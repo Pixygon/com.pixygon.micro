@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 2949176917679527162}
+  _volume: {fileID: 5803399767336028375}
+  _defaultVolume: {fileID: 11400000, guid: 148a6bbc0902ebb4195e7a74a5a12828, type: 2}
 --- !u!1 &2949176917332506666
 GameObject:
   m_ObjectHideFlags: 0

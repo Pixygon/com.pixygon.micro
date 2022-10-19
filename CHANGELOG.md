@@ -5,6 +5,7 @@
 - Unserialized fields in CameraController
 - Cleaned up the Parallax-system and made it better system
 - Adjusted camera-length
+- Post-processing volume set through LevelData
 
 ### Added
 - Added levelData

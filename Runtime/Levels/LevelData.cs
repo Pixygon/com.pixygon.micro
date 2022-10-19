@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Pixygon.Micro
 {
@@ -7,5 +8,6 @@ namespace Pixygon.Micro
         public GameObject _levelPrefab;
         public ParallaxLayerData[] _parallaxLayerDatas;
         public AudioClip _bgm;
+        public VolumeProfile _postProcessingProfile;
     }
 }

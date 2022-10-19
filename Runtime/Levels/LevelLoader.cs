@@ -32,6 +32,10 @@ namespace Pixygon.Micro {
             _player.GetComponent<MicroActor>().Initialize(this);
             _parallax.Initialize(_player.transform, level._parallaxLayerDatas);
             GetComponent<AudioSource>().clip = level._bgm;
+            if(level._postProcessingProfile != null)
+                MicroController._instance.Display._volume.profile = level._postProcessingProfile;
+            else
+                MicroController._instance.Display._volume.profile = MicroController._instance.Display._defaultVolume;
         }
     }
 }
