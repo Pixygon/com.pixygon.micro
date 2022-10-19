@@ -1,7 +1,7 @@
 {
   "name": "com.pixygon.micro",
-  "version": "0.5.0",
-  "displayName": "Pixygonµ",
+  "version": "0.5.1",
+  "displayName": "Pixygon - µ",
   "description": "Virtual console for making games inside games!",
   "unity": "2022.1",
   "unityRelease": "20f1",

@@ -78,10 +78,10 @@ namespace Pixygon.Micro {
             HandleGroundCheck();
             var horizontalForce = _rigid.velocity.x;
             horizontalForce += MicroController._instance.Input.Movement.x * _speed;
-            if (MicroController._instance.Input.Movement.x < -0.1f && _renderer.flipX)
-                _renderer.flipX = false;
-            else if (MicroController._instance.Input.Movement.x > 0.1f && !_renderer.flipX)
+            if (MicroController._instance.Input.Movement.x < -0.1f && !_renderer.flipX)
                 _renderer.flipX = true;
+            else if (MicroController._instance.Input.Movement.x > 0.1f && _renderer.flipX)
+                _renderer.flipX = false;
 
             if (Mathf.Abs(MicroController._instance.Input.Movement.x) < .01f)
                 horizontalForce *= Mathf.Pow(1f - _horizontalDampingWhenStopping, Time.deltaTime * 10f);

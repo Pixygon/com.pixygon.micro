@@ -13,6 +13,9 @@ namespace Pixygon.Micro {
         protected bool _invincible;
         public bool IsDead { get; protected set; }
 
+        public virtual void Initialize(LevelLoader loader) {
+            
+        }
         protected void HandleIFrames() {
             if (!_invincible) return;
             if (_iFrames > 0f) {
