@@ -3,7 +3,11 @@
 ## 0.5.2
 ### Changed
 - Unserialized fields in CameraController
-- Cleaned up the Parallax-system and made it a better system
+- Cleaned up the Parallax-system and made it better system
+- Adjusted camera-length
+
+### Added
+- Added levelData
 
 ## 0.5.1
 ### Changed

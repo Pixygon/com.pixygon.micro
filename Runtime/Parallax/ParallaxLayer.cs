@@ -18,6 +18,7 @@ namespace Pixygon.Micro {
             _sprite.drawMode = SpriteDrawMode.Tiled;
             _sprite.size = data._tiling;
             _offset = data._offset;
+            _sprite.sortingOrder = data._sortOrder;
         }
         public Vector2 Travel => (Vector2)_camera.transform.localPosition - _startPos;
         private float ClippingPlane => (_camera.transform.localPosition.z +

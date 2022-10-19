@@ -7,5 +7,6 @@ namespace Pixygon.Micro {
         public float _zDistance;
         public Vector2 _tiling;
         public Vector2 _offset;
+        public int _sortOrder;
     }
 }
