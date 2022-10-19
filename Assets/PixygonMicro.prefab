@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5756036675148950165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5250042263949909182}
+  - component: {fileID: 2666906224468455078}
+  m_Layer: 0
+  m_Name: PixygonMicro
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5250042263949909182
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5756036675148950165}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2666906224468455078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5756036675148950165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51610ef833ed36a4c923b0b2630f1e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _displayPrefab: {fileID: 1034441228, guid: 2450e531cae6fb54db8bff2e9efce294, type: 3}
+  _inputPrefab: {fileID: 6343291228509907286, guid: a4891852998363e4f929d5439b1062bd, type: 3}
+  _cartridgePrefab: {fileID: 2979621713504935600, guid: 7530b6ec643ce104890872de17a016a5, type: 3}
+  _consolePrefab: {fileID: 6011951935827920969, guid: 76328be2e7b034646b916ff5875cb0c2, type: 3}
+  _version: 0.5.0
