@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Pixygon.Micro {
     public class LevelLoader : MonoBehaviour {
-        [SerializeField] private Level _level;
+        [SerializeField] private LevelData _level;
         [SerializeField] private GameObject _playerPrefab;
         [SerializeField] private Parallax _parallax;
         [SerializeField] private CameraController _camera;
@@ -14,24 +14,23 @@ namespace Pixygon.Micro {
             Initialize();
         }
 
-        public void Initialize() {
+        private void Initialize() {
             LoadLevel(_level);
         }
 
         public void ResetLevels() {
-            _level.RespawnLevel();
+            _currentLevel.RespawnLevel();
         }
 
-        public void LoadLevel(Level level) {
+        public void LoadLevel(LevelData level) {
             if (_currentLevel != null)
                 Destroy(_currentLevel.gameObject);
-            _currentLevel = Instantiate(level, transform);
+            _currentLevel = Instantiate(level._levelPrefab, transform).GetComponent<Level>();
             _player = Instantiate(_playerPrefab, transform);
             _player.transform.position = _currentLevel.PlayerSpawn;
             _camera.Initialize(_player.transform);
             _player.GetComponent<MicroActor>().Initialize(this);
-            _parallax.Initialize(_player.transform, level.ParallaxLayerDatas);
-            //Spawn enemies
+            _parallax.Initialize(_player.transform, level._parallaxLayerDatas);
         }
     }
 }
