@@ -1,7 +1,10 @@
 # Changelog
 
-## 0.5.1
+## 0.5.2
+### Changed
+- Unserialized fields in CameraController
 
+## 0.5.1
 ### Changed
 - Moved some properties into MicroController
 - Changed some namespaces of new scripts, and decoupled them more

@@ -3,9 +3,10 @@ using UnityEngine;
 namespace Pixygon.Micro {
     public class CameraController : MonoBehaviour {
         [SerializeField] private bool _followPlayer;
-        [SerializeField] private Transform _player;
         [SerializeField] private Vector3 _offset;
         [SerializeField] private float _lag;
+        
+        private Transform _player;
 
         public void Initialize(Transform player) {
             _player = player;

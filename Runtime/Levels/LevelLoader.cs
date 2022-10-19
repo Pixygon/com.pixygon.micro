@@ -5,6 +5,7 @@ namespace Pixygon.Micro {
         [SerializeField] private Level _level;
         [SerializeField] private GameObject _playerPrefab;
         [SerializeField] private Parallax _parallax;
+        [SerializeField] private CameraController _camera;
         
         private Level _currentLevel;
         private GameObject _player;
@@ -27,7 +28,7 @@ namespace Pixygon.Micro {
             _currentLevel = Instantiate(level, transform);
             _player = Instantiate(_playerPrefab, transform);
             _player.transform.position = _currentLevel.PlayerSpawn;
-            GetComponent<CameraController>().Initialize(_player.transform);
+            _camera.Initialize(_player.transform);
             _player.GetComponent<MicroActor>().Initialize(this);
             _parallax.Initialize(_player.transform, level.ParallaxLayerDatas);
             //Spawn enemies
