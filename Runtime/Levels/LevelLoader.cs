@@ -31,6 +31,7 @@ namespace Pixygon.Micro {
             _camera.Initialize(_player.transform);
             _player.GetComponent<MicroActor>().Initialize(this);
             _parallax.Initialize(_player.transform, level._parallaxLayerDatas);
+            GetComponent<AudioSource>().clip = level._bgm;
         }
     }
 }

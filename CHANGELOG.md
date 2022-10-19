@@ -3,7 +3,7 @@
 ## 0.5.2
 ### Changed
 - Unserialized fields in CameraController
-- Cleaned up the Parallax-prefab
+- Cleaned up the Parallax-system and made it a better system
 
 ## 0.5.1
 ### Changed
