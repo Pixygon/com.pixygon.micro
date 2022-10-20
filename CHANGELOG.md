@@ -14,7 +14,9 @@
 - Fields for GameOverScreen
 - Fields for MenuScreen
 - More logging on levelselect and start
-- UI-script that sets up camera-stack and does basic UI-functions
+- Camera-stacking for UI and default view
+- UI-script that does basic UI-functions
+- Cartridge version
 
 ## 0.5.2
 ### Changed
