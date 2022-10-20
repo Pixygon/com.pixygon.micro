@@ -30,7 +30,7 @@ namespace Pixygon.Micro {
 
         private void Initialize() {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Game started", this);
-            Ui.Initialize();
+            //Ui.Initialize();
             Ui.TriggerMenuScreen(true);
         }
 
