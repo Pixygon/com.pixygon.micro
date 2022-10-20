@@ -18,8 +18,21 @@ namespace Pixygon.Micro {
             Initialize();
         }
 
+        private void OnEnable() {
+            MicroController._instance.Input._run += SelectLevel;
+        }
+
+        private void OnDisable() {
+            MicroController._instance.Input._run -= SelectLevel;
+        }
+
         private void Initialize() {
             _menuScreen.SetActive(true);
+        }
+
+        private void SelectLevel(bool started) {
+            if (_currentLevel != null) return;
+            StartLevel(0);
         }
 
         public void StartLevel(int i) {
