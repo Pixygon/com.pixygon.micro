@@ -22,11 +22,11 @@ namespace Pixygon.Micro {
         }
 
         private void OnEnable() {
-            MicroController._instance.Input._run += SelectLevel;
+            MicroController._instance.Input._jump += SelectLevel;
         }
 
         private void OnDisable() {
-            MicroController._instance.Input._run -= SelectLevel;
+            MicroController._instance.Input._jump -= SelectLevel;
         }
 
         private void Initialize() {
@@ -35,6 +35,7 @@ namespace Pixygon.Micro {
         }
 
         private void SelectLevel(bool started) {
+            Log.DebugMessage(DebugGroup.PixygonMicro, "Selected level", this);
             if (!_levelLoaded) return;
             StartLevel(0);
         }
