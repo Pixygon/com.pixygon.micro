@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1001907809538323393}
   - component: {fileID: 1001907809538323392}
   - component: {fileID: 2200292425043845478}
-  m_Layer: 6
+  m_Layer: 29
   m_Name: ParallaxLayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

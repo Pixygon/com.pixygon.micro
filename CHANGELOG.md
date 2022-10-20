@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.5.3
 ### Fixed
 - BGM should now play at the start of a level
 
