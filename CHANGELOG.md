@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+### Fixed
+- BGM should now play at the start of a level
+
+### Added
+- Sprite Import postprocessor
+- AnimatorController for players
+
 ## 0.5.2
 ### Changed
 - Unserialized fields in CameraController
