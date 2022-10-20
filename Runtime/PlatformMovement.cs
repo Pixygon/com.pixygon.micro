@@ -96,17 +96,7 @@ namespace Pixygon.Micro {
                 horizontalForce *= Mathf.Pow(1f - _horizontalDampingBasic, Time.deltaTime * 10f);
             
             horizontalForce = Mathf.Clamp(horizontalForce, -_maxSpeed, _maxSpeed);
-            switch (Mathf.Abs(horizontalForce)) {
-                case < .1f:
-                    _anim.Movement(0);
-                    break;
-                case < 8f:
-                    _anim.Movement(1);
-                    break;
-                default:
-                    _anim.Movement(2);
-                    break;
-            }
+            _anim.SetMovement(Mathf.Abs(horizontalForce));
             _rigid.velocity = new Vector2(horizontalForce, _rigid.velocity.y);
         }
         public void SetKinematic() {

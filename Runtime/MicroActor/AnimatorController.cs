@@ -1,38 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Pixygon.Micro
-{
+namespace Pixygon.Micro {
     public class AnimatorController : MonoBehaviour {
         [SerializeField] private Animator _anim;
+        private static readonly int IsWalking = Animator.StringToHash("IsWalking");
+        private static readonly int IsRunning = Animator.StringToHash("IsRunning");
+        private static readonly int Jump1 = Animator.StringToHash("Jump");
+        private static readonly int Air = Animator.StringToHash("InAir");
+        private static readonly int Land1 = Animator.StringToHash("Land");
+        private static readonly int Damage1 = Animator.StringToHash("Damage");
+        private const float IdleThreshold = .1f;
+        private const float RunThreshold = 9f;
+
         public void Jump() {
-            _anim.SetTrigger("Jump");
+            _anim.SetTrigger(Jump1);
         }
+
         public void Land() {
-            _anim.SetBool("InAir", false);
-            _anim.SetTrigger("Land");
+            _anim.SetBool(Air, false);
+            _anim.SetTrigger(Land1);
         }
 
         public void InAir() {
-            _anim.SetBool("InAir", true);
+            _anim.SetBool(Air, true);
         }
+
         public void Damage() {
-            _anim.SetTrigger("Damage");
+            _anim.SetTrigger(Damage1);
         }
-        public void Movement(int i) {
+
+        public void SetMovement(float i) {
             switch (i) {
-                case 0:
-                    _anim.SetBool("IsWalking", false);
-                    _anim.SetBool("IsRunning", false);
+                case < IdleThreshold:
+                    _anim.SetBool(IsWalking, false);
+                    _anim.SetBool(IsRunning, false);
                     break;
-                case 1:
-                    _anim.SetBool("IsWalking", true);
-                    _anim.SetBool("IsRunning", false);
+                case < RunThreshold:
+                    _anim.SetBool(IsWalking, true);
+                    _anim.SetBool(IsRunning, false);
                     break;
-                case 2:
-                    _anim.SetBool("IsWalking", true);
-                    _anim.SetBool("IsRunning", true);
+                default:
+                    _anim.SetBool(IsWalking, true);
+                    _anim.SetBool(IsRunning, true);
                     break;
             }
         }
