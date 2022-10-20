@@ -1,3 +1,4 @@
+using Pixygon.DebugTool;
 using UnityEngine;
 
 namespace Pixygon.Micro {
@@ -12,6 +13,7 @@ namespace Pixygon.Micro {
         private Level _currentLevel;
         private GameObject _player;
         private Parallax _parallax;
+        private bool _levelLoaded;
 
         public GameObject GameOverScreen => _gameOverScreen;
         
@@ -28,15 +30,17 @@ namespace Pixygon.Micro {
         }
 
         private void Initialize() {
+            Log.DebugMessage(DebugGroup.PixygonMicro, "Game started", this);
             _menuScreen.SetActive(true);
         }
 
         private void SelectLevel(bool started) {
-            if (_currentLevel != null) return;
+            if (!_levelLoaded) return;
             StartLevel(0);
         }
 
         public void StartLevel(int i) {
+            Log.DebugMessage(DebugGroup.PixygonMicro, "Select Level: " + i, this);
             _menuScreen.SetActive(false);
             LoadLevel(_level[i]);
         }
@@ -61,6 +65,8 @@ namespace Pixygon.Micro {
                 MicroController._instance.Display._volume.profile = level._postProcessingProfile;
             else
                 MicroController._instance.Display._volume.profile = MicroController._instance.Display._defaultVolume;
+            _levelLoaded = true;
+            Log.DebugMessage(DebugGroup.PixygonMicro, "Level loaded!", this);
         }
     }
 }

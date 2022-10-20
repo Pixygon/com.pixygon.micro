@@ -13,6 +13,7 @@
 - AnimatorController for players
 - Fields for GameOverScreen
 - Fields for MenuScreen
+- More logging on levelselect and start
 
 ## 0.5.2
 ### Changed
