@@ -2,20 +2,29 @@ using UnityEngine;
 
 namespace Pixygon.Micro {
     public class LevelLoader : MonoBehaviour {
-        [SerializeField] private LevelData _level;
+        [SerializeField] private LevelData[] _level;
         [SerializeField] private GameObject _playerPrefab;
         [SerializeField] private Parallax _parallax;
         [SerializeField] private CameraController _camera;
+        [SerializeField] private GameObject _gameOverScreen;
+        [SerializeField] private GameObject _menuScreen;
         
         private Level _currentLevel;
         private GameObject _player;
 
+        public GameObject GameOverScreen => _gameOverScreen;
+        
         private void Start() {
             Initialize();
         }
 
         private void Initialize() {
-            LoadLevel(_level);
+            _menuScreen.SetActive(true);
+        }
+
+        public void StartLevel(int i) {
+            _menuScreen.SetActive(false);
+            LoadLevel(_level[i]);
         }
 
         public void ResetLevels() {

@@ -4,9 +4,14 @@
 ### Fixed
 - BGM should now play at the start of a level
 
+### Changed
+- Game starts in menu, player must select level to load level
+
 ### Added
 - Sprite Import postprocessor
 - AnimatorController for players
+- Fields for GameOverScreen
+- Fields for MenuScreen
 
 ## 0.5.2
 ### Changed
