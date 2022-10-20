@@ -23,6 +23,7 @@ namespace Pixygon.Micro {
         [SerializeField] private ParticleSystem _runFx;
         
         [SerializeField] private SpriteRenderer _renderer;
+        [SerializeField] private AnimatorController _anim;
         
         private bool _isGrounded;
         private InputController _input;
@@ -55,11 +56,13 @@ namespace Pixygon.Micro {
             if (started && _isGrounded) {
                 _jumpFx.Play();
                 _jumpSfx.Play();
+                _anim.Jump();
             }
             _rigid.velocity = velocity;
         }
         private void Run(bool started) {
             _maxSpeed = started ? _maxSpeedRun : _maxSpeedWalk;
+            _anim.Movement(started ? 2 : 1);
             if (started)
                 _runFx.Play();
             else
@@ -70,8 +73,11 @@ namespace Pixygon.Micro {
             if (!_isGrounded && ground) {
                 _landFx.Play();
                 _landSfx.Play();
+                _anim.Land();
             }
             _isGrounded = ground;
+            if(!_isGrounded)
+                _anim.InAir();
         }
         public void HandleMovement() {
             if (_actor.IsDead) return;

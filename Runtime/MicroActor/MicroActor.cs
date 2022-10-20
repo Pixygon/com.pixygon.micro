@@ -6,6 +6,7 @@ namespace Pixygon.Micro {
         [SerializeField] private ParticleSystem _damageFx;
         [SerializeField] private ParticleSystem _deathFx;
         [SerializeField] private AudioSource _damageSfx;
+        [SerializeField] private AnimatorController _anim;
 
         protected int _hp;
         private float _iFrames;
@@ -43,6 +44,7 @@ namespace Pixygon.Micro {
             _invincible = true;
             _damageFx.Play();
             _damageSfx.Play();
+            _anim.Damage();
             if (_hp != 0)
                 _hp -= 1;
             else
