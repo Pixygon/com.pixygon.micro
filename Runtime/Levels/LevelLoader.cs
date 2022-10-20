@@ -35,8 +35,10 @@ namespace Pixygon.Micro {
         }
 
         private void SelectLevel(bool started) {
+            if (!started) return;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Selected level", this);
             if (!_levelLoaded) return;
+            Log.DebugMessage(DebugGroup.PixygonMicro, "Level was not loaded...", this);
             StartLevel(0);
         }
 
