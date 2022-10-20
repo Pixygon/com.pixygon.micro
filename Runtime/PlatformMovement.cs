@@ -26,7 +26,6 @@ namespace Pixygon.Micro {
         [SerializeField] private AnimatorController _anim;
         
         private bool _isGrounded;
-        private InputController _input;
         private Rigidbody2D _rigid;
         private float _horizontalForce;
         private float _maxSpeed;

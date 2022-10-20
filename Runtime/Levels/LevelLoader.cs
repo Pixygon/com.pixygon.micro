@@ -1,3 +1,4 @@
+using Codice.Client.BaseCommands;
 using Pixygon.DebugTool;
 using UnityEngine;
 
@@ -9,13 +10,12 @@ namespace Pixygon.Micro {
         [SerializeField] private CameraController _camera;
         [SerializeField] private GameObject _gameOverScreen;
         [SerializeField] private GameObject _menuScreen;
+        [SerializeField] private GameObject _ui;
         
         private Level _currentLevel;
         private GameObject _player;
         private Parallax _parallax;
         private bool _levelLoaded;
-
-        public GameObject GameOverScreen => _gameOverScreen;
         
         private void Start() {
             Initialize();
@@ -31,7 +31,7 @@ namespace Pixygon.Micro {
 
         private void Initialize() {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Game started", this);
-            _menuScreen.SetActive(true);
+            TriggerMenuScreen(true);
         }
 
         private void SelectLevel(bool started) {
@@ -44,7 +44,7 @@ namespace Pixygon.Micro {
 
         public void StartLevel(int i) {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Select Level: " + i, this);
-            _menuScreen.SetActive(false);
+            TriggerMenuScreen(false);
             LoadLevel(_level[i]);
         }
 
@@ -70,6 +70,17 @@ namespace Pixygon.Micro {
                 MicroController._instance.Display._volume.profile = MicroController._instance.Display._defaultVolume;
             _levelLoaded = true;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Level loaded!", this);
+        }
+
+
+        public void TriggerMenuScreen(bool activate) {
+            _ui.SetActive(activate);
+            _menuScreen.SetActive(activate);
+        }
+
+        public void TriggerGameOverScreen(bool activate) {
+            _ui.SetActive(activate);
+            _gameOverScreen.SetActive(activate);
         }
     }
 }
