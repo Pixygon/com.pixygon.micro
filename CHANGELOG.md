@@ -6,6 +6,7 @@
 
 ### Changed
 - Game starts in menu, player must select level to load level
+- Display-quad is now inside console
 
 ### Added
 - Sprite Import postprocessor

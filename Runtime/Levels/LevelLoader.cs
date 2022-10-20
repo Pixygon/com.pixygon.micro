@@ -4,13 +4,14 @@ namespace Pixygon.Micro {
     public class LevelLoader : MonoBehaviour {
         [SerializeField] private LevelData[] _level;
         [SerializeField] private GameObject _playerPrefab;
-        [SerializeField] private Parallax _parallax;
+        [SerializeField] private Parallax _parallaxPrefab;
         [SerializeField] private CameraController _camera;
         [SerializeField] private GameObject _gameOverScreen;
         [SerializeField] private GameObject _menuScreen;
         
         private Level _currentLevel;
         private GameObject _player;
+        private Parallax _parallax;
 
         public GameObject GameOverScreen => _gameOverScreen;
         
@@ -52,6 +53,7 @@ namespace Pixygon.Micro {
             _player.transform.position = _currentLevel.PlayerSpawn;
             _camera.Initialize(_player.transform);
             _player.GetComponent<MicroActor>().Initialize(this);
+            _parallax = Instantiate(_parallaxPrefab, transform);
             _parallax.Initialize(_player.transform, level._parallaxLayerDatas);
             GetComponent<AudioSource>().clip = level._bgm;
             GetComponent<AudioSource>().Play();
