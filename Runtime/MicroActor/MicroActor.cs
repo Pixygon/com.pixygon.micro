@@ -7,6 +7,9 @@ namespace Pixygon.Micro {
         [SerializeField] private ParticleSystem _deathFx;
         [SerializeField] private AudioSource _damageSfx;
         [SerializeField] private AnimatorController _anim;
+        [SerializeField] protected int _startHp;
+        [SerializeField] private float _threshold = -8f;
+        [SerializeField] private bool _destroyOnDeath;
 
         protected int _hp;
         private float _iFrames;
@@ -15,7 +18,7 @@ namespace Pixygon.Micro {
         public bool IsDead { get; protected set; }
 
         public virtual void Initialize(LevelLoader loader) {
-            
+            _hp = _startHp;
         }
         protected void HandleIFrames() {
             if (!_invincible) return;
@@ -38,7 +41,7 @@ namespace Pixygon.Micro {
             _sprite.enabled = true;
         }
 
-        protected virtual void Damage() {
+        public virtual void Damage() {
             if (_invincible) return;
             _iFrames = 1f;
             _invincible = true;
@@ -56,6 +59,14 @@ namespace Pixygon.Micro {
             StopIFrames();
             _sprite.enabled = false;
             _deathFx.Play();
+            if(_destroyOnDeath)
+                Destroy(gameObject);
+        }
+
+        public virtual void Update() {
+            if (transform.position.y <= _threshold)
+                Die();
+            HandleIFrames();
         }
     }
 }

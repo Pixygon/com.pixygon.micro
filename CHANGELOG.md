@@ -3,6 +3,10 @@
 ## Unreleased
 ### Fixed
 - MicroActorSpawners spawns enemies inside it
+- HP is now set in MicroActor
+- MicroActors die when falling off edges
+- MicroActors can be destroyed when dying
+
 ## 0.5.3
 ### Fixed
 - BGM should now play at the start of a level
