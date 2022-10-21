@@ -30,6 +30,8 @@ namespace Pixygon.Micro {
         private float _horizontalForce;
         private float _maxSpeed;
         private MicroActor _actor;
+
+        public bool XFlip => _renderer.flipX;
         
         public void Initialize() {
             _rigid = GetComponent<Rigidbody2D>();
@@ -80,6 +82,8 @@ namespace Pixygon.Micro {
             _isGrounded = ground;
             if(!_isGrounded)
                 _anim.InAir();
+            else
+                _anim.Land();
         }
         public void HandleMovement() {
             if (_actor.IsDead) return;

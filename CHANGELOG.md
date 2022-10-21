@@ -5,6 +5,7 @@
 - MicroActorSpawners spawns enemies inside it
 - HP is now set in MicroActor
 - Fixed error in sprite import postprocessor
+- Bug in animation where player didnt land
 
 ### Changed
 - Jumps are now divided into input-check and actual jump
@@ -13,6 +14,7 @@
 - Added method to force jump
 - MicroActors die when falling off edges
 - MicroActors can be destroyed when dying
+- XFlip in PlatformController is now public
 
 ## 0.5.3
 ### Fixed
