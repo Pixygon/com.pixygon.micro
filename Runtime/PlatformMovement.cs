@@ -47,12 +47,16 @@ namespace Pixygon.Micro {
         private void Jump(bool started) {
             if (_actor.IsDead) return;
             var velocity = _rigid.velocity;
-            velocity = started switch {
-                true when _isGrounded => new Vector2(velocity.x, _jumpPower),
-                false when velocity.y > 0f => new Vector2(velocity.x, velocity.y * _verticalDamping),
-                _ => velocity
-            };
-            if (started && _isGrounded) {
+            if (started && _isGrounded)
+                velocity = new Vector2(velocity.x, _jumpPower);
+            else if (!started && velocity.y > 0f)
+                velocity = new Vector2(velocity.x, velocity.y * _verticalDamping);
+            else
+                velocity = velocity;
+            DoJump(velocity, started && _isGrounded);
+        }
+        public void DoJump(Vector2 velocity, bool playEffect) {
+            if (playEffect) {
                 _jumpFx.Play();
                 _jumpSfx.Play();
                 _anim.Jump();

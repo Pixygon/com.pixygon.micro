@@ -4,6 +4,12 @@
 ### Fixed
 - MicroActorSpawners spawns enemies inside it
 - HP is now set in MicroActor
+
+### Changed
+- Jumps are now divided into input-check and actual jump
+
+### Added
+- Added method to force jump
 - MicroActors die when falling off edges
 - MicroActors can be destroyed when dying
 
