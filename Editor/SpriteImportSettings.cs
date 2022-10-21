@@ -9,7 +9,7 @@ public class SpriteImportSettings : AssetPostprocessor
         importer.filterMode = FilterMode.Point;
         importer.spritePixelsPerUnit = 16;
         importer.textureCompression = TextureImporterCompression.Uncompressed;
-        importer.maxTextureSize = 128;
+        //importer.maxTextureSize = 128;
         
     }
 }

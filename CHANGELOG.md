@@ -4,6 +4,7 @@
 ### Fixed
 - MicroActorSpawners spawns enemies inside it
 - HP is now set in MicroActor
+- Fixed error in sprite import postprocessor
 
 ### Changed
 - Jumps are now divided into input-check and actual jump
