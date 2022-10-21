@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.5.4
 ### Fixed
 - MicroActorSpawners spawns enemies inside it
 - HP is now set in MicroActor
@@ -21,6 +21,7 @@
 - MicroActors can be destroyed when dying
 - XFlip in PlatformController is now public
 - Bounces on enemies/damageObjects
+- Added X/Y-lock to parallaxData
 
 ## 0.5.3
 ### Fixed

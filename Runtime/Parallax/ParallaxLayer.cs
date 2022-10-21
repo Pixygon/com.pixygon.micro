@@ -8,6 +8,8 @@ namespace Pixygon.Micro {
         private Transform _player;
         private Vector2 _startPos;
         private float _startZ;
+        private bool _lockX;
+        private bool _lockY;
         public void Initialize(Transform player, ParallaxLayerData data) {
             _camera = MicroController._instance.Display._camera;
             _player = player;
@@ -19,6 +21,8 @@ namespace Pixygon.Micro {
             _sprite.size = data._tiling;
             _offset = data._offset;
             _sprite.sortingOrder = data._sortOrder;
+            _lockX = data._lockXAxis;
+            _lockY = data._lockYAxis;
         }
         public Vector2 Travel => (Vector2)_camera.transform.localPosition - _startPos;
         private float ClippingPlane => (_camera.transform.localPosition.z +
@@ -27,6 +31,11 @@ namespace Pixygon.Micro {
         public float DistanceFromSubject => transform.localPosition.z - _player.position.z;
         public void UpdateParallax() {
             var newPos = (_startPos + _offset) + Travel * ParallaxFactor;
+            if (_lockX)
+                newPos = new Vector2(_startPos.x+_offset.x, newPos.y);
+            if(_lockY)
+                newPos = new Vector2(newPos.x, _startPos.y+_offset.y);
+            
             transform.localPosition = new Vector3(newPos.x, newPos.y, _startZ);
         }
     }

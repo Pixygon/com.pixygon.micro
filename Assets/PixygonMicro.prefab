@@ -48,6 +48,6 @@ MonoBehaviour:
   _inputPrefab: {fileID: 6343291228509907286, guid: a4891852998363e4f929d5439b1062bd, type: 3}
   _cartridgePrefab: {fileID: 2979621713504935600, guid: 7530b6ec643ce104890872de17a016a5, type: 3}
   _consolePrefab: {fileID: 6011951935827920969, guid: 76328be2e7b034646b916ff5875cb0c2, type: 3}
-  _version: 0.5.3
+  _version: 0.5.4
   _skipIntro: 0
   _cartridges: []

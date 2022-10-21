@@ -8,5 +8,7 @@ namespace Pixygon.Micro {
         public Vector2 _tiling;
         public Vector2 _offset;
         public int _sortOrder;
+        public bool _lockYAxis;
+        public bool _lockXAxis;
     }
 }
