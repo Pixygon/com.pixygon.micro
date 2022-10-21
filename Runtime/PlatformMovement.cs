@@ -66,6 +66,7 @@ namespace Pixygon.Micro {
             _rigid.velocity = velocity;
         }
         private void Run(bool started) {
+            if (_actor.IsDead) return;
             _maxSpeed = started ? _maxSpeedRun : _maxSpeedWalk;
             if (started)
                 _runFx.Play();
@@ -102,14 +103,21 @@ namespace Pixygon.Micro {
                 horizontalForce *= Mathf.Pow(1f - _horizontalDampingWhenTurning, Time.deltaTime * 10f);
             else
                 horizontalForce *= Mathf.Pow(1f - _horizontalDampingBasic, Time.deltaTime * 10f);
-            
+            if(_maxSpeed < _maxSpeedWalk && _runFx.isPlaying)
+                _runFx.Stop();
+            if(_maxSpeed > _maxSpeedWalk && !_runFx.isPlaying)
+                _runFx.Play();
             horizontalForce = Mathf.Clamp(horizontalForce, -_maxSpeed, _maxSpeed);
             _anim.SetMovement(Mathf.Abs(horizontalForce));
             _rigid.velocity = new Vector2(horizontalForce, _rigid.velocity.y);
         }
-        public void SetKinematic() {
+
+        public void SetDead() {
             _rigid.isKinematic = true;
             _rigid.velocity = Vector2.zero;
+            _runFx.Stop();
+        }
+        public void SetKinematic() {
         }
         public void ResetController() {
             _rigid.isKinematic = false;
