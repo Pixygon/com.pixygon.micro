@@ -30,10 +30,11 @@ namespace Pixygon.Micro {
         }
 
         public void SetMovement(float i) {
-            if(i is > IdleThreshold and < RunThreshold) { 
+            if (i is > IdleThreshold and < RunThreshold) {
                 _anim.SetBool(IsWalking, true);
                 _anim.SetBool(IsRunning, false);
-            } else if (i > RunThreshold) {
+            }
+            else if (i > RunThreshold) {
                 _anim.SetBool(IsWalking, true);
                 _anim.SetBool(IsRunning, true);
             }
@@ -41,5 +42,6 @@ namespace Pixygon.Micro {
                 _anim.SetBool(IsWalking, false);
                 _anim.SetBool(IsRunning, false);
             }
+        }
     }
 }

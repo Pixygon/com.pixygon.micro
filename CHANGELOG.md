@@ -12,6 +12,7 @@
 
 ### Changed
 - Jumps are now divided into input-check and actual jump
+- CartridgeController is spawned after ConsoleController
 
 ### Added
 - Added method to force jump
