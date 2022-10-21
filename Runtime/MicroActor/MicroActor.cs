@@ -14,14 +14,14 @@ namespace Pixygon.Micro {
         protected int _hp;
         private float _iFrames;
         private float _iFrameEffectCounter;
-        protected bool _invincible;
+        public bool Invincible;
         public bool IsDead { get; protected set; }
 
         public virtual void Initialize(LevelLoader loader) {
             _hp = _startHp;
         }
         protected void HandleIFrames() {
-            if (!_invincible) return;
+            if (!Invincible) return;
             if (_iFrames > 0f) {
                 _iFrames -= Time.deltaTime;
                 if (_iFrameEffectCounter > 0f)
@@ -37,14 +37,14 @@ namespace Pixygon.Micro {
 
         private void StopIFrames() {
             _iFrameEffectCounter = 0f;
-            _invincible = false;
+            Invincible = false;
             _sprite.enabled = true;
         }
 
         public virtual void Damage() {
-            if (_invincible) return;
+            if (Invincible) return;
             _iFrames = 1f;
-            _invincible = true;
+            Invincible = true;
             _damageFx.Play();
             _damageSfx.Play();
             _anim.Damage();

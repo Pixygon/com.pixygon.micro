@@ -32,8 +32,8 @@ namespace Pixygon.Micro
             Application.targetFrameRate = 60;
             Display = Instantiate(_displayPrefab, transform);
             Input = Instantiate(_inputPrefab, transform);
-            Cartridge = Instantiate(_cartridgePrefab, transform);
             Console = Instantiate(_consolePrefab, transform);
+            Cartridge = Instantiate(_cartridgePrefab, transform);
             
             Cartridge.Initilize();
             Console.Initialize();

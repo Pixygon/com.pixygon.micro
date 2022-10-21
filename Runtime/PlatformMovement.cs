@@ -89,12 +89,13 @@ namespace Pixygon.Micro {
             if (_actor.IsDead) return;
             HandleGroundCheck();
             var horizontalForce = _rigid.velocity.x;
-            horizontalForce += MicroController._instance.Input.Movement.x * _speed;
-            if (MicroController._instance.Input.Movement.x < -0.1f && !_renderer.flipX)
-                _renderer.flipX = true;
-            else if (MicroController._instance.Input.Movement.x > 0.1f && _renderer.flipX)
-                _renderer.flipX = false;
-
+            if (!_actor.Invincible) {
+                horizontalForce += MicroController._instance.Input.Movement.x * _speed;
+                if (MicroController._instance.Input.Movement.x < -0.1f && !_renderer.flipX)
+                    _renderer.flipX = true;
+                else if (MicroController._instance.Input.Movement.x > 0.1f && _renderer.flipX)
+                    _renderer.flipX = false;
+            }
             if (Mathf.Abs(MicroController._instance.Input.Movement.x) < .01f)
                 horizontalForce *= Mathf.Pow(1f - _horizontalDampingWhenStopping, Time.deltaTime * 10f);
             else if (Math.Abs(Mathf.Sign(MicroController._instance.Input.Movement.x) - Mathf.Sign(horizontalForce)) > .01f)

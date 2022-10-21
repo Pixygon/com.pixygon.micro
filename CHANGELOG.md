@@ -6,6 +6,9 @@
 - HP is now set in MicroActor
 - Fixed error in sprite import postprocessor
 - Bug in animation where player didnt land
+- No movement during I-frames
+- Made Invincible-bool a public property
+- Bug in animation not entering idle-state
 
 ### Changed
 - Jumps are now divided into input-check and actual jump
@@ -15,6 +18,7 @@
 - MicroActors die when falling off edges
 - MicroActors can be destroyed when dying
 - XFlip in PlatformController is now public
+- Bounces on enemies/damageObjects
 
 ## 0.5.3
 ### Fixed

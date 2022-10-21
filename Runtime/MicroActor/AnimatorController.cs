@@ -9,7 +9,7 @@ namespace Pixygon.Micro {
         private static readonly int Air = Animator.StringToHash("InAir");
         private static readonly int Land1 = Animator.StringToHash("Land");
         private static readonly int Damage1 = Animator.StringToHash("Damage");
-        private const float IdleThreshold = .1f;
+        private const float IdleThreshold = .2f;
         private const float RunThreshold = 9f;
 
         public void Jump() {
@@ -30,20 +30,16 @@ namespace Pixygon.Micro {
         }
 
         public void SetMovement(float i) {
-            switch (i) {
-                case < IdleThreshold:
-                    _anim.SetBool(IsWalking, false);
-                    _anim.SetBool(IsRunning, false);
-                    break;
-                case < RunThreshold:
-                    _anim.SetBool(IsWalking, true);
-                    _anim.SetBool(IsRunning, false);
-                    break;
-                default:
-                    _anim.SetBool(IsWalking, true);
-                    _anim.SetBool(IsRunning, true);
-                    break;
+            if(i is > IdleThreshold and < RunThreshold) { 
+                _anim.SetBool(IsWalking, true);
+                _anim.SetBool(IsRunning, false);
+            } else if (i > RunThreshold) {
+                _anim.SetBool(IsWalking, true);
+                _anim.SetBool(IsRunning, true);
             }
-        }
+            else {
+                _anim.SetBool(IsWalking, false);
+                _anim.SetBool(IsRunning, false);
+            }
     }
 }
