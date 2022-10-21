@@ -5,6 +5,10 @@
 - Run-particles should be off on death now
 - Run-particles should only appear when actually moving now
 
+### Added
+- New player-layer
+- New actor-layer
+
 ## 0.5.4
 ### Fixed
 - MicroActorSpawners spawns enemies inside it
