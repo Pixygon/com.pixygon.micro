@@ -10,6 +10,7 @@ namespace Pixygon.Micro {
         [SerializeField] protected int _startHp;
         [SerializeField] private float _threshold = -8f;
         [SerializeField] private bool _destroyOnDeath;
+        [SerializeField] private float _iFrameLength = .6f;
 
         protected int _hp;
         private float _iFrames;
@@ -43,7 +44,7 @@ namespace Pixygon.Micro {
 
         public virtual void Damage() {
             if (Invincible) return;
-            _iFrames = 1f;
+            _iFrames = _iFrameLength;
             Invincible = true;
             _damageFx.Play();
             _damageSfx.Play();

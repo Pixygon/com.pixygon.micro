@@ -9,7 +9,7 @@ namespace Pixygon.Micro {
         private static readonly int Air = Animator.StringToHash("InAir");
         private static readonly int Land1 = Animator.StringToHash("Land");
         private static readonly int Damage1 = Animator.StringToHash("Damage");
-        private const float IdleThreshold = .2f;
+        private const float IdleThreshold = .5f;
         private const float RunThreshold = 9f;
 
         public void Jump() {

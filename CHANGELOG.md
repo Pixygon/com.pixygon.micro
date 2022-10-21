@@ -13,6 +13,7 @@
 ### Changed
 - Jumps are now divided into input-check and actual jump
 - CartridgeController is spawned after ConsoleController
+- IFrames can now be set in MicroActor
 
 ### Added
 - Added method to force jump
