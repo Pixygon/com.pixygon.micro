@@ -7,12 +7,12 @@ namespace Pixygon.Micro {
         [SerializeField] private Transform _playerSpawn;
         public Vector3 PlayerSpawn => _playerSpawn.position;
 
-        public void RespawnLevel() {
+        public void RespawnLevel(LevelLoader loader) {
             foreach (var coin in _coins) {
                 coin.Respawn();
             }
             foreach (var spawner in _actors) {
-                spawner.SpawnActor();
+                spawner.SpawnActor(loader);
             }
         }
     }

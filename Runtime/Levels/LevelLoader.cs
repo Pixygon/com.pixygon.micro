@@ -1,10 +1,11 @@
+using Pixygon.Addressable;
 using Pixygon.DebugTool;
 using UnityEngine;
 
 namespace Pixygon.Micro {
     public class LevelLoader : MonoBehaviour {
         [SerializeField] private LevelData[] _level;
-        [SerializeField] private GameObject _playerPrefab;
+        [SerializeField] private MicroActorData _playerData;
         [SerializeField] private Parallax _parallaxPrefab;
         [SerializeField] private CameraController _camera;
         [SerializeField] private UI _ui;
@@ -48,17 +49,17 @@ namespace Pixygon.Micro {
         }
 
         public void ResetLevels() {
-            _currentLevel.RespawnLevel();
+            _currentLevel.RespawnLevel(this);
         }
 
-        public void LoadLevel(LevelData level) {
+        public async void LoadLevel(LevelData level) {
             if (_currentLevel != null)
                 Destroy(_currentLevel.gameObject);
             _currentLevel = Instantiate(level._levelPrefab, transform).GetComponent<Level>();
-            _player = Instantiate(_playerPrefab, transform);
+            _player = await AddressableLoader.LoadGameObject(_playerData._actorRef, transform);
             _player.transform.position = _currentLevel.PlayerSpawn;
             _camera.Initialize(_player.transform);
-            _player.GetComponent<MicroActor>().Initialize(this);
+            _player.GetComponent<MicroActor>().Initialize(this, _playerData);
             _parallax = Instantiate(_parallaxPrefab, transform);
             _parallax.Initialize(_player.transform, level._parallaxLayerDatas);
             GetComponent<AudioSource>().clip = level._bgm;

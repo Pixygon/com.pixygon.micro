@@ -6,9 +6,14 @@
 - Run-particles should only appear when actually moving now
 - Build never skips intro
 
+### Changed
+- Player is loaded through MicroActorData
+- 
+
 ### Added
 - New player-layer
 - New actor-layer
+- Added animations to Parallax-layers
 
 ## 0.5.4
 ### Fixed
