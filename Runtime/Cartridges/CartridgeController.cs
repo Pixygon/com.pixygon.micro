@@ -1,3 +1,4 @@
+using Pixygon.DebugTool;
 using UnityEngine;
 
 namespace Pixygon.Micro {
@@ -8,17 +9,32 @@ namespace Pixygon.Micro {
         private Intro _intro;
 
         public void Initilize() {
+            #if UNITY_EDITOR
             if (MicroController._instance.SkipIntro)
-                LoadCartridge(MicroController._instance.Cartridges[0]);
-            else {
-                _intro = Instantiate(_introPrefab, transform);
-                _intro.StartIntro(EndIntro);
-            }
+                StartGame();
+            else
+            #endif
+                StartIntro();
+        }
+
+        private void StartIntro() {
+            _intro = Instantiate(_introPrefab, transform);
+            _intro.StartIntro(EndIntro);
         }
 
         private void EndIntro() {
             _intro.gameObject.SetActive(false);
-            LoadCartridge(MicroController._instance.Cartridges[0]);
+            StartGame();
+        }
+
+        private void StartGame() {
+            var i = PlayerPrefs.GetInt("Cartridge");
+            if (MicroController._instance.Cartridges == null || MicroController._instance.Cartridges.Length <= i) {
+                Log.DebugMessage(DebugGroup.PixygonMicro, "No cartridges set!", this);
+                MicroController._instance.TriggerHomeMenu(true);
+                return;
+            }
+            LoadCartridge(MicroController._instance.Cartridges[i]);
         }
 
         public void LoadCartridge(Cartridge c) {

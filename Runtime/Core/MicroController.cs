@@ -13,6 +13,8 @@ namespace Pixygon.Micro
         [SerializeField] private bool _skipIntro;
         [SerializeField] private Cartridge[] _cartridges;
         
+        private bool _homeMenuOpen;
+        
         public DisplayController Display { get; private set; }
         public InputController Input { get; private set; }
         public CartridgeController Cartridge { get; private set; }
@@ -38,12 +40,25 @@ namespace Pixygon.Micro
             Cartridge.Initilize();
             Console.Initialize();
             Input._quit += Quit;
+            Input._home += TriggerHomeMenu;
         }
 
         private void Quit(bool started) {
             #if !UNITY_WEBGL
             Application.Quit();
             #endif
+        }
+
+        public void TriggerHomeMenu(bool started) {
+            if(!started) return;
+            if (_homeMenuOpen) {
+                if(_cartridges.Length != 0)
+                    _homeMenuOpen = false;
+            }
+            else {
+                
+                _homeMenuOpen = true;
+            }
         }
     }
 }

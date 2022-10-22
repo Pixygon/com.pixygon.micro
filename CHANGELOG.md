@@ -4,6 +4,7 @@
 ### Fixed
 - Run-particles should be off on death now
 - Run-particles should only appear when actually moving now
+- Build never skips intro
 
 ### Added
 - New player-layer

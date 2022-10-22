@@ -23,6 +23,9 @@ namespace Pixygon.Micro {
             _sprite.sortingOrder = data._sortOrder;
             _lockX = data._lockXAxis;
             _lockY = data._lockYAxis;
+            if (data._isAnimated) {
+                gameObject.AddComponent<Animator>().runtimeAnimatorController = data._animator;
+            }
         }
         public Vector2 Travel => (Vector2)_camera.transform.localPosition - _startPos;
         private float ClippingPlane => (_camera.transform.localPosition.z +

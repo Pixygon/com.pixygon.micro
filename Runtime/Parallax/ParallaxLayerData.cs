@@ -10,5 +10,7 @@ namespace Pixygon.Micro {
         public int _sortOrder;
         public bool _lockYAxis;
         public bool _lockXAxis;
+        public bool _isAnimated;
+        public RuntimeAnimatorController _animator;
     }
 }
