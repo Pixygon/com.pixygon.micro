@@ -1,3 +1,4 @@
+using Pixygon.DebugTool;
 using UnityEngine;
 
 namespace Pixygon.Micro {
@@ -19,6 +20,7 @@ namespace Pixygon.Micro {
         public bool IsDead { get; protected set; }
 
         public virtual void Initialize(LevelLoader loader, MicroActorData data) {
+            Log.DebugMessage(DebugGroup.PixygonMicro, "Initializing MicroActor");
             Data = data;
             _hp = data._hp;
             if (Data._isHostile)
