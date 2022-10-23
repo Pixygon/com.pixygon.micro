@@ -8,5 +8,9 @@ namespace Pixygon.Micro {
         public AssetReference _actorRef;
         public float _speed;
         public int _hp;
+        public bool _isHostile;
+        public bool _isKillable;
+        public bool _detectGaps;
+        public bool _detectObstacles;
     }
 }

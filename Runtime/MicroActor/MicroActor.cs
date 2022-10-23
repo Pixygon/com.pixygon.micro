@@ -7,7 +7,6 @@ namespace Pixygon.Micro {
         [SerializeField] private ParticleSystem _deathFx;
         [SerializeField] private AudioSource _damageSfx;
         [SerializeField] private AnimatorController _anim;
-        //[SerializeField] protected int _startHp;
         [SerializeField] private float _threshold = -8f;
         [SerializeField] private bool _destroyOnDeath;
         [SerializeField] private float _iFrameLength = .6f;
@@ -15,11 +14,15 @@ namespace Pixygon.Micro {
         protected int _hp;
         private float _iFrames;
         private float _iFrameEffectCounter;
-        public bool Invincible;
+        public bool Invincible { get; private set; }
+        public MicroActorData Data { get; private set; }
         public bool IsDead { get; protected set; }
 
         public virtual void Initialize(LevelLoader loader, MicroActorData data) {
+            Data = data;
             _hp = data._hp;
+            if (Data._isHostile)
+                gameObject.AddComponent<DamageObject>();
         }
         protected void HandleIFrames() {
             if (!Invincible) return;
@@ -44,6 +47,7 @@ namespace Pixygon.Micro {
 
         public virtual void Damage() {
             if (Invincible) return;
+            if (!Data._isKillable) return;
             _iFrames = _iFrameLength;
             Invincible = true;
             _damageFx.Play();

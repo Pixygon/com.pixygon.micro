@@ -8,12 +8,15 @@
 
 ### Changed
 - Player is loaded through MicroActorData
-- 
+- MicroActorData is now a public Property
 
 ### Added
 - New player-layer
 - New actor-layer
 - Added animations to Parallax-layers
+- More dynamic setup of Actors
+- New fields in MicroActorData for "IsHostile", "IsKillable"
+- New fields in MicroActorData for "Detect gaps", "Detect obstacles"
 
 ## 0.5.4
 ### Fixed
