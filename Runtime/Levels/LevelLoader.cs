@@ -1,6 +1,8 @@
+using System.Threading.Tasks;
 using Pixygon.Addressable;
 using Pixygon.DebugTool;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Pixygon.Micro {
     public class LevelLoader : MonoBehaviour {
@@ -52,25 +54,45 @@ namespace Pixygon.Micro {
             _currentLevel.RespawnLevel(this);
         }
 
+        private LevelData _currentLevelData;
+
         public async void LoadLevel(LevelData level) {
-            if (_currentLevel != null)
-                Destroy(_currentLevel.gameObject);
-            _currentLevel = Instantiate(level._levelPrefab, transform).GetComponent<Level>();
-            _player = await AddressableLoader.LoadGameObject(_playerData._actorRef, transform);
-            _player.transform.position = _currentLevel.PlayerSpawn;
-            _camera.Initialize(_player.transform);
-            _player.GetComponent<MicroActor>().Initialize(this, _playerData);
-            _parallax = Instantiate(_parallaxPrefab, transform);
-            _parallax.Initialize(_player.transform, level._parallaxLayerDatas);
-            GetComponent<AudioSource>().clip = level._bgm;
-            GetComponent<AudioSource>().Play();
-            if(level._postProcessingProfile != null)
-                MicroController._instance.Display._volume.profile = level._postProcessingProfile;
-            else
-                MicroController._instance.Display._volume.profile = MicroController._instance.Display._defaultVolume;
+            _currentLevelData = level;
+            await SetupLevel();
+            await SetupPlayer();
+            await SetupParallax();
+            await SetupBgm();
+            await SetupPostProc();
             _levelLoaded = true;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Level loaded!", this);
         }
 
+        private async Task SetupLevel() {
+            if (_currentLevel != null)
+                Destroy(_currentLevel.gameObject);
+            
+            var g = await AddressableLoader.LoadGameObject(_currentLevelData._levelRef, transform);
+            _currentLevel = g.GetComponent<Level>();
+            //_currentLevel = Instantiate(_currentLevelData._levelPrefab, transform).GetComponent<Level>();
+            _currentLevel.RespawnLevel(this);
+        }
+        private async Task SetupPlayer() {
+            _player = await AddressableLoader.LoadGameObject(_playerData._actorRef, transform);
+            _player.transform.position = _currentLevel.PlayerSpawn;
+            _camera.Initialize(_player.transform);
+            _player.GetComponent<MicroActor>().Initialize(this, _playerData);
+        }
+        private async Task SetupParallax() {
+            _parallax = Instantiate(_parallaxPrefab, transform);
+            _parallax.Initialize(_player.transform, _currentLevelData._parallaxLayerDatas);
+        }
+        private async Task SetupBgm() {
+            GetComponent<AudioSource>().clip = await AddressableLoader.LoadAsset<AudioClip>(_currentLevelData._bgmRef);
+            GetComponent<AudioSource>().Play();
+        }
+        private async Task SetupPostProc() {
+            MicroController._instance.Display._volume.profile = _currentLevelData._postProcessingProfileRef != null ?
+                await AddressableLoader.LoadAsset<VolumeProfile>(_currentLevelData._postProcessingProfileRef) : MicroController._instance.Display._defaultVolume;
+        }
     }
 }

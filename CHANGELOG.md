@@ -9,6 +9,8 @@
 ### Changed
 - Player is loaded through MicroActorData
 - MicroActorData is now a public Property
+- Most things on LevelData is now AssetReferences
+- Almost all assets properly loaded through Addressables
 
 ### Added
 - New player-layer
