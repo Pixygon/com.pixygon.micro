@@ -74,7 +74,7 @@ namespace Pixygon.Micro {
             var g = await AddressableLoader.LoadGameObject(_currentLevelData._levelRef, transform);
             _currentLevel = g.GetComponent<Level>();
             //_currentLevel = Instantiate(_currentLevelData._levelPrefab, transform).GetComponent<Level>();
-            _currentLevel.RespawnLevel(this);
+            //_currentLevel.RespawnLevel(this);
         }
         private async Task SetupPlayer() {
             _player = await AddressableLoader.LoadGameObject(_playerData._actorRef, transform);
