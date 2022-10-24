@@ -11,6 +11,7 @@
 - MicroActorData is now a public Property
 - Most things on LevelData is now AssetReferences
 - Almost all assets properly loaded through Addressables
+- Increased screen-size to 320x180
 
 ### Added
 - New player-layer
