@@ -17,6 +17,7 @@ namespace Pixygon.Micro {
         private Parallax _parallax;
         private bool _levelLoaded;
         private LevelData _currentLevelData;
+        private int _currentLevelId;
 
         public UI Ui => _ui;
         
@@ -52,8 +53,8 @@ namespace Pixygon.Micro {
             LoadLevel(_level[i]);
         }
 
-        private int _currentLevelId;
         public void EndLevel() {
+            if (!_levelLoaded) return;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Ending level!", this);
             _currentLevelId += 1;
             StartLevel(_currentLevelId);
@@ -63,8 +64,8 @@ namespace Pixygon.Micro {
             _currentLevel.RespawnLevel(this);
         }
 
-
-        public async void LoadLevel(LevelData level) {
+        private async void LoadLevel(LevelData level) {
+            _levelLoaded = false;
             _currentLevelData = level;
             await SetupLevel();
             await SetupPlayer();
