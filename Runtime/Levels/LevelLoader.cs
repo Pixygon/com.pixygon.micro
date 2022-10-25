@@ -59,11 +59,9 @@ namespace Pixygon.Micro {
             _currentLevelId += 1;
             StartLevel(_currentLevelId);
         }
-
         public void ResetLevels() {
             _currentLevel.RespawnLevel(this);
         }
-
         private async void LoadLevel(LevelData level) {
             _levelLoaded = false;
             _currentLevelData = level;
@@ -75,7 +73,6 @@ namespace Pixygon.Micro {
             _levelLoaded = true;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Level loaded!", this);
         }
-
         private async Task SetupLevel() {
             if (_currentLevel != null)
                 Destroy(_currentLevel.gameObject);

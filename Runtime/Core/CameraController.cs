@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Pixygon.Micro {
@@ -19,6 +20,18 @@ namespace Pixygon.Micro {
                     MicroController._instance.Display._camera.transform.position,
                     (_player.position + _offset) + (Vector3.back * 10f), _lag);
             }
+        }
+        
+        public static async void Shake(float duration) {
+            Vector2 startPos = MicroController._instance.Display._camera.transform.position;
+            var time = 0f;
+            while (time < duration) {
+                time += Time.deltaTime;
+                MicroController._instance.Display._camera.transform.position = startPos + Random.insideUnitCircle;
+                await Task.Yield();
+            }
+
+            MicroController._instance.Display._camera.transform.position = startPos;
         }
     }
 }
