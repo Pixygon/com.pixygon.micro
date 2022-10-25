@@ -10,10 +10,11 @@ namespace Pixygon.Micro {
         [SerializeField] private TextMeshPro _pointsText;
 
         public void SetLife(int i) {
-            _lifeIcons[0].SetActive(i > 0);
-            _lifeIcons[1].SetActive(i > 1);
-            _lifeIcons[2].SetActive(i > 2);
+            _lifeIcons[0].SetActive(i >= 0);
+            _lifeIcons[1].SetActive(i >= 1);
+            _lifeIcons[2].SetActive(i >= 2);
         }
+
         public void SetCoins(int coins) {
             _coinText.text = $"${coins}";
         }
