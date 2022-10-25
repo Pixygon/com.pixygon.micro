@@ -28,6 +28,8 @@ namespace Pixygon.Micro {
             if (Data._isHostile)
                 gameObject.AddComponent<DamageObject>();
         }
+
+        private bool _iFrameRed;
         protected void HandleIFrames() {
             if (!Invincible) return;
             if (_iFrames > 0f) {
@@ -35,8 +37,9 @@ namespace Pixygon.Micro {
                 if (_iFrameEffectCounter > 0f)
                     _iFrameEffectCounter -= Time.deltaTime;
                 else {
+                    _iFrameRed = !_iFrameRed
                     _iFrameEffectCounter = .1f;
-                    _sprite.enabled = !_sprite.enabled;
+                    _sprite.color = _iFrameRed ? Color.red : Color.white;
                 }
             }
             else
@@ -46,7 +49,8 @@ namespace Pixygon.Micro {
         private void StopIFrames() {
             _iFrameEffectCounter = 0f;
             Invincible = false;
-            _sprite.enabled = true;
+            _iFrameRed = false;
+            _sprite.color = Color.white;
         }
 
         public virtual void Damage() {

@@ -16,6 +16,7 @@
 - UI should now correctly show 0 life if you have 0 life
 - Added points-system to UI
 - PlatformMovement: Exposed IsGrounded-bool
+- IFrames makes characters red instead of invisible
 
 ### Added
 - New player-layer
