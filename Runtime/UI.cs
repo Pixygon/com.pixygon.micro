@@ -19,7 +19,7 @@ namespace Pixygon.Micro {
         }
 
         public void SetPoints(int points) {
-            _pointsText.text = points;
+            _pointsText.text = points.ToString();
         }
         public void TriggerMenuScreen(bool activate) {
             _menuScreen.SetActive(activate);
