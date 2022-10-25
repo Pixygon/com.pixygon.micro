@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -75,6 +76,18 @@ namespace Pixygon.Micro {
                 _quit.Invoke(true);
             if (context.canceled)
                 _quit.Invoke(false);
+        }
+        public static async void Rumble(float duration, float intensity = 1f) {
+            InputSystem.ResumeHaptics();
+            var curve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
+            var time = 0f;
+            while (time < duration) {
+                time += Time.deltaTime;
+                Gamepad.current.SetMotorSpeeds(intensity*curve.Evaluate(time/duration), intensity*curve.Evaluate(time/duration));
+                await Task.Yield();
+            }
+            Gamepad.current.SetMotorSpeeds(0f, 0f);
+            InputSystem.PauseHaptics();
         }
     }
 }

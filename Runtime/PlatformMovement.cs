@@ -25,12 +25,12 @@ namespace Pixygon.Micro {
         [SerializeField] private SpriteRenderer _renderer;
         [SerializeField] private AnimatorController _anim;
         
-        private bool _isGrounded;
         private Rigidbody2D _rigid;
         private float _horizontalForce;
         private float _maxSpeed;
         private MicroActor _actor;
 
+        public bool IsGrounded { get; private set; }
         public bool XFlip => _renderer.flipX;
         
         public void Initialize() {
@@ -49,13 +49,13 @@ namespace Pixygon.Micro {
         private void Jump(bool started) {
             if (_actor.IsDead) return;
             var velocity = _rigid.velocity;
-            if (started && _isGrounded)
+            if (started && IsGrounded)
                 velocity = new Vector2(velocity.x, _jumpPower);
             else if (!started && velocity.y > 0f)
                 velocity = new Vector2(velocity.x, velocity.y * _verticalDamping);
             else
                 velocity = velocity;
-            DoJump(velocity, started && _isGrounded);
+            DoJump(velocity, started && IsGrounded);
         }
         public void DoJump(Vector2 velocity, bool playEffect) {
             if (playEffect) {
@@ -75,13 +75,13 @@ namespace Pixygon.Micro {
         }
         private void HandleGroundCheck() {
             var ground = Physics2D.OverlapCircle(_groundCheck.position, _groundCheckSize, _groundLayer);
-            if (!_isGrounded && ground) {
+            if (!IsGrounded && ground) {
                 _landFx.Play();
                 _landSfx.Play();
                 _anim.Land();
             }
-            _isGrounded = ground;
-            if(!_isGrounded)
+            IsGrounded = ground;
+            if(!IsGrounded)
                 _anim.InAir();
             else
                 _anim.Land();

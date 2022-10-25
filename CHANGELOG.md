@@ -15,6 +15,7 @@
 - Increased screen-size to 320x180
 - UI should now correctly show 0 life if you have 0 life
 - Added points-system to UI
+- PlatformMovement: Exposed IsGrounded-bool
 
 ### Added
 - New player-layer
@@ -26,6 +27,7 @@
 - Added Goals and Level advancing
 - Added Screen-shake to camera controller
 - Added intensity-value to screen-shake
+- Added rumble to controllers
 
 ## 0.5.4
 ### Fixed
