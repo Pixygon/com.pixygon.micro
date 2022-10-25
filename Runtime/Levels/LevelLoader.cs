@@ -20,6 +20,7 @@ namespace Pixygon.Micro {
         private int _currentLevelId;
 
         public UI Ui => _ui;
+        public CameraController Camera => _camera;
         
         private void Start() {
             Initialize();
