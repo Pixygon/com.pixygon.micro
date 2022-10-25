@@ -20,6 +20,7 @@
 - More dynamic setup of Actors
 - New fields in MicroActorData for "IsHostile", "IsKillable"
 - New fields in MicroActorData for "Detect gaps", "Detect obstacles"
+- Added Goals and Level advancing
 
 ## 0.5.4
 ### Fixed

@@ -11,10 +11,12 @@ namespace Pixygon.Micro {
         [SerializeField] private Parallax _parallaxPrefab;
         [SerializeField] private CameraController _camera;
         [SerializeField] private UI _ui;
+        
         private Level _currentLevel;
         private GameObject _player;
         private Parallax _parallax;
         private bool _levelLoaded;
+        private LevelData _currentLevelData;
 
         public UI Ui => _ui;
         
@@ -41,7 +43,7 @@ namespace Pixygon.Micro {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Selected level", this);
             if (_levelLoaded) return;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Level was not loaded...", this);
-            StartLevel(0);
+            StartLevel(_currentLevelId);
         }
 
         public void StartLevel(int i) {
@@ -50,11 +52,17 @@ namespace Pixygon.Micro {
             LoadLevel(_level[i]);
         }
 
+        private int _currentLevelId;
+        public void EndLevel() {
+            Log.DebugMessage(DebugGroup.PixygonMicro, "Ending level!", this);
+            _currentLevelId += 1;
+            StartLevel(_currentLevelId);
+        }
+
         public void ResetLevels() {
             _currentLevel.RespawnLevel(this);
         }
 
-        private LevelData _currentLevelData;
 
         public async void LoadLevel(LevelData level) {
             _currentLevelData = level;
@@ -70,14 +78,12 @@ namespace Pixygon.Micro {
         private async Task SetupLevel() {
             if (_currentLevel != null)
                 Destroy(_currentLevel.gameObject);
-            
             var g = await AddressableLoader.LoadGameObject(_currentLevelData._levelRef, transform);
             _currentLevel = g.GetComponent<Level>();
-            //_currentLevel = Instantiate(_currentLevelData._levelPrefab, transform).GetComponent<Level>();
-            //_currentLevel.RespawnLevel(this);
         }
         private async Task SetupPlayer() {
-            _player = await AddressableLoader.LoadGameObject(_playerData._actorRef, transform);
+            if(_player == null) 
+                _player = await AddressableLoader.LoadGameObject(_playerData._actorRef, transform);
             _player.transform.position = _currentLevel.PlayerSpawn;
             _camera.Initialize(_player.transform);
             _player.GetComponent<MicroActor>().Initialize(this, _playerData);
@@ -94,5 +100,6 @@ namespace Pixygon.Micro {
             MicroController._instance.Display._volume.profile = _currentLevelData._postProcessingProfileRef != null ?
                 await AddressableLoader.LoadAsset<VolumeProfile>(_currentLevelData._postProcessingProfileRef) : MicroController._instance.Display._defaultVolume;
         }
+
     }
 }
