@@ -37,7 +37,7 @@ namespace Pixygon.Micro {
                 if (_iFrameEffectCounter > 0f)
                     _iFrameEffectCounter -= Time.deltaTime;
                 else {
-                    _iFrameRed = !_iFrameRed
+                    _iFrameRed = !_iFrameRed;
                     _iFrameEffectCounter = .1f;
                     _sprite.color = _iFrameRed ? Color.red : Color.white;
                 }
