@@ -2,13 +2,14 @@ using System.Threading.Tasks;
 using Pixygon.Addressable;
 using Pixygon.DebugTool;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Rendering;
 
 namespace Pixygon.Micro {
     public class LevelLoader : MonoBehaviour {
         [SerializeField] private LevelData[] _level;
         [SerializeField] private MicroActorData _playerData;
-        [SerializeField] private Parallax _parallaxPrefab;
+        [SerializeField] private AssetReference _parallaxPrefabRef;
         [SerializeField] private CameraController _camera;
         [SerializeField] private UI _ui;
         
@@ -72,6 +73,7 @@ namespace Pixygon.Micro {
             await SetupBgm();
             await SetupPostProc();
             _levelLoaded = true;
+            _camera.SnapCamera();
             Log.DebugMessage(DebugGroup.PixygonMicro, "Level loaded!", this);
         }
         private async Task SetupLevel() {
@@ -88,7 +90,10 @@ namespace Pixygon.Micro {
             _player.GetComponent<MicroActor>().Initialize(this, _playerData);
         }
         private async Task SetupParallax() {
-            _parallax = Instantiate(_parallaxPrefab, transform);
+            if (_parallax == null) {
+                var p = await AddressableLoader.LoadGameObject(_parallaxPrefabRef, transform);
+                _parallax = p.GetComponent<Parallax>();
+            }
             _parallax.Initialize(_player.transform, _currentLevelData._parallaxLayerDatas);
         }
         private async Task SetupBgm() {

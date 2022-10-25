@@ -21,7 +21,9 @@ namespace Pixygon.Micro {
                     (_player.position + _offset) + (Vector3.back * 10f), _lag);
             }
         }
-        
+        public void SnapCamera() {
+            MicroController._instance.Display._camera.transform.position = (_player.position + _offset) + (Vector3.back * 10f);
+        }
         public static async void Shake(float duration, float intensity = 1f) {
             var curve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
             var transform1 = MicroController._instance.Display._camera.transform;

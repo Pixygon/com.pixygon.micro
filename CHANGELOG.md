@@ -1,11 +1,12 @@
 # Changelog
 
-## Unreleased
+## 0.5.5
 ### Fixed
 - Run-particles should be off on death now
 - Run-particles should only appear when actually moving now
 - Build never skips intro
 - Unkillable actors are always marked as Invincible
+- Parallax-layers should not be duplicated anymore
 
 ### Changed
 - Player is loaded through MicroActorData
@@ -29,6 +30,7 @@
 - Added Screen-shake to camera controller
 - Added intensity-value to screen-shake
 - Added rumble to controllers
+- Added "Snap"-camera function
 
 ## 0.5.4
 ### Fixed
