@@ -12,6 +12,8 @@
 - Most things on LevelData is now AssetReferences
 - Almost all assets properly loaded through Addressables
 - Increased screen-size to 320x180
+- UI should now correctly show 0 life if you have 0 life
+- Added points-system to UI
 
 ### Added
 - New player-layer
