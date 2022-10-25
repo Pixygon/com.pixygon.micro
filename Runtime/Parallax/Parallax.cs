@@ -18,7 +18,7 @@ namespace Pixygon.Micro {
 
         private void ResetParallax() {
             foreach (var g in _parallaxLayers) {
-                Destroy(g);
+                Destroy(g.gameObject);
             }
             _parallaxLayers = null;
         }
