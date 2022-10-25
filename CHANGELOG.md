@@ -5,6 +5,7 @@
 - Run-particles should be off on death now
 - Run-particles should only appear when actually moving now
 - Build never skips intro
+- Unkillable actors are always marked as Invincible
 
 ### Changed
 - Player is loaded through MicroActorData

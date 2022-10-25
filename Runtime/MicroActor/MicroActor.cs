@@ -23,6 +23,8 @@ namespace Pixygon.Micro {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Initializing MicroActor");
             Data = data;
             _hp = data._hp;
+            if (!Data._isKillable)
+                Invincible = true;
             if (Data._isHostile)
                 gameObject.AddComponent<DamageObject>();
         }
@@ -73,7 +75,8 @@ namespace Pixygon.Micro {
         public virtual void Update() {
             if (transform.position.y <= _threshold)
                 Die();
-            HandleIFrames();
+            if(Data._isKillable)
+                HandleIFrames();
         }
     }
 }
