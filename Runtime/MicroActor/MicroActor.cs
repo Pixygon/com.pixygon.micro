@@ -73,6 +73,7 @@ namespace Pixygon.Micro {
         }
 
         public virtual void Update() {
+            if (Data == null) return;
             if (transform.position.y <= _threshold)
                 Die();
             if(Data._isKillable)
