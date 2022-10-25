@@ -22,6 +22,7 @@
 - New fields in MicroActorData for "Detect gaps", "Detect obstacles"
 - Added Goals and Level advancing
 - Added Screen-shake to camera controller
+- Added intensity-value to screen-shake
 
 ## 0.5.4
 ### Fixed

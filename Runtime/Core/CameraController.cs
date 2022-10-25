@@ -22,12 +22,13 @@ namespace Pixygon.Micro {
             }
         }
         
-        public static async void Shake(float duration) {
+        public static async void Shake(float duration, float intensity = 1f) {
             Vector2 startPos = MicroController._instance.Display._camera.transform.position;
             var time = 0f;
             while (time < duration) {
                 time += Time.deltaTime;
-                MicroController._instance.Display._camera.transform.position = startPos + Random.insideUnitCircle;
+                var shake = startPos + Random.insideUnitCircle * intensity;
+                MicroController._instance.Display._camera.transform.position = new Vector3(shake.x, shake.y, MicroController._instance.Display._camera.transform.position.z);
                 await Task.Yield();
             }
 
