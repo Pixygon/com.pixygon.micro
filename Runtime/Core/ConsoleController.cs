@@ -17,5 +17,9 @@ namespace Pixygon.Micro
             _sprite.color = faceplate._color;
             _sprite.sprite = faceplate._sprite;
         }
+
+        public void SetZoom(float f) {
+            MicroController._instance.SetZoom(f);
+        }
     }
 }

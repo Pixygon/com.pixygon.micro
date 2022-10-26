@@ -7,6 +7,8 @@ namespace Pixygon.Micro {
         [SerializeField] private float _maxSpeedWalk = 8f;
         [SerializeField] private float _maxSpeedRun = 12f;
         [SerializeField] private float _jumpPower = 12f;
+        [SerializeField] private float _coyoteTimeDuration = .5f;
+        [SerializeField] private float _jumpBufferDuration = .5f;
         [Range(0f, 1f)] [SerializeField] private float _horizontalDampingBasic = .18f;
         [Range(0f, 1f)] [SerializeField] private float _horizontalDampingWhenStopping = .5f;
         [Range(0f, 1f)] [SerializeField] private float _horizontalDampingWhenTurning = .3f;
@@ -29,6 +31,8 @@ namespace Pixygon.Micro {
         private float _horizontalForce;
         private float _maxSpeed;
         private MicroActor _actor;
+        private float _coyoteTime;
+        private float _jumpBuffer;
 
         public bool IsGrounded { get; private set; }
         public bool XFlip => _renderer.flipX;
@@ -49,8 +53,10 @@ namespace Pixygon.Micro {
         private void Jump(bool started) {
             if (_actor.IsDead) return;
             var velocity = _rigid.velocity;
-            if (started && IsGrounded)
+            if (started && (IsGrounded || _coyoteTime > 0f)) 
                 velocity = new Vector2(velocity.x, _jumpPower);
+            else if (started && !IsGrounded)
+                _jumpBuffer = _jumpBufferDuration;
             else if (!started && velocity.y > 0f)
                 velocity = new Vector2(velocity.x, velocity.y * _verticalDamping);
             else
@@ -79,7 +85,12 @@ namespace Pixygon.Micro {
                 _landFx.Play();
                 _landSfx.Play();
                 _anim.Land();
+                if(_jumpBuffer > 0f)
+                    Jump(true);
             }
+
+            if (IsGrounded && !ground)
+                _coyoteTime = _coyoteTimeDuration;
             IsGrounded = ground;
             if(!IsGrounded)
                 _anim.InAir();
@@ -89,6 +100,10 @@ namespace Pixygon.Micro {
         public void HandleMovement() {
             if (_actor.IsDead) return;
             HandleGroundCheck();
+            if (_coyoteTime > 0f)
+                _coyoteTime -= Time.deltaTime;
+            if (_jumpBuffer > 0f)
+                _jumpBuffer -= Time.deltaTime;
             var horizontalForce = _rigid.velocity.x;
             if (!_actor.Invincible) {
                 horizontalForce += MicroController._instance.Input.Movement.x * _speed;

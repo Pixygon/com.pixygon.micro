@@ -58,8 +58,15 @@ namespace Pixygon.Micro {
         public void EndLevel() {
             if (!_levelLoaded) return;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Ending level!", this);
-            _currentLevelId += 1;
-            StartLevel(_currentLevelId);
+            if (_level.Length < _currentLevelId) {
+                _currentLevelId += 1;
+                StartLevel(_currentLevelId);
+            }
+            else {
+                Log.DebugMessage(DebugGroup.PixygonMicro, "Game completed!!");
+                _currentLevelId = 0;
+                StartLevel(_currentLevelId);
+            }
         }
         public void ResetLevels() {
             _currentLevel.RespawnLevel(this);

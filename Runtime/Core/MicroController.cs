@@ -12,6 +12,7 @@ namespace Pixygon.Micro
         [SerializeField] private string _version;
         [SerializeField] private bool _skipIntro;
         [SerializeField] private Cartridge[] _cartridges;
+        [SerializeField] private Camera _cam;
         
         private bool _homeMenuOpen;
         
@@ -59,6 +60,10 @@ namespace Pixygon.Micro
                 
                 _homeMenuOpen = true;
             }
+        }
+
+        public void SetZoom(float f) {
+            _cam.transform.position = new Vector3(0f, 0f, Mathf.Lerp(-10f, -20f, f));
         }
     }
 }

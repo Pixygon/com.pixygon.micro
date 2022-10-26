@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+### Added
+- Points-value added to MicroActorData
+- Added JumpBuffer
+- Added CoyoteTime
+- Added LevelName
+- Added ConsoleZoom
+
 ## 0.5.5
 ### Fixed
 - Run-particles should be off on death now
