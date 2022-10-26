@@ -50,20 +50,29 @@ namespace Pixygon.Micro {
             MicroController._instance.Input._jump -= Jump;
             MicroController._instance.Input._run -= Run;
         }
+
         private void Jump(bool started) {
             if (_actor.IsDead) return;
             var velocity = _rigid.velocity;
-            if (started && (IsGrounded || _coyoteTime > 0f)) {
+            if (started && IsGrounded) {
                 velocity = new Vector2(velocity.x, _jumpPower);
                 _coyoteTime = 0f;
+                _jumpBuffer = 0f;
+            } else if (started && _coyoteTime > 0f) {
+                Debug.Log("Coyote-time jump!");
+                velocity = new Vector2(velocity.x, _jumpPower);
+                _coyoteTime = 0f;
+                _jumpBuffer = 0f;
             } else if (started && !IsGrounded)
                 _jumpBuffer = _jumpBufferDuration;
             else if (!started && velocity.y > 0f)
                 velocity = new Vector2(velocity.x, velocity.y * _verticalDamping);
             else
                 velocity = velocity;
+
             DoJump(velocity, started && IsGrounded);
         }
+
         public void DoJump(Vector2 velocity, bool playEffect) {
             if (playEffect) {
                 _jumpFx.Play();
@@ -86,8 +95,10 @@ namespace Pixygon.Micro {
                 _landFx.Play();
                 _landSfx.Play();
                 _anim.Land();
-                if(_jumpBuffer > 0f)
+                if (_jumpBuffer > 0f) {
+                    Debug.Log("Jump-buffer jump!");
                     Jump(true);
+                }
             }
 
             if (IsGrounded && !ground)
