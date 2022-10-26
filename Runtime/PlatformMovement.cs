@@ -53,9 +53,10 @@ namespace Pixygon.Micro {
         private void Jump(bool started) {
             if (_actor.IsDead) return;
             var velocity = _rigid.velocity;
-            if (started && (IsGrounded || _coyoteTime > 0f)) 
+            if (started && (IsGrounded || _coyoteTime > 0f)) {
                 velocity = new Vector2(velocity.x, _jumpPower);
-            else if (started && !IsGrounded)
+                _coyoteTime = 0f;
+            } else if (started && !IsGrounded)
                 _jumpBuffer = _jumpBufferDuration;
             else if (!started && velocity.y > 0f)
                 velocity = new Vector2(velocity.x, velocity.y * _verticalDamping);
