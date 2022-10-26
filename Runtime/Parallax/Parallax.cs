@@ -5,8 +5,10 @@ namespace Pixygon.Micro {
         [SerializeField] private ParallaxLayer _parallaxLayerPrefab;
         
         private ParallaxLayer[] _parallaxLayers;
+        private bool _loaded;
         
         public void Initialize(Transform player, ParallaxLayerData[] layerData) {
+            _loaded = false;
             if (_parallaxLayers != null)
                 ResetParallax();
             _parallaxLayers = new ParallaxLayer[layerData.Length];
@@ -14,6 +16,7 @@ namespace Pixygon.Micro {
                 _parallaxLayers[i] = Instantiate(_parallaxLayerPrefab, transform);
                 _parallaxLayers[i].Initialize(player, layerData[i]);
             }
+            _loaded = true;
         }
 
         private void ResetParallax() {
@@ -24,6 +27,7 @@ namespace Pixygon.Micro {
         }
         
         private void Update() {
+            if (!_loaded) return;
             foreach (var layer in _parallaxLayers) {
                 layer.UpdateParallax();
             }

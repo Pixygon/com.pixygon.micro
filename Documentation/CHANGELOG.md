@@ -1,6 +1,9 @@
 # Changelog
 
 ## Unreleased
+### Fixed
+- Bug with no parallax-layers
+
 ### Added
 - Points-value added to MicroActorData
 - Added JumpBuffer
