@@ -14,6 +14,7 @@
 - Added ConsoleZoom
 - Added layer "PixygonMicroActorsBG"
 - Added "CannotMove"-field in PlatformMovement-HandleMovement
+- Added Level Start/End-objects to UI
 
 ## 0.5.5
 ### Fixed

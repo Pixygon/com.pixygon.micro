@@ -8,6 +8,8 @@ namespace Pixygon.Micro {
         [SerializeField] private GameObject[] _lifeIcons;
         [SerializeField] private TextMeshPro _coinText;
         [SerializeField] private TextMeshPro _pointsText;
+        [SerializeField] public GameObject LevelStartScreen { get; }
+        [SerializeField] public GameObject LevelEndScreen { get; }
 
         public void SetLife(int i) {
             _lifeIcons[0].SetActive(i >= 0);
