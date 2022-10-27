@@ -18,6 +18,7 @@ namespace Pixygon.Micro {
         public bool Invincible { get; private set; }
         public MicroActorData Data { get; private set; }
         public bool IsDead { get; protected set; }
+        public bool IgnoreMovement { get; protected set; }
 
         public virtual void Initialize(LevelLoader loader, MicroActorData data) {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Initializing MicroActor");

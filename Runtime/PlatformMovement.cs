@@ -54,6 +54,7 @@ namespace Pixygon.Micro {
 
         private void Jump(bool started) {
             if (_actor.IsDead) return;
+            if (_actor.IgnoreMovement) return;
             var playFx = false;
             var velocity = _rigid.velocity;
             if (started && IsGrounded) {
@@ -120,7 +121,7 @@ namespace Pixygon.Micro {
             else
                 _anim.Land();
         }
-        public void HandleMovement(bool cannotMove) {
+        public void HandleMovement() {
             if (_actor.IsDead) return;
             HandleGroundCheck();
             if (_coyoteTime > 0f)
@@ -128,7 +129,7 @@ namespace Pixygon.Micro {
             if (_jumpBuffer > 0f)
                 _jumpBuffer -= Time.deltaTime;
             var horizontalForce = _rigid.velocity.x;
-            var move = cannotMove ? 0f : MicroController._instance.Input.Movement.x;
+            var move = _actor.IgnoreMovement ? 0f : MicroController._instance.Input.Movement.x;
             if (!_actor.Invincible) {
                 horizontalForce += move * _speed;
                 if (move < -0.1f && !_renderer.flipX)
