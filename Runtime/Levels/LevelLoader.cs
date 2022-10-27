@@ -58,6 +58,7 @@ namespace Pixygon.Micro {
         public void EndLevel() {
             if (!_levelLoaded) return;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Ending level!", this);
+            _levelLoaded = false;
             if (_currentLevelId < _level.Length) {
                 _currentLevelId += 1;
                 StartLevel(_currentLevelId);
