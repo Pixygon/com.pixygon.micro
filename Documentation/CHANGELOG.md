@@ -4,6 +4,7 @@
 ### Fixed
 - Bug with no parallax-layers
 - Pickups should play effect now
+- Levels should not double-spawn anymore
 
 ### Added
 - Points-value added to MicroActorData

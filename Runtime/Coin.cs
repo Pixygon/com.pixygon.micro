@@ -12,7 +12,6 @@ namespace Pixygon.Micro {
         public void Respawn() {
             GetComponent<Collider2D>().enabled = true;
             GetComponent<SpriteRenderer>().enabled = true;
-            _effect.Play();
         }
     }
 }

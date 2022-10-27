@@ -72,6 +72,7 @@ namespace Pixygon.Micro {
             _currentLevel.RespawnLevel(this);
         }
         private async void LoadLevel(LevelData level) {
+            if (_levelLoaded) return;
             _levelLoaded = false;
             _currentLevelData = level;
             await SetupLevel();
