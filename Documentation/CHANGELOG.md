@@ -13,6 +13,7 @@
 - Added LevelName
 - Added ConsoleZoom
 - Added layer "PixygonMicroActorsBG"
+- Added "CannotMove"-field in PlatformMovement-HandleMovement
 
 ## 0.5.5
 ### Fixed

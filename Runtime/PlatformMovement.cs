@@ -120,7 +120,7 @@ namespace Pixygon.Micro {
             else
                 _anim.Land();
         }
-        public void HandleMovement() {
+        public void HandleMovement(bool cannotMove) {
             if (_actor.IsDead) return;
             HandleGroundCheck();
             if (_coyoteTime > 0f)
@@ -128,16 +128,17 @@ namespace Pixygon.Micro {
             if (_jumpBuffer > 0f)
                 _jumpBuffer -= Time.deltaTime;
             var horizontalForce = _rigid.velocity.x;
+            var move = cannotMove ? 0f : MicroController._instance.Input.Movement.x;
             if (!_actor.Invincible) {
-                horizontalForce += MicroController._instance.Input.Movement.x * _speed;
-                if (MicroController._instance.Input.Movement.x < -0.1f && !_renderer.flipX)
+                horizontalForce += move * _speed;
+                if (move < -0.1f && !_renderer.flipX)
                     _renderer.flipX = true;
-                else if (MicroController._instance.Input.Movement.x > 0.1f && _renderer.flipX)
+                else if (move > 0.1f && _renderer.flipX)
                     _renderer.flipX = false;
             }
-            if (Mathf.Abs(MicroController._instance.Input.Movement.x) < .01f)
+            if (Mathf.Abs(move) < .01f)
                 horizontalForce *= Mathf.Pow(1f - _horizontalDampingWhenStopping, Time.deltaTime * 10f);
-            else if (Math.Abs(Mathf.Sign(MicroController._instance.Input.Movement.x) - Mathf.Sign(horizontalForce)) > .01f)
+            else if (Math.Abs(Mathf.Sign(move) - Mathf.Sign(horizontalForce)) > .01f)
                 horizontalForce *= Mathf.Pow(1f - _horizontalDampingWhenTurning, Time.deltaTime * 10f);
             else
                 horizontalForce *= Mathf.Pow(1f - _horizontalDampingBasic, Time.deltaTime * 10f);
