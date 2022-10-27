@@ -5,12 +5,14 @@ namespace Pixygon.Micro {
     public class UI : MonoBehaviour {
         [SerializeField] private GameObject _gameOverScreen;
         [SerializeField] private GameObject _menuScreen;
+        [SerializeField] private GameObject _levelStartScreen;
+        [SerializeField] private GameObject _levelEndScreen;
+        [SerializeField] private GameObject _pregameScreen;
         [SerializeField] private GameObject[] _lifeIcons;
         [SerializeField] private TextMeshPro _coinText;
         [SerializeField] private TextMeshPro _pointsText;
-        [SerializeField] private GameObject _levelStartScreen;
-        [SerializeField] private GameObject _levelEndScreen;
 
+        public GameObject PregameScreen => _pregameScreen;
         public GameObject LevelStartScreen => _levelStartScreen;
         public GameObject LevelEndScreen => _levelEndScreen;
         public void SetLife(int i) {
