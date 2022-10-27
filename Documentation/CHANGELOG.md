@@ -3,6 +3,7 @@
 ## Unreleased
 ### Fixed
 - Bug with no parallax-layers
+- Pickups should play effect now
 
 ### Added
 - Points-value added to MicroActorData
@@ -10,6 +11,7 @@
 - Added CoyoteTime
 - Added LevelName
 - Added ConsoleZoom
+- Added layer "PixygonMicroActorsBG"
 
 ## 0.5.5
 ### Fixed

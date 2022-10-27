@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Pixygon.Micro {
     public class PlatformMovement : MonoBehaviour {
@@ -53,21 +54,25 @@ namespace Pixygon.Micro {
 
         private void Jump(bool started) {
             if (_actor.IsDead) return;
+            var playFx = false;
             var velocity = _rigid.velocity;
             if (started && IsGrounded) {
                 velocity = new Vector2(velocity.x, _jumpPower);
                 _coyoteTime = 0f;
                 _jumpBuffer = 0f;
+                playFx = true;
             } else if (started && !IsGrounded && _coyoteTime > 0f) {
                 Debug.Log("Coyote-time jump!");
                 velocity = new Vector2(velocity.x, _jumpPower);
                 _coyoteTime = 0f;
                 _jumpBuffer = 0f;
+                playFx = true;
             } else if (started && !IsGrounded && _jumpBuffer > 0f) {
                 Debug.Log("Jump-buffer jump!");
                 velocity = new Vector2(velocity.x, _jumpPower);
                 _coyoteTime = 0f;
                 _jumpBuffer = 0f;
+                playFx = true;
             } else if (started && !IsGrounded)
                 _jumpBuffer = _jumpBufferDuration;
             else if (!started && velocity.y > 0f)
@@ -75,12 +80,13 @@ namespace Pixygon.Micro {
             else
                 velocity = velocity;
 
-            DoJump(velocity, started && IsGrounded);
+            DoJump(velocity, playFx);
         }
 
         public void DoJump(Vector2 velocity, bool playEffect) {
             if (playEffect) {
                 _jumpFx.Play();
+                _jumpSfx.pitch = UnityEngine.Random.Range(0.9f, 1.05f);
                 _jumpSfx.Play();
                 _anim.Jump();
             }
@@ -98,6 +104,7 @@ namespace Pixygon.Micro {
             var ground = Physics2D.OverlapCircle(_groundCheck.position, _groundCheckSize, _groundLayer);
             if (!IsGrounded && ground) {
                 _landFx.Play();
+                _landSfx.pitch = UnityEngine.Random.Range(0.9f, 1.05f);
                 _landSfx.Play();
                 _anim.Land();
                 if (_jumpBuffer > 0f) {

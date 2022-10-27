@@ -16,7 +16,7 @@ namespace Pixygon.Micro {
         }
 
         public void SetCoins(int coins) {
-            _coinText.text = $"${coins}";
+            _coinText.text = coins.ToString();
         }
 
         public void SetPoints(int points) {

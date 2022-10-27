@@ -59,6 +59,7 @@ namespace Pixygon.Micro {
             _iFrames = _iFrameLength;
             Invincible = true;
             _damageFx.Play();
+            _damageSfx.pitch = UnityEngine.Random.Range(0.9f, 1.05f);
             _damageSfx.Play();
             _anim.Damage();
             if (_hp != 0)
