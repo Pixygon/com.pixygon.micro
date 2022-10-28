@@ -6,6 +6,9 @@
 - Pickups should play effect now
 - Levels should not double-spawn anymore
 
+### Changed
+- Exposed CurrentLevel of LevelLoader
+
 ### Added
 - Points-value added to MicroActorData
 - Added JumpBuffer
