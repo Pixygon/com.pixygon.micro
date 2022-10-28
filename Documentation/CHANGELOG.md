@@ -8,6 +8,7 @@
 
 ### Changed
 - Exposed CurrentLevel of LevelLoader
+- Exposed CurrentLevelData of LevelLoader
 
 ### Added
 - Points-value added to MicroActorData

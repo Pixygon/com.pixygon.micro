@@ -16,12 +16,12 @@ namespace Pixygon.Micro {
         private GameObject _player;
         private Parallax _parallax;
         private bool _levelLoaded;
-        private LevelData _currentLevelData;
         private int _currentLevelId;
 
         public UI Ui => _ui;
         public CameraController Camera => _camera;
         public Level CurrentLevel { get; private set; }
+        public LevelData CurrentLevelData { get; private set; }
         
         private void Start() {
             Initialize();
@@ -75,7 +75,7 @@ namespace Pixygon.Micro {
         private async void LoadLevel(LevelData level) {
             if (_levelLoaded) return;
             _levelLoaded = false;
-            _currentLevelData = level;
+            CurrentLevelData = level;
             await SetupLevel();
             await SetupPlayer();
             await SetupParallax();
@@ -88,7 +88,7 @@ namespace Pixygon.Micro {
         private async Task SetupLevel() {
             if (CurrentLevel != null)
                 Destroy(CurrentLevel.gameObject);
-            var g = await AddressableLoader.LoadGameObject(_currentLevelData._levelRef, transform);
+            var g = await AddressableLoader.LoadGameObject(CurrentLevelData._levelRef, transform);
             CurrentLevel = g.GetComponent<Level>();
         }
         private async Task SetupPlayer() {
@@ -103,15 +103,15 @@ namespace Pixygon.Micro {
                 var p = await AddressableLoader.LoadGameObject(_parallaxPrefabRef, transform);
                 _parallax = p.GetComponent<Parallax>();
             }
-            _parallax.Initialize(_player.transform, _currentLevelData._parallaxLayerDatas);
+            _parallax.Initialize(_player.transform, CurrentLevelData._parallaxLayerDatas);
         }
         private async Task SetupBgm() {
-            GetComponent<AudioSource>().clip = await AddressableLoader.LoadAsset<AudioClip>(_currentLevelData._bgmRef);
+            GetComponent<AudioSource>().clip = await AddressableLoader.LoadAsset<AudioClip>(CurrentLevelData._bgmRef);
             GetComponent<AudioSource>().Play();
         }
         private async Task SetupPostProc() {
-            MicroController._instance.Display._volume.profile = _currentLevelData._postProcessingProfileRef != null ?
-                await AddressableLoader.LoadAsset<VolumeProfile>(_currentLevelData._postProcessingProfileRef) : MicroController._instance.Display._defaultVolume;
+            MicroController._instance.Display._volume.profile = CurrentLevelData._postProcessingProfileRef != null ?
+                await AddressableLoader.LoadAsset<VolumeProfile>(CurrentLevelData._postProcessingProfileRef) : MicroController._instance.Display._defaultVolume;
         }
 
     }
