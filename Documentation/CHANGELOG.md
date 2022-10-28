@@ -21,6 +21,7 @@
 - Added Level Start/End-objects to UI
 - Set LevelStart + text-method
 - Coins have a Taken-property, to avoid taking them twice
+- UI: Added animation options to points and coins
 
 ## 0.5.5
 ### Fixed
