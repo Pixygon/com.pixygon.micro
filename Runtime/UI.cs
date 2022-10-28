@@ -11,9 +11,9 @@ namespace Pixygon.Micro {
         [SerializeField] private GameObject[] _lifeIcons;
         [SerializeField] private TextMeshPro _coinText;
         [SerializeField] private TextMeshPro _pointsText;
+        [SerializeField] private TextMeshPro _levelStartText;
 
         public GameObject PregameScreen => _pregameScreen;
-        public GameObject LevelStartScreen => _levelStartScreen;
         public GameObject LevelEndScreen => _levelEndScreen;
         public void SetLife(int i) {
             _lifeIcons[0].SetActive(i >= 0);
@@ -34,6 +34,11 @@ namespace Pixygon.Micro {
 
         public void TriggerGameOverScreen(bool activate) {
             _gameOverScreen.SetActive(activate);
+        }
+
+        public void TriggerStartScreen(bool activate, string text = "") {
+            _levelStartText.text = text;
+            _levelStartScreen.SetActive(activate);
         }
     }
 }
