@@ -5,7 +5,7 @@ namespace Pixygon.Micro {
     public class MicroActor : MonoBehaviour {
         [SerializeField] protected SpriteRenderer _sprite;
         [SerializeField] private ParticleSystem _damageFx;
-        [SerializeField] private ParticleSystem _deathFx;
+        [SerializeField] protected ParticleSystem _deathFx;
         [SerializeField] private AudioSource _damageSfx;
         [SerializeField] private AnimatorController _anim;
         [SerializeField] private float _threshold = -8f;
@@ -47,7 +47,7 @@ namespace Pixygon.Micro {
                 StopIFrames();
         }
 
-        private void StopIFrames() {
+        protected void StopIFrames() {
             _iFrameEffectCounter = 0f;
             Invincible = false;
             _iFrameRed = false;
