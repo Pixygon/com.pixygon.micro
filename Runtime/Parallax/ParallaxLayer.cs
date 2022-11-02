@@ -8,6 +8,7 @@ namespace Pixygon.Micro.Parallax {
         private Transform _player;
         private Vector2 _startPos;
         private float _startZ;
+        private float _length;
         private bool _lockX;
         private bool _lockY;
         private Vector2 Travel => (Vector2)_camera.transform.localPosition - _startPos;
@@ -34,9 +35,9 @@ namespace Pixygon.Micro.Parallax {
             if (data._isAnimated) {
                 gameObject.AddComponent<Animator>().runtimeAnimatorController = data._animator;
             }
+            _length = _sprite.sprite.bounds.size.x;
         }
         public void UpdateParallax() {
-            var length = 240/16;
             var temp = _camera.transform.position.x * (1 - ParallaxFactor);
             var newPos = (_startPos + _offset) + Travel * ParallaxFactor;
             if (_lockX)
@@ -45,9 +46,16 @@ namespace Pixygon.Micro.Parallax {
                 newPos = new Vector2(newPos.x, _startPos.y+_offset.y);
             
             transform.localPosition = new Vector3(newPos.x, newPos.y, _startZ);
+            if (temp > _startPos.x + (_length / 2f))
+                _startPos = new Vector2(_startPos.x + _length, _startPos.y);
+            else if (temp < _startPos.x - (_length / 2f))
+                _startPos = new Vector2(_startPos.x - _length, _startPos.y);
+            //HandleScroll();
+        }
 
-            if (Travel.x > _startPos.x + (length / 2f)) _startPos = new Vector2(_startPos.x + length, _startPos.y);
-            else if (Travel.x < _startPos.x - (length / 2f)) _startPos = new Vector2(_startPos.x - length, _startPos.y);
+        private void HandleScroll() {
+            //This fucks up hard!
+            _length = 240;
         }
     }
 }

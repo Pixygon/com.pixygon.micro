@@ -27,7 +27,7 @@ namespace Pixygon.Micro {
             StartGame();
         }
 
-        private void StartGame() {
+        public void StartGame() {
             var i = PlayerPrefs.GetInt("Cartridge");
             if (MicroController._instance.Cartridges == null || MicroController._instance.Cartridges.Length <= i) {
                 Log.DebugMessage(DebugGroup.PixygonMicro, "No cartridges set!", this);

@@ -9,17 +9,18 @@ namespace Pixygon.Micro
         [SerializeField] private InputController _inputPrefab;
         [SerializeField] private CartridgeController _cartridgePrefab;
         [SerializeField] private ConsoleController _consolePrefab;
+        [SerializeField] private HomeController _homePrefab;
         [SerializeField] private string _version;
         [SerializeField] private bool _skipIntro;
         [SerializeField] private Cartridge[] _cartridges;
         [SerializeField] private Camera _cam;
         
-        private bool _homeMenuOpen;
-        
+        public bool HomeMenuOpen { get; private set; }
         public DisplayController Display { get; private set; }
         public InputController Input { get; private set; }
         public CartridgeController Cartridge { get; private set; }
         public ConsoleController Console { get; private set; }
+        public HomeController Home { get; private set; }
         public bool SkipIntro => _skipIntro;
         public string Version => _version;
         public Cartridge[] Cartridges => _cartridges;
@@ -37,9 +38,11 @@ namespace Pixygon.Micro
             Input = Instantiate(_inputPrefab, transform);
             Console = Instantiate(_consolePrefab, transform);
             Cartridge = Instantiate(_cartridgePrefab, transform);
+            Home = Instantiate(_homePrefab, transform);
             
             Cartridge.Initilize();
             Console.Initialize();
+            Home.Initialize();
             Input._quit += Quit;
             Input._home += TriggerHomeMenu;
         }
@@ -52,14 +55,15 @@ namespace Pixygon.Micro
 
         public void TriggerHomeMenu(bool started) {
             if(!started) return;
-            if (_homeMenuOpen) {
+            if (HomeMenuOpen) {
                 if(_cartridges.Length != 0)
-                    _homeMenuOpen = false;
+                    HomeMenuOpen = false;
             }
             else {
-                
-                _homeMenuOpen = true;
+                HomeMenuOpen = true;
             }
+
+            Home.Activate(HomeMenuOpen);
         }
 
         public void SetZoom(float f) {
