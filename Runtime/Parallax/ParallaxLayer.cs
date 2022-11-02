@@ -46,8 +46,8 @@ namespace Pixygon.Micro.Parallax {
             
             transform.localPosition = new Vector3(newPos.x, newPos.y, _startZ);
 
-            if (temp > _startPos.x + (length / 32f)) _startPos = new Vector2(_startPos.x + (length/32f), _startPos.y);
-            else if (temp < _startPos.x - (length / 32f)) _startPos = new Vector2(_startPos.x - (length/32f), _startPos.y);
+            if (temp > _startPos.x + (length / 32f)) _startPos = new Vector2(_startPos.x + (length/16f), _startPos.y);
+            else if (temp < _startPos.x - (length / 32f)) _startPos = new Vector2(_startPos.x - (length/16f), _startPos.y);
         }
     }
 }
