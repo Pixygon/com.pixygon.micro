@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Random = System.Random;
 
 namespace Pixygon.Micro {
     public class PlatformMovement : MonoBehaviour {

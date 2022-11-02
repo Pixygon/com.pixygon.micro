@@ -1,3 +1,4 @@
+using Pixygon.Micro.Parallax;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 

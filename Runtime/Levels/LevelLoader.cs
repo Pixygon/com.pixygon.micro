@@ -14,7 +14,7 @@ namespace Pixygon.Micro {
         [SerializeField] private UI _ui;
         
         private GameObject _player;
-        private Parallax _parallax;
+        private Parallax.Parallax _parallax;
         private bool _levelLoaded;
         private int _currentLevelId;
 
@@ -101,9 +101,9 @@ namespace Pixygon.Micro {
         private async Task SetupParallax() {
             if (_parallax == null) {
                 var p = await AddressableLoader.LoadGameObject(_parallaxPrefabRef, transform);
-                _parallax = p.GetComponent<Parallax>();
+                _parallax = p.GetComponent<Parallax.Parallax>();
             }
-            _parallax.Initialize(_player.transform, CurrentLevelData._parallaxLayerDatas);
+            _parallax.Initialize(_player.transform, MicroController._instance.Display._camera, CurrentLevelData._parallaxLayerDatas);
         }
         private async Task SetupBgm() {
             GetComponent<AudioSource>().clip = await AddressableLoader.LoadAsset<AudioClip>(CurrentLevelData._bgmRef);

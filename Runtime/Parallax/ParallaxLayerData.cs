@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Pixygon.Micro {
+namespace Pixygon.Micro.Parallax {
     [CreateAssetMenu(menuName = "Pixygon/Micro/New Parallax Layer")]
     public class ParallaxLayerData : ScriptableObject {
         public Sprite _sprite;

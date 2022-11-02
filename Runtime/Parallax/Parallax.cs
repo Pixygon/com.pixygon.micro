@@ -1,20 +1,20 @@
 using UnityEngine;
 
-namespace Pixygon.Micro {
+namespace Pixygon.Micro.Parallax {
     public class Parallax : MonoBehaviour {
         [SerializeField] private ParallaxLayer _parallaxLayerPrefab;
         
         private ParallaxLayer[] _parallaxLayers;
         private bool _loaded;
         
-        public void Initialize(Transform player, ParallaxLayerData[] layerData) {
+        public void Initialize(Transform player, Camera camera, ParallaxLayerData[] layerData) {
             _loaded = false;
             if (_parallaxLayers != null)
                 ResetParallax();
             _parallaxLayers = new ParallaxLayer[layerData.Length];
             for (var i = 0; i < layerData.Length; i++) {
                 _parallaxLayers[i] = Instantiate(_parallaxLayerPrefab, transform);
-                _parallaxLayers[i].Initialize(player, layerData[i]);
+                _parallaxLayers[i].Initialize(player, camera, layerData[i]);
             }
             _loaded = true;
         }

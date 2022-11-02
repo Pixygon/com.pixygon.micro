@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Pixygon.Micro {
+namespace Pixygon.Micro.Parallax {
     public class ParallaxLayer : MonoBehaviour {
         [SerializeField] private Vector2 _offset;
         [SerializeField] private SpriteRenderer _sprite;
@@ -10,12 +10,20 @@ namespace Pixygon.Micro {
         private float _startZ;
         private bool _lockX;
         private bool _lockY;
-        public void Initialize(Transform player, ParallaxLayerData data) {
-            _camera = MicroController._instance.Display._camera;
+        private Vector2 Travel => (Vector2)_camera.transform.localPosition - _startPos;
+        private float ClippingPlane => (_camera.transform.localPosition.z +
+                                        (DistanceFromSubject > 0 ? _camera.farClipPlane : _camera.nearClipPlane));
+        private float ParallaxFactor => Mathf.Abs(DistanceFromSubject) / ClippingPlane;
+        private float DistanceFromSubject => transform.localPosition.z - _player.position.z;
+        public void Initialize(Transform player, Camera camera, ParallaxLayerData data) {
+            _camera = camera;
             _player = player;
-            _startPos = transform.localPosition;
-            transform.localPosition = new Vector3(_startPos.x, _startPos.y, data._zDistance);
-            _startZ = transform.localPosition.z;
+            var transform1 = transform;
+            var localPosition = transform1.localPosition;
+            _startPos = localPosition;
+            localPosition = new Vector3(_startPos.x, _startPos.y, data._zDistance);
+            transform1.localPosition = localPosition;
+            _startZ = localPosition.z;
             _sprite.sprite = data._sprite;
             _sprite.drawMode = SpriteDrawMode.Tiled;
             _sprite.size = data._tiling;
@@ -27,12 +35,9 @@ namespace Pixygon.Micro {
                 gameObject.AddComponent<Animator>().runtimeAnimatorController = data._animator;
             }
         }
-        public Vector2 Travel => (Vector2)_camera.transform.localPosition - _startPos;
-        private float ClippingPlane => (_camera.transform.localPosition.z +
-                                        (DistanceFromSubject > 0 ? _camera.farClipPlane : _camera.nearClipPlane));
-        public float ParallaxFactor => Mathf.Abs(DistanceFromSubject) / ClippingPlane;
-        public float DistanceFromSubject => transform.localPosition.z - _player.position.z;
         public void UpdateParallax() {
+            var length = 320 / 2f;
+            var temp = _camera.transform.position.x * (1 - ParallaxFactor);
             var newPos = (_startPos + _offset) + Travel * ParallaxFactor;
             if (_lockX)
                 newPos = new Vector2(_startPos.x+_offset.x, newPos.y);
@@ -40,6 +45,9 @@ namespace Pixygon.Micro {
                 newPos = new Vector2(newPos.x, _startPos.y+_offset.y);
             
             transform.localPosition = new Vector3(newPos.x, newPos.y, _startZ);
+
+            if (temp > _startPos.x + (length / 2f)) _startPos = new Vector2(_startPos.x + length, _startPos.y);
+            else if (temp < _startPos.x - (length / 2f)) _startPos = new Vector2(_startPos.x - length, _startPos.y);
         }
     }
 }
