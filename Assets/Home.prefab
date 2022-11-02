@@ -4216,6 +4216,7 @@ MonoBehaviour:
   _cartridgeMenu: {fileID: 349827037038918028}
   _trophyMenu: {fileID: 53262085080894072}
   _versionText: {fileID: 3242902583921616804}
+  _gameTitleText: {fileID: 2603186868119296752}
   _eventHomeTest: {fileID: 4052173378563074003}
   _eventSettingsTest: {fileID: 5713136879418158747}
   _eventCartridgeTest: {fileID: 5991848956664691943}

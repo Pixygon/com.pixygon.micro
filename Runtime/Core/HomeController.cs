@@ -11,6 +11,7 @@ namespace Pixygon.Micro {
         [SerializeField] private GameObject _cartridgeMenu;
         [SerializeField] private GameObject _trophyMenu;
         [SerializeField] private TextMeshProUGUI _versionText;
+        [SerializeField] private TextMeshProUGUI _gameTitleText;
         [SerializeField] private GameObject _eventHomeTest;
         [SerializeField] private GameObject _eventSettingsTest;
         [SerializeField] private GameObject _eventCartridgeTest;
@@ -20,6 +21,7 @@ namespace Pixygon.Micro {
         public void Initialize() {
             GetComponent<Canvas>().worldCamera = MicroController._instance.Display._uiCamera;
             _versionText.text = MicroController._instance.Version;
+            _gameTitleText.text = MicroController._instance.CurrentlyLoadedCartridge._title;
         }
         public void Activate(bool activate) {
             _homeMenu.SetActive(activate);
@@ -52,6 +54,8 @@ namespace Pixygon.Micro {
         public void SetCartridge(int i) {
             PlayerPrefs.SetInt("Cartridge", i);
             PlayerPrefs.Save();
+            _gameTitleText.text = MicroController._instance.CurrentlyLoadedCartridge._title;
+            TriggerCartridgeSelect(false);
         }
 
 

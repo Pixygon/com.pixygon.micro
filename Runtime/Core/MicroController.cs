@@ -24,7 +24,7 @@ namespace Pixygon.Micro
         public bool SkipIntro => _skipIntro;
         public string Version => _version;
         public Cartridge[] Cartridges => _cartridges;
-        
+        public Cartridge CurrentlyLoadedCartridge => _cartridges[PlayerPrefs.GetInt("Cartridge")];
         private void Awake() {
             if (_instance == null)
                 _instance = this;
