@@ -36,7 +36,7 @@ namespace Pixygon.Micro.Parallax {
             }
         }
         public void UpdateParallax() {
-            var length = 320 / 2f;
+            var length = 240 / 2f;
             var temp = _camera.transform.position.x * (1 - ParallaxFactor);
             var newPos = (_startPos + _offset) + Travel * ParallaxFactor;
             if (_lockX)
