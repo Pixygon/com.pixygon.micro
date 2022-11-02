@@ -10,6 +10,8 @@
 - Exposed CurrentLevel of LevelLoader
 - Exposed CurrentLevelData of LevelLoader
 - Made some things in MicroActor protected instead of private
+- Added asmDef to parallaxing
+- Parallax should scroll indefinitely
 
 ### Added
 - Points-value added to MicroActorData
