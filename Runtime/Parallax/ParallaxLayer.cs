@@ -36,7 +36,7 @@ namespace Pixygon.Micro.Parallax {
             }
         }
         public void UpdateParallax() {
-            var length = 240 / 2f;
+            var length = 240;
             var temp = _camera.transform.position.x * (1 - ParallaxFactor);
             var newPos = (_startPos + _offset) + Travel * ParallaxFactor;
             if (_lockX)
@@ -46,8 +46,8 @@ namespace Pixygon.Micro.Parallax {
             
             transform.localPosition = new Vector3(newPos.x, newPos.y, _startZ);
 
-            if (temp > _startPos.x + (length / 2f)) _startPos = new Vector2(_startPos.x + (length/16f), _startPos.y);
-            else if (temp < _startPos.x - (length / 2f)) _startPos = new Vector2(_startPos.x - (length/16f), _startPos.y);
+            if (temp > _startPos.x + (length / 16f)) _startPos = new Vector2(_startPos.x + (length/16f), _startPos.y);
+            else if (temp < _startPos.x - (length / 16f)) _startPos = new Vector2(_startPos.x - (length/16f), _startPos.y);
         }
     }
 }
