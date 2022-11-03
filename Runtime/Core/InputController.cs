@@ -79,6 +79,7 @@ namespace Pixygon.Micro {
         }
         public static async void Rumble(float duration, float intensity = 1f) {
             InputSystem.ResumeHaptics();
+            if (Gamepad.current == null) return;
             var curve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
             var time = 0f;
             while (time < duration) {

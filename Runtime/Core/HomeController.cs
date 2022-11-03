@@ -29,6 +29,7 @@ namespace Pixygon.Micro {
         [SerializeField] private AudioMixer _mixer;
         public void Initialize() {
             GetComponent<Canvas>().worldCamera = MicroController._instance.Display._uiCamera;
+            GetComponent<Canvas>().sortingLayerName = "Menu";
             _versionText.text = MicroController._instance.Version;
             SetCurrentCartridge();
             _masterSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat("MasterVolume", 1f)*10);

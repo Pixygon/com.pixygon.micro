@@ -1,6 +1,10 @@
 # Changelog
 
 ## Unreleased
+### Fixed
+- If no gamepad connected, rumble would not work
+- Error with sortinglayers
+
 ### Added
 - First test of Pausing game
 - Automatic gathering of coins and spawners in level
