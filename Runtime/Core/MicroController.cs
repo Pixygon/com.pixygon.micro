@@ -63,7 +63,19 @@ namespace Pixygon.Micro
                 HomeMenuOpen = true;
             }
 
+            //This is a bad way to do it...
+            //Time.timeScale = HomeMenuOpen ? 1f : 0f;
+            PauseGame(HomeMenuOpen);
             Home.Activate(HomeMenuOpen);
+        }
+
+        private void PauseGame(bool pause) {
+            foreach (var r in GetComponents<Rigidbody2D>()) {
+                if (pause)
+                    r.Sleep();
+                else
+                    r.WakeUp();
+            }
         }
 
         public void SetZoom(float f) {

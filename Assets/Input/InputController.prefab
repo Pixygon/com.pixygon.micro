@@ -277,6 +277,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5199dec9-013f-4079-ba7a-de77f666e428
     m_ActionName: PixygonMicro/Quit[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: be04b948-3d74-4f60-a56c-84091a799426
+    m_ActionName: PixygonMicro/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3f3e9839-3818-445a-86dc-33f94f8d5873
+    m_ActionName: PixygonMicro/Click[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PixygonMicro

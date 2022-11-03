@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+### Added
+- First test of Pausing game
+
 ## 0.5.6
 ### Fixed
 - Bug with no parallax-layers

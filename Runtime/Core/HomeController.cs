@@ -24,12 +24,13 @@ namespace Pixygon.Micro {
         [SerializeField] private TextMeshProUGUI _masterText;
         [SerializeField] private TextMeshProUGUI _bgmText;
         [SerializeField] private TextMeshProUGUI _sfxText;
+        [SerializeField] private Button _startGameButton;
 
         [SerializeField] private AudioMixer _mixer;
         public void Initialize() {
             GetComponent<Canvas>().worldCamera = MicroController._instance.Display._uiCamera;
             _versionText.text = MicroController._instance.Version;
-            _gameTitleText.text = MicroController._instance.CurrentlyLoadedCartridge == null ? "???" : MicroController._instance.CurrentlyLoadedCartridge._title;
+            SetCurrentCartridge();
             _masterSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat("MasterVolume", 1f)*10);
             _bgmSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat("BGMVolume", 1f)*10);
             _sfxSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat("SFXVolume", 1f)*10);
@@ -88,23 +89,28 @@ namespace Pixygon.Micro {
             EventSystem.current.SetSelectedGameObject(open ? _eventCartridgeTest : _eventHomeTest);
         }
         public void SetCartridge(int i) {
+            if(i > MicroController._instance.Cartridges.Length)
+                i = 0;
             PlayerPrefs.SetInt("Cartridge", i);
             PlayerPrefs.Save();
-            _gameTitleText.text = MicroController._instance.CurrentlyLoadedCartridge._title;
+            SetCurrentCartridge();
             TriggerCartridgeSelect(false);
+        }
+
+        private void SetCurrentCartridge() {
+            var hasCartridge = MicroController._instance.CurrentlyLoadedCartridge != null;
+            _gameTitleText.text = hasCartridge ? MicroController._instance.CurrentlyLoadedCartridge._title : "No cartridge";
         }
 
 
         public void TriggerTrophySelect(bool open) {
             _trophyMenu.SetActive(open);
             _homeMenu.SetActive(!open);
-            if(open)
-                EventSystem.current.SetSelectedGameObject(_eventTrophiesTest);
-            else
-                EventSystem.current.SetSelectedGameObject(GetComponentInChildren<Button>().gameObject);
+            EventSystem.current.SetSelectedGameObject(open ? _eventTrophiesTest : _eventHomeTest);
         }
 
         public void StartGame() {
+            if (MicroController._instance.CurrentlyLoadedCartridge == null) return;
             MicroController._instance.Cartridge.StartGame();
             Activate(false);
         }
