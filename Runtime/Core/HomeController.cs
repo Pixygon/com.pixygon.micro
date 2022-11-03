@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -17,16 +18,51 @@ namespace Pixygon.Micro {
         [SerializeField] private GameObject _eventCartridgeTest;
         [SerializeField] private GameObject _eventFaceplateTest;
         [SerializeField] private GameObject _eventTrophiesTest;
+        [SerializeField] private Slider _masterSlider;
+        [SerializeField] private Slider _bgmSlider;
+        [SerializeField] private Slider _sfxSlider;
+        [SerializeField] private TextMeshProUGUI _masterText;
+        [SerializeField] private TextMeshProUGUI _bgmText;
+        [SerializeField] private TextMeshProUGUI _sfxText;
 
+        [SerializeField] private AudioMixer _mixer;
         public void Initialize() {
             GetComponent<Canvas>().worldCamera = MicroController._instance.Display._uiCamera;
             _versionText.text = MicroController._instance.Version;
-            _gameTitleText.text = MicroController._instance.CurrentlyLoadedCartridge._title;
+            _gameTitleText.text = MicroController._instance.CurrentlyLoadedCartridge == null ? "???" : MicroController._instance.CurrentlyLoadedCartridge._title;
+            _masterSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat("MasterVolume", 1f)*10);
+            _bgmSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat("BGMVolume", 1f)*10);
+            _sfxSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat("SFXVolume", 1f)*10);
+            UpdateAudioSettings();
         }
         public void Activate(bool activate) {
             _homeMenu.SetActive(activate);
             if(activate)
                 EventSystem.current.SetSelectedGameObject(_eventHomeTest);
+        }
+
+        public void SetMasterAudioLevel(float f) {
+            PlayerPrefs.SetFloat("MasterVolume", Mathf.Clamp(f * .1f, 0.0001f, 1f));
+            PlayerPrefs.Save();
+            UpdateAudioSettings();
+        }
+        public void SetBgmAudioLevel(float f) {
+            PlayerPrefs.SetFloat("BGMVolume", Mathf.Clamp(f * .1f, 0.0001f, 1f));
+            PlayerPrefs.Save();
+            UpdateAudioSettings();
+        }
+        public void SetSfxAudioLevel(float f) {
+            PlayerPrefs.SetFloat("SFXVolume", Mathf.Clamp(f * .1f, 0.0001f, 1f));
+            PlayerPrefs.Save();
+            UpdateAudioSettings();
+        }
+        public void UpdateAudioSettings() {
+            _mixer.SetFloat("MasterVolume", Mathf.Log10(PlayerPrefs.GetFloat("MasterVolume", 1f)) * 20f);
+            _mixer.SetFloat("BGMVolume", Mathf.Log10(PlayerPrefs.GetFloat("BGMVolume", 1f)) * 20f);
+            _mixer.SetFloat("SFXVolume", Mathf.Log10(PlayerPrefs.GetFloat("SFXVolume", 1f)) * 20f);
+            _masterText.text = $"{Mathf.RoundToInt(PlayerPrefs.GetFloat("MasterVolume", 1f)*100f)}%";
+            _bgmText.text = $"{Mathf.RoundToInt(PlayerPrefs.GetFloat("BGMVolume", 1f)*100f)}%";
+            _sfxText.text = $"{Mathf.RoundToInt(PlayerPrefs.GetFloat("SFXVolume", 1f)*100f)}%";
         }
         
         public void TriggerSettingsMenu(bool open) {
