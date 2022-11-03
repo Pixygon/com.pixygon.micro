@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.5.6
 ### Fixed
 - Bug with no parallax-layers
 - Pickups should play effect now
@@ -12,6 +12,7 @@
 - Made some things in MicroActor protected instead of private
 - Added asmDef to parallaxing
 - Parallax should scroll indefinitely
+- Upgraded InputSystem to 1.4.4
 
 ### Added
 - Points-value added to MicroActorData
@@ -26,6 +27,8 @@
 - Coins have a Taken-property, to avoid taking them twice
 - UI: Added animation options to points and coins
 - HomeMenu with settings, cartridges, faceplates and trophies
+- Volume-settings
+- Button-names on console
 
 ## 0.5.5
 ### Fixed
