@@ -4,6 +4,7 @@
 ### Fixed
 - If no gamepad connected, rumble would not work
 - Error with sortinglayers
+- Parallax: Temporarily removed the "infinite" scroll that was causing issues
 
 ### Added
 - First test of Pausing game

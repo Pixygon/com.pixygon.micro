@@ -38,7 +38,7 @@ namespace Pixygon.Micro.Parallax {
             _length = _sprite.sprite.bounds.size.x;
         }
         public void UpdateParallax() {
-            var temp = _camera.transform.position.x * (1 - ParallaxFactor);
+            //var temp = _camera.transform.position.x * (1 - ParallaxFactor);
             var newPos = (_startPos + _offset) + Travel * ParallaxFactor;
             if (_lockX)
                 newPos = new Vector2(_startPos.x+_offset.x, newPos.y);
@@ -46,10 +46,10 @@ namespace Pixygon.Micro.Parallax {
                 newPos = new Vector2(newPos.x, _startPos.y+_offset.y);
             
             transform.localPosition = new Vector3(newPos.x, newPos.y, _startZ);
-            if (temp > _startPos.x + (_length / 2f))
-                _startPos = new Vector2(_startPos.x + _length, _startPos.y);
-            else if (temp < _startPos.x - (_length / 2f))
-                _startPos = new Vector2(_startPos.x - _length, _startPos.y);
+            //if (temp > _startPos.x + (_length / 2f))
+            //    _startPos = new Vector2(_startPos.x + _length, _startPos.y);
+            //else if (temp < _startPos.x - (_length / 2f))
+            //    _startPos = new Vector2(_startPos.x - _length, _startPos.y);
             //HandleScroll();
         }
 
