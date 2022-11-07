@@ -44,12 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51610ef833ed36a4c923b0b2630f1e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debuggerPrefab: {fileID: 5109607135746896225, guid: a12d5ac13a74f284dacff0d5f982f7a7, type: 3}
   _displayPrefab: {fileID: 1034441228, guid: 2450e531cae6fb54db8bff2e9efce294, type: 3}
   _inputPrefab: {fileID: 6343291228509907286, guid: a4891852998363e4f929d5439b1062bd, type: 3}
   _cartridgePrefab: {fileID: 2979621713504935600, guid: 7530b6ec643ce104890872de17a016a5, type: 3}
   _consolePrefab: {fileID: 6011951935827920969, guid: 76328be2e7b034646b916ff5875cb0c2, type: 3}
   _homePrefab: {fileID: 5321083034677840298, guid: 8e6e17919a6d908438687f4da9b6aaa8, type: 3}
-  _version: 0.5.5
+  _version: 0.5.6
   _skipIntro: 0
   _cartridges: []
   _cam: {fileID: 0}

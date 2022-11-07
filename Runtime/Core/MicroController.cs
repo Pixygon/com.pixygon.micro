@@ -1,3 +1,4 @@
+using Pixygon.DebugTool;
 using UnityEngine;
 
 namespace Pixygon.Micro
@@ -5,6 +6,7 @@ namespace Pixygon.Micro
     public class MicroController : MonoBehaviour {
         public static MicroController _instance;
         
+        [SerializeField] private Debugger _debuggerPrefab;
         [SerializeField] private DisplayController _displayPrefab;
         [SerializeField] private InputController _inputPrefab;
         [SerializeField] private CartridgeController _cartridgePrefab;
@@ -34,6 +36,7 @@ namespace Pixygon.Micro
         }
         private void Initialize() {
             Application.targetFrameRate = 60;
+            Instantiate(_debuggerPrefab, transform);
             Display = Instantiate(_displayPrefab, transform);
             Input = Instantiate(_inputPrefab, transform);
             Console = Instantiate(_consolePrefab, transform);
