@@ -6,6 +6,9 @@
 - Error with sortinglayers
 - Parallax: Temporarily removed the "infinite" scroll that was causing issues
 
+### Changed
+- Changed Coin-script into Pickup-script!
+
 ### Added
 - First test of Pausing game
 - Automatic gathering of coins and spawners in level

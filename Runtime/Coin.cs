@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 
 namespace Pixygon.Micro {
-    public class Coin : MonoBehaviour {
+    public class Pickup : MonoBehaviour {
         [SerializeField] private ParticleSystem _effect;
         
+        [field: SerializeField] public int PickupId { get; private set; }
         public bool Taken { get; private set; }
-        public void TakeCoin() {
+        public void TakePickup() {
             GetComponent<Collider2D>().enabled = false;
             GetComponent<SpriteRenderer>().enabled = false;
             Taken = true;

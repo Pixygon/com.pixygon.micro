@@ -1,16 +1,19 @@
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Pixygon.Micro {
     public class Level : MonoBehaviour {
+        [FormerlySerializedAs("_coins")]
         [ContextMenuItem("Get Pickups", "GatherPickups")]
-        [SerializeField] private Coin[] _coins;
+        [SerializeField] private Pickup[] _pickups;
         [ContextMenuItem("Get ActorSpawners", "GatherActors")]
         [SerializeField] private MicroActorSpawner[] _actors;
         [SerializeField] private Transform _playerSpawn;
         public Vector3 PlayerSpawn => _playerSpawn.position;
 
         public void RespawnLevel(LevelLoader loader) {
-            foreach (var coin in _coins) {
+            foreach (var coin in _pickups) {
                 coin.Respawn();
             }
             foreach (var spawner in _actors) {
@@ -19,11 +22,17 @@ namespace Pixygon.Micro {
         }
 
         private void GatherPickups() {
-            _coins = GetComponentsInChildren<Coin>();
+            _pickups = GetComponentsInChildren<Pickup>();
+#if UNITY_EDITOR
+            EditorUtility.SetDirty(this);
+#endif
         }
 
         private void GatherActors() {
             _actors = GetComponentsInChildren<MicroActorSpawner>();
+#if UNITY_EDITOR
+            EditorUtility.SetDirty(this);
+#endif
         }
     }
 }
