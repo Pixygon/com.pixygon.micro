@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7e2984a773b46b3aa14acde672d8d8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputAsset: {fileID: -944628639613478452, guid: 72e0749a04a714e4393de127641a31d3, type: 3}
+  <InputAsset>k__BackingField: {fileID: -944628639613478452, guid: 72e0749a04a714e4393de127641a31d3, type: 3}
 --- !u!114 &6343291228509907284
 MonoBehaviour:
   m_ObjectHideFlags: 0

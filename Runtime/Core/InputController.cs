@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 namespace Pixygon.Micro {
     public class InputController : MonoBehaviour {
-        [SerializeField] private InputActionAsset _inputAsset;
         
         public UnityAction<Vector2> _move;
         public UnityAction<bool> _jump;
@@ -19,9 +18,10 @@ namespace Pixygon.Micro {
 
         private InputAction _moveAction;
         public Vector2 Movement => _moveAction.ReadValue<Vector2>();
+        [field: SerializeField] public InputActionAsset InputAsset { get; private set; }
 
         private void OnEnable() {
-            _moveAction = _inputAsset.FindAction("Move");
+            _moveAction = InputAsset.FindAction("Move");
             _moveAction.Enable();
         }
 

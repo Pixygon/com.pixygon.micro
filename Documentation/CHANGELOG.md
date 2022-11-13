@@ -5,6 +5,7 @@
 - If no gamepad connected, rumble would not work
 - Error with sortinglayers
 - Parallax: Temporarily removed the "infinite" scroll that was causing issues
+- InputAsset is now a property!
 
 ### Changed
 - Changed Coin-script into Pickup-script!
