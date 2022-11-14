@@ -13,6 +13,7 @@
 ### Added
 - First test of Pausing game
 - Automatic gathering of coins and spawners in level
+- Added new console-version
 
 ## 0.5.6
 ### Fixed
