@@ -739,7 +739,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b3b6717ab17e64294e904177d7bcc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 0}
+  _bodyMat: {fileID: 2100000, guid: 8d2f0691998ea7549be286a47e33f054, type: 2}
+  _faceMat: {fileID: 2100000, guid: e8714237e2a7b0a4daf92bd96b50c9b9, type: 2}
   _defaultFaceplate: {fileID: 11400000, guid: 6e298018b0d357e4f9228e1143256fc1, type: 2}
 --- !u!1 &4528693297401987951
 GameObject:

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d2ec0d02c237de4582666363c269d6c, type: 3}
   m_Name: DefaultFaceplate
   m_EditorClassIdentifier: 
-  _title: Default Purple
-  _color: {r: 0.23921569, g: 0.09411765, b: 0.34901962, a: 1}
-  _sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  _title: Default
+  _color: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
+  _tex: {fileID: 0}
