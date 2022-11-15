@@ -10,7 +10,7 @@ namespace Pixygon.Micro
         }
         public void UpdateFaceplate() {
             _bodyMat.color = MicroController._instance.CurrentlyLoadedFaceplate._color;
-            _faceMat.mainTexture = MicroController._instance.CurrentlyLoadedFaceplate._tex != null ? MicroController._instance.CurrentlyLoadedFaceplate._tex : null;
+            _faceMat.SetTexture("Albedo", MicroController._instance.CurrentlyLoadedFaceplate._tex != null ? MicroController._instance.CurrentlyLoadedFaceplate._tex : null);
         }
 
         public void SetZoom(float f) {
