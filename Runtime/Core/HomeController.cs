@@ -79,8 +79,11 @@ namespace Pixygon.Micro {
             EventSystem.current.SetSelectedGameObject(open ? _eventFaceplateTest : _eventHomeTest);
         }
         public void SetFaceplate(int i) {
+            if(i > MicroController._instance.Faceplates.Length)
+                i = 0;
             PlayerPrefs.SetInt("Faceplate", i);
             PlayerPrefs.Save();
+            MicroController._instance.Console.UpdateFaceplate();
         }
 
 

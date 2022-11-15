@@ -15,6 +15,7 @@ namespace Pixygon.Micro
         [SerializeField] private string _version;
         [SerializeField] private bool _skipIntro;
         [SerializeField] private Cartridge[] _cartridges;
+        [SerializeField] private Faceplate[] _faceplates;
         [SerializeField] private Camera _cam;
         
         public bool HomeMenuOpen { get; private set; }
@@ -26,7 +27,9 @@ namespace Pixygon.Micro
         public bool SkipIntro => _skipIntro;
         public string Version => _version;
         public Cartridge[] Cartridges => _cartridges;
+        public Faceplate[] Faceplates => _faceplates;
         public Cartridge CurrentlyLoadedCartridge => _cartridges.Length != 0 ? _cartridges[PlayerPrefs.GetInt("Cartridge")] : null;
+        public Faceplate CurrentlyLoadedFaceplate => _faceplates.Length != 0 ? _faceplates[PlayerPrefs.GetInt("Faceplate")] : null;
         private void Awake() {
             if (_instance == null)
                 _instance = this;
