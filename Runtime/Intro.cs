@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Pixygon.Micro {
     public class Intro : MonoBehaviour {
         [SerializeField] private SpriteRenderer _logo;
-        [SerializeField] private TextMeshPro _title;
+        [SerializeField] private SpriteRenderer _title;
         [SerializeField] private AnimationCurve _curve;
 
         public async void StartIntro(Action endIntro) {

@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.5.7
 ### Fixed
 - If no gamepad connected, rumble would not work
 - Error with sortinglayers
@@ -14,6 +14,8 @@
 - First test of Pausing game
 - Automatic gathering of coins and spawners in level
 - Added new console-version
+- Console-buttons move according to input
+- More customization-options for faceplates
 
 ## 0.5.6
 ### Fixed

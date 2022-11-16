@@ -5,6 +5,8 @@ namespace Pixygon.Micro {
     public class Faceplate : ScriptableObject {
         public string _title;
         public Color _color;
+        public Color _detailColor;
+        public Color _buttonColor;
         public Texture2D _tex;
     }
 }

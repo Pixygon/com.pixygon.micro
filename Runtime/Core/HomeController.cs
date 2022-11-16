@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using Pixygon.PagedContent;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
@@ -73,12 +75,37 @@ namespace Pixygon.Micro {
             EventSystem.current.SetSelectedGameObject(open ? _eventSettingsTest : _eventHomeTest);
         }
 
+        //private List<GameObject> _faceplateList;
+        //[SerializeField] private GameObject _faceplatePrefab;
+        //[SerializeField] private Transform _faceplateParent;
+        
         public void TriggerFaceplateSelect(bool open) {
             _faceplateMenu.SetActive(open);
             _homeMenu.SetActive(!open);
+            if(open)
+                PopulateFaceplateList();
             EventSystem.current.SetSelectedGameObject(open ? _eventFaceplateTest : _eventHomeTest);
         }
-        public void SetFaceplate(int i) {
+
+        [SerializeField] private PagedContentManager _faceplateLists;
+        private void PopulateFaceplateList() {
+            _faceplateLists.PopulateCollections(MicroController._instance.Faceplates, 0, SetFaceplate, 0, true);
+            /*
+            if (_faceplateList != null) {
+                foreach (var g in _faceplateList)
+                    Destroy(g);
+            }
+            _faceplateList = new List<GameObject>();
+            foreach (var faceplate in MicroController._instance.Faceplates) {
+                var g = Instantiate(_faceplatePrefab, _faceplateParent);
+                g.GetComponent<FaceplateListing>().SetTitle(faceplate._title);
+                _faceplateList.Add(g);
+            }
+            */
+            //_eventFaceplateTest = _faceplateLists.[0];
+        }
+        public void SetFaceplate(object o, int i) {
+            Debug.Log("Set faceplate!! " + i);
             if(i > MicroController._instance.Faceplates.Length)
                 i = 0;
             PlayerPrefs.SetInt("Faceplate", i);

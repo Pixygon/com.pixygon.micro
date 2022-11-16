@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 68509a621443e3a468878f9bc68903b2
+guid: 57deef1da2fe49b4785df28478e36774
 ModelImporter:
   serializedVersion: 22103
   internalIDToNameTable: []
@@ -7,12 +7,12 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: blinn5
-    second: {fileID: 2100000, guid: da333b4502df6df4e8e3c816aae1a7c9, type: 2}
+      name: pixygon_micro_body
+    second: {fileID: 2100000, guid: 8d2f0691998ea7549be286a47e33f054, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: pixygon_micro_body
+      name: pixygon_micro_details
     second: {fileID: 2100000, guid: 52b66e8823e43e34394cc452a093e293, type: 2}
   - first:
       type: UnityEngine:Material
@@ -50,7 +50,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 10
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -104,7 +104,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.099999994
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

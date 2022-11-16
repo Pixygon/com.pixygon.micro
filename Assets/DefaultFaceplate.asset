@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: DefaultFaceplate
   m_EditorClassIdentifier: 
   _title: Default
-  _color: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
-  _tex: {fileID: 0}
+  _color: {r: 0, g: 0.5294118, b: 0.79607844, a: 1}
+  _detailColor: {r: 0.23113206, g: 0.7177044, b: 1, a: 1}
+  _buttonColor: {r: 0.23113206, g: 0.7177044, b: 1, a: 1}
+  _tex: {fileID: 2800000, guid: a6011835151fac6499213788aad602e7, type: 3}
