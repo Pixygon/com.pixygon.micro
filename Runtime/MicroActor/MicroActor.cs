@@ -12,18 +12,18 @@ namespace Pixygon.Micro {
         [SerializeField] private bool _destroyOnDeath;
         [SerializeField] private float _iFrameLength = .6f;
 
-        protected int _hp;
         private float _iFrames;
         private float _iFrameEffectCounter;
         public bool Invincible { get; private set; }
         public MicroActorData Data { get; private set; }
         public bool IsDead { get; protected set; }
         public bool IgnoreMovement { get; protected set; }
+        public int HP { get; protected set;}
 
         public virtual void Initialize(LevelLoader loader, MicroActorData data) {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Initializing MicroActor");
             Data = data;
-            _hp = data._hp;
+            HP = data._hp;
             if (!Data._isKillable)
                 Invincible = true;
             if (Data._isHostile)
@@ -63,8 +63,8 @@ namespace Pixygon.Micro {
             _damageSfx.pitch = UnityEngine.Random.Range(0.9f, 1.05f);
             _damageSfx.Play();
             _anim.Damage();
-            if (_hp != 0)
-                _hp -= 1;
+            if (HP != 0)
+                HP -= 1;
             else
                 Die();
         }
