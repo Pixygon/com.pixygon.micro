@@ -4,7 +4,7 @@ namespace Pixygon.Micro
 {
     public class LevelObject : MonoBehaviour
     {
-        public void Reset() {
+        public virtual void Reset() {
             
         }
     }
