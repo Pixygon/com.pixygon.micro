@@ -9481,6 +9481,38 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 8735095847446515005}
     m_Modifications:
+    - target: {fileID: 423099554754021613, guid: 7db548fb2360d73479c67c1a012d0838, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 423099554754021613, guid: 7db548fb2360d73479c67c1a012d0838, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 423099554754021613, guid: 7db548fb2360d73479c67c1a012d0838, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -120
+      objectReference: {fileID: 0}
+    - target: {fileID: 1358009603178411612, guid: 7db548fb2360d73479c67c1a012d0838, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1358009603178411612, guid: 7db548fb2360d73479c67c1a012d0838, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1358009603178411612, guid: 7db548fb2360d73479c67c1a012d0838, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 1638244633764327817, guid: 7db548fb2360d73479c67c1a012d0838, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695076730913975934, guid: 7db548fb2360d73479c67c1a012d0838, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2351488798853888062, guid: 7db548fb2360d73479c67c1a012d0838, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -9594,9 +9626,17 @@ PrefabInstance:
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3780934128976418359, guid: 7db548fb2360d73479c67c1a012d0838, type: 3}
+      propertyPath: _itemsPerPage
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780934128976418359, guid: 7db548fb2360d73479c67c1a012d0838, type: 3}
       propertyPath: _pagedContentPrefab
       value: 
       objectReference: {fileID: 243633641118968241, guid: fdb61290d7ff13445be2a9f042bf7858, type: 3}
+    - target: {fileID: 6852522676235180954, guid: 7db548fb2360d73479c67c1a012d0838, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8957338758832634307, guid: 7db548fb2360d73479c67c1a012d0838, type: 3}
       propertyPath: m_Spacing.x
       value: 5
