@@ -9,6 +9,7 @@ namespace Pixygon.Micro {
         [SerializeField] private Pickup[] _pickups;
         [ContextMenuItem("Get ActorSpawners", "GatherActors")]
         [SerializeField] private MicroActorSpawner[] _actors;
+        [SerializeField] private LevelObject[] _levelObjects;
         [SerializeField] private Transform _playerSpawn;
         public Vector3 PlayerSpawn => _playerSpawn.position;
 
@@ -18,6 +19,9 @@ namespace Pixygon.Micro {
             }
             foreach (var spawner in _actors) {
                 spawner.SpawnActor(loader);
+            }
+            foreach (var levelObject in _levelObjects) {
+                levelObject.Reset();
             }
         }
 

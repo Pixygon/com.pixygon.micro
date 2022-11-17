@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+### Fixed
+- Bug where levels could be double-loaded
+- Bug where BGM starts playing twice
+
+### Added
+- LevelObjects, that can be reset
+
 ## 0.5.7
 ### Fixed
 - If no gamepad connected, rumble would not work

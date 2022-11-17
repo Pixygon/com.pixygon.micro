@@ -44,16 +44,19 @@ namespace Pixygon.Micro {
         private void SelectLevel(bool started) {
             if (!started) return;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Selected level", this);
-            if (_levelLoaded) return;
+            if (_levelLoaded || _loadingLevel) return;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Level was not loaded...", this);
             StartLevel(_currentLevelId);
         }
 
         public void StartLevel(int i) {
+            _loadingLevel = true;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Select Level: " + i, this);
             Ui.TriggerMenuScreen(false);
             LoadLevel(_level[i]);
         }
+
+        private bool _loadingLevel;
 
         public void EndLevel() {
             if (!_levelLoaded) return;
@@ -82,6 +85,7 @@ namespace Pixygon.Micro {
             await SetupBgm();
             await SetupPostProc();
             _levelLoaded = true;
+            _loadingLevel = false;
             _camera.SnapCamera();
             Log.DebugMessage(DebugGroup.PixygonMicro, "Level loaded!", this);
         }
@@ -107,12 +111,11 @@ namespace Pixygon.Micro {
         }
         private async Task SetupBgm() {
             GetComponent<AudioSource>().clip = await AddressableLoader.LoadAsset<AudioClip>(CurrentLevelData._bgmRef);
-            GetComponent<AudioSource>().Play();
+            //GetComponent<AudioSource>().Play();
         }
         private async Task SetupPostProc() {
             MicroController._instance.Display._volume.profile = CurrentLevelData._postProcessingProfileRef != null ?
                 await AddressableLoader.LoadAsset<VolumeProfile>(CurrentLevelData._postProcessingProfileRef) : MicroController._instance.Display._defaultVolume;
         }
-
     }
 }
