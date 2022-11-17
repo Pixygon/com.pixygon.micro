@@ -14,12 +14,15 @@ namespace Pixygon.Micro
         }
 
         public void UpdateFaceplate() {
-            Log.DebugMessage(DebugGroup.PixygonMicro, "Set faceplate to " + MicroController._instance.CurrentlyLoadedFaceplate._title, this);
-            _bodyMat.color = MicroController._instance.CurrentlyLoadedFaceplate._color;
-            _detailsMat.color = MicroController._instance.CurrentlyLoadedFaceplate._detailColor;
-            _buttonsMat.color = MicroController._instance.CurrentlyLoadedFaceplate._buttonColor;
+            var plate = MicroController._instance.CurrentlyLoadedFaceplate;
+            Log.DebugMessage(DebugGroup.PixygonMicro, "Set faceplate to " + plate._title, this);
+            _bodyMat.color = plate._color;
+            _detailsMat.color = plate._detailColor;
+            _buttonsMat.color = plate._buttonColor;
             _faceMat.EnableKeyword("_Albedo");
-            _faceMat.SetTexture("_Albedo", MicroController._instance.CurrentlyLoadedFaceplate._tex != null ? MicroController._instance.CurrentlyLoadedFaceplate._tex : null);
+            _faceMat.SetTexture("_Albedo", plate._tex != null ? plate._tex : null);
+            if (plate._useFaceplateColor)
+                _faceMat.color = plate._faceplate;
         }
 
         public void SetZoom(float f) {
