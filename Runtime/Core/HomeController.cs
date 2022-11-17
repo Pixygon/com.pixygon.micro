@@ -9,6 +9,7 @@ using UnityEngine.UI;
 namespace Pixygon.Micro {
     public class HomeController : MonoBehaviour {
         [SerializeField] private GameObject _homeMenu;
+        [SerializeField] private GameObject _mainMenu;
         [SerializeField] private GameObject _settingsMenu;
         [SerializeField] private GameObject _faceplateMenu;
         [SerializeField] private GameObject _cartridgeMenu;
@@ -41,6 +42,11 @@ namespace Pixygon.Micro {
         }
         public void Activate(bool activate) {
             _homeMenu.SetActive(activate);
+            _mainMenu.SetActive(activate);
+            _settingsMenu.SetActive(false);
+            _cartridgeMenu.SetActive(false);
+            _faceplateMenu.SetActive(false);
+            _trophyMenu.SetActive(false);
             if(activate)
                 EventSystem.current.SetSelectedGameObject(_eventHomeTest);
         }
@@ -71,7 +77,7 @@ namespace Pixygon.Micro {
         
         public void TriggerSettingsMenu(bool open) {
             _settingsMenu.SetActive(open);
-            _homeMenu.SetActive(!open);
+            _mainMenu.SetActive(!open);
             EventSystem.current.SetSelectedGameObject(open ? _eventSettingsTest : _eventHomeTest);
         }
 
@@ -81,7 +87,7 @@ namespace Pixygon.Micro {
         
         public void TriggerFaceplateSelect(bool open) {
             _faceplateMenu.SetActive(open);
-            _homeMenu.SetActive(!open);
+            _mainMenu.SetActive(!open);
             if(open)
                 PopulateFaceplateList();
             EventSystem.current.SetSelectedGameObject(open ? _eventFaceplateTest : _eventHomeTest);
@@ -116,7 +122,7 @@ namespace Pixygon.Micro {
 
         public void TriggerCartridgeSelect(bool open) {
             _cartridgeMenu.SetActive(open);
-            _homeMenu.SetActive(!open);
+            _mainMenu.SetActive(!open);
             EventSystem.current.SetSelectedGameObject(open ? _eventCartridgeTest : _eventHomeTest);
         }
         public void SetCartridge(int i) {
