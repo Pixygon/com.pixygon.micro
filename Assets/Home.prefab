@@ -9633,6 +9633,22 @@ PrefabInstance:
       propertyPath: _pagedContentPrefab
       value: 
       objectReference: {fileID: 243633641118968241, guid: fdb61290d7ff13445be2a9f042bf7858, type: 3}
+    - target: {fileID: 3780934128976418359, guid: 7db548fb2360d73479c67c1a012d0838, type: 3}
+      propertyPath: _nextPageAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Gamepad>/rightShoulder
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780934128976418359, guid: 7db548fb2360d73479c67c1a012d0838, type: 3}
+      propertyPath: _nextPageAction.m_SingletonActionBindings.Array.data[1].m_Path
+      value: <Keyboard>/e
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780934128976418359, guid: 7db548fb2360d73479c67c1a012d0838, type: 3}
+      propertyPath: _prevPageAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Gamepad>/leftShoulder
+      objectReference: {fileID: 0}
+    - target: {fileID: 3780934128976418359, guid: 7db548fb2360d73479c67c1a012d0838, type: 3}
+      propertyPath: _prevPageAction.m_SingletonActionBindings.Array.data[1].m_Path
+      value: <Keyboard>/q
+      objectReference: {fileID: 0}
     - target: {fileID: 6852522676235180954, guid: 7db548fb2360d73479c67c1a012d0838, type: 3}
       propertyPath: m_SizeDelta.y
       value: 20
