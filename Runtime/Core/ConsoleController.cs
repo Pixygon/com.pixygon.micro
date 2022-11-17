@@ -21,6 +21,7 @@ namespace Pixygon.Micro
             _buttonsMat.color = plate._buttonColor;
             _faceMat.EnableKeyword("_Albedo");
             _faceMat.SetTexture("_Albedo", plate._tex != null ? plate._tex : null);
+            _faceMat.color = plate._useFaceplateColor ? plate._faceplate : Color.white;
             if (plate._useFaceplateColor)
                 _faceMat.color = plate._faceplate;
         }
