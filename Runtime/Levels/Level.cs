@@ -9,6 +9,7 @@ namespace Pixygon.Micro {
         [SerializeField] private Pickup[] _pickups;
         [ContextMenuItem("Get ActorSpawners", "GatherActors")]
         [SerializeField] private MicroActorSpawner[] _actors;
+        [ContextMenuItem("Get LevelObjects", "GatherLevelObjects")]
         [SerializeField] private LevelObject[] _levelObjects;
         [SerializeField] private Transform _playerSpawn;
         public Vector3 PlayerSpawn => _playerSpawn.position;
@@ -34,6 +35,13 @@ namespace Pixygon.Micro {
 
         private void GatherActors() {
             _actors = GetComponentsInChildren<MicroActorSpawner>();
+#if UNITY_EDITOR
+            EditorUtility.SetDirty(this);
+#endif
+        }
+
+        private void GatherLevelObjects() {
+            _levelObjects = GetComponentsInChildren<LevelObject>();
 #if UNITY_EDITOR
             EditorUtility.SetDirty(this);
 #endif
