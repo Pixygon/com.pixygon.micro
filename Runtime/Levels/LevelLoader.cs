@@ -79,10 +79,10 @@ namespace Pixygon.Micro {
             if (_levelLoaded) return;
             _levelLoaded = false;
             CurrentLevelData = level;
+            await SetupBgm();
             await SetupLevel();
             await SetupPlayer();
             await SetupParallax();
-            await SetupBgm();
             await SetupPostProc();
             _levelLoaded = true;
             _loadingLevel = false;
