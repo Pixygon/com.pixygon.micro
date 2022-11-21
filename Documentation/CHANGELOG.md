@@ -4,6 +4,7 @@
 ### Fixed
 - Bug where levels could be double-loaded
 - Bug where BGM starts playing twice
+- Bug where audiomixers weren't properly loaded
 
 ### Added
 - LevelObjects, that can be reset

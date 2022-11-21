@@ -28,8 +28,8 @@ namespace Pixygon.Micro {
         [SerializeField] private TextMeshProUGUI _bgmText;
         [SerializeField] private TextMeshProUGUI _sfxText;
         [SerializeField] private Button _startGameButton;
+        [SerializeField] private PagedContentManager _faceplateLists;
 
-        [SerializeField] private AudioMixer _mixer;
         public void Initialize() {
             GetComponent<Canvas>().worldCamera = MicroController._instance.Display._uiCamera;
             GetComponent<Canvas>().sortingLayerName = "Menu";
@@ -38,7 +38,9 @@ namespace Pixygon.Micro {
             _masterSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat("MasterVolume", 1f)*10);
             _bgmSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat("BGMVolume", 1f)*10);
             _sfxSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat("SFXVolume", 1f)*10);
-            UpdateAudioSettings();
+            _masterText.text = $"{Mathf.RoundToInt(PlayerPrefs.GetFloat("MasterVolume", 1f)*100f)}%";
+            _bgmText.text = $"{Mathf.RoundToInt(PlayerPrefs.GetFloat("BGMVolume", 1f)*100f)}%";
+            _sfxText.text = $"{Mathf.RoundToInt(PlayerPrefs.GetFloat("SFXVolume", 1f)*100f)}%";
         }
         public void Activate(bool activate) {
             _homeMenu.SetActive(activate);
@@ -54,25 +56,20 @@ namespace Pixygon.Micro {
         public void SetMasterAudioLevel(float f) {
             PlayerPrefs.SetFloat("MasterVolume", Mathf.Clamp(f * .1f, 0.0001f, 1f));
             PlayerPrefs.Save();
-            UpdateAudioSettings();
+            _masterText.text = $"{Mathf.RoundToInt(PlayerPrefs.GetFloat("MasterVolume", 1f)*100f)}%";
+            MicroController._instance.UpdateAudioSettings();
         }
         public void SetBgmAudioLevel(float f) {
             PlayerPrefs.SetFloat("BGMVolume", Mathf.Clamp(f * .1f, 0.0001f, 1f));
             PlayerPrefs.Save();
-            UpdateAudioSettings();
+            _bgmText.text = $"{Mathf.RoundToInt(PlayerPrefs.GetFloat("BGMVolume", 1f)*100f)}%";
+            MicroController._instance.UpdateAudioSettings();
         }
         public void SetSfxAudioLevel(float f) {
             PlayerPrefs.SetFloat("SFXVolume", Mathf.Clamp(f * .1f, 0.0001f, 1f));
             PlayerPrefs.Save();
-            UpdateAudioSettings();
-        }
-        public void UpdateAudioSettings() {
-            _mixer.SetFloat("MasterVolume", Mathf.Log10(PlayerPrefs.GetFloat("MasterVolume", 1f)) * 20f);
-            _mixer.SetFloat("BGMVolume", Mathf.Log10(PlayerPrefs.GetFloat("BGMVolume", 1f)) * 20f);
-            _mixer.SetFloat("SFXVolume", Mathf.Log10(PlayerPrefs.GetFloat("SFXVolume", 1f)) * 20f);
-            _masterText.text = $"{Mathf.RoundToInt(PlayerPrefs.GetFloat("MasterVolume", 1f)*100f)}%";
-            _bgmText.text = $"{Mathf.RoundToInt(PlayerPrefs.GetFloat("BGMVolume", 1f)*100f)}%";
             _sfxText.text = $"{Mathf.RoundToInt(PlayerPrefs.GetFloat("SFXVolume", 1f)*100f)}%";
+            MicroController._instance.UpdateAudioSettings();
         }
         
         public void TriggerSettingsMenu(bool open) {
@@ -93,7 +90,6 @@ namespace Pixygon.Micro {
             EventSystem.current.SetSelectedGameObject(open ? _eventFaceplateTest : _eventHomeTest);
         }
 
-        [SerializeField] private PagedContentManager _faceplateLists;
         private void PopulateFaceplateList() {
             _faceplateLists.PopulateCollections(MicroController._instance.Faceplates, 0, SetFaceplate, 0, true);
             /*

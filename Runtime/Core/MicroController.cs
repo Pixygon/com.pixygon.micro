@@ -1,5 +1,6 @@
 using Pixygon.DebugTool;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Pixygon.Micro
 {
@@ -17,6 +18,7 @@ namespace Pixygon.Micro
         [SerializeField] private Cartridge[] _cartridges;
         [SerializeField] private Faceplate[] _faceplates;
         [SerializeField] private Camera _cam;
+        [SerializeField] private AudioMixer _mixer;
         
         public bool HomeMenuOpen { get; private set; }
         public DisplayController Display { get; private set; }
@@ -45,7 +47,7 @@ namespace Pixygon.Micro
             Console = Instantiate(_consolePrefab, transform);
             Cartridge = Instantiate(_cartridgePrefab, transform);
             Home = Instantiate(_homePrefab, transform);
-            
+            UpdateAudioSettings();
             Cartridge.Initilize();
             Console.Initialize();
             Home.Initialize();
@@ -86,6 +88,11 @@ namespace Pixygon.Micro
 
         public void SetZoom(float f) {
             _cam.transform.position = new Vector3(0f, 0f, Mathf.Lerp(-10f, -20f, f));
+        }
+        public void UpdateAudioSettings() {
+            _mixer.SetFloat("MasterVolume", Mathf.Log10(PlayerPrefs.GetFloat("MasterVolume", 1f)) * 20f);
+            _mixer.SetFloat("BGMVolume", Mathf.Log10(PlayerPrefs.GetFloat("BGMVolume", 1f)) * 20f);
+            _mixer.SetFloat("SFXVolume", Mathf.Log10(PlayerPrefs.GetFloat("SFXVolume", 1f)) * 20f);
         }
     }
 }
