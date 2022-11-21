@@ -77,10 +77,6 @@ namespace Pixygon.Micro {
             _mainMenu.SetActive(!open);
             EventSystem.current.SetSelectedGameObject(open ? _eventSettingsTest : _eventHomeTest);
         }
-
-        //private List<GameObject> _faceplateList;
-        //[SerializeField] private GameObject _faceplatePrefab;
-        //[SerializeField] private Transform _faceplateParent;
         
         public void TriggerFaceplateSelect(bool open) {
             _faceplateMenu.SetActive(open);

@@ -39,6 +39,10 @@ namespace Pixygon.Micro
                 Destroy(gameObject);
             Initialize();
         }
+
+        private void Start() {
+            UpdateAudioSettings();
+        }
         private void Initialize() {
             Application.targetFrameRate = 60;
             Instantiate(_debuggerPrefab, transform);
@@ -47,7 +51,6 @@ namespace Pixygon.Micro
             Console = Instantiate(_consolePrefab, transform);
             Cartridge = Instantiate(_cartridgePrefab, transform);
             Home = Instantiate(_homePrefab, transform);
-            UpdateAudioSettings();
             Cartridge.Initilize();
             Console.Initialize();
             Home.Initialize();
