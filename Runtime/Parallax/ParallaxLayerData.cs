@@ -4,6 +4,7 @@ namespace Pixygon.Micro.Parallax {
     [CreateAssetMenu(menuName = "Pixygon/Micro/New Parallax Layer")]
     public class ParallaxLayerData : ScriptableObject {
         public Sprite _sprite;
+        public Color _color = Color.white;
         public float _zDistance;
         public Vector2 _tiling;
         public Vector2 _offset;

@@ -28,6 +28,7 @@ namespace Pixygon.Micro.Parallax {
             _sprite.sprite = data._sprite;
             _sprite.drawMode = SpriteDrawMode.Tiled;
             _sprite.size = data._tiling;
+            _sprite.color = data._color;
             _offset = data._offset;
             _sprite.sortingOrder = data._sortOrder;
             _lockX = data._lockXAxis;

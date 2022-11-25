@@ -8,6 +8,8 @@
 
 ### Added
 - LevelObjects, that can be reset
+- Added more options for pickup-interactions
+- Added color-options for Parallax-effect
 
 ## 0.5.7
 ### Fixed
