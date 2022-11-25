@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Pixygon.Effects;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Pixygon.Micro {
     public class Pickup : MonoBehaviour {
-        //[SerializeField] private ParticleSystem _effect;
+        [SerializeField] private EffectData _effect;
         [SerializeField] private UnityEvent _onPickup;
         [SerializeField] private UnityEvent _onRespawn;
         [SerializeField] private bool _destroyOnPickup;
@@ -13,18 +14,14 @@ namespace Pixygon.Micro {
         
         public bool Taken { get; private set; }
         public void TakePickup() {
-            //GetComponent<Collider2D>().enabled = false;
-            //GetComponent<SpriteRenderer>().enabled = false;
             Taken = true;
             _onPickup.Invoke();
+            EffectsManager.SpawnEffect(_effect.GetFullID, transform.position);
             if (_destroyOnPickup)
                 Destroy(gameObject, _destroyTime);
-            //_effect.Play();
         }
 
         public void Respawn() {
-            //GetComponent<Collider2D>().enabled = true;
-            //GetComponent<SpriteRenderer>().enabled = true;
             Taken = false;
             _onRespawn.Invoke();
         }
