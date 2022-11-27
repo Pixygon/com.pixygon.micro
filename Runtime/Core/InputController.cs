@@ -19,10 +19,23 @@ namespace Pixygon.Micro {
         private InputAction _moveAction;
         public Vector2 Movement => _moveAction.ReadValue<Vector2>();
         [field: SerializeField] public InputActionAsset InputAsset { get; private set; }
+        
+        public InputAction JumpAction { get; private set; }
+        public InputAction RunAction { get; private set; }
+        public InputAction ShoulderRAction { get; private set; }
+        public InputAction ShoulderLAction { get; private set; }
+        public InputAction SelectAction { get; private set; }
+        public InputAction HomeAction { get; private set; }
 
         private void OnEnable() {
             _moveAction = InputAsset.FindAction("Move");
             _moveAction.Enable();
+            JumpAction = InputAsset.FindAction("Jump");
+            RunAction = InputAsset.FindAction("Run");
+            ShoulderRAction = InputAsset.FindAction("ShoulderR");
+            ShoulderLAction = InputAsset.FindAction("ShoulderL");
+            SelectAction = InputAsset.FindAction("Select");
+            HomeAction = InputAsset.FindAction("Jump");
         }
 
         public void Move(InputAction.CallbackContext context) {
