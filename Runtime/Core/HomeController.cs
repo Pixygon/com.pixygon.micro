@@ -28,6 +28,7 @@ namespace Pixygon.Micro {
         [SerializeField] private TextMeshProUGUI _bgmText;
         [SerializeField] private TextMeshProUGUI _sfxText;
         [SerializeField] private Button _startGameButton;
+        [SerializeField] private PagedContentManager _cartridgeLists;
         [SerializeField] private PagedContentManager _faceplateLists;
 
         public void Initialize() {
@@ -82,28 +83,11 @@ namespace Pixygon.Micro {
             _faceplateMenu.SetActive(open);
             _mainMenu.SetActive(!open);
             if(open)
-                PopulateFaceplateList();
+                _faceplateLists.PopulateCollections(MicroController._instance.Faceplates, 0, SetFaceplate, 0, true);
             EventSystem.current.SetSelectedGameObject(open ? _eventFaceplateTest : _eventHomeTest);
         }
 
-        private void PopulateFaceplateList() {
-            _faceplateLists.PopulateCollections(MicroController._instance.Faceplates, 0, SetFaceplate, 0, true);
-            /*
-            if (_faceplateList != null) {
-                foreach (var g in _faceplateList)
-                    Destroy(g);
-            }
-            _faceplateList = new List<GameObject>();
-            foreach (var faceplate in MicroController._instance.Faceplates) {
-                var g = Instantiate(_faceplatePrefab, _faceplateParent);
-                g.GetComponent<FaceplateListing>().SetTitle(faceplate._title);
-                _faceplateList.Add(g);
-            }
-            */
-            //_eventFaceplateTest = _faceplateLists.[0];
-        }
-        public void SetFaceplate(object o, int i) {
-            Debug.Log("Set faceplate!! " + i);
+        private void SetFaceplate(object o, int i) {
             if(i > MicroController._instance.Faceplates.Length)
                 i = 0;
             PlayerPrefs.SetInt("Faceplate", i);
@@ -115,9 +99,11 @@ namespace Pixygon.Micro {
         public void TriggerCartridgeSelect(bool open) {
             _cartridgeMenu.SetActive(open);
             _mainMenu.SetActive(!open);
+            if(open)
+                _cartridgeLists.PopulateCollections(MicroController._instance.Cartridges, 0, SetCartridge, 0, true);
             EventSystem.current.SetSelectedGameObject(open ? _eventCartridgeTest : _eventHomeTest);
         }
-        public void SetCartridge(int i) {
+        private void SetCartridge(object o, int i) {
             if(i > MicroController._instance.Cartridges.Length)
                 i = 0;
             PlayerPrefs.SetInt("Cartridge", i);

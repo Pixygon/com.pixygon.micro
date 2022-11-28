@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 7074295128066672532}
   - component: {fileID: 4441484249448080365}
   - component: {fileID: 5636704445089355729}
-  - component: {fileID: 4096969435937356468}
+  - component: {fileID: -3612843241714895006}
   m_Layer: 31
-  m_Name: FaceplateBtn
+  m_Name: CartridgeBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,9 +123,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4096969435937356468}
-        m_TargetAssemblyTypeName: Pixygon.PagedContent.PagedContentObject, Pixygon.PagedContent
-        m_MethodName: Select
+      - m_Target: {fileID: -3612843241714895006}
+        m_TargetAssemblyTypeName: Pixygon.Micro.CartridgeObject, Pixygon.Micro
+        m_MethodName: Activate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -135,7 +135,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
---- !u!114 &4096969435937356468
+--- !u!114 &-3612843241714895006
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 243633641118968241}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5ff077e588b88741b2e370e02c78479, type: 3}
+  m_Script: {fileID: 11500000, guid: 78394fc2bc51f7a46be1f773c2e24c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 6635150820853636840}

@@ -1,3 +1,4 @@
+using Pixygon.NFT;
 using UnityEngine;
 
 namespace Pixygon.Micro {
@@ -9,5 +10,6 @@ namespace Pixygon.Micro {
         public GameObject _gamePrefab;
         public Texture2D _cartridgeImage;
         public Color _cartridgeColor;
+        public NFTLink _nftLink;
     }
 }

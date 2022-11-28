@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac8707d824150b74aa6931feb47bcbda, type: 3}
+  m_Name: TestCartridge
+  m_EditorClassIdentifier: 
+  _title: SampleGame
+  _description: This is a sample
+  _version: 0.5.0
+  _gamePrefab: {fileID: 1708818856127366985, guid: 8c760b4f2ca0f504289b93f6d4f631ce, type: 3}
+  _cartridgeImage: {fileID: 2800000, guid: ce5f11cd993284c4f9c54f854bdc8c9c, type: 3}
+  _cartridgeColor: {r: 0, g: 0, b: 0, a: 1}
+  _nftLink:
+    RequiresNFT: 0
+    Template: []

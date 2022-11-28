@@ -1,3 +1,4 @@
+using Pixygon.NFT;
 using UnityEngine;
 
 namespace Pixygon.Micro {
@@ -10,5 +11,6 @@ namespace Pixygon.Micro {
         public Texture2D _tex;
         public bool _useFaceplateColor;
         public Color _faceplate;
+        public NFTLink _nftLink;
     }
 }

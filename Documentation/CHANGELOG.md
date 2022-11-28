@@ -11,6 +11,8 @@
 - Added more options for pickup-interactions
 - Added color-options for Parallax-effect
 - Exposed all InputActions in InputController
+- PagedContentManager for Cartridges
+- Made item-selection clearer for cartridges and faceplates
 
 ## 0.5.7
 ### Fixed
