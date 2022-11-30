@@ -8,6 +8,7 @@ namespace Pixygon.Micro {
         private GameObject _game;
         private Intro _intro;
 
+        public LevelLoader LevelLoader { get; private set; }
         public void Initilize() {
             #if UNITY_EDITOR
             if (MicroController._instance.SkipIntro)
@@ -41,6 +42,7 @@ namespace Pixygon.Micro {
 
         public void LoadCartridge(Cartridge c) {
             _game = Instantiate(c._gamePrefab, transform);
+            LevelLoader = _game.GetComponent<LevelLoader>();
         }
 
         public void UnloadCartridge() {
