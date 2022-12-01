@@ -124,8 +124,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: -3612843241714895006}
-        m_TargetAssemblyTypeName: Pixygon.Micro.CartridgeObject, Pixygon.Micro
-        m_MethodName: Activate
+        m_TargetAssemblyTypeName: Pixygon.PagedContent.PagedContentObject, Pixygon.PagedContent
+        m_MethodName: Select
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
