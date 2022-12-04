@@ -12,10 +12,10 @@ namespace Pixygon.Micro {
             ResetPoints();
         }
         
-        public void AddPoints(int points) {
+        public void AddPoints(int points, Vector3 pos) {
             _points += points;
             _levelLoader.Ui.SetPoints(_points);
-            EffectsManager.SpawnScoreEffect(points, transform.position);
+            EffectsManager.SpawnScoreEffect(points, pos);
         }
 
         public void SetSavedPoints() {
