@@ -4,6 +4,7 @@ using Pixygon.DebugTool;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Rendering;
+using UnityEngine.SocialPlatforms.Impl;
 
 namespace Pixygon.Micro {
     public class LevelLoader : MonoBehaviour {
@@ -19,6 +20,7 @@ namespace Pixygon.Micro {
         private int _currentLevelId;
 
         public UI Ui => _ui;
+        public ScoreManager ScoreManager { get; private set; }
         public CameraController Camera => _camera;
         public Level CurrentLevel { get; private set; }
         public LevelData CurrentLevelData { get; private set; }
@@ -39,6 +41,8 @@ namespace Pixygon.Micro {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Game started", this);
             //Ui.Initialize();
             Ui.TriggerMenuScreen(true);
+            ScoreManager = gameObject.AddComponent<ScoreManager>();
+            ScoreManager.Initialize(this);
         }
 
         private void SelectLevel(bool started) {
@@ -57,6 +61,9 @@ namespace Pixygon.Micro {
         }
 
         private bool _loadingLevel;
+        public LevelLoader(ScoreManager scoreManager) {
+            ScoreManager = scoreManager;
+        }
 
         public void EndLevel() {
             if (!_levelLoaded) return;

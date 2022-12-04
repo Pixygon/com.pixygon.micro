@@ -13,6 +13,7 @@
 - Exposed all InputActions in InputController
 - PagedContentManager for Cartridges
 - Made item-selection clearer for cartridges and faceplates
+- Scoremanager for keeping track of scores!
 
 ## 0.5.7
 ### Fixed
