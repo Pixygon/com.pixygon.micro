@@ -14,6 +14,8 @@ namespace Pixygon.Micro {
 
         private float _iFrames;
         private float _iFrameEffectCounter;
+        protected LevelLoader _levelLoader;
+        
         public bool Invincible { get; private set; }
         public MicroActorData Data { get; private set; }
         public bool IsDead { get; protected set; }
@@ -28,6 +30,7 @@ namespace Pixygon.Micro {
                 Invincible = true;
             if (Data._isHostile)
                 gameObject.AddComponent<DamageObject>();
+            _levelLoader = loader;
         }
 
         private bool _iFrameRed;
