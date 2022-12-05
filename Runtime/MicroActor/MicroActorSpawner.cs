@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Pixygon.DebugTool;
 using Pixygon.Addressable;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Pixygon.Micro {
     public class MicroActorSpawner : MonoBehaviour {
@@ -10,7 +11,9 @@ namespace Pixygon.Micro {
         [SerializeField] private bool _onlyOneActor = true;
         
         [SerializeField] private bool _repeat;
-        [SerializeField] private int _spawnTimer;
+        [SerializeField] private int _spawnTimerMin = 150;
+        [SerializeField] private int _spawnTimerMax = 300;
+        [SerializeField] private int _spawnTimerStart;
         
         private List<GameObject> _spawnedActor;
         private float _timer;
@@ -20,6 +23,9 @@ namespace Pixygon.Micro {
             _loader = loader;
             _spawnedActor = new List<GameObject>();
             _initialized = true;
+            _timer = _spawnTimerStart;
+            if(!_repeat)
+                DoSpawn();
         }
         public async void SpawnActor() {
             Log.DebugMessage(DebugGroup.Actor, "Spawning actor", this);
@@ -31,7 +37,7 @@ namespace Pixygon.Micro {
 
         private void DoSpawn() {
             if(_onlyOneActor) DespawnActor();
-            _timer = _spawnTimer;
+            _timer = Random.Range(_spawnTimerMin, _spawnTimerMax);
             SpawnActor();
         }
         private void DespawnActor() {
