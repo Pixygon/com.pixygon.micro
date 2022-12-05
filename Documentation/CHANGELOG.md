@@ -14,6 +14,8 @@
 - PagedContentManager for Cartridges
 - Made item-selection clearer for cartridges and faceplates
 - Scoremanager for keeping track of scores!
+- ActorSpawner can now repeatedly spawn more enemies
+
 
 ## 0.5.7
 ### Fixed
