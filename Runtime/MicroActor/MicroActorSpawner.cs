@@ -40,6 +40,7 @@ namespace Pixygon.Micro {
         private void Update() {
             if (!_repeat || !_initialized) return;
             if (_timer < 0f) SpawnActor();
+            else _timer -= Time.deltaTime;
         }
     }
 }
