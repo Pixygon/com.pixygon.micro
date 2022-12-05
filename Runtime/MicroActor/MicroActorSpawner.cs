@@ -16,7 +16,7 @@ namespace Pixygon.Micro {
         private float _timer;
         private LevelLoader _loader;
         private bool _initialized;
-        private void Initialize(LevelLoader loader) {
+        public void Initialize(LevelLoader loader) {
             _loader = loader;
             _spawnedActor = new List<GameObject>();
             _initialized = true;

@@ -19,7 +19,7 @@ namespace Pixygon.Micro {
                 coin.Respawn();
             }
             foreach (var spawner in _actors) {
-                spawner.SpawnActor(loader);
+                spawner.Initialize(loader);
             }
             foreach (var levelObject in _levelObjects) {
                 levelObject.Reset();
