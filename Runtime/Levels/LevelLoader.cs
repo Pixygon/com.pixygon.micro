@@ -101,6 +101,7 @@ namespace Pixygon.Micro {
                 Destroy(CurrentLevel.gameObject);
             var g = await AddressableLoader.LoadGameObject(CurrentLevelData._levelRef, transform);
             CurrentLevel = g.GetComponent<Level>();
+            Debug.Log("Setup Level");
         }
         private async Task SetupPlayer() {
             if(_player == null) 
@@ -108,6 +109,7 @@ namespace Pixygon.Micro {
             _player.transform.position = CurrentLevel.PlayerSpawn;
             _camera.Initialize(_player.transform);
             _player.GetComponent<MicroActor>().Initialize(this, _playerData);
+            Debug.Log("Setup Player");
         }
         private async Task SetupParallax() {
             if (_parallax == null) {
@@ -115,14 +117,16 @@ namespace Pixygon.Micro {
                 _parallax = p.GetComponent<Parallax.Parallax>();
             }
             _parallax.Initialize(_player.transform, MicroController._instance.Display._camera, CurrentLevelData._parallaxLayerDatas);
+            Debug.Log("Setup Parallax");
         }
         private async Task SetupBgm() {
             GetComponent<AudioSource>().clip = await AddressableLoader.LoadAsset<AudioClip>(CurrentLevelData._bgmRef);
-            //GetComponent<AudioSource>().Play();
+            Debug.Log("Setup BGM");
         }
         private async Task SetupPostProc() {
             MicroController._instance.Display._volume.profile = CurrentLevelData._postProcessingProfileRef != null ?
                 await AddressableLoader.LoadAsset<VolumeProfile>(CurrentLevelData._postProcessingProfileRef) : MicroController._instance.Display._defaultVolume;
+            Debug.Log("Setup PostProc");
         }
     }
 }
