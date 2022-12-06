@@ -13,34 +13,34 @@ namespace Pixygon.Micro {
         private const float RunThreshold = 9f;
 
         public void Jump() {
-            _anim.SetTrigger(Jump1);
+            _anim?.SetTrigger(Jump1);
         }
 
         public void Land() {
-            _anim.SetBool(Air, false);
-            _anim.SetTrigger(Land1);
+            _anim?.SetBool(Air, false);
+            _anim?.SetTrigger(Land1);
         }
 
         public void InAir() {
-            _anim.SetBool(Air, true);
+            _anim?.SetBool(Air, true);
         }
 
         public void Damage() {
-            _anim.SetTrigger(Damage1);
+            _anim?.SetTrigger(Damage1);
         }
 
         public void SetMovement(float i) {
             if (i is > IdleThreshold and < RunThreshold) {
-                _anim.SetBool(IsWalking, true);
-                _anim.SetBool(IsRunning, false);
+                _anim?.SetBool(IsWalking, true);
+                _anim?.SetBool(IsRunning, false);
             }
             else if (i > RunThreshold) {
-                _anim.SetBool(IsWalking, true);
-                _anim.SetBool(IsRunning, true);
+                _anim?.SetBool(IsWalking, true);
+                _anim?.SetBool(IsRunning, true);
             }
             else {
-                _anim.SetBool(IsWalking, false);
-                _anim.SetBool(IsRunning, false);
+                _anim?.SetBool(IsWalking, false);
+                _anim?.SetBool(IsRunning, false);
             }
         }
     }
