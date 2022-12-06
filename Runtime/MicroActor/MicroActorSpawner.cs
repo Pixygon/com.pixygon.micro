@@ -21,10 +21,10 @@ namespace Pixygon.Micro {
         
         public void Initialize(LevelLoader loader) {
             _loader = loader;
+            DeSpawnActor();
             _spawnedActor = new List<GameObject>();
             _initialized = true;
             _timer = _spawnTimerStart;
-            DeSpawnActor();
             if(!_repeat)
                 DoSpawn();
         }
@@ -42,6 +42,7 @@ namespace Pixygon.Micro {
             SpawnActor();
         }
         public void DeSpawnActor() {
+            if(_spawnedActor == null) return;
             foreach (var a in _spawnedActor) {
                 Destroy(a);
             }
