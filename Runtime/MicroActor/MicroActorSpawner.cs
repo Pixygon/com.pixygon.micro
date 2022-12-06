@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using Pixygon.DebugTool;
 using Pixygon.Addressable;
 using UnityEngine;
@@ -9,7 +9,6 @@ namespace Pixygon.Micro {
     public class MicroActorSpawner : MonoBehaviour {
         [SerializeField] private MicroActorData _actorData;
         [SerializeField] private bool _onlyOneActor = true;
-        
         [SerializeField] private bool _repeat;
         [SerializeField] private int _spawnTimerMin = 150;
         [SerializeField] private int _spawnTimerMax = 300;
@@ -19,6 +18,7 @@ namespace Pixygon.Micro {
         private float _timer;
         private LevelLoader _loader;
         private bool _initialized;
+        
         public void Initialize(LevelLoader loader) {
             _loader = loader;
             _spawnedActor = new List<GameObject>();
@@ -27,25 +27,28 @@ namespace Pixygon.Micro {
             if(!_repeat)
                 DoSpawn();
         }
-        public async void SpawnActor() {
+        private async void SpawnActor() {
             Log.DebugMessage(DebugGroup.Actor, "Spawning actor", this);
             var a = await AddressableLoader.LoadGameObject(_actorData._actorRef, transform);
             a.transform.localPosition = Vector3.zero;
             a.GetComponent<MicroActor>().Initialize(_loader, _actorData);
             _spawnedActor.Add(a);
         }
-
         private void DoSpawn() {
-            if(_onlyOneActor) DespawnActor();
+            if(_onlyOneActor) DeSpawnActor();
+            PruneActorList();
             _timer = Random.Range(_spawnTimerMin, _spawnTimerMax);
             SpawnActor();
         }
-        private void DespawnActor() {
+        public void DeSpawnActor() {
             foreach (var a in _spawnedActor) {
                 Destroy(a);
             }
+            PruneActorList();
         }
-
+        private void PruneActorList() {
+            _spawnedActor = _spawnedActor.Where(a => a != null).ToList();
+        }
         private void Update() {
             if (!_repeat || !_initialized) return;
             if (_timer < 0f) DoSpawn();
