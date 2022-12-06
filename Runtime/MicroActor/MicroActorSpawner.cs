@@ -24,6 +24,7 @@ namespace Pixygon.Micro {
             _spawnedActor = new List<GameObject>();
             _initialized = true;
             _timer = _spawnTimerStart;
+            DeSpawnActor();
             if(!_repeat)
                 DoSpawn();
         }
