@@ -15,8 +15,12 @@ namespace Pixygon.Micro {
 
         [SerializeField] private bool _animatePoints;
         [SerializeField] private bool _animateCoins;
+        [SerializeField] private bool _animateCollectables;
         [SerializeField] private Animator _pointsAnimator;
         [SerializeField] private Animator _coinsAnimator;
+        [SerializeField] private Animator _collectablesAnimator;
+        
+        [SerializeField] private SpriteRenderer[] _collectableSprites;
         
         public GameObject PregameScreen => _pregameScreen;
         public GameObject LevelEndScreen => _levelEndScreen;
@@ -34,6 +38,13 @@ namespace Pixygon.Micro {
         public void SetPoints(int points) {
             if(_animatePoints) _pointsAnimator.SetTrigger("Tick");
             _pointsText.text = points.ToString();
+        }
+
+        public void SetCollectable(bool[] collectable) {
+            if(_animateCollectables) _collectablesAnimator.SetTrigger("Tick");
+            for (var i = 0; i < collectable.Length; i++) {
+                _collectableSprites[i].color = collectable[i] ? Color.black : Color.white;
+            }
         }
         public void TriggerMenuScreen(bool activate) {
             _menuScreen.SetActive(activate);

@@ -15,6 +15,8 @@
 - Made item-selection clearer for cartridges and faceplates
 - Scoremanager for keeping track of scores!
 - ActorSpawner can now repeatedly spawn more enemies
+- Added field for Collectables
+- Killheight is now set in levels
 
 
 ## 0.5.7

@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -12,7 +13,9 @@ namespace Pixygon.Micro {
         [ContextMenuItem("Get LevelObjects", "GatherLevelObjects")]
         [SerializeField] private LevelObject[] _levelObjects;
         [SerializeField] private Transform _playerSpawn;
+        [SerializeField] private int _killHeight;
         public Vector3 PlayerSpawn => _playerSpawn.position;
+        public int KillHeight => _killHeight;
 
         public void RespawnLevel(LevelLoader loader) {
             foreach (var coin in _pickups) {
@@ -45,6 +48,11 @@ namespace Pixygon.Micro {
 #if UNITY_EDITOR
             EditorUtility.SetDirty(this);
 #endif
+        }
+
+        private void OnDrawGizmos() {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(new Vector3(-1000, _killHeight, 0), new Vector3(1000, _killHeight, 0));
         }
     }
 }
