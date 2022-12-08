@@ -43,7 +43,7 @@ namespace Pixygon.Micro {
         public void SetCollectable(bool[] collectable) {
             if(_animateCollectables) _collectablesAnimator.SetTrigger("Tick");
             for (var i = 0; i < collectable.Length; i++) {
-                _collectableSprites[i].color = collectable[i] ? Color.black : Color.white;
+                _collectableSprites[i].color = collectable[i] ? Color.white : Color.black;
             }
         }
         public void TriggerMenuScreen(bool activate) {
