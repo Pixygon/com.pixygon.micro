@@ -11,7 +11,6 @@ namespace Pixygon.Micro {
         public int _pointsValue;
         public bool _isHostile;
         public bool _isKillable;
-        public bool _detectGaps;
-        public bool _detectObstacles;
+        public AIListenerData[] _listeners;
     }
 }

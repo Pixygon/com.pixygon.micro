@@ -15,6 +15,7 @@ namespace Pixygon.Micro {
         private float _iFrameEffectCounter;
         protected LevelLoader _levelLoader;
         private float _killheight;
+        private bool _iFrameRed;
         
         public bool Invincible { get; private set; }
         public MicroActorData Data { get; private set; }
@@ -34,7 +35,6 @@ namespace Pixygon.Micro {
             _killheight = _levelLoader.CurrentLevel.KillHeight;
         }
 
-        private bool _iFrameRed;
         protected void HandleIFrames() {
             if (!Invincible) return;
             if (_iFrames > 0f) {
