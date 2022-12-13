@@ -4,17 +4,23 @@ using UnityEngine;
 namespace Pixygon.Micro {
     [CreateAssetMenu(menuName = "PixygonMicro/New Faceplate")]
     public class Faceplate : ScriptableObject {
+        [Header("NFT Info")]
         public string _title;
         public string _collabPartner;
+        public int _maxSupply;
+        public int _price;
         public Texture2D _collabIcon;
         public Rarity _rarity;
+        public NFTLink _nftLink;
+        
+        [Header("Faceplate")]
         public Color _color;
         public Color _detailColor;
         public Color _buttonColor;
         public Texture2D _tex;
         public bool _useFaceplateColor;
         public Color _faceplate;
-        public NFTLink _nftLink;
+        
     }
 
     public enum Rarity {

@@ -24,6 +24,7 @@
 - Added AIReaction-system
 - Added AIMover-system
 - Major improvements to AI
+- Added more info to faceplates
 
 
 ## 0.5.7
