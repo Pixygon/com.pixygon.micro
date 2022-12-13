@@ -6,6 +6,9 @@
 - Bug where BGM starts playing twice
 - Bug where audiomixers weren't properly loaded
 
+### Changed
+- More info for faceplates
+
 ### Added
 - LevelObjects, that can be reset
 - Added more options for pickup-interactions
@@ -17,6 +20,10 @@
 - ActorSpawner can now repeatedly spawn more enemies
 - Added field for Collectables
 - Killheight is now set in levels
+- Added AIListener-system
+- Added AIReaction-system
+- Added AIMover-system
+- Major improvements to AI
 
 
 ## 0.5.7
