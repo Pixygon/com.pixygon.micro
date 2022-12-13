@@ -7,6 +7,7 @@ namespace Pixygon.Micro {
         [Header("NFT Info")]
         public string _title;
         public string _collabPartner;
+        public string _collabWallet;
         public int _maxSupply;
         public int _price;
         public Texture2D _collabIcon;
