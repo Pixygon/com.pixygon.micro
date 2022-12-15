@@ -25,6 +25,7 @@
 - Added AIMover-system
 - Major improvements to AI
 - Added more info to faceplates
+- Added different ItemSpawners
 
 
 ## 0.5.7
