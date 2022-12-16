@@ -5,7 +5,7 @@ namespace Pixygon.Micro {
         
 #if UNITY_WEBGL
         public void GetAddress() {
-            main.Login();
+            WebGLDispatcher.Login();
         }
 
         public void GotWallet(string wallet) {
