@@ -9,6 +9,8 @@ namespace Pixygon.Micro {
         }
 
         public void GotWallet(string wallet) {
+            PlayerPrefs.SetString("WaxWallet", wallet);
+            PlayerPrefs.Save();
             MicroController._instance.SetWallet(wallet);
         }
 
