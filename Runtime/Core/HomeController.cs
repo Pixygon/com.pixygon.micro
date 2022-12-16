@@ -27,6 +27,7 @@ namespace Pixygon.Micro {
         [SerializeField] private TextMeshProUGUI _masterText;
         [SerializeField] private TextMeshProUGUI _bgmText;
         [SerializeField] private TextMeshProUGUI _sfxText;
+        [SerializeField] private TextMeshProUGUI _walletText;
         [SerializeField] private Button _startGameButton;
         [SerializeField] private PagedContentManager _cartridgeLists;
         [SerializeField] private PagedContentManager _faceplateLists;
@@ -128,6 +129,14 @@ namespace Pixygon.Micro {
             if (MicroController._instance.CurrentlyLoadedCartridge == null) return;
             MicroController._instance.Cartridge.StartGame();
             Activate(false);
+        }
+
+        public void GetWallet() {
+            MicroController._instance.GetWallet();
+        }
+
+        public void SetWallet(string s) {
+            _walletText.text = s;
         }
     }
 }

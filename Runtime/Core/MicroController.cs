@@ -19,6 +19,7 @@ namespace Pixygon.Micro
         [SerializeField] private Faceplate[] _faceplates;
         [SerializeField] private Camera _cam;
         [SerializeField] private AudioMixer _mixer;
+        [SerializeField] private WalletFetcher _walletFetcher;
         
         public bool HomeMenuOpen { get; private set; }
         public DisplayController Display { get; private set; }
@@ -26,6 +27,7 @@ namespace Pixygon.Micro
         public CartridgeController Cartridge { get; private set; }
         public ConsoleController Console { get; private set; }
         public HomeController Home { get; private set; }
+        public string Wallet { get; private set; }
         public bool SkipIntro => _skipIntro;
         public string Version => _version;
         public Cartridge[] Cartridges => _cartridges;
@@ -96,6 +98,18 @@ namespace Pixygon.Micro
             _mixer.SetFloat("MasterVolume", Mathf.Log10(PlayerPrefs.GetFloat("MasterVolume", 1f)) * 20f);
             _mixer.SetFloat("BGMVolume", Mathf.Log10(PlayerPrefs.GetFloat("BGMVolume", 1f)) * 20f);
             _mixer.SetFloat("SFXVolume", Mathf.Log10(PlayerPrefs.GetFloat("SFXVolume", 1f)) * 20f);
+        }
+
+        public void GetWallet() {
+#if UNITY_WEBGL
+            _walletFetcher.GetAddress();
+#endif
+        }
+
+        public void SetWallet(string wallet) {
+            Debug.Log("Hi my name is Pixygon Micro, and this is your wallet: " + wallet);
+            Wallet = wallet;
+            Home.SetWallet(wallet);
         }
     }
 }

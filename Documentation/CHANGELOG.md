@@ -26,7 +26,7 @@
 - Major improvements to AI
 - Added more info to faceplates
 - Added different ItemSpawners
-
+- Added login to wax-wallet
 
 ## 0.5.7
 ### Fixed
