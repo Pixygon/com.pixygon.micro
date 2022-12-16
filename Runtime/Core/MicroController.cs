@@ -1,4 +1,5 @@
 using Pixygon.DebugTool;
+using Pixygon.Saving;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -109,6 +110,7 @@ namespace Pixygon.Micro
         public void SetWallet(string wallet) {
             Debug.Log("Hi my name is Pixygon Micro, and this is your wallet: " + wallet);
             Wallet = wallet;
+            SaveManager.SettingsSave._waxWallet = wallet;
             Home.SetWallet(wallet);
         }
     }
