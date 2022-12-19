@@ -95,6 +95,16 @@ namespace Pixygon.Micro
         public void SetZoom(float f) {
             _cam.transform.position = new Vector3(0f, 0f, Mathf.Lerp(-10f, -20f, f));
         }
+
+        public void SetCameraToDefault() {
+            _cam.transform.position = new Vector3(0f, 0f, -10);
+        }
+        public void SetCameraToCartridgeSelect() {
+            _cam.transform.position = new Vector3(0f, -8f, -20);
+        }
+        public void SetCameraToFaceplateSelect() {
+            _cam.transform.position = new Vector3(0f, 0f, -20);
+        }
         public void UpdateAudioSettings() {
             _mixer.SetFloat("MasterVolume", Mathf.Log10(PlayerPrefs.GetFloat("MasterVolume", 1f)) * 20f);
             _mixer.SetFloat("BGMVolume", Mathf.Log10(PlayerPrefs.GetFloat("BGMVolume", 1f)) * 20f);

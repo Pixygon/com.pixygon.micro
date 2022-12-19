@@ -81,6 +81,10 @@ namespace Pixygon.Micro {
         }
         
         public void TriggerFaceplateSelect(bool open) {
+            if (open)
+                MicroController._instance.SetCameraToFaceplateSelect();
+            else
+                MicroController._instance.SetCameraToDefault();
             _faceplateMenu.SetActive(open);
             _mainMenu.SetActive(!open);
             if(open)
@@ -98,6 +102,10 @@ namespace Pixygon.Micro {
 
 
         public void TriggerCartridgeSelect(bool open) {
+            if (open)
+                MicroController._instance.SetCameraToCartridgeSelect();
+            else
+                MicroController._instance.SetCameraToDefault();
             _cartridgeMenu.SetActive(open);
             _mainMenu.SetActive(!open);
             if(open)
