@@ -1,14 +1,17 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Pixygon.Micro
 {
     public class CartridgeSelector : MonoBehaviour {
         [SerializeField] private CartridgeObject _cartridgePrefab;
+        [SerializeField] private HomeController _home;
         
         private CartridgeObject[] _objects;
         private int _currentCartridge;
         private Cartridge[] _cartridges;
         private float _selectTimer;
+        private bool _isClosing;
         
         public void Open() {
             MicroController._instance.SetCameraToCartridgeSelect();
@@ -25,13 +28,21 @@ namespace Pixygon.Micro
         }
 
         public void Close() {
+            _isClosing = true;
             MicroController._instance.Input._move -= Move;
             MicroController._instance.Input._jump -= SelectCartridge;
             MicroController._instance.SetCameraToDefault();
             foreach (var g in _objects) {
                 Destroy(g.gameObject);
             }
+            ActuallyClose();
+        }
+
+        private async void ActuallyClose() {
+            await Task.Yield();
             _objects = null;
+            _home.TriggerCartridgeSelect(false);
+            _isClosing = false;
         }
 
         public void PopulateCartridges() {
@@ -71,7 +82,6 @@ namespace Pixygon.Micro
                 _selectTimer -= Time.deltaTime;
         }
 
-        [SerializeField] private HomeController _home;
         public void SelectCartridge(bool started) {
             if (!started) return;
             if(_currentCartridge > MicroController._instance.Cartridges.Length)

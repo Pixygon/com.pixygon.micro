@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using Pixygon.PagedContent;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -18,8 +15,6 @@ namespace Pixygon.Micro {
         [SerializeField] private TextMeshProUGUI _gameTitleText;
         [SerializeField] private GameObject _eventHomeTest;
         [SerializeField] private GameObject _eventSettingsTest;
-        [SerializeField] private GameObject _eventCartridgeTest;
-        [SerializeField] private GameObject _eventFaceplateTest;
         [SerializeField] private GameObject _eventTrophiesTest;
         [SerializeField] private Slider _masterSlider;
         [SerializeField] private Slider _bgmSlider;
@@ -29,9 +24,6 @@ namespace Pixygon.Micro {
         [SerializeField] private TextMeshProUGUI _sfxText;
         [SerializeField] private TextMeshProUGUI _walletText;
         [SerializeField] private Button _startGameButton;
-        [SerializeField] private PagedContentManager _cartridgeLists;
-        [SerializeField] private PagedContentManager _faceplateLists;
-
         [SerializeField] private CartridgeSelector _cartridgeSelector;
         [SerializeField] private FaceplateSelector _faceplateSelector;
 
@@ -56,6 +48,8 @@ namespace Pixygon.Micro {
             _trophyMenu.SetActive(false);
             if(activate)
                 EventSystem.current.SetSelectedGameObject(_eventHomeTest);
+            else
+                MicroController._instance.SetCameraToDefault();
         }
 
         public void SetMasterAudioLevel(float f) {
@@ -82,42 +76,13 @@ namespace Pixygon.Micro {
             _mainMenu.SetActive(!open);
             EventSystem.current.SetSelectedGameObject(open ? _eventSettingsTest : _eventHomeTest);
         }
-        
         public void TriggerFaceplateSelect(bool open) {
-            
             _mainMenu.SetActive(!open);
-            if (open) {
-                _faceplateSelector.Open();
-            }
-            /*
-            if (open)
-                MicroController._instance.SetCameraToFaceplateSelect();
-            else
-                MicroController._instance.SetCameraToDefault();
-            _faceplateMenu.SetActive(open);
-            _mainMenu.SetActive(!open);
-            if(open)
-                _faceplateLists.PopulateCollections(MicroController._instance.Faceplates, 0, SetFaceplate, 0, true);
-            EventSystem.current.SetSelectedGameObject(open ? _eventFaceplateTest : _eventHomeTest);
-            */
+            if (open) _faceplateSelector.Open();
         }
-
-        /*
-        private void SetFaceplate(object o, int i) {
-            if(i > MicroController._instance.Faceplates.Length)
-                i = 0;
-            PlayerPrefs.SetInt("Faceplate", i);
-            PlayerPrefs.Save();
-            MicroController._instance.Console.UpdateFaceplate();
-        }
-        */
-
-        
         public void TriggerCartridgeSelect(bool open) {
             _mainMenu.SetActive(!open);
-            if (open) {
-                _cartridgeSelector.Open();
-            }
+            if (open) _cartridgeSelector.Open();
         }
 
         public void SetCurrentCartridge() {
@@ -140,7 +105,6 @@ namespace Pixygon.Micro {
         public void GetWallet() {
             MicroController._instance.GetWallet();
         }
-
         public void SetWallet(string s) {
             _walletText.text = s;
         }

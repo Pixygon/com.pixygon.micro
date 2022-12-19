@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Pixygon.Micro {
@@ -9,6 +10,7 @@ namespace Pixygon.Micro {
         private int _currentFaceplate;
         private Faceplate[] _faceplates;
         private float _selectTimer;
+        private bool _isClosing;
         
         public void Open() {
             MicroController._instance.SetCameraToFaceplateSelect();
@@ -26,6 +28,7 @@ namespace Pixygon.Micro {
         }
 
         public void Close() {
+            _isClosing = true;
             MicroController._instance.Input._move -= Move;
             MicroController._instance.Input._jump -= SelectFaceplate;
             MicroController._instance.SetCameraToDefault();
@@ -33,7 +36,14 @@ namespace Pixygon.Micro {
             foreach (var g in _objects) {
                 Destroy(g.gameObject);
             }
+            ActuallyClose();
+        }
+
+        private async void ActuallyClose() {
+            await Task.Yield();
             _objects = null;
+            _home.TriggerCartridgeSelect(false);
+            _isClosing = false;
         }
 
         public void PopulateFaceplates() {

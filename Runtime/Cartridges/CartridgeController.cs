@@ -1,4 +1,5 @@
 using Pixygon.DebugTool;
+using Pixygon.Saving;
 using UnityEngine;
 
 namespace Pixygon.Micro {
@@ -32,7 +33,7 @@ namespace Pixygon.Micro {
             if(_game != null)
                 Destroy(_game);
             var i = PlayerPrefs.GetInt("Cartridge");
-            if (MicroController._instance.Cartridges == null || MicroController._instance.Cartridges.Length <= i) {
+            if (MicroController._instance.Cartridges == null || MicroController._instance.Cartridges.Length <= i || SaveManager.SettingsSave._waxWallet == string.Empty) {
                 Log.DebugMessage(DebugGroup.PixygonMicro, "No cartridges set!", this);
                 MicroController._instance.TriggerHomeMenu(true);
                 return;
