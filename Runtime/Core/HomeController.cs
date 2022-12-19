@@ -32,6 +32,9 @@ namespace Pixygon.Micro {
         [SerializeField] private PagedContentManager _cartridgeLists;
         [SerializeField] private PagedContentManager _faceplateLists;
 
+        [SerializeField] private CartridgeSelector _cartridgeSelector;
+        [SerializeField] private FaceplateSelector _faceplateSelector;
+
         public void Initialize() {
             GetComponent<Canvas>().worldCamera = MicroController._instance.Display._uiCamera;
             GetComponent<Canvas>().sortingLayerName = "Menu";
@@ -81,6 +84,12 @@ namespace Pixygon.Micro {
         }
         
         public void TriggerFaceplateSelect(bool open) {
+            
+            _mainMenu.SetActive(!open);
+            if (open) {
+                _faceplateSelector.Open();
+            }
+            /*
             if (open)
                 MicroController._instance.SetCameraToFaceplateSelect();
             else
@@ -90,8 +99,10 @@ namespace Pixygon.Micro {
             if(open)
                 _faceplateLists.PopulateCollections(MicroController._instance.Faceplates, 0, SetFaceplate, 0, true);
             EventSystem.current.SetSelectedGameObject(open ? _eventFaceplateTest : _eventHomeTest);
+            */
         }
 
+        /*
         private void SetFaceplate(object o, int i) {
             if(i > MicroController._instance.Faceplates.Length)
                 i = 0;
@@ -99,33 +110,20 @@ namespace Pixygon.Micro {
             PlayerPrefs.Save();
             MicroController._instance.Console.UpdateFaceplate();
         }
+        */
 
-
+        
         public void TriggerCartridgeSelect(bool open) {
-            if (open)
-                MicroController._instance.SetCameraToCartridgeSelect();
-            else
-                MicroController._instance.SetCameraToDefault();
-            _cartridgeMenu.SetActive(open);
             _mainMenu.SetActive(!open);
-            if(open)
-                _cartridgeLists.PopulateCollections(MicroController._instance.Cartridges, 0, SetCartridge, 0, true);
-            EventSystem.current.SetSelectedGameObject(open ? _eventCartridgeTest : _eventHomeTest);
-        }
-        private void SetCartridge(object o, int i) {
-            if(i > MicroController._instance.Cartridges.Length)
-                i = 0;
-            PlayerPrefs.SetInt("Cartridge", i);
-            PlayerPrefs.Save();
-            SetCurrentCartridge();
-            TriggerCartridgeSelect(false);
+            if (open) {
+                _cartridgeSelector.Open();
+            }
         }
 
-        private void SetCurrentCartridge() {
+        public void SetCurrentCartridge() {
             var hasCartridge = MicroController._instance.CurrentlyLoadedCartridge != null;
             _gameTitleText.text = hasCartridge ? MicroController._instance.CurrentlyLoadedCartridge._title : "No cartridge";
         }
-
 
         public void TriggerTrophySelect(bool open) {
             _trophyMenu.SetActive(open);

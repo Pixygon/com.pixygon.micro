@@ -27,6 +27,8 @@
 - Added more info to faceplates
 - Added different ItemSpawners
 - Added login to wax-wallet
+- New way of selecting faceplates
+- New way of selecting cartridge
 
 ## 0.5.7
 ### Fixed

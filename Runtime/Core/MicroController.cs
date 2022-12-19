@@ -14,6 +14,7 @@ namespace Pixygon.Micro
         [SerializeField] private CartridgeController _cartridgePrefab;
         [SerializeField] private ConsoleController _consolePrefab;
         [SerializeField] private HomeController _homePrefab;
+        [SerializeField] private SaveManager _saveManager;
         [SerializeField] private string _version;
         [SerializeField] private bool _skipIntro;
         [SerializeField] private Cartridge[] _cartridges;
@@ -34,13 +35,23 @@ namespace Pixygon.Micro
         public Cartridge[] Cartridges => _cartridges;
         public Faceplate[] Faceplates => _faceplates;
         public Cartridge CurrentlyLoadedCartridge => _cartridges.Length != 0 ? _cartridges[PlayerPrefs.GetInt("Cartridge")] : null;
-        public Faceplate CurrentlyLoadedFaceplate => _faceplates.Length != 0 ? _faceplates[PlayerPrefs.GetInt("Faceplate")] : null;
+        public Faceplate CurrentlyLoadedFaceplate {
+            get {
+                if(PlayerPrefs.GetInt("Faceplate") >= _faceplates.Length)
+                    PlayerPrefs.SetInt("Faceplate", 0);
+                return _faceplates.Length != 0 ? _faceplates[PlayerPrefs.GetInt("Faceplate")] : null;
+            }
+        }
+
         private void Awake() {
             if (_instance == null)
                 _instance = this;
             else
                 Destroy(gameObject);
             Initialize();
+#if UNITY_EDITOR
+            SetWallet("md1qw.wam");  
+#endif
         }
 
         private void Start() {
@@ -54,6 +65,7 @@ namespace Pixygon.Micro
             Console = Instantiate(_consolePrefab, transform);
             Cartridge = Instantiate(_cartridgePrefab, transform);
             Home = Instantiate(_homePrefab, transform);
+            Instantiate(_saveManager, transform);
             Cartridge.Initilize();
             Console.Initialize();
             Home.Initialize();
@@ -120,6 +132,8 @@ namespace Pixygon.Micro
         public void SetWallet(string wallet) {
             Debug.Log("Hi my name is Pixygon Micro, and this is your wallet: " + wallet);
             Wallet = wallet;
+            if (SaveManager.SettingsSave == null)
+                SaveManager.SettingsSave = new SettingsSaveData();
             SaveManager.SettingsSave._waxWallet = wallet;
             Home.SetWallet(wallet);
         }

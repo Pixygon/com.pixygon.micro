@@ -1,32 +1,21 @@
-using System;
-using Pixygon.PagedContent;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Pixygon.Micro {
-    public class CartridgeObject : PagedContentObject {
+    public class CartridgeObject : MonoBehaviour {
         [SerializeField] private GameObject _lockIcon;
-        private bool _canUse;
+        [SerializeField] private MeshRenderer _sticker;
 
-        public override void Initialize(object d, int num, Action<object, int> a) {
-            base.Initialize(d, num, a);
-            var cartridge = d as Cartridge;
+        public bool CanUse { get; private set; }
+        public void Initialize(Cartridge cartridge) {
+            _sticker.materials[2].SetTexture("_Albedo", cartridge._cartridgeImage);
             if (cartridge._nftLink.RequiresNFT) {
                 _lockIcon.SetActive(true); 
-                NFT.NFT.ValidateTemplate(cartridge._nftLink.Template[0], () => { _canUse = true; _lockIcon.SetActive(false); });
+                NFT.NFT.ValidateTemplate(cartridge._nftLink.Template[0], () => { CanUse = true; _lockIcon.SetActive(false); });
             }
             else {
                 _lockIcon.SetActive(false); 
-                _canUse = true;
+                CanUse = true;
             }
-            GetComponent<Image>().sprite = Sprite.Create(cartridge._cartridgeImage,
-                new Rect(0, 0, cartridge._cartridgeImage.width, cartridge._cartridgeImage.height), new Vector2(.5f, .5f));
-            GetComponent<Image>().color = Color.white;
-        }
-
-        public override void Activate() {
-            if (!_canUse) return;
-            base.Activate();
         }
     }
 }

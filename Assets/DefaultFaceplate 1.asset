@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d2ec0d02c237de4582666363c269d6c, type: 3}
+  m_Name: DefaultFaceplate 1
+  m_EditorClassIdentifier: 
+  _title: Default
+  _collabPartner: 
+  _collabWallet: 
+  _maxSupply: 0
+  _price: 0
+  _collabIcon: {fileID: 0}
+  _rarity: 0
+  _nftLink:
+    RequiresNFT: 1
+    Template:
+    - template: 261018
+      schema: promo
+      collection: magnta555art
+      chain: 0
+  _color: {r: 0.79607844, g: 0, b: 0.04820196, a: 1}
+  _detailColor: {r: 1, g: 0.23137254, b: 0.52028847, a: 1}
+  _buttonColor: {r: 1, g: 0.67995006, b: 0.23137254, a: 1}
+  _tex: {fileID: 2800000, guid: a6011835151fac6499213788aad602e7, type: 3}
+  _useFaceplateColor: 1
+  _faceplate: {r: 0.28839418, g: 1, b: 0.23137254, a: 1}
