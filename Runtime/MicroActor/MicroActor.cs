@@ -1,12 +1,15 @@
 using Pixygon.DebugTool;
+using Pixygon.Effects;
 using UnityEngine;
 
 namespace Pixygon.Micro {
     public class MicroActor : MonoBehaviour {
         [SerializeField] protected SpriteRenderer _sprite;
-        [SerializeField] private ParticleSystem _damageFx;
-        [SerializeField] protected ParticleSystem _deathFx;
-        [SerializeField] private AudioSource _damageSfx;
+        //[SerializeField] private ParticleSystem _damageFx;
+        //[SerializeField] protected ParticleSystem _deathFx;
+        //[SerializeField] private AudioSource _damageSfx;
+        [SerializeField] private EffectData _damageFx;
+        [SerializeField] private EffectData _deathFx;
         [SerializeField] private AnimatorController _anim;
         [SerializeField] private bool _destroyOnDeath;
         [SerializeField] private float _iFrameLength = .6f;
@@ -63,9 +66,10 @@ namespace Pixygon.Micro {
             if (!Data._isKillable) return;
             _iFrames = _iFrameLength;
             Invincible = true;
-            _damageFx.Play();
-            _damageSfx.pitch = UnityEngine.Random.Range(0.9f, 1.05f);
-            _damageSfx.Play();
+            //_damageFx.Play();
+            //_damageSfx.pitch = UnityEngine.Random.Range(0.9f, 1.05f);
+            //_damageSfx.Play();
+            EffectsManager.SpawnEffect(_damageFx.GetFullID, transform.position);
             _anim.Damage();
             if (HP != 0)
                 HP -= 1;
@@ -77,7 +81,8 @@ namespace Pixygon.Micro {
             IsDead = true;
             StopIFrames();
             _sprite.enabled = false;
-            _deathFx.Play();
+            EffectsManager.SpawnEffect(_deathFx.GetFullID, transform.position);
+            //_deathFx.Play();
             if(_destroyOnDeath)
                 Destroy(gameObject);
         }
