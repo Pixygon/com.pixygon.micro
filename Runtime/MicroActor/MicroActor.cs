@@ -5,14 +5,15 @@ using UnityEngine;
 namespace Pixygon.Micro {
     public class MicroActor : MonoBehaviour {
         [SerializeField] protected SpriteRenderer _sprite;
-        [SerializeField] private EffectData _damageFx;
-        [SerializeField] private EffectData _deathFx;
+        [SerializeField] protected EffectData _damageFx;
+        [SerializeField] protected EffectData _deathFx;
         [SerializeField] private AnimatorController _anim;
         [SerializeField] private bool _destroyOnDeath;
         
-        protected LevelLoader _levelLoader;
         private float _killheight;
-        private IFrameManager _iFrameManager;
+        
+        protected LevelLoader _levelLoader;
+        protected IFrameManager _iFrameManager;
         
         public bool Invincible { get; set; }
         public MicroActorData Data { get; private set; }
