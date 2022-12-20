@@ -15,6 +15,7 @@ namespace Pixygon.Micro {
             _actor = actor;
         }
         public void SetIFrames() {
+            _actor.Invincible = true;
             _iFrames = _iFrameLength;
         }
         public void HandleIFrames() {

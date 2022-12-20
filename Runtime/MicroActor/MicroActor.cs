@@ -38,8 +38,8 @@ namespace Pixygon.Micro {
             if (!Data._isKillable) return;
             if(Data._useIframes)
                 _iFrameManager.SetIFrames();
-            Invincible = true;
-            EffectsManager.SpawnEffect(Data._damageFx.GetFullID, transform.position);
+            if(Data._damageFx != null)
+                EffectsManager.SpawnEffect(Data._damageFx.GetFullID, transform.position);
             _anim.Damage();
             if (HP != 0)
                 HP -= 1;
@@ -52,7 +52,8 @@ namespace Pixygon.Micro {
             if(Data._useIframes)
                 _iFrameManager.StopIFrames();
             _sprite.enabled = false;
-            EffectsManager.SpawnEffect(Data._deathFx.GetFullID, transform.position);
+            if(Data._deathFx != null)
+                EffectsManager.SpawnEffect(Data._deathFx.GetFullID, transform.position);
             if(_destroyOnDeath) Destroy(gameObject);
         }
 
