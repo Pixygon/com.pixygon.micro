@@ -5,13 +5,9 @@ using UnityEngine;
 namespace Pixygon.Micro {
     public class MicroActor : MonoBehaviour {
         [SerializeField] protected SpriteRenderer _sprite;
-        [SerializeField] protected EffectData _damageFx;
-        [SerializeField] protected EffectData _deathFx;
         [SerializeField] private AnimatorController _anim;
         [SerializeField] private bool _destroyOnDeath;
-        
         private float _killheight;
-        
         protected LevelLoader _levelLoader;
         protected IFrameManager _iFrameManager;
         
@@ -31,16 +27,19 @@ namespace Pixygon.Micro {
                 gameObject.AddComponent<DamageObject>();
             _levelLoader = loader;
             _killheight = _levelLoader.CurrentLevel.KillHeight;
-            _iFrameManager = gameObject.AddComponent<IFrameManager>();
-            _iFrameManager.Initialize(this, _sprite);
+            if (Data._useIframes) {
+                _iFrameManager = gameObject.AddComponent<IFrameManager>();
+                _iFrameManager.Initialize(this, _sprite);
+            }
         }
 
         public virtual void Damage() {
             if (Invincible) return;
             if (!Data._isKillable) return;
-            _iFrameManager.SetIFrames();
+            if(Data._useIframes)
+                _iFrameManager.SetIFrames();
             Invincible = true;
-            EffectsManager.SpawnEffect(_damageFx.GetFullID, transform.position);
+            EffectsManager.SpawnEffect(Data._damageFx.GetFullID, transform.position);
             _anim.Damage();
             if (HP != 0)
                 HP -= 1;
@@ -50,9 +49,10 @@ namespace Pixygon.Micro {
 
         protected virtual void Die() {
             IsDead = true;
-            _iFrameManager.StopIFrames();
+            if(Data._useIframes)
+                _iFrameManager.StopIFrames();
             _sprite.enabled = false;
-            EffectsManager.SpawnEffect(_deathFx.GetFullID, transform.position);
+            EffectsManager.SpawnEffect(Data._deathFx.GetFullID, transform.position);
             if(_destroyOnDeath) Destroy(gameObject);
         }
 
@@ -60,7 +60,7 @@ namespace Pixygon.Micro {
             if (Data == null) return;
             if (transform.position.y <= _killheight)
                 Die();
-            if(Data._isKillable)
+            if(Data._isKillable && Data._useIframes)
                 _iFrameManager.HandleIFrames();
         }
     }
