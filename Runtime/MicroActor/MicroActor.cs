@@ -5,22 +5,16 @@ using UnityEngine;
 namespace Pixygon.Micro {
     public class MicroActor : MonoBehaviour {
         [SerializeField] protected SpriteRenderer _sprite;
-        //[SerializeField] private ParticleSystem _damageFx;
-        //[SerializeField] protected ParticleSystem _deathFx;
-        //[SerializeField] private AudioSource _damageSfx;
         [SerializeField] private EffectData _damageFx;
         [SerializeField] private EffectData _deathFx;
         [SerializeField] private AnimatorController _anim;
         [SerializeField] private bool _destroyOnDeath;
-        [SerializeField] private float _iFrameLength = .6f;
-
-        private float _iFrames;
-        private float _iFrameEffectCounter;
+        
         protected LevelLoader _levelLoader;
         private float _killheight;
-        private bool _iFrameRed;
+        private IFrameManager _iFrameManager;
         
-        public bool Invincible { get; private set; }
+        public bool Invincible { get; set; }
         public MicroActorData Data { get; private set; }
         public bool IsDead { get; protected set; }
         public bool IgnoreMovement { get; protected set; }
@@ -36,39 +30,15 @@ namespace Pixygon.Micro {
                 gameObject.AddComponent<DamageObject>();
             _levelLoader = loader;
             _killheight = _levelLoader.CurrentLevel.KillHeight;
-        }
-
-        protected void HandleIFrames() {
-            if (!Invincible) return;
-            if (_iFrames > 0f) {
-                _iFrames -= Time.deltaTime;
-                if (_iFrameEffectCounter > 0f)
-                    _iFrameEffectCounter -= Time.deltaTime;
-                else {
-                    _iFrameRed = !_iFrameRed;
-                    _iFrameEffectCounter = .1f;
-                    _sprite.color = _iFrameRed ? Color.red : Color.white;
-                }
-            }
-            else
-                StopIFrames();
-        }
-
-        protected void StopIFrames() {
-            _iFrameEffectCounter = 0f;
-            Invincible = false;
-            _iFrameRed = false;
-            _sprite.color = Color.white;
+            _iFrameManager = gameObject.AddComponent<IFrameManager>();
+            _iFrameManager.Initialize(this, _sprite);
         }
 
         public virtual void Damage() {
             if (Invincible) return;
             if (!Data._isKillable) return;
-            _iFrames = _iFrameLength;
+            _iFrameManager.SetIFrames();
             Invincible = true;
-            //_damageFx.Play();
-            //_damageSfx.pitch = UnityEngine.Random.Range(0.9f, 1.05f);
-            //_damageSfx.Play();
             EffectsManager.SpawnEffect(_damageFx.GetFullID, transform.position);
             _anim.Damage();
             if (HP != 0)
@@ -79,12 +49,10 @@ namespace Pixygon.Micro {
 
         protected virtual void Die() {
             IsDead = true;
-            StopIFrames();
+            _iFrameManager.StopIFrames();
             _sprite.enabled = false;
             EffectsManager.SpawnEffect(_deathFx.GetFullID, transform.position);
-            //_deathFx.Play();
-            if(_destroyOnDeath)
-                Destroy(gameObject);
+            if(_destroyOnDeath) Destroy(gameObject);
         }
 
         public virtual void Update() {
@@ -92,7 +60,7 @@ namespace Pixygon.Micro {
             if (transform.position.y <= _killheight)
                 Die();
             if(Data._isKillable)
-                HandleIFrames();
+                _iFrameManager.HandleIFrames();
         }
     }
 }
