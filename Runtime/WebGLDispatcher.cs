@@ -3,10 +3,17 @@ using System.Runtime.InteropServices;
 namespace  Pixygon.Micro {
     public static class WebGLDispatcher {
 #if UNITY_WEBGL
-    [DllImport("__Internal")]
-    public static extern void Login();
-    [DllImport("__Internal")]
-    private static extern string WalletAddress();
+    [DllImport("__Internal")] public static extern void Wax_Login();
+        
+    [DllImport("__Internal")] private static extern string Eth_WalletAddress();
+        
+        
+    [DllImport("__Internal")] private static extern void Tezos_DAppClient();
+    [DllImport("__Internal")] private static extern void Tezos_RequestPermission();
+    [DllImport("__Internal")] private static extern void Tezos_SendTez();
+    [DllImport("__Internal")] private static extern void Tezos_APICall();
+    [DllImport("__Internal")] private static extern void Tezos_TokenAddressString();
+    [DllImport("__Internal")] private static extern string Tezos_MyAddressString();
 #endif
     }
 }
