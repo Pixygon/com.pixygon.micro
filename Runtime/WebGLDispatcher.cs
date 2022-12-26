@@ -12,7 +12,7 @@ namespace  Pixygon.Micro {
     [DllImport("__Internal")] public static extern void Tezos_RequestPermission();
     [DllImport("__Internal")] public static extern void Tezos_SendTez();
     [DllImport("__Internal")] public static extern void Tezos_APICall();
-    [DllImport("__Internal")] public static extern void Tezos_TokenAddressString();
+    [DllImport("__Internal")] public static extern string Tezos_TokenAddressString();
     [DllImport("__Internal")] public static extern string Tezos_MyAddressString();
 #endif
     }
