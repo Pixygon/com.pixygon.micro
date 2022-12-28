@@ -40,7 +40,7 @@ namespace Pixygon.Micro {
                 _iFrameManager.SetIFrames();
             if(Data._damageFx != null)
                 EffectsManager.SpawnEffect(Data._damageFx.GetFullID, transform.position);
-            _anim.Damage();
+            //_anim.Damage();
             if (HP != 0)
                 HP -= 1;
             else
