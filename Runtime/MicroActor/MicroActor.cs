@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Pixygon.Micro {
     public class MicroActor : MonoBehaviour {
         [SerializeField] protected SpriteRenderer _sprite;
-        [SerializeField] private AnimatorController _anim;
+        [SerializeField] protected AnimatorController _anim;
         [SerializeField] private bool _destroyOnDeath;
         private float _killheight;
         protected LevelLoader _levelLoader;
