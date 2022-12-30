@@ -10,6 +10,7 @@ namespace Pixygon.Micro
         public string _levelId;
         public AssetReference _levelRef;
         public AssetReference _bgmRef;
+        public AssetReference _levelClearSfxRef;
         public AssetReference _postProcessingProfileRef;
         public ParallaxLayerData[] _parallaxLayerDatas;
     }
