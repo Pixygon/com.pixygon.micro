@@ -109,7 +109,7 @@ namespace Pixygon.Micro
         }
 
         public void SetCameraToDefault() {
-            _cam.transform.position = new Vector3(0f, 0f, -10);
+            _cam.transform.position = new Vector3(0f, 0f, -12);
         }
         public void SetCameraToCartridgeSelect() {
             _cam.transform.position = new Vector3(0f, -8f, -20);
@@ -123,14 +123,24 @@ namespace Pixygon.Micro
             _mixer.SetFloat("SFXVolume", Mathf.Log10(PlayerPrefs.GetFloat("SFXVolume", 1f)) * 20f);
         }
 
-        public void GetWallet() {
+        public void GetWaxWallet() {
 #if UNITY_WEBGL
-            _walletFetcher.GetAddress();
+            _walletFetcher.GetWaxAddress();
+#endif
+        }
+        public void GetEthWallet() {
+#if UNITY_WEBGL
+            _walletFetcher.GetEthAddress();
+#endif
+        }
+        public void GetTezWallet() {
+#if UNITY_WEBGL
+            _walletFetcher.GetTezAddress();
 #endif
         }
 
         public void SetWallet(string wallet) {
-            Debug.Log("Hi my name is Pixygon Micro, and this is your wallet: " + wallet);
+            //Debug.Log("Hi my name is Pixygon Micro, and this is your wallet: " + wallet);
             Wallet = wallet;
             if (SaveManager.SettingsSave == null)
                 SaveManager.SettingsSave = new SettingsSaveData();

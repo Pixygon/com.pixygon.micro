@@ -4,8 +4,16 @@ namespace Pixygon.Micro {
     public class WalletFetcher : MonoBehaviour {
         
 #if UNITY_WEBGL
-        public void GetAddress() {
+        public void GetWaxAddress() {
             WebGLDispatcher.Wax_Login();
+        }
+        
+        public void GetEthAdress() {
+            WebGLDispatcher.Eth_Login();
+        }
+
+        public void GetTezAdress() {
+            WebGLDispatcher.Tez_Login();
         }
 
         public void GotWallet(string wallet) {

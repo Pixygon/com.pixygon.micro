@@ -103,7 +103,7 @@ namespace Pixygon.Micro {
         }
 
         public void GetWallet() {
-            MicroController._instance.GetWallet();
+            MicroController._instance.GetWaxWallet();
         }
         public void SetWallet(string s) {
             _walletText.text = s;
