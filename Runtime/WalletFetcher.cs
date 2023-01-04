@@ -8,11 +8,11 @@ namespace Pixygon.Micro {
             WebGLDispatcher.Wax_Login();
         }
         
-        public void GetEthAdress() {
+        public void GetEthAddress() {
             WebGLDispatcher.Eth_Login();
         }
 
-        public void GetTezAdress() {
+        public void GetTezAddress() {
             WebGLDispatcher.Tez_Login();
         }
 
