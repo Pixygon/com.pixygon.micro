@@ -10,7 +10,9 @@ namespace Pixygon.Micro {
         private float _killheight;
         protected LevelLoader _levelLoader;
         protected IFrameManager _iFrameManager;
-        
+
+        public Animator Anim => _anim;
+        public SpriteRenderer Renderer => _sprite;
         public bool Invincible { get; set; }
         public MicroActorData Data { get; private set; }
         public bool IsDead { get; protected set; }
