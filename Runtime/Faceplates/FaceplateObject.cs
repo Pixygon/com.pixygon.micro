@@ -14,12 +14,18 @@ namespace Pixygon.Micro {
             _faceplate.SetFaceplate(faceplate);
             if (faceplate._nftLink.RequiresNFT) {
                 _lockIcon.SetActive(true);
-                NFT.NFT.ValidateTemplate(faceplate._nftLink.Template[0], () => { CanUse = true; _lockIcon.SetActive(false); });
+                CanUse = false;
+                NFT.NFT.ValidateTemplate(faceplate._nftLink.Template[0], Validate);
             }
             else {
                 _lockIcon.SetActive(false);
                 CanUse = true;
             }
+        }
+
+        private void Validate() {
+            CanUse = true;
+            _lockIcon.SetActive(false);
         }
     }
 }

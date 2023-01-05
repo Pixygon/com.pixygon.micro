@@ -9,13 +9,19 @@ namespace Pixygon.Micro {
         public void Initialize(Cartridge cartridge) {
             _sticker.materials[2].SetTexture("_Albedo", cartridge._cartridgeImage);
             if (cartridge._nftLink.RequiresNFT) {
-                _lockIcon.SetActive(true); 
-                NFT.NFT.ValidateTemplate(cartridge._nftLink.Template[0], () => { CanUse = true; _lockIcon.SetActive(false); });
+                _lockIcon.SetActive(true);
+                CanUse = false;
+                NFT.NFT.ValidateTemplate(cartridge._nftLink.Template[0], Validate);
             }
             else {
                 _lockIcon.SetActive(false); 
                 CanUse = true;
             }
+        }
+
+        private void Validate() {
+            CanUse = true;
+            _lockIcon.SetActive(false);
         }
     }
 }
