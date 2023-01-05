@@ -16,6 +16,7 @@ namespace Pixygon.Micro {
             MicroController._instance.SetCameraToFaceplateSelect();
             MicroController._instance.Input._move += Move;
             MicroController._instance.Input._jump += SelectFaceplate;
+            MicroController._instance.Input._run += DoClose;
             MicroController._instance.Console.HideConsole(true);
             _currentFaceplate = 0;
             _faceplates = MicroController._instance.Faceplates;
@@ -31,6 +32,7 @@ namespace Pixygon.Micro {
             _isClosing = true;
             MicroController._instance.Input._move -= Move;
             MicroController._instance.Input._jump -= SelectFaceplate;
+            MicroController._instance.Input._run -= DoClose;
             MicroController._instance.SetCameraToDefault();
             MicroController._instance.Console.HideConsole(false);
             foreach (var g in _objects) {
@@ -82,9 +84,14 @@ namespace Pixygon.Micro {
             if(_selectTimer > 0f)
                 _selectTimer -= Time.deltaTime;
         }
+        private void DoClose(bool started) {
+            if (!started) return;
+            Close();
+        }
 
         public void SelectFaceplate(bool started) {
             if (!started) return;
+            if (!_objects[_currentFaceplate].CanUse) return;
             if(_currentFaceplate > MicroController._instance.Faceplates.Length)
                 _currentFaceplate = 0;
             PlayerPrefs.SetInt("Faceplate", _currentFaceplate);

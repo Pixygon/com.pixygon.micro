@@ -17,6 +17,7 @@ namespace Pixygon.Micro
             MicroController._instance.SetCameraToCartridgeSelect();
             MicroController._instance.Input._move += Move;
             MicroController._instance.Input._jump += SelectCartridge;
+            MicroController._instance.Input._run += DoClose;
             _currentCartridge = 0;
             _cartridges = MicroController._instance.Cartridges;
             _objects = new[] {
@@ -31,6 +32,7 @@ namespace Pixygon.Micro
             _isClosing = true;
             MicroController._instance.Input._move -= Move;
             MicroController._instance.Input._jump -= SelectCartridge;
+            MicroController._instance.Input._run -= DoClose;
             MicroController._instance.SetCameraToDefault();
             foreach (var g in _objects) {
                 Destroy(g.gameObject);
@@ -82,12 +84,13 @@ namespace Pixygon.Micro
                 _selectTimer -= Time.deltaTime;
         }
 
+        private void DoClose(bool started) {
+            if (!started) return;
+            Close();
+        }
         public void SelectCartridge(bool started) {
             if (!started) return;
-            if (!_objects[_currentCartridge].CanUse) {
-                Close();
-                return;
-            }
+            if (!_objects[_currentCartridge].CanUse) return;
             if(_currentCartridge > MicroController._instance.Cartridges.Length)
                 _currentCartridge = 0;
             PlayerPrefs.SetInt("Cartridge", _currentCartridge);

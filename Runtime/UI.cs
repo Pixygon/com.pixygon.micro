@@ -21,6 +21,9 @@ namespace Pixygon.Micro {
         [SerializeField] private Animator _collectablesAnimator;
         
         [SerializeField] private SpriteRenderer[] _collectableSprites;
+
+        [SerializeField] private SpriteRenderer _powerupRenderer;
+        [SerializeField] private Sprite[] _powerups;
         
         public GameObject PregameScreen => _pregameScreen;
         public GameObject LevelEndScreen => _levelEndScreen;
@@ -33,6 +36,15 @@ namespace Pixygon.Micro {
         public void SetCoins(int coins) {
             if(_animateCoins) _coinsAnimator.SetTrigger("Tick");
             _coinText.text = coins.ToString();
+        }
+        public void SetPowerup(int i) {
+            if (i == -1) {
+                _powerupRenderer.gameObject.SetActive(false);
+            }
+            else {
+                _powerupRenderer.sprite = _powerups[i];
+                _powerupRenderer.gameObject.SetActive(true);
+            }
         }
 
         public void SetPoints(int points) {
