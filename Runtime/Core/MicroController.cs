@@ -90,7 +90,7 @@ namespace Pixygon.Micro
         public void TriggerHomeMenu(bool started) {
             if(!started) return;
             if (HomeMenuOpen) {
-                if(_cartridges.Length != 0)
+                if(_cartridges.Length != 0 || CurrentlyLoadedCartridge != null)
                     HomeMenuOpen = false;
             } else {
                 HomeMenuOpen = true;
