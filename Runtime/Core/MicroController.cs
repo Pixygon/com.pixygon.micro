@@ -92,8 +92,7 @@ namespace Pixygon.Micro
             if (HomeMenuOpen) {
                 if(_cartridges.Length != 0)
                     HomeMenuOpen = false;
-            }
-            else {
+            } else {
                 HomeMenuOpen = true;
             }
 
