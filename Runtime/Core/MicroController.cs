@@ -34,7 +34,13 @@ namespace Pixygon.Micro
         public string Version => _version;
         public Cartridge[] Cartridges => _cartridges;
         public Faceplate[] Faceplates => _faceplates;
-        public Cartridge CurrentlyLoadedCartridge => _cartridges.Length != 0 ? _cartridges[PlayerPrefs.GetInt("Cartridge")] : null;
+        public Cartridge CurrentlyLoadedCartridge {
+            get {
+                if (PlayerPrefs.GetInt("Cartridge", -1) == -1)
+                    return null;
+                return _cartridges.Length != 0 ? _cartridges[PlayerPrefs.GetInt("Cartridge")] : null;
+            }
+        }
         public Faceplate CurrentlyLoadedFaceplate {
             get {
                 if(PlayerPrefs.GetInt("Faceplate") >= _faceplates.Length)
