@@ -32,7 +32,7 @@ namespace Pixygon.Micro {
         public void StartGame() {
             if(_game != null)
                 Destroy(_game);
-            var i = PlayerPrefs.GetInt("Cartridge");
+            var i = PlayerPrefs.GetInt("Cartridge", -1);
             if (MicroController._instance.Cartridges == null || MicroController._instance.Cartridges.Length <= i || SaveManager.SettingsSave == null) {
                 NoCartridge();
                 return;
