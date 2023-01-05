@@ -49,6 +49,8 @@ namespace Pixygon.Micro
             else
                 Destroy(gameObject);
             Initialize();
+            if(SaveManager.SettingsSave == null)
+                SetWallet(string.Empty);
 #if UNITY_EDITOR
             SetWallet("md1qw.wam");  
 #endif
@@ -140,7 +142,6 @@ namespace Pixygon.Micro
         }
 
         public void SetWallet(string wallet) {
-            //Debug.Log("Hi my name is Pixygon Micro, and this is your wallet: " + wallet);
             Wallet = wallet;
             if (SaveManager.SettingsSave == null)
                 SaveManager.SettingsSave = new SettingsSaveData();
