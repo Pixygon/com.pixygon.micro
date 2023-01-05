@@ -84,6 +84,10 @@ namespace Pixygon.Micro
 
         public void SelectCartridge(bool started) {
             if (!started) return;
+            if (!_objects[_currentCartridge].CanUse) {
+                Close();
+                return;
+            }
             if(_currentCartridge > MicroController._instance.Cartridges.Length)
                 _currentCartridge = 0;
             PlayerPrefs.SetInt("Cartridge", _currentCartridge);
