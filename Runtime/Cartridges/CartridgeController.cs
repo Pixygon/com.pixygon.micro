@@ -6,9 +6,10 @@ namespace Pixygon.Micro {
     public class CartridgeController : MonoBehaviour {
         [SerializeField] private Intro _introPrefab;
 
-        private GameObject _game;
+        //private GameObject _game;
         private Intro _intro;
 
+        public GameObject Game { get; private set; }
         public LevelLoader LevelLoader { get; private set; }
         public void Initilize() {
             #if UNITY_EDITOR
@@ -30,8 +31,8 @@ namespace Pixygon.Micro {
         }
 
         public void StartGame() {
-            if(_game != null)
-                Destroy(_game);
+            if(Game != null)
+                Destroy(Game);
             var i = PlayerPrefs.GetInt("Cartridge", -1);
             if (MicroController._instance.Cartridges == null || MicroController._instance.Cartridges.Length <= i || SaveManager.SettingsSave == null) {
                 NoCartridge();
@@ -55,12 +56,12 @@ namespace Pixygon.Micro {
         }
 
         public void LoadCartridge(Cartridge c) {
-            _game = Instantiate(c._gamePrefab, transform);
-            LevelLoader = _game.GetComponent<LevelLoader>();
+            Game = Instantiate(c._gamePrefab, transform);
+            LevelLoader = Game.GetComponent<LevelLoader>();
         }
 
         public void UnloadCartridge() {
-            Destroy(_game);
+            Destroy(Game);
         }
     }
 }
