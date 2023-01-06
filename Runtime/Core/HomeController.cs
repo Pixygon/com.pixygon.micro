@@ -98,8 +98,8 @@ namespace Pixygon.Micro {
 
         public void StartGame() {
             if (MicroController._instance.CurrentlyLoadedCartridge == null) return;
-            MicroController._instance.TriggerHomeMenu(true);
             MicroController._instance.Cartridge.StartGame();
+            MicroController._instance.TriggerHomeMenu(true);
             Activate(false);
         }
 
