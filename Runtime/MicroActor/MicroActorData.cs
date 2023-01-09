@@ -14,6 +14,7 @@ namespace Pixygon.Micro {
         public bool _isKillable;
         public AIListenerData[] _listeners;
         public bool _useIframes;
+        public float _iFrameLength = .6f;
         public EffectData _damageFx;
         public EffectData _deathFx;
     }

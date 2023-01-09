@@ -2,8 +2,7 @@
 
 namespace Pixygon.Micro {
     public class IFrameManager : MonoBehaviour {
-        [SerializeField] private float _iFrameLength = .6f;
-
+        private float _iFrameLength;
         private float _iFrames;
         private float _iFrameEffectCounter;
         private bool _iFrameRed;
@@ -13,6 +12,7 @@ namespace Pixygon.Micro {
         public void Initialize(MicroActor actor, SpriteRenderer sprite) {
             _sprite = sprite;
             _actor = actor;
+            _iFrameLength = actor.Data._iFrameLength;
         }
         public void SetIFrames() {
             _actor.Invincible = true;
