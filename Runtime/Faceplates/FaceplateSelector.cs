@@ -8,7 +8,7 @@ namespace Pixygon.Micro {
         
         private FaceplateObject[] _objects;
         private int _currentFaceplate;
-        private Faceplate[] _faceplates;
+        private Faceplate[] _facePlates;
         private float _selectTimer;
         private bool _isClosing;
         
@@ -18,8 +18,8 @@ namespace Pixygon.Micro {
             MicroController._instance.Input._jump += SelectFaceplate;
             MicroController._instance.Input._run += DoClose;
             MicroController._instance.Console.HideConsole(true);
-            _currentFaceplate = 0;
-            _faceplates = MicroController._instance.Faceplates;
+            _currentFaceplate = PlayerPrefs.GetInt("Faceplate", 0);
+            _facePlates = MicroController._instance.Faceplates;
             _objects = new[] {
                 Instantiate(_faceplatePrefab, new Vector3(-27f, 0f, 0f), Quaternion.identity),
                 Instantiate(_faceplatePrefab, new Vector3(0f, 0f, 0f), Quaternion.identity),
@@ -51,16 +51,16 @@ namespace Pixygon.Micro {
         public void PopulateFaceplates() {
             if (_currentFaceplate != 0) {
                 _objects[0].gameObject.SetActive(true);
-                _objects[0].Initialize(_faceplates[_currentFaceplate-1]);
+                _objects[0].Initialize(_facePlates[_currentFaceplate-1]);
             }
             else {
                 _objects[0].gameObject.SetActive(false);
             }
-            _objects[1].Initialize(_faceplates[_currentFaceplate]);
+            _objects[1].Initialize(_facePlates[_currentFaceplate]);
 
-            if (_currentFaceplate != _faceplates.Length - 1) {
+            if (_currentFaceplate != _facePlates.Length - 1) {
                 _objects[2].gameObject.SetActive(true);
-                _objects[2].Initialize(_faceplates[_currentFaceplate+1]);
+                _objects[2].Initialize(_facePlates[_currentFaceplate+1]);
             }
             else {
                 _objects[2].gameObject.SetActive(false);
@@ -73,7 +73,7 @@ namespace Pixygon.Micro {
                 if (_currentFaceplate == 0) return;
                 _currentFaceplate -= 1;
             } else if (v.x > .5f) {
-                if (_currentFaceplate == _faceplates.Length-1) return;
+                if (_currentFaceplate == _facePlates.Length-1) return;
                 _currentFaceplate += 1;
             }
             _selectTimer = .2f;
