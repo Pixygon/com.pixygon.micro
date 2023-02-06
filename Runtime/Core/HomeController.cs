@@ -15,7 +15,8 @@ namespace Pixygon.Micro {
         [SerializeField] private TextMeshProUGUI _gameTitleText;
         [SerializeField] private GameObject _eventHomeTest;
         [SerializeField] private GameObject _eventSettingsTest;
-        [SerializeField] private GameObject _eventTrophiesTest;
+        [SerializeField] private GameObject _eventLoginTest;
+        [SerializeField] private GameObject _eventAccountTest;
         [SerializeField] private Slider _masterSlider;
         [SerializeField] private Slider _bgmSlider;
         [SerializeField] private Slider _sfxSlider;
@@ -26,6 +27,11 @@ namespace Pixygon.Micro {
         [SerializeField] private Button _startGameButton;
         [SerializeField] private CartridgeSelector _cartridgeSelector;
         [SerializeField] private FaceplateSelector _faceplateSelector;
+        
+        [SerializeField] private TMP_InputField _userInput;
+        [SerializeField] private TMP_InputField _passInput;
+        [SerializeField] private GameObject _accountLoginPage;
+        [SerializeField] private GameObject _accountUserPage;
 
         public void Initialize() {
             GetComponent<Canvas>().worldCamera = MicroController._instance.Display._uiCamera;
@@ -92,8 +98,10 @@ namespace Pixygon.Micro {
 
         public void TriggerTrophySelect(bool open) {
             _trophyMenu.SetActive(open);
-            _homeMenu.SetActive(!open);
-            EventSystem.current.SetSelectedGameObject(open ? _eventTrophiesTest : _eventHomeTest);
+            _mainMenu.SetActive(!open);
+            EventSystem.current.SetSelectedGameObject(open ? _eventLoginTest : _eventHomeTest);
+            if(open)
+                SetAccountScreen();
         }
 
         public void StartGame() {
@@ -108,6 +116,29 @@ namespace Pixygon.Micro {
         }
         public void SetWallet(string s) {
             _walletText.text = s;
+        }
+
+        public void Login() {
+            MicroController._instance.Api.StartLogin(_userInput.text, _passInput.text, false, SetAccountScreen);
+        }
+
+        public void Logout() {
+            MicroController._instance.Api.StartLogout();
+            SetAccountScreen();
+        }
+
+
+        public void SetAccountScreen() {
+            if (MicroController._instance.Api.AccountData == null) {
+                _accountLoginPage.SetActive(true);
+                _accountUserPage.SetActive(false);
+                EventSystem.current.SetSelectedGameObject(_eventLoginTest);
+            } else {
+                SetWallet(MicroController._instance.Api.AccountData.user.userName);
+                _accountLoginPage.SetActive(false);
+                _accountUserPage.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(_eventAccountTest);
+            }
         }
     }
 }

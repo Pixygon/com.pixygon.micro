@@ -44,6 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6eba4f8a2010104ca774de0710c2138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameId: 
+  _feedback:
+    gameId: 
+    title: 
+    feedbackType: 
+    description: 
+    rating: 0
+    coordinateX: 0
+    coordinateY: 0
+    coordinateZ: 0
+    area: 
 --- !u!1 &4957823692606078818
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,3 +159,4 @@ MonoBehaviour:
   _cam: {fileID: 0}
   _mixer: {fileID: 0}
   _walletFetcher: {fileID: 4883480438912146272}
+  _api: {fileID: 4343666993450949090}

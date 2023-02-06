@@ -22,6 +22,7 @@ namespace Pixygon.Micro
         [SerializeField] private Camera _cam;
         [SerializeField] private AudioMixer _mixer;
         [SerializeField] private WalletFetcher _walletFetcher;
+        [SerializeField] private PixygonApi _api;
         
         public bool HomeMenuOpen { get; private set; }
         public DisplayController Display { get; private set; }
@@ -34,6 +35,8 @@ namespace Pixygon.Micro
         public string Version => _version;
         public Cartridge[] Cartridges => _cartridges;
         public Faceplate[] Faceplates => _faceplates;
+        public PixygonApi Api => _api;
+        
         public Cartridge CurrentlyLoadedCartridge {
             get {
                 if (PlayerPrefs.GetInt("Cartridge", -1) == -1)
@@ -90,6 +93,7 @@ namespace Pixygon.Micro
         public void TriggerHomeMenu(bool started) {
             if(!started) return;
             if (HomeMenuOpen) {
+                return;
                 if (_cartridges.Length != 0 && CurrentlyLoadedCartridge != null && Wallet != string.Empty && Cartridge.Game != null) {
                     Debug.Log("Home menu should close...");
                     HomeMenuOpen = false;

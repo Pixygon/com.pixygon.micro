@@ -1,31 +1,53 @@
 using System;
 using System.Threading.Tasks;
-using Pixygon.Core;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class PixygonApi : MonoBehaviour {
-    [SerializeField] private string _userName;
-    [SerializeField] private string _password;
+    //[SerializeField] private string _userName;
+    //[SerializeField] private string _password;
     [SerializeField] private string _gameId;
     [SerializeField] private Feedback _feedback;
     
     private const string _debugUrl = "https://pixygon-server.onrender.com/";
     private bool _useDebug = true;
 
-    private LoginToken _data;
-
+    
+    public LoginToken AccountData;
     private async void Start() {
-        _data = await LogIn(_userName, _password);
+        //_data = await LogIn(_userName, _password);
         //PostHighScore(_gameId ,_data.user._id, UnityEngine.Random.Range(0, 100000), "Some level");
         //PostFeedback(_feedback);
+        if (PlayerPrefs.GetInt("RememberMe") == 1) {
+            AccountData = await LogIn(PlayerPrefs.GetString("Username"), PlayerPrefs.GetString("Password"));
+        }
     }
     public void SetDebug(bool debug) {
         _useDebug = debug;
     }
+
+    public async void StartLogin(string user, string pass, bool rememberMe = false, Action onLogin = null) {
+        if (rememberMe) {
+            PlayerPrefs.SetInt("RememberMe", 1);
+            PlayerPrefs.SetString("Username", user);
+            PlayerPrefs.SetString("Password", pass);
+            PlayerPrefs.Save();
+        }
+        AccountData = await LogIn(user, pass);
+        onLogin?.Invoke();
+    }
+
+    public async void StartLogout() {
+        PlayerPrefs.DeleteKey("RememberMe");
+        PlayerPrefs.DeleteKey("Username");
+        PlayerPrefs.DeleteKey("Password");
+        PlayerPrefs.Save();
+        AccountData = null;
+    }
     public async Task<LoginToken> LogIn(string user, string pass) {
         var www = await PostWWW("auth/login", JsonUtility.ToJson(new LoginData(user, pass)));
-        return(JsonUtility.FromJson<LoginToken>(www.downloadHandler.text));
+        Debug.Log(www.downloadHandler.text);
+        return JsonUtility.FromJson<LoginToken>(www.downloadHandler.text);
     }
     public async void GetUsers() {
         var www = await GetWWW("Users");
@@ -88,6 +110,10 @@ public class AccountData {
     public string email;
     public string picturePath;
     public string[] friends;
+    public string waxWallet;
+    public string ethWallet;
+    public string tezWallet;
+    public bool artist;
     public string[] transactions;
     public string role;
     public int viewedProfile;
