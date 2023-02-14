@@ -16,10 +16,12 @@ namespace Pixygon.Micro {
             WebGLDispatcher.Tez_Login();
         }
 
-        public void GotWallet(string wallet) {
-            PlayerPrefs.SetString("WaxWallet", wallet);
-            PlayerPrefs.Save();
-            MicroController._instance.SetWallet(wallet);
+        public void GotWaxWallet(string wallet) {
+            MicroController._instance.SetWaxWallet(wallet);
+        }
+        
+        public void GotEthWallet(string wallet) {
+            MicroController._instance.SetEthWallet(wallet);
         }
 
 #endif

@@ -30,7 +30,6 @@ namespace Pixygon.Micro
         public CartridgeController Cartridge { get; private set; }
         public ConsoleController Console { get; private set; }
         public HomeController Home { get; private set; }
-        public string Wallet { get; private set; }
         public bool SkipIntro => _skipIntro;
         public string Version => _version;
         public Cartridge[] Cartridges => _cartridges;
@@ -58,11 +57,11 @@ namespace Pixygon.Micro
             else
                 Destroy(gameObject);
             Initialize();
-            if(SaveManager.SettingsSave == null)
-                SetWallet(string.Empty);
-#if UNITY_EDITOR
-            SetWallet("md1qw.wam");  
-#endif
+            //if(SaveManager.SettingsSave == null)
+                //SetWallet(string.Empty);
+//#if UNITY_EDITOR
+            //SetWallet("md1qw.wam");  
+//#endif
         }
 
         private void Start() {
@@ -94,7 +93,7 @@ namespace Pixygon.Micro
             if(!started) return;
             if (HomeMenuOpen) {
                 return;
-                if (_cartridges.Length != 0 && CurrentlyLoadedCartridge != null && Wallet != string.Empty && Cartridge.Game != null) {
+                if (_cartridges.Length != 0 && CurrentlyLoadedCartridge != null && !Api.IsLoggedIn && Cartridge.Game != null) {
                     Debug.Log("Home menu should close...");
                     HomeMenuOpen = false;
                 }
@@ -152,12 +151,12 @@ namespace Pixygon.Micro
 #endif
         }
 
-        public void SetWallet(string wallet) {
-            Wallet = wallet;
-            if (SaveManager.SettingsSave == null)
-                SaveManager.SettingsSave = new SettingsSaveData();
-            SaveManager.SettingsSave._waxWallet = wallet;
-            Home.SetWallet(wallet);
+        public void SetWaxWallet(string wallet) {
+            _api.PatchWaxWallet(wallet);
+        }
+
+        public void SetEthWallet(string wallet) {
+            _api.PatchWaxWallet(wallet);
         }
     }
 }

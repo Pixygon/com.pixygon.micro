@@ -38,7 +38,7 @@ namespace Pixygon.Micro {
                 NoCartridge();
                 return;
             }
-            if (SaveManager.SettingsSave._waxWallet == string.Empty) {
+            if (SaveManager.SettingsSave._isLoggedIn == false) {
                 NoCartridge();
                 return;
             }

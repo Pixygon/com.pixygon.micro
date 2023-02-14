@@ -111,15 +111,21 @@ namespace Pixygon.Micro {
             Activate(false);
         }
 
-        public void GetWallet() {
+        public void GetWaxWallet() {
             MicroController._instance.GetWaxWallet();
+        }
+        public void GetEthWallet() {
+            MicroController._instance.GetEthWallet();
+        }
+        public void GetTezWallet() {
+            MicroController._instance.GetTezWallet();
         }
         public void SetWallet(string s) {
             _walletText.text = s;
         }
 
         public void Login() {
-            MicroController._instance.Api.StartLogin(_userInput.text, _passInput.text, false, SetAccountScreen);
+            MicroController._instance.Api.StartLogin(_userInput.text, _passInput.text, true, SetAccountScreen);
         }
 
         public void Logout() {
@@ -129,12 +135,13 @@ namespace Pixygon.Micro {
 
 
         public void SetAccountScreen() {
-            if (MicroController._instance.Api.AccountData == null) {
+            if (!MicroController._instance.Api.IsLoggedIn) {
                 _accountLoginPage.SetActive(true);
                 _accountUserPage.SetActive(false);
                 EventSystem.current.SetSelectedGameObject(_eventLoginTest);
+                //SetWallet(MicroController._instance.Api.AccountData.user.waxWallet);
             } else {
-                SetWallet(MicroController._instance.Api.AccountData.user.userName);
+                //SetWallet(MicroController._instance.Api.AccountData.user.userName);
                 _accountLoginPage.SetActive(false);
                 _accountUserPage.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(_eventAccountTest);
