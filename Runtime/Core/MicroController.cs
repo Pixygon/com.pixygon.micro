@@ -80,7 +80,7 @@ namespace Pixygon.Micro
             Console.Initialize();
             Home.Initialize();
             Input._quit += Quit;
-            Input._home += TriggerHomeMenu;
+            Input._home += OpenHomeMenu;
         }
 
         private void Quit(bool started) {
@@ -89,22 +89,22 @@ namespace Pixygon.Micro
             #endif
         }
 
-        public void TriggerHomeMenu(bool started) {
+        public void OpenHomeMenu(bool started) {
             if(!started) return;
             if (HomeMenuOpen) {
                 return;
-                if (_cartridges.Length != 0 && CurrentlyLoadedCartridge != null && !Api.IsLoggedIn && Cartridge.Game != null) {
-                    Debug.Log("Home menu should close...");
-                    HomeMenuOpen = false;
-                }
-            } else {
-                HomeMenuOpen = true;
-            }
-
+            HomeMenuOpen = true;
             //This is a bad way to do it...
             //Time.timeScale = HomeMenuOpen ? 1f : 0f;
             PauseGame(HomeMenuOpen);
             Home.Activate(HomeMenuOpen);
+        }
+        
+        public void CloseHomeMenu() {
+            if (_cartridges.Length != 0 && CurrentlyLoadedCartridge != null && !Api.IsLoggedIn && Cartridge.Game != null) {
+                Debug.Log("Home menu should close...");
+                HomeMenuOpen = false;
+            }
         }
 
         private void PauseGame(bool pause) {
