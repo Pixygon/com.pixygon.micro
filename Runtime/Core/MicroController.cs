@@ -90,9 +90,7 @@ namespace Pixygon.Micro
         }
 
         public void OpenHomeMenu(bool started) {
-            if(!started) return;
-            if (HomeMenuOpen) {
-                return;
+            if(!started || HomeMenuOpen) return;
             HomeMenuOpen = true;
             //This is a bad way to do it...
             //Time.timeScale = HomeMenuOpen ? 1f : 0f;
