@@ -99,10 +99,15 @@ namespace Pixygon.Micro
         }
         
         public void CloseHomeMenu() {
-            if (_cartridges.Length != 0 && CurrentlyLoadedCartridge != null && !Api.IsLoggedIn && Cartridge.Game != null) {
-                Debug.Log("Home menu should close...");
-                HomeMenuOpen = false;
-            }
+            if (_cartridges.Length == 0) return;
+            Debug.Log("HomeMenuClose: Cartridges exist...");
+            if (CurrentlyLoadedCartridge == null) return;
+            Debug.Log("HomeMenuClose: A cartridge is loaded...");
+            if(!Api.IsLoggedIn) return;
+            Debug.Log("HomeMenuClose: API is logged in...");
+            if(Cartridge.Game == null) return;
+            Debug.Log("Home menu should close!");
+            HomeMenuOpen = false;
         }
 
         private void PauseGame(bool pause) {
