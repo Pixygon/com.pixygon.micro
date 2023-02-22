@@ -10,28 +10,21 @@ namespace Pixygon.Micro {
         [SerializeField] private GameObject _settingsMenu;
         [SerializeField] private GameObject _faceplateMenu;
         [SerializeField] private GameObject _cartridgeMenu;
-        [SerializeField] private GameObject _trophyMenu;
         [SerializeField] private TextMeshProUGUI _versionText;
         [SerializeField] private TextMeshProUGUI _gameTitleText;
         [SerializeField] private GameObject _eventHomeTest;
         [SerializeField] private GameObject _eventSettingsTest;
-        [SerializeField] private GameObject _eventLoginTest;
-        [SerializeField] private GameObject _eventAccountTest;
         [SerializeField] private Slider _masterSlider;
         [SerializeField] private Slider _bgmSlider;
         [SerializeField] private Slider _sfxSlider;
         [SerializeField] private TextMeshProUGUI _masterText;
         [SerializeField] private TextMeshProUGUI _bgmText;
         [SerializeField] private TextMeshProUGUI _sfxText;
-        [SerializeField] private TextMeshProUGUI _walletText;
         [SerializeField] private Button _startGameButton;
         [SerializeField] private CartridgeSelector _cartridgeSelector;
         [SerializeField] private FaceplateSelector _faceplateSelector;
         
-        [SerializeField] private TMP_InputField _userInput;
-        [SerializeField] private TMP_InputField _passInput;
-        [SerializeField] private GameObject _accountLoginPage;
-        [SerializeField] private GameObject _accountUserPage;
+        [SerializeField] private HomeAccountScreen _homeAccountScreen;
 
         public void Initialize() {
             GetComponent<Canvas>().worldCamera = MicroController._instance.Display._uiCamera;
@@ -51,7 +44,7 @@ namespace Pixygon.Micro {
             _settingsMenu.SetActive(false);
             _cartridgeMenu.SetActive(false);
             _faceplateMenu.SetActive(false);
-            _trophyMenu.SetActive(false);
+            _homeAccountScreen.gameObject.SetActive(false);
             if(activate)
                 EventSystem.current.SetSelectedGameObject(_eventHomeTest);
             else
@@ -88,6 +81,7 @@ namespace Pixygon.Micro {
         }
         public void TriggerCartridgeSelect(bool open) {
             _mainMenu.SetActive(!open);
+            _cartridgeMenu.SetActive(open);
             if (open) _cartridgeSelector.Open();
         }
 
@@ -96,12 +90,12 @@ namespace Pixygon.Micro {
             _gameTitleText.text = hasCartridge ? MicroController._instance.CurrentlyLoadedCartridge._title : "No cartridge";
         }
 
-        public void TriggerTrophySelect(bool open) {
-            _trophyMenu.SetActive(open);
+        public void TriggerAccountMenu(bool open) {
             _mainMenu.SetActive(!open);
-            EventSystem.current.SetSelectedGameObject(open ? _eventLoginTest : _eventHomeTest);
-            if(open)
-                SetAccountScreen();
+            if(!open)
+                EventSystem.current.SetSelectedGameObject(_eventHomeTest);
+            else
+                _homeAccountScreen.OpenScreen(true);
         }
 
         public void StartGame() {
@@ -111,41 +105,5 @@ namespace Pixygon.Micro {
             Activate(false);
         }
 
-        public void GetWaxWallet() {
-            MicroController._instance.GetWaxWallet();
-        }
-        public void GetEthWallet() {
-            MicroController._instance.GetEthWallet();
-        }
-        public void GetTezWallet() {
-            MicroController._instance.GetTezWallet();
-        }
-        public void SetWallet(string s) {
-            _walletText.text = s;
-        }
-
-        public void Login() {
-            MicroController._instance.Api.StartLogin(_userInput.text, _passInput.text, true, SetAccountScreen);
-        }
-
-        public void Logout() {
-            MicroController._instance.Api.StartLogout();
-            SetAccountScreen();
-        }
-
-
-        public void SetAccountScreen() {
-            if (!MicroController._instance.Api.IsLoggedIn) {
-                _accountLoginPage.SetActive(true);
-                _accountUserPage.SetActive(false);
-                EventSystem.current.SetSelectedGameObject(_eventLoginTest);
-                //SetWallet(MicroController._instance.Api.AccountData.user.waxWallet);
-            } else {
-                //SetWallet(MicroController._instance.Api.AccountData.user.userName);
-                _accountLoginPage.SetActive(false);
-                _accountUserPage.SetActive(true);
-                EventSystem.current.SetSelectedGameObject(_eventAccountTest);
-            }
-        }
     }
 }
