@@ -14,12 +14,11 @@ namespace Pixygon.Micro {
         }
 
         private void Update() {
-            if (_followPlayer) {
-                if (_player == null) return;
-                MicroController._instance.Display._camera.transform.position = Vector3.Lerp(
-                    MicroController._instance.Display._camera.transform.position,
-                    (_player.position + _offset) + (Vector3.back * _offset.z), _lag);
-            }
+            if (!_followPlayer) return;
+            if (_player == null) return;
+            MicroController._instance.Display._camera.transform.position = Vector3.Lerp(
+                MicroController._instance.Display._camera.transform.position,
+                (_player.position + _offset) + (Vector3.back * _offset.z), _lag);
         }
         public void SnapCamera() {
             MicroController._instance.Display._camera.transform.position = (_player.position + _offset) + (Vector3.back * _offset.z);
