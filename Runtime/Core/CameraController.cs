@@ -18,11 +18,11 @@ namespace Pixygon.Micro {
                 if (_player == null) return;
                 MicroController._instance.Display._camera.transform.position = Vector3.Lerp(
                     MicroController._instance.Display._camera.transform.position,
-                    (_player.position + _offset) + (Vector3.back * 10f), _lag);
+                    (_player.position + _offset) + (Vector3.back * _offset.z), _lag);
             }
         }
         public void SnapCamera() {
-            MicroController._instance.Display._camera.transform.position = (_player.position + _offset) + (Vector3.back * 10f);
+            MicroController._instance.Display._camera.transform.position = (_player.position + _offset) + (Vector3.back * _offset.z);
         }
         public static async void Shake(float duration, float intensity = 1f) {
             var curve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
