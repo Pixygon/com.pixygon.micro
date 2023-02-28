@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Pixygon.Micro.PixielMicro
-{
+namespace Pixygon.Micro {
     public class MovementCalculator : MonoBehaviour
     {
         public static float CalculateForce(float startForce, MovementConfig mov, bool running)

@@ -72,5 +72,12 @@ namespace Pixygon.Micro {
             if(Data._isKillable && Data._useIframes)
                 _iFrameManager.HandleIFrames();
         }
+        
+        public void SetFlip(float dir) {
+            if (dir < -0.1f && !Renderer.flipX)
+                Renderer.flipX = true;
+            else if (dir > 0.1f && Renderer.flipX)
+                Renderer.flipX = false;
+        }
     }
 }
