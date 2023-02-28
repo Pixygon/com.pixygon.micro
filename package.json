@@ -1,10 +1,10 @@
 {
   "name": "com.pixygon.micro",
-  "version": "0.5.7",
+  "version": "0.6.0",
   "displayName": "Pixygon - µ",
   "description": "Virtual console for making games inside games!",
-  "unity": "2022.1",
-  "unityRelease": "20f1",
+  "unity": "2022.2",
+  "unityRelease": "8f1",
   "documentationUrl": "https://www.pixygon.io/dev/micro",
   "changelogUrl": "https://www.pixygon.io/dev/micro/changelog",
   "licensesUrl": "https://www.pixygon.io/dev/micro/license",

@@ -7,6 +7,9 @@ namespace Pixygon.Micro {
         [SerializeField] protected SpriteRenderer _sprite;
         [SerializeField] protected Animator _anim;
         [SerializeField] private bool _destroyOnDeath;
+        [SerializeField] private Rigidbody2D _rigid;
+        [SerializeField] private MovementConfig _movementConfig;
+        [SerializeField] private GroundChecker _groundChecker;
         private float _killheight;
         protected LevelLoader _levelLoader;
         protected IFrameManager _iFrameManager;
@@ -18,6 +21,9 @@ namespace Pixygon.Micro {
         public bool IsDead { get; protected set; }
         public bool IgnoreMovement { get; protected set; }
         public int HP { get; protected set;}
+        public Rigidbody2D Rigid => _rigid;
+        public MovementConfig MovementConfig => _movementConfig;
+        public GroundChecker GroundChecker => _groundChecker;
 
         public virtual void Initialize(LevelLoader loader, MicroActorData data) {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Initializing MicroActor");

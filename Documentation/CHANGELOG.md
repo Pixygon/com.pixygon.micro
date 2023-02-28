@@ -1,6 +1,8 @@
 # Changelog
 
 ## Unreleased
+
+## 0.6.0
 ### Fixed
 - Bug where levels could be double-loaded
 - Bug where BGM starts playing twice
@@ -29,6 +31,10 @@
 - Added login to wax-wallet
 - New way of selecting faceplates
 - New way of selecting cartridge
+- Added new Home-menu
+- Added Pixygon Sign Up
+- Added Pixygon Sign In
+- Added Pixygon Passport
 
 ## 0.5.7
 ### Fixed
