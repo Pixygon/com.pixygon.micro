@@ -10,6 +10,7 @@ namespace Pixygon.Micro
     public class EnemyChecker : MonoBehaviour
     {
         [SerializeField] private EffectData _attackFx;
+        [SerializeField] private MicroActor _ignoreActor;
         
         public void HandleEnemyCheck(Action onHit) {
             var pos = transform.position;
@@ -19,7 +20,7 @@ namespace Pixygon.Micro
             foreach (var hit in hits.Where(hit => hit.collider != null)) {
                 var actor = hit.collider.gameObject.GetComponent<MicroActor>();
                 if (!actor) continue;
-                //if (actor is Pixiel) continue;
+                if (actor == _ignoreActor) continue;
                 if (actor.Invincible) continue;
                 Log.DebugMessage(DebugGroup.Actor, "Hit something! " + actor.name);
                 actor.Damage();
