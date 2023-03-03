@@ -8,7 +8,10 @@ namespace Pixygon.Micro {
         [SerializeField] private UnityEvent _itemNotReadyEvent;
         private bool _itemReady;
         private float _timer;
-
+        
+        private void Awake() {
+            _timer = _timerStart;
+        }
         private void Update() {
             if (_itemReady) return;
             if (_timer >= 0f)
