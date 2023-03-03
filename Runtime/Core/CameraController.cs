@@ -8,6 +8,8 @@ namespace Pixygon.Micro {
         [SerializeField] private float _lag;
         
         private Transform _player;
+        
+        public Vector3 Offset => _offset;
 
         public void Initialize(Transform player) {
             _player = player;
