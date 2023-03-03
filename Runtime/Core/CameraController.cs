@@ -9,7 +9,10 @@ namespace Pixygon.Micro {
         
         private Transform _player;
         
-        public Vector3 Offset => _offset;
+        public Vector3 Offset {
+            get { return _offset; }
+            set { _offset = value; }
+        }
 
         public void Initialize(Transform player) {
             _player = player;
