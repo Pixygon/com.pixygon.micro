@@ -11,5 +11,9 @@ namespace Pixygon.Micro {
             var g = Instantiate(_itemPrefab, transform.position + (Vector3)_offset, Quaternion.identity);
             g.GetComponent<Rigidbody2D>().AddForce(_direction * _force, ForceMode2D.Impulse);
         }
+        public virtual void SpawnItem(GameObject item) {
+            var g = Instantiate(item, transform.position + (Vector3)_offset, Quaternion.identity);
+            g.GetComponent<Rigidbody2D>().AddForce(_direction * _force, ForceMode2D.Impulse);
+        }
     }
 }
