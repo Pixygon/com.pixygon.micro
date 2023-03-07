@@ -10,6 +10,7 @@ namespace Pixygon.Micro {
         public string _version;
         public GameObject _gamePrefab;
         public Texture2D _cartridgeImage;
+        public Sprite _cartridgeBanner;
         public Color _cartridgeColor;
         public NFTLink _nftLink;
     }

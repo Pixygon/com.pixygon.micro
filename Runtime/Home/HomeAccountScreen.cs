@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 namespace Pixygon.Micro {
     public class HomeAccountScreen : MonoBehaviour {
         [SerializeField] private TextMeshProUGUI _usernameText;
-        [SerializeField] private TextMeshProUGUI _emailText;
         [SerializeField] private TextMeshProUGUI _waxWalletText;
         [SerializeField] private TextMeshProUGUI _ethWalletText;
         [SerializeField] private TextMeshProUGUI _tezWalletText;
@@ -42,11 +41,9 @@ namespace Pixygon.Micro {
         public void SetWaxWallet(string s) {
             _waxWalletText.text = s;
         }
-
         public void Login() {
             MicroController._instance.Api.StartLogin(_userInput.text, _passInput.text, true, SetAccountScreen);
         }
-
         public void Logout() {
             MicroController._instance.Api.StartLogout();
             SetAccountScreen();
@@ -66,10 +63,8 @@ namespace Pixygon.Micro {
                 _ethIcon.SetActive(Saving.SaveManager.SettingsSave._user.ethWallet != string.Empty);
                 _tezIcon.SetActive(Saving.SaveManager.SettingsSave._user.tezWallet != string.Empty);
                 _usernameText.text = Saving.SaveManager.SettingsSave._user.userName;
-                _emailText.text = Saving.SaveManager.SettingsSave._user.email;
             }
         }
-
         public void OpenScreen(bool open) {
             gameObject.SetActive(open);
             if (!open) {
@@ -79,7 +74,6 @@ namespace Pixygon.Micro {
             EventSystem.current.SetSelectedGameObject(_eventLogin);
             SetAccountScreen();
         }
-
         public void OpenWalletScreen(bool open) {
             _accountWalletPage.SetActive(open);
             EventSystem.current.SetSelectedGameObject(open ? _eventWallet : _eventAccount);
