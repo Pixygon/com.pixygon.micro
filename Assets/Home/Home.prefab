@@ -151,6 +151,7 @@ MonoBehaviour:
   _accountWalletPage: {fileID: 2389121739899878520}
   _eventAccount: {fileID: 2114998029410659930}
   _eventWallet: {fileID: 4585874920184787329}
+  _eventNoAccount: {fileID: 6282583165340286402}
   _waxIcon: {fileID: 6878891359709522008}
   _ethIcon: {fileID: 3458990276243588674}
   _tezIcon: {fileID: 5210813395228281602}

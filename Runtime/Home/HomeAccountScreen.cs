@@ -14,6 +14,7 @@ namespace Pixygon.Micro {
         
         [SerializeField] private GameObject _eventAccount;
         [SerializeField] private GameObject _eventWallet;
+        [SerializeField] private GameObject _eventNoAccount;
 
         [SerializeField] private GameObject _waxIcon;
         [SerializeField] private GameObject _ethIcon;
@@ -68,6 +69,7 @@ namespace Pixygon.Micro {
             if (!MicroController._instance.Api.IsLoggedIn) {
                 _accountUserPage.SetActive(false);
                 _noAccountScreen.SetActive(true);
+                EventSystem.current.SetSelectedGameObject(_eventNoAccount);
             } else {
                 _accountUserPage.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(_eventAccount);
