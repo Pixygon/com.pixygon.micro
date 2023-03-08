@@ -25,17 +25,19 @@ public class PixygonApi : MonoBehaviour {
         _useDebug = debug;
     }
 
-    public async void StartLogin(string user, string pass, bool rememberMe = false, Action onLogin = null) {
+    public async void StartLogin(string user, string pass, bool rememberMe = false, Action onLogin = null, Action<string> onFail = null) {
         if (rememberMe) {
             PlayerPrefs.SetInt("RememberMe", 1);
             PlayerPrefs.SetString("Username", user);
             PlayerPrefs.SetString("Password", pass);
             PlayerPrefs.Save();
         }
-        AccountData = await LogIn(user, pass);
-        SaveManager.SettingsSave._user = AccountData.user;
-        SaveManager.SettingsSave._isLoggedIn = true;
-        MicroController._instance.Home.SetUsernameText(AccountData.user.userName);
+        AccountData = await LogIn(user, pass, onFail);
+        if (AccountData != null) {
+            SaveManager.SettingsSave._user = AccountData.user;
+            SaveManager.SettingsSave._isLoggedIn = true;
+            MicroController._instance.Home.SetUsernameText(AccountData.user.userName);
+        }
         onLogin?.Invoke();
     }
 
@@ -51,6 +53,11 @@ public class PixygonApi : MonoBehaviour {
         var www = await PostVerifiedWWW($"users/{AccountData.user._id}/eth/{wallet}", AccountData.token, "");
         Debug.Log("EthWallet Patch: " + www.downloadHandler.text);
     }
+    public async void PatchTezWallet(string wallet) {
+        Debug.Log("Patching tez-wallet");
+        var www = await PostVerifiedWWW($"users/{AccountData.user._id}/tez/{wallet}", AccountData.token, "");
+        Debug.Log("TezWallet Patch: " + www.downloadHandler.text);
+    }
 
     public async void StartLogout() {
         PlayerPrefs.DeleteKey("RememberMe");
@@ -61,12 +68,18 @@ public class PixygonApi : MonoBehaviour {
         SaveManager.SettingsSave._isLoggedIn = false;
         AccountData = null;
     }
-    public async Task<LoginToken> LogIn(string user, string pass) {
+
+    public async Task<LoginToken> LogIn(string user, string pass, Action<string> onFail = null) {
         var www = await PostWWW("auth/login", JsonUtility.ToJson(new LoginData(user, pass)));
-        Debug.Log(www.downloadHandler.text);
+        //Debug.Log(www.downloadHandler.text);
+        if (www.error != "") {
+            onFail?.Invoke(www.error);
+            return null;
+        }
         IsLoggedIn = true;
         return JsonUtility.FromJson<LoginToken>(www.downloadHandler.text);
     }
+
     public async void GetUsers() {
         var www = await GetWWW("Users");
     }
@@ -82,7 +95,7 @@ public class PixygonApi : MonoBehaviour {
         Debug.Log($"Feedback: {www.downloadHandler.text}");
     }
 
-    private async Task<UnityWebRequest> GetWWW(string path) {
+    private static async Task<UnityWebRequest> GetWWW(string path) {
         var www = UnityWebRequest.Get(_debugUrl + path);
         www.timeout = 60;
         www.SendWebRequest();
@@ -91,10 +104,9 @@ public class PixygonApi : MonoBehaviour {
         //_consoleText.text += $"Result: {www.responseCode} | {www.downloadHandler.text}\n";
         return www;
     }
-    private async Task<UnityWebRequest> PostWWW(string path, string body)
-    {
+    private static async Task<UnityWebRequest> PostWWW(string path, string body) {
         var www = UnityWebRequest.Put(_debugUrl + path, body);
-        www.timeout = 60;
+        www.timeout = 30;
         www.method = "POST";
         www.SetRequestHeader("Content-Type", "application/json");
         www.SendWebRequest();
@@ -103,7 +115,7 @@ public class PixygonApi : MonoBehaviour {
         //_consoleText.text += $"Result: {www.responseCode} | {www.downloadHandler.text}\n";
         return www;
     }
-    private async Task<UnityWebRequest> PostVerifiedWWW(string path, string token, string body)
+    private static async Task<UnityWebRequest> PostVerifiedWWW(string path, string token, string body)
     {
         var www = UnityWebRequest.Put(_debugUrl + path, body);
         www.timeout = 60;
@@ -111,8 +123,7 @@ public class PixygonApi : MonoBehaviour {
         www.SetRequestHeader("Authorization", $"Bearer {token}");
         www.SetRequestHeader("Content-Type", "application/json");
         www.SendWebRequest();
-        while (!www.isDone)
-            await Task.Yield();
+        while (!www.isDone) await Task.Yield();
         //_consoleText.text += $"Result: {www.responseCode} | {www.downloadHandler.text}\n";
         return www;
     }

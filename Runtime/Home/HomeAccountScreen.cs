@@ -9,13 +9,9 @@ namespace Pixygon.Micro {
         [SerializeField] private TextMeshProUGUI _ethWalletText;
         [SerializeField] private TextMeshProUGUI _tezWalletText;
         
-        [SerializeField] private TMP_InputField _userInput;
-        [SerializeField] private TMP_InputField _passInput;
-        [SerializeField] private GameObject _accountLoginPage;
         [SerializeField] private GameObject _accountUserPage;
         [SerializeField] private GameObject _accountWalletPage;
         
-        [SerializeField] private GameObject _eventLogin;
         [SerializeField] private GameObject _eventAccount;
         [SerializeField] private GameObject _eventWallet;
 
@@ -28,35 +24,38 @@ namespace Pixygon.Micro {
         [SerializeField] private GameObject _tezCheck;
 
         [SerializeField] private HomeController _homeScreen;
+        
+        [SerializeField] private GameObject _walletLoadingScreen;
+        [SerializeField] private AccountLogin _accountLogin;
 
         public void GetWaxWallet() {
             MicroController._instance.GetWaxWallet();
+            _walletLoadingScreen.SetActive(true);
         }
         public void GetEthWallet() {
             MicroController._instance.GetEthWallet();
+            _walletLoadingScreen.SetActive(true);
         }
         public void GetTezWallet() {
             MicroController._instance.GetTezWallet();
+            _walletLoadingScreen.SetActive(true);
         }
         public void SetWaxWallet(string s) {
-            _waxWalletText.text = s;
+            _walletLoadingScreen.SetActive(false);
         }
-        public void Login() {
-            MicroController._instance.Api.StartLogin(_userInput.text, _passInput.text, true, SetAccountScreen);
-        }
+
+
+        
         public void Logout() {
             MicroController._instance.Api.StartLogout();
             SetAccountScreen();
         }
+
         public void SetAccountScreen() {
             if (!MicroController._instance.Api.IsLoggedIn) {
-                _accountLoginPage.SetActive(true);
                 _accountUserPage.SetActive(false);
-                EventSystem.current.SetSelectedGameObject(_eventLogin);
-                //SetWallet(MicroController._instance.Api.AccountData.user.waxWallet);
+                _accountLogin.StartLogin();
             } else {
-                //SetWallet(MicroController._instance.Api.AccountData.user.userName);
-                _accountLoginPage.SetActive(false);
                 _accountUserPage.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(_eventAccount);
                 _waxIcon.SetActive(Saving.SaveManager.SettingsSave._user.waxWallet != string.Empty);
@@ -71,7 +70,7 @@ namespace Pixygon.Micro {
                 _homeScreen.TriggerAccountMenu(false);
                 return;
             }
-            EventSystem.current.SetSelectedGameObject(_eventLogin);
+            //EventSystem.current.SetSelectedGameObject(_eventLogin);
             SetAccountScreen();
         }
         public void OpenWalletScreen(bool open) {
@@ -84,6 +83,10 @@ namespace Pixygon.Micro {
             _waxWalletText.text = Saving.SaveManager.SettingsSave._user.waxWallet;
             _ethWalletText.text = Saving.SaveManager.SettingsSave._user.ethWallet;
             _tezWalletText.text = Saving.SaveManager.SettingsSave._user.tezWallet;
+        }
+
+        public void WalletReceived() {
+            _walletLoadingScreen.SetActive(false);
         }
     }
 }

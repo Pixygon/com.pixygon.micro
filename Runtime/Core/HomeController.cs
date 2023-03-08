@@ -80,5 +80,9 @@ namespace Pixygon.Micro {
         public void SetUsernameText(string s) {
             _usernameText.text = "Hi, " + s + "!";
         }
+
+        public void WalletReceived() {
+            _homeAccountScreen.WalletReceived();
+        }
     }
 }
