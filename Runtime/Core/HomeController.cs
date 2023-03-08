@@ -54,7 +54,6 @@ namespace Pixygon.Micro {
             else
                 _homeAccountScreen.OpenScreen(true);
         }
-
         public void TriggerFaceplateSelect(bool open) {
             _mainMenu.SetActive(!open);
             if (open) _faceplateSelector.Open();

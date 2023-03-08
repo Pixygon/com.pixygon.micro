@@ -52,7 +52,7 @@ namespace Pixygon.Micro {
         private void NoCartridge() {
             PlayerPrefs.SetInt("Cartridge", -1);
             Log.DebugMessage(DebugGroup.PixygonMicro, "No cartridges set!", this);
-            MicroController._instance.CloseHomeMenu();
+            MicroController._instance.OpenHomeMenu();
         }
 
         public void LoadCartridge(Cartridge c) {
