@@ -157,16 +157,16 @@ public class PixygonApi : MonoBehaviour {
 
 [Serializable]
 public class LoginData {
-    public string user;
+    public string userName;
     public string password;
 
     public LoginData(string user, string pass) {
-        this.user = user;
+        userName = user;
         password = pass;
     }
 }
 public class SignupData {
-    public string user;
+    public string userName;
     public string email;
     public string password;
 
