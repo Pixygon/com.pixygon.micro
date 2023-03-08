@@ -171,7 +171,7 @@ public class SignupData {
     public string password;
 
     public SignupData(string user, string email, string pass) {
-        this.user = user;
+        userName = user;
         this.email = email;
         password = pass;
     }
