@@ -588,6 +588,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6309166238667548151}
+        m_TargetAssemblyTypeName: Pixygon.Micro.AccountSignUp, Pixygon.Micro
+        m_MethodName: StartSignup
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &311750152230576713
 GameObject:
   m_ObjectHideFlags: 0
@@ -7187,6 +7199,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3214063353576719174}
+        m_TargetAssemblyTypeName: Pixygon.Micro.AccountLogin, Pixygon.Micro
+        m_MethodName: StartLogin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3512615562339250641
 GameObject:
   m_ObjectHideFlags: 0
@@ -9102,6 +9126,7 @@ MonoBehaviour:
   _eventUsername: {fileID: 2043263657493541320}
   _eventPassword: {fileID: 779954669720427935}
   _eventLogin: {fileID: 7033697847591532052}
+  _eventLoginFailed: {fileID: 3494504560757374535}
 --- !u!1 &5162078858273712102
 GameObject:
   m_ObjectHideFlags: 0
@@ -14824,6 +14849,7 @@ MonoBehaviour:
   _eventEmail: {fileID: 9175117354957974565}
   _eventPassword: {fileID: 957906226102599017}
   _eventLogin: {fileID: 1538610973006202154}
+  _eventSignupFailed: {fileID: 230181725812264028}
 --- !u!1 &9090424680414263818
 GameObject:
   m_ObjectHideFlags: 0

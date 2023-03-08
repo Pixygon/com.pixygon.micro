@@ -165,6 +165,7 @@ public class LoginData {
         password = pass;
     }
 }
+[Serializable]
 public class SignupData {
     public string userName;
     public string email;

@@ -21,6 +21,7 @@ namespace Pixygon.Micro {
         [SerializeField] private GameObject _eventUsername;
         [SerializeField] private GameObject _eventPassword;
         [SerializeField] private GameObject _eventLogin;
+        [SerializeField] private GameObject _eventLoginFailed;
         
         public void StartLogin() {
             gameObject.SetActive(true);
@@ -58,6 +59,7 @@ namespace Pixygon.Micro {
             _loginErrorScreen.SetActive(true);
             _loginErrorText.text = $"Login failed: {s}";
             _loginLoadingScreen.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(_eventLoginFailed);
             StartLogin();
         }
     }
