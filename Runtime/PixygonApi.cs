@@ -40,6 +40,21 @@ public class PixygonApi : MonoBehaviour {
         }
         onLogin?.Invoke();
     }
+    public async void StartSignup(string user, string email, string pass, bool rememberMe = false, Action onSignup = null, Action<string> onFail = null) {
+        if (rememberMe) {
+            PlayerPrefs.SetInt("RememberMe", 1);
+            PlayerPrefs.SetString("Username", user);
+            PlayerPrefs.SetString("Password", pass);
+            PlayerPrefs.Save();
+        }
+        AccountData = await Signup(user,email, pass, onFail);
+        if (AccountData != null) {
+            SaveManager.SettingsSave._user = AccountData.user;
+            SaveManager.SettingsSave._isLoggedIn = true;
+            MicroController._instance.Home.SetUsernameText(AccountData.user.userName);
+        }
+        onSignup?.Invoke();
+    }
 
     public async void PatchWaxWallet(string wallet) {
         Debug.Log("Patching wax-wallet");
@@ -67,10 +82,21 @@ public class PixygonApi : MonoBehaviour {
         SaveManager.SettingsSave._user = null;
         SaveManager.SettingsSave._isLoggedIn = false;
         AccountData = null;
+        IsLoggedIn = false;
     }
 
     public async Task<LoginToken> LogIn(string user, string pass, Action<string> onFail = null) {
         var www = await PostWWW("auth/login", JsonUtility.ToJson(new LoginData(user, pass)));
+        if (!string.IsNullOrWhiteSpace(www.error)) {
+            Debug.Log("ERROR!! " + www.error + " and this " + www.downloadHandler.text);
+            onFail?.Invoke($"{www.error}\n{www.downloadHandler.text}");
+            return null;
+        }
+        IsLoggedIn = true;
+        return JsonUtility.FromJson<LoginToken>(www.downloadHandler.text);
+    }
+    public async Task<LoginToken> Signup(string user, string email, string pass, Action<string> onFail = null) {
+        var www = await PostWWW("auth/register", JsonUtility.ToJson(new SignupData(user, email, pass)));
         if (!string.IsNullOrWhiteSpace(www.error)) {
             Debug.Log("ERROR!! " + www.error + " and this " + www.downloadHandler.text);
             onFail?.Invoke($"{www.error}\n{www.downloadHandler.text}");
@@ -131,10 +157,21 @@ public class PixygonApi : MonoBehaviour {
 
 [Serializable]
 public class LoginData {
+    public string user;
+    public string password;
+
+    public LoginData(string user, string pass) {
+        this.user = user;
+        password = pass;
+    }
+}
+public class SignupData {
+    public string user;
     public string email;
     public string password;
 
-    public LoginData(string email, string pass) {
+    public SignupData(string user, string email, string pass) {
+        this.user = user;
         this.email = email;
         password = pass;
     }

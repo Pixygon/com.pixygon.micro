@@ -488,8 +488,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 132, y: -40}
-  m_SizeDelta: {x: 129, y: 23}
+  m_AnchoredPosition: {x: 110, y: -40}
+  m_SizeDelta: {x: 185, y: 23}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &6128427636929662581
 CanvasRenderer:
@@ -506,7 +506,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 311750152230576713}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1530,7 +1530,7 @@ GameObject:
   - component: {fileID: 7786765955572285556}
   - component: {fileID: 7584326530761752594}
   m_Layer: 31
-  m_Name: PasswordInput (1)
+  m_Name: PasswordInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1554,8 +1554,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 132, y: -96}
-  m_SizeDelta: {x: 129, y: 23}
+  m_AnchoredPosition: {x: 110, y: -99}
+  m_SizeDelta: {x: 185, y: 23}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &3415306745534036563
 CanvasRenderer:
@@ -1572,7 +1572,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 957906226102599017}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -7666,7 +7666,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter password...
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c09295e084723ec4b962be59cef67722, type: 2}
   m_sharedMaterial: {fileID: -1968809754200725644, guid: c09295e084723ec4b962be59cef67722, type: 2}
@@ -8491,8 +8491,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4384592894538621636}
-  - component: {fileID: 3786541378242985635}
-  - component: {fileID: 3379713865721654293}
   - component: {fileID: 3214063353576719174}
   m_Layer: 31
   m_Name: Login
@@ -8529,44 +8527,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 320, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &3786541378242985635
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5158238575281150397}
-  m_CullTransparentMesh: 1
---- !u!114 &3379713865721654293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5158238575281150397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 251fcfb1352844a96bde226d4f69229e, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &3214063353576719174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10548,7 +10508,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter email...
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c09295e084723ec4b962be59cef67722, type: 2}
   m_sharedMaterial: {fileID: -1968809754200725644, guid: c09295e084723ec4b962be59cef67722, type: 2}
@@ -10909,7 +10869,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter password...
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c09295e084723ec4b962be59cef67722, type: 2}
   m_sharedMaterial: {fileID: -1968809754200725644, guid: c09295e084723ec4b962be59cef67722, type: 2}
@@ -13621,8 +13581,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 468420916988937514}
-  - component: {fileID: 906727908832093071}
-  - component: {fileID: 2741556866448220879}
+  - component: {fileID: 6309166238667548151}
   m_Layer: 31
   m_Name: SignUp
   m_TagString: Untagged
@@ -13659,15 +13618,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 320, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &906727908832093071
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8952391278340326459}
-  m_CullTransparentMesh: 1
---- !u!114 &2741556866448220879
+--- !u!114 &6309166238667548151
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13676,27 +13627,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 8952391278340326459}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 5aa8f284d8ffd274ea6b0f1766537cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bc194404ae1fb4971b6c4a870d188d76, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  _userInput: {fileID: 3507602109975339854}
+  _emailInput: {fileID: 7984744720746960173}
+  _passInput: {fileID: 7584326530761752594}
+  _signupLoadingScreen: {fileID: 0}
+  _signupErrorScreen: {fileID: 0}
+  _signupErrorText: {fileID: 0}
+  _accountScreen: {fileID: 0}
+  _usernameScreen: {fileID: 8277375288343081975}
+  _emailScreen: {fileID: 5455883249185828191}
+  _passwordScreen: {fileID: 9151169855554884713}
+  _overviewScreen: {fileID: 5372386771166040326}
+  _eventUsername: {fileID: 311750152230576713}
+  _eventEmail: {fileID: 9175117354957974565}
+  _eventPassword: {fileID: 957906226102599017}
+  _eventLogin: {fileID: 1538610973006202154}
 --- !u!1 &9090424680414263818
 GameObject:
   m_ObjectHideFlags: 0
@@ -14188,7 +14136,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 03470bb44fc164e86b7a1ad057ef5f2f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 35182a051e1d84e82b9d7e932ee46360, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -14211,7 +14159,7 @@ GameObject:
   - component: {fileID: 7503922856309749347}
   - component: {fileID: 7984744720746960173}
   m_Layer: 31
-  m_Name: PasswordInput
+  m_Name: EmailInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14235,8 +14183,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 132, y: -68}
-  m_SizeDelta: {x: 129, y: 23}
+  m_AnchoredPosition: {x: 110, y: -68}
+  m_SizeDelta: {x: 185, y: 23}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &9056854299129436392
 CanvasRenderer:
@@ -14253,7 +14201,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9175117354957974565}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
