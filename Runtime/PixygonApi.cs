@@ -15,11 +15,11 @@ public class PixygonApi : MonoBehaviour {
     public bool IsLoggedIn { get; private set; }
     private LoginToken AccountData;
     private async void Start() {
-        if (PlayerPrefs.GetInt("RememberMe") == 1) {
-            AccountData = await LogIn(PlayerPrefs.GetString("Username"), PlayerPrefs.GetString("Password"));
-            SaveManager.SettingsSave._user = AccountData.user;
-            SaveManager.SettingsSave._isLoggedIn = true;
-        }
+        if (PlayerPrefs.GetInt("RememberMe") != 1) return;
+        AccountData = await LogIn(PlayerPrefs.GetString("Username"), PlayerPrefs.GetString("Password"));
+        if (AccountData == null) return;
+        SaveManager.SettingsSave._user = AccountData.user;
+        SaveManager.SettingsSave._isLoggedIn = true;
     }
     public void SetDebug(bool debug) {
         _useDebug = debug;
@@ -73,6 +73,7 @@ public class PixygonApi : MonoBehaviour {
         var www = await PostWWW("auth/login", JsonUtility.ToJson(new LoginData(user, pass)));
         //Debug.Log(www.downloadHandler.text);
         if (www.error != "") {
+            Debug.Log("ERROR!! " + www.error);
             onFail?.Invoke(www.error);
             return null;
         }
