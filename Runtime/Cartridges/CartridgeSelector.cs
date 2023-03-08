@@ -19,12 +19,10 @@ namespace Pixygon.Micro
             MicroController._instance.Input._jump += SelectCartridge;
             MicroController._instance.Input._run += DoClose;
             _currentCartridge = PlayerPrefs.GetInt("Cartridge", 0);
+            if (_currentCartridge == -1)
+                _currentCartridge = 0;
             _cartridges = MicroController._instance.Cartridges;
-            _objects = new[] {
-                Instantiate(_cartridgePrefab, new Vector3(-18f, -12f, 0f), Quaternion.identity),
-                Instantiate(_cartridgePrefab, new Vector3(0f, -12f, 0f), Quaternion.identity),
-                Instantiate(_cartridgePrefab, new Vector3(18f, -12f, 0f), Quaternion.identity)
-            };
+            ClearCartridges();
             PopulateCartridges();
         }
 
@@ -34,9 +32,7 @@ namespace Pixygon.Micro
             MicroController._instance.Input._jump -= SelectCartridge;
             MicroController._instance.Input._run -= DoClose;
             MicroController._instance.SetCameraToDefault();
-            foreach (var g in _objects) {
-                Destroy(g.gameObject);
-            }
+            PopulateCartridges();
             ActuallyClose();
         }
 
@@ -48,6 +44,22 @@ namespace Pixygon.Micro
         }
 
         public void PopulateCartridges() {
+            ClearCartridges();
+            _objects = new[] {
+                Instantiate(_cartridgePrefab, new Vector3(-18f, -12f, 0f), Quaternion.identity),
+                Instantiate(_cartridgePrefab, new Vector3(0f, -12f, 0f), Quaternion.identity),
+                Instantiate(_cartridgePrefab, new Vector3(18f, -12f, 0f), Quaternion.identity)
+            };
+            RefreshCartridges();
+        }
+        public void ClearCartridges() {
+            if (_objects != null) {
+                foreach (var g in _objects) {
+                    Destroy(g.gameObject);
+                }
+            }
+        }
+        public void RefreshCartridges() {
             if (_currentCartridge != 0) {
                 _objects[0].gameObject.SetActive(true);
                 _objects[0].Initialize(_cartridges[_currentCartridge-1]);
@@ -76,7 +88,7 @@ namespace Pixygon.Micro
                 _currentCartridge += 1;
             }
             _selectTimer = .2f;
-            PopulateCartridges();
+            RefreshCartridges();
         }
 
         private void Update() {
