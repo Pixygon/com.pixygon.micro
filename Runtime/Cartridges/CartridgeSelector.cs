@@ -18,7 +18,7 @@ namespace Pixygon.Micro
             MicroController._instance.Input._move += Move;
             MicroController._instance.Input._jump += SelectCartridge;
             MicroController._instance.Input._run += DoClose;
-            _currentCartridge = 0;
+            _currentCartridge = PlayerPrefs.GetInt("Cartridge", 0);
             _cartridges = MicroController._instance.Cartridges;
             _objects = new[] {
                 Instantiate(_cartridgePrefab, new Vector3(-18f, -12f, 0f), Quaternion.identity),

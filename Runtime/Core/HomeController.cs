@@ -10,6 +10,7 @@ namespace Pixygon.Micro {
         [SerializeField] private GameObject _faceplateMenu;
         [SerializeField] private GameObject _cartridgeMenu;
         [SerializeField] private TextMeshProUGUI _gameTitleText;
+        [SerializeField] private Image _gameBannerImage;
         [SerializeField] private TextMeshProUGUI _usernameText;
         [SerializeField] private GameObject _eventHomeTest;
         [SerializeField] private Button _startGameButton;
@@ -19,6 +20,9 @@ namespace Pixygon.Micro {
         [SerializeField] private HomeAccountScreen _homeAccountScreen;
         [SerializeField] private HomeSettingsScreen _homeSettingsScreen;
 
+        [SerializeField] private Sprite _noGameSprite;
+        
+        private Cartridge _lastUsedCartridge;
         public void Initialize() {
             GetComponent<Canvas>().worldCamera = MicroController._instance.Display._uiCamera;
             GetComponent<Canvas>().sortingLayerName = "Menu";
@@ -50,6 +54,7 @@ namespace Pixygon.Micro {
             else
                 _homeAccountScreen.OpenScreen(true);
         }
+
         public void TriggerFaceplateSelect(bool open) {
             _mainMenu.SetActive(!open);
             if (open) _faceplateSelector.Open();
@@ -61,13 +66,19 @@ namespace Pixygon.Micro {
         }
         public void SetCurrentCartridge() {
             var hasCartridge = MicroController._instance.CurrentlyLoadedCartridge != null;
-            _gameTitleText.text = hasCartridge ? MicroController._instance.CurrentlyLoadedCartridge._title : "No cartridge";
+            //_gameTitleText.text = hasCartridge ? MicroController._instance.CurrentlyLoadedCartridge._title : "No cartridge";
+            _gameBannerImage.sprite = hasCartridge ? MicroController._instance.CurrentlyLoadedCartridge._cartridgeBanner : _noGameSprite;
         }
         public void StartGame() {
             if (MicroController._instance.CurrentlyLoadedCartridge == null) return;
-            MicroController._instance.Cartridge.StartGame();
+            if(_lastUsedCartridge != MicroController._instance.CurrentlyLoadedCartridge)
+                MicroController._instance.Cartridge.StartGame();
+            _lastUsedCartridge = MicroController._instance.CurrentlyLoadedCartridge;
             MicroController._instance.CloseHomeMenu();
             Activate(false);
+        }
+        public void SetUsernameText(string s) {
+            _usernameText.text = "Hi, " + s + "!";
         }
     }
 }

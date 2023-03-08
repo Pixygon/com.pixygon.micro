@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Pixygon.Micro;
 using Pixygon.Saving;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -34,6 +35,7 @@ public class PixygonApi : MonoBehaviour {
         AccountData = await LogIn(user, pass);
         SaveManager.SettingsSave._user = AccountData.user;
         SaveManager.SettingsSave._isLoggedIn = true;
+        MicroController._instance.Home.SetUsernameText(AccountData.user.userName);
         onLogin?.Invoke();
     }
 
