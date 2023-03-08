@@ -71,9 +71,8 @@ public class PixygonApi : MonoBehaviour {
 
     public async Task<LoginToken> LogIn(string user, string pass, Action<string> onFail = null) {
         var www = await PostWWW("auth/login", JsonUtility.ToJson(new LoginData(user, pass)));
-        //Debug.Log(www.downloadHandler.text);
         if (!string.IsNullOrWhiteSpace(www.error)) {
-            //Debug.Log("ERROR!! " + www.error + " and this " + www.downloadHandler.text);
+            Debug.Log("ERROR!! " + www.error + " and this " + www.downloadHandler.text);
             onFail?.Invoke($"{www.error}\n{www.downloadHandler.text}");
             return null;
         }
