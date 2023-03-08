@@ -24,9 +24,12 @@ namespace Pixygon.Micro {
         [SerializeField] private GameObject _tezCheck;
 
         [SerializeField] private HomeController _homeScreen;
+        [SerializeField] private AccountLogin _accountLogin;
+        [SerializeField] private AccountSignUp _accountSignup;
+
+        [SerializeField] private GameObject _noAccountScreen;
         
         [SerializeField] private GameObject _walletLoadingScreen;
-        [SerializeField] private AccountLogin _accountLogin;
 
         public void GetWaxWallet() {
             MicroController._instance.GetWaxWallet();
@@ -51,10 +54,20 @@ namespace Pixygon.Micro {
             SetAccountScreen();
         }
 
+        public void StartLogin() {
+            _accountLogin.StartLogin();
+            _noAccountScreen.SetActive(false);
+        }
+
+        public void StartSignup() {
+            _accountSignup.StartSignup();
+            _noAccountScreen.SetActive(false);
+        }
+
         public void SetAccountScreen() {
             if (!MicroController._instance.Api.IsLoggedIn) {
                 _accountUserPage.SetActive(false);
-                _accountLogin.StartLogin();
+                _noAccountScreen.SetActive(true);
             } else {
                 _accountUserPage.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(_eventAccount);
