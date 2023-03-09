@@ -4,31 +4,31 @@ namespace Pixygon.Micro.Parallax {
     public class Parallax : MonoBehaviour {
         [SerializeField] private ParallaxLayer _parallaxLayerPrefab;
         
-        private ParallaxLayer[] _parallaxLayers;
+        public ParallaxLayer[] ParallaxLayers { get; private set; }
         private bool _loaded;
         
         public void Initialize(Transform player, Camera camera, ParallaxLayerData[] layerData) {
             _loaded = false;
-            if (_parallaxLayers != null)
+            if (ParallaxLayers != null)
                 ResetParallax();
-            _parallaxLayers = new ParallaxLayer[layerData.Length];
+            ParallaxLayers = new ParallaxLayer[layerData.Length];
             for (var i = 0; i < layerData.Length; i++) {
-                _parallaxLayers[i] = Instantiate(_parallaxLayerPrefab, transform);
-                _parallaxLayers[i].Initialize(player, camera, layerData[i]);
+                ParallaxLayers[i] = Instantiate(_parallaxLayerPrefab, transform);
+                ParallaxLayers[i].Initialize(player, camera, layerData[i]);
             }
             _loaded = true;
         }
 
         private void ResetParallax() {
-            foreach (var g in _parallaxLayers) {
+            foreach (var g in ParallaxLayers) {
                 Destroy(g.gameObject);
             }
-            _parallaxLayers = null;
+            ParallaxLayers = null;
         }
         
         private void Update() {
             if (!_loaded) return;
-            foreach (var layer in _parallaxLayers) {
+            foreach (var layer in ParallaxLayers) {
                 layer.UpdateParallax();
             }
         }
