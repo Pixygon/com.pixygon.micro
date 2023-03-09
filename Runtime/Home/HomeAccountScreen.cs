@@ -73,9 +73,9 @@ namespace Pixygon.Micro {
             } else {
                 _accountUserPage.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(_eventAccount);
-                _waxIcon.SetActive(Saving.SaveManager.SettingsSave._user.waxWallet != string.Empty);
-                _ethIcon.SetActive(Saving.SaveManager.SettingsSave._user.ethWallet != string.Empty);
-                _tezIcon.SetActive(Saving.SaveManager.SettingsSave._user.tezWallet != string.Empty);
+                _waxIcon.SetActive(!string.IsNullOrWhiteSpace(Saving.SaveManager.SettingsSave._user.waxWallet));
+                _ethIcon.SetActive(!string.IsNullOrWhiteSpace(Saving.SaveManager.SettingsSave._user.ethWallet));
+                _tezIcon.SetActive(!string.IsNullOrWhiteSpace(Saving.SaveManager.SettingsSave._user.tezWallet));
                 _usernameText.text = Saving.SaveManager.SettingsSave._user.userName;
             }
         }
@@ -102,6 +102,7 @@ namespace Pixygon.Micro {
 
         public void WalletReceived() {
             _walletLoadingScreen.SetActive(false);
+            OpenWalletScreen(true);
         }
     }
 }

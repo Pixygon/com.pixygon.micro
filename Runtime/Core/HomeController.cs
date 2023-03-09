@@ -9,7 +9,6 @@ namespace Pixygon.Micro {
         [SerializeField] private GameObject _mainMenu;
         [SerializeField] private GameObject _faceplateMenu;
         [SerializeField] private GameObject _cartridgeMenu;
-        [SerializeField] private TextMeshProUGUI _gameTitleText;
         [SerializeField] private Image _gameBannerImage;
         [SerializeField] private TextMeshProUGUI _usernameText;
         [SerializeField] private GameObject _eventHomeTest;
