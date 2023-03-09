@@ -114,7 +114,6 @@ RectTransform:
   - {fileID: 468420916988937514}
   - {fileID: 4906307991322137612}
   - {fileID: 173801697627397682}
-  - {fileID: 7511442045527325908}
   - {fileID: 1495255717084916498}
   m_Father: {fileID: 4101013512147991237}
   m_RootOrder: -1
@@ -145,25 +144,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _usernameText: {fileID: 7603206413401430160}
-  _waxWalletText: {fileID: 7915383117083656293}
-  _ethWalletText: {fileID: 3997809518875466620}
-  _tezWalletText: {fileID: 155857276394245871}
   _accountUserPage: {fileID: 8064999915213328713}
-  _accountWalletPage: {fileID: 2389121739899878520}
   _eventAccount: {fileID: 2114998029410659930}
-  _eventWallet: {fileID: 4585874920184787329}
   _eventNoAccount: {fileID: 6282583165340286402}
   _waxIcon: {fileID: 6878891359709522008}
   _ethIcon: {fileID: 3458990276243588674}
   _tezIcon: {fileID: 5210813395228281602}
-  _waxCheck: {fileID: 6822998615432849242}
-  _ethCheck: {fileID: 7156272024396072293}
-  _tezCheck: {fileID: 7434706902225672243}
   _homeScreen: {fileID: 5321083034677840298}
   _accountLogin: {fileID: 3214063353576719174}
   _accountSignup: {fileID: 6309166238667548151}
+  _accountWallet: {fileID: 3624666484729453875}
   _noAccountScreen: {fileID: 1445381094518284841}
-  _walletLoadingScreen: {fileID: 1293073298884554092}
 --- !u!1 &129048029324209878
 GameObject:
   m_ObjectHideFlags: 0
@@ -1755,9 +1746,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6634352338368393160}
-        m_TargetAssemblyTypeName: Pixygon.Micro.HomeAccountScreen, Pixygon.Micro
-        m_MethodName: OpenWalletScreen
+      - m_Target: {fileID: 2389121739899878520}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1766,6 +1757,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6634352338368393160}
+        m_TargetAssemblyTypeName: Pixygon.Micro.HomeAccountScreen, Pixygon.Micro
+        m_MethodName: OpenScreen
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &957906226102599017
 GameObject:
@@ -2854,13 +2857,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293073298884554092}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 72234963875679624}
-  m_Father: {fileID: 3982690097973479215}
+  m_Father: {fileID: 173801697627397682}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -3877,8 +3880,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6634352338368393160}
-        m_TargetAssemblyTypeName: Pixygon.Micro.HomeAccountScreen, Pixygon.Micro
+      - m_Target: {fileID: 3624666484729453875}
+        m_TargetAssemblyTypeName: Pixygon.Micro.AccountWallet, Pixygon.Micro
         m_MethodName: GetEthWallet
         m_Mode: 1
         m_Arguments:
@@ -5106,6 +5109,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6634352338368393160}
+        m_TargetAssemblyTypeName: Pixygon.Micro.HomeAccountScreen, Pixygon.Micro
+        m_MethodName: OpenScreen
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &2100099215731250555
 GameObject:
   m_ObjectHideFlags: 0
@@ -5460,6 +5475,7 @@ GameObject:
   - component: {fileID: 173801697627397682}
   - component: {fileID: 2661120097056011990}
   - component: {fileID: 783609569787068186}
+  - component: {fileID: 3624666484729453875}
   m_Layer: 31
   m_Name: Wallets
   m_TagString: Untagged
@@ -5483,6 +5499,7 @@ RectTransform:
   - {fileID: 434586731856374099}
   - {fileID: 8754959165300699599}
   - {fileID: 2129401090996003360}
+  - {fileID: 7511442045527325908}
   m_Father: {fileID: 3982690097973479215}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5529,6 +5546,26 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3624666484729453875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2389121739899878520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed00823add494a77b999db9c0544ac31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _waxWalletText: {fileID: 7915383117083656293}
+  _ethWalletText: {fileID: 3997809518875466620}
+  _tezWalletText: {fileID: 155857276394245871}
+  _eventWallet: {fileID: 4585874920184787329}
+  _waxCheck: {fileID: 6822998615432849242}
+  _ethCheck: {fileID: 7156272024396072293}
+  _tezCheck: {fileID: 7434706902225672243}
+  _walletLoadingScreen: {fileID: 1293073298884554092}
 --- !u!1 &2411703724354749877
 GameObject:
   m_ObjectHideFlags: 0
@@ -5787,8 +5824,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6634352338368393160}
-        m_TargetAssemblyTypeName: Pixygon.Micro.HomeAccountScreen, Pixygon.Micro
+      - m_Target: {fileID: 3624666484729453875}
+        m_TargetAssemblyTypeName: Pixygon.Micro.AccountWallet, Pixygon.Micro
         m_MethodName: GetTezWallet
         m_Mode: 1
         m_Arguments:
@@ -6432,6 +6469,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6634352338368393160}
+        m_TargetAssemblyTypeName: Pixygon.Micro.HomeAccountScreen, Pixygon.Micro
+        m_MethodName: OpenScreen
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &3151884963116779574
 GameObject:
@@ -7188,21 +7237,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 153735076577027821}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 3214063353576719174}
         m_TargetAssemblyTypeName: Pixygon.Micro.AccountLogin, Pixygon.Micro
-        m_MethodName: StartLogin
+        m_MethodName: CloseFailedLogin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8320,8 +8357,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6634352338368393160}
-        m_TargetAssemblyTypeName: Pixygon.Micro.HomeAccountScreen, Pixygon.Micro
+      - m_Target: {fileID: 3624666484729453875}
+        m_TargetAssemblyTypeName: Pixygon.Micro.AccountWallet, Pixygon.Micro
         m_MethodName: GetWaxWallet
         m_Mode: 1
         m_Arguments:
@@ -9538,7 +9575,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 47bddbf71ee53614fa16fea60e5abbe6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aa7175a84957c814c968bf3986859321, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9958,8 +9995,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6634352338368393160}
         m_TargetAssemblyTypeName: Pixygon.Micro.HomeAccountScreen, Pixygon.Micro
-        m_MethodName: OpenWalletScreen
-        m_Mode: 6
+        m_MethodName: StartWalletFetch
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11266,9 +11303,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 53262085080894072}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
+      - m_Target: {fileID: 6634352338368393160}
+        m_TargetAssemblyTypeName: Pixygon.Micro.HomeAccountScreen, Pixygon.Micro
+        m_MethodName: OpenScreen
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -5,50 +5,22 @@ using UnityEngine.EventSystems;
 namespace Pixygon.Micro {
     public class HomeAccountScreen : MonoBehaviour {
         [SerializeField] private TextMeshProUGUI _usernameText;
-        [SerializeField] private TextMeshProUGUI _waxWalletText;
-        [SerializeField] private TextMeshProUGUI _ethWalletText;
-        [SerializeField] private TextMeshProUGUI _tezWalletText;
         
         [SerializeField] private GameObject _accountUserPage;
-        [SerializeField] private GameObject _accountWalletPage;
         
         [SerializeField] private GameObject _eventAccount;
-        [SerializeField] private GameObject _eventWallet;
         [SerializeField] private GameObject _eventNoAccount;
 
         [SerializeField] private GameObject _waxIcon;
         [SerializeField] private GameObject _ethIcon;
         [SerializeField] private GameObject _tezIcon;
-        
-        [SerializeField] private GameObject _waxCheck;
-        [SerializeField] private GameObject _ethCheck;
-        [SerializeField] private GameObject _tezCheck;
 
         [SerializeField] private HomeController _homeScreen;
         [SerializeField] private AccountLogin _accountLogin;
         [SerializeField] private AccountSignUp _accountSignup;
+        [SerializeField] private AccountWallet _accountWallet;
 
         [SerializeField] private GameObject _noAccountScreen;
-        
-        [SerializeField] private GameObject _walletLoadingScreen;
-
-        public void GetWaxWallet() {
-            MicroController._instance.GetWaxWallet();
-            _walletLoadingScreen.SetActive(true);
-        }
-        public void GetEthWallet() {
-            MicroController._instance.GetEthWallet();
-            _walletLoadingScreen.SetActive(true);
-        }
-        public void GetTezWallet() {
-            MicroController._instance.GetTezWallet();
-            _walletLoadingScreen.SetActive(true);
-        }
-        public void SetWaxWallet(string s) {
-            _walletLoadingScreen.SetActive(false);
-        }
-
-
         
         public void Logout() {
             MicroController._instance.Api.StartLogout();
@@ -63,6 +35,10 @@ namespace Pixygon.Micro {
         public void StartSignup() {
             _accountSignup.StartSignup();
             _noAccountScreen.SetActive(false);
+        }
+
+        public void StartWalletFetch() {
+            _accountWallet.OpenWalletScreen();
         }
 
         public void SetAccountScreen() {
@@ -88,21 +64,10 @@ namespace Pixygon.Micro {
             //EventSystem.current.SetSelectedGameObject(_eventLogin);
             SetAccountScreen();
         }
-        public void OpenWalletScreen(bool open) {
-            _accountWalletPage.SetActive(open);
-            EventSystem.current.SetSelectedGameObject(open ? _eventWallet : _eventAccount);
-            if (!open) return;
-            _waxCheck.SetActive(!string.IsNullOrWhiteSpace(Saving.SaveManager.SettingsSave._user.waxWallet));
-            _ethCheck.SetActive(!string.IsNullOrWhiteSpace(Saving.SaveManager.SettingsSave._user.ethWallet));
-            _tezCheck.SetActive(!string.IsNullOrWhiteSpace(Saving.SaveManager.SettingsSave._user.tezWallet));
-            _waxWalletText.text = Saving.SaveManager.SettingsSave._user.waxWallet;
-            _ethWalletText.text = Saving.SaveManager.SettingsSave._user.ethWallet;
-            _tezWalletText.text = Saving.SaveManager.SettingsSave._user.tezWallet;
-        }
+
 
         public void WalletReceived() {
-            _walletLoadingScreen.SetActive(false);
-            OpenWalletScreen(true);
+            _accountWallet.WalletReceived();
         }
     }
 }

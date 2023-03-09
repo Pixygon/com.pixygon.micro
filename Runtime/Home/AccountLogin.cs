@@ -49,17 +49,22 @@ namespace Pixygon.Micro {
         }
 
         private void LoginComplete() {
+            if (!MicroController._instance.Api.IsLoggedIn) return;
             _accountScreen.SetAccountScreen();
             _loginLoadingScreen.SetActive(false);
             gameObject.SetActive(false);
         }
         
         private void LoginFailed(string s) {
-            _loginLoadingScreen.SetActive(false);
             _loginErrorScreen.SetActive(true);
             _loginErrorText.text = $"Login failed: {s}";
             _loginLoadingScreen.SetActive(false);
             EventSystem.current.SetSelectedGameObject(_eventLoginFailed);
+        }
+
+        public void CloseFailedLogin() {
+            _loginErrorScreen.SetActive(false);
+            _loginErrorText.text = "";
             StartLogin();
         }
     }
