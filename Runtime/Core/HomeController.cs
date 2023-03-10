@@ -38,6 +38,8 @@ namespace Pixygon.Micro {
                 EventSystem.current.SetSelectedGameObject(_eventHomeTest);
             else
                 MicroController._instance.SetCameraToDefault();
+            if (MicroController._instance.Api.IsLoggedIn)
+                SetUsernameText(MicroController._instance.Api.AccountData.user.userName);
         }
         public void TriggerSettingsMenu(bool open) {
             _mainMenu.SetActive(!open);

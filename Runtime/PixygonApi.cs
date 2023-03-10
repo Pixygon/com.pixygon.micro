@@ -13,7 +13,7 @@ public class PixygonApi : MonoBehaviour {
     private bool _useDebug = true;
 
     public bool IsLoggedIn { get; private set; }
-    private LoginToken AccountData;
+    public LoginToken AccountData { get; private set; }
     private async void Start() {
         if (PlayerPrefs.GetInt("RememberMe") != 1) return;
         AccountData = await LogIn(PlayerPrefs.GetString("Username"), PlayerPrefs.GetString("Password"));
