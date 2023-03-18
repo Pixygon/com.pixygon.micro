@@ -160,7 +160,7 @@ namespace Pixygon.Micro
         }
 
         public void SetEthWallet(string wallet) {
-            _api.PatchWaxWallet(wallet);
+            _api.PatchEthWallet(wallet);
             Home.WalletReceived();
         }
 
