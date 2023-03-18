@@ -17,9 +17,11 @@ namespace Pixygon.Micro {
             MicroController._instance.SetWaxWallet(wallet);
         }
         public void GotEthWallet(string wallet) {
+            Debug.Log("Got Eth-wallet");
             MicroController._instance.SetEthWallet(wallet);
         }
         public void GotTezWallet(string wallet) {
+            Debug.Log("Got TEZ-wallet");
             MicroController._instance.SetTezWallet(wallet);
         }
 #endif
