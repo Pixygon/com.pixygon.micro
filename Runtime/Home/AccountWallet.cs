@@ -14,6 +14,7 @@ namespace Pixygon.Micro {
         [SerializeField] private GameObject _tezCheck;
         [SerializeField] private GameObject _walletLoadingScreen;
 
+        /*
         public void GetWaxWallet() {
             MicroController._instance.GetWaxWallet();
             _walletLoadingScreen.SetActive(true);
@@ -35,6 +36,7 @@ namespace Pixygon.Micro {
             EventSystem.current.SetSelectedGameObject(_eventWallet);
             RefreshWallets();
         }
+        */
 
         public void RefreshWallets() {
             _waxCheck.SetActive(!string.IsNullOrWhiteSpace(Saving.SaveManager.SettingsSave._user.waxWallet));

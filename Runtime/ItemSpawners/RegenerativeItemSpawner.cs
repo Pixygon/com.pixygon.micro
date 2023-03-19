@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Pixygon.Micro {
     public class RegenerativeItemSpawner : ItemSpawner {
         [SerializeField] private float _timerStart = 10f;
+        [SerializeField] private float _timerLength = 10f;
         [SerializeField] private UnityEvent _itemReadyEvent;
         [SerializeField] private UnityEvent _itemNotReadyEvent;
         private bool _itemReady;
@@ -26,7 +28,7 @@ namespace Pixygon.Micro {
             if (!_itemReady) return;
             _itemReady = false;
             SpawnItem();
-            _timer = _timerStart;
+            _timer = _timerLength;
             _itemNotReadyEvent.Invoke();
         }
     }
