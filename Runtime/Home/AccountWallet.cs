@@ -20,6 +20,11 @@ namespace Pixygon.Micro {
             _walletLoadingScreen.SetActive(true);
             EventSystem.current.SetSelectedGameObject(_eventFetching);
         }
+        public void GetAnchorWallet() {
+            MicroController._instance.GetAnchorWallet();
+            _walletLoadingScreen.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(_eventFetching);
+        }
         public void GetEthWallet() {
             MicroController._instance.GetEthWallet();
             _walletLoadingScreen.SetActive(true);

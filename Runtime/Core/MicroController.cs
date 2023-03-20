@@ -143,6 +143,12 @@ namespace Pixygon.Micro
             _walletFetcher.GetWaxAddress();
 #endif
         }
+
+        public void GetAnchorWallet() {
+#if UNITY_WEBGL
+            _walletFetcher.GetAnchorAddress();
+#endif
+        }
         public void GetEthWallet() {
 #if UNITY_WEBGL
             _walletFetcher.GetEthAddress();

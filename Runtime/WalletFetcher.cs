@@ -7,6 +7,9 @@ namespace Pixygon.Micro {
         public void GetWaxAddress() {
             WebGLDispatcher.Wax_Login();
         }
+        public void GetAnchorAddress() {
+            WebGLDispatcher.Anchor_Login();
+        }
         public void GetEthAddress() {
             WebGLDispatcher.Eth_Login();
         }

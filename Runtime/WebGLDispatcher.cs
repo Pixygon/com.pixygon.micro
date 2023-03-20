@@ -4,6 +4,7 @@ namespace  Pixygon.Micro {
     public static class WebGLDispatcher {
 #if UNITY_WEBGL
     [DllImport("__Internal")] public static extern void Wax_Login();
+    [DllImport("__Internal")] public static extern void Anchor_Login();
     [DllImport("__Internal")] public static extern void Eth_Login();
     [DllImport("__Internal")] public static extern void Tez_Login();
         
