@@ -5692,7 +5692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 1170623219921264916}
     m_SelectOnDown: {fileID: 6636636161488739377}
@@ -5903,9 +5903,9 @@ RectTransform:
   - {fileID: 2945871717287202008}
   - {fileID: 434586731856374099}
   - {fileID: 8754959165300699599}
+  - {fileID: 4388776165111216648}
   - {fileID: 2129401090996003360}
   - {fileID: 7511442045527325908}
-  - {fileID: 4388776165111216648}
   m_Father: {fileID: 3982690097973479215}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
