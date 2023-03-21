@@ -8,14 +8,14 @@ namespace  Pixygon.Micro {
     [DllImport("__Internal")] public static extern void Eth_Login();
     [DllImport("__Internal")] public static extern void Tez_Login();
         
-    [DllImport("__Internal")] private static extern string Eth_WalletAddress();
+    //[DllImport("__Internal")] private static extern string Eth_WalletAddress();
 
-    [DllImport("__Internal")] public static extern void Tezos_DAppClient();
-    [DllImport("__Internal")] public static extern void Tezos_RequestPermission();
-    [DllImport("__Internal")] public static extern void Tezos_SendTez();
-    [DllImport("__Internal")] public static extern void Tezos_APICall();
-    [DllImport("__Internal")] public static extern string Tezos_TokenAddressString();
-    [DllImport("__Internal")] public static extern string Tezos_MyAddressString();
+    //[DllImport("__Internal")] public static extern void Tezos_DAppClient();
+    //[DllImport("__Internal")] public static extern void Tezos_RequestPermission();
+    //[DllImport("__Internal")] public static extern void Tezos_SendTez();
+    //[DllImport("__Internal")] public static extern void Tezos_APICall();
+    //[DllImport("__Internal")] public static extern string Tezos_TokenAddressString();
+    //[DllImport("__Internal")] public static extern string Tezos_MyAddressString();
 #endif
     }
 }
