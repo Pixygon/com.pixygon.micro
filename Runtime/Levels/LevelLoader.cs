@@ -13,6 +13,10 @@ namespace Pixygon.Micro {
         [SerializeField] private AssetReference _parallaxPrefabRef;
         [SerializeField] private CameraController _camera;
         [SerializeField] private UI _ui;
+
+        [SerializeField] private bool _useLoadingScreen;
+        [SerializeField] private GameObject _loadingScreen;
+        private bool _isLoading;
         
         private GameObject _player;
         private bool _levelLoaded;
@@ -29,15 +33,12 @@ namespace Pixygon.Micro {
         private void Start() {
             Initialize();
         }
-
         private void OnEnable() {
             MicroController._instance.Input._jump += SelectLevel;
         }
-
         private void OnDisable() {
             MicroController._instance.Input._jump -= SelectLevel;
         }
-
         private void Initialize() {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Game started", this);
             //Ui.Initialize();
@@ -45,9 +46,15 @@ namespace Pixygon.Micro {
             ScoreManager = gameObject.AddComponent<ScoreManager>();
             ScoreManager.Initialize(this);
         }
-
         public void OpenLoadingScreen() {
-            
+            if (_isLoading) return;
+            _isLoading = true;
+            _loadingScreen.SetActive(false);
+        }
+
+        public void CloseLoadingScreen() {
+            _isLoading = false;
+            _loadingScreen.SetActive(false);
         }
 
         public void StartGame() {
@@ -58,7 +65,6 @@ namespace Pixygon.Micro {
             StartLevel(_currentLevelId);
         }
 
-        [SerializeField] private bool _useLoadingScreen;
         private void SelectLevel(bool started) {
             if (!started) return;
             if(_useLoadingScreen)
