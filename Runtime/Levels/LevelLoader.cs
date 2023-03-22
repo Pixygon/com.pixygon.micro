@@ -49,7 +49,7 @@ namespace Pixygon.Micro {
         public void OpenLoadingScreen() {
             if (_isLoading) return;
             _isLoading = true;
-            _loadingScreen.SetActive(false);
+            _loadingScreen.SetActive(true);
         }
 
         public void CloseLoadingScreen() {
