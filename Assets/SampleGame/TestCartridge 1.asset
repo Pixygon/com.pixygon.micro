@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac8707d824150b74aa6931feb47bcbda, type: 3}
-  m_Name: TestCartridge
+  m_Name: TestCartridge 1
   m_EditorClassIdentifier: 
   _id: 
   _title: SampleGame
@@ -19,7 +19,7 @@ MonoBehaviour:
   _gamePrefab: {fileID: 1708818856127366985, guid: 8c760b4f2ca0f504289b93f6d4f631ce, type: 3}
   _cartridgeImage: {fileID: 2800000, guid: ce5f11cd993284c4f9c54f854bdc8c9c, type: 3}
   _cartridgeBanner: {fileID: 0}
-  _cartridgeColor: {r: 1, g: 1, b: 1, a: 1}
+  _cartridgeColor: {r: 1, g: 0, b: 0, a: 1}
   _nftLink:
     RequiresNFT: 0
     Template: []

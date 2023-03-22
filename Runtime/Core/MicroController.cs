@@ -162,16 +162,19 @@ namespace Pixygon.Micro
 
         public void SetWaxWallet(string wallet) {
             _api.PatchWaxWallet(wallet);
+            SaveManager.SettingsSave._user.waxWallet = wallet;
             Home.WalletReceived();
         }
 
         public void SetEthWallet(string wallet) {
             _api.PatchEthWallet(wallet);
+            SaveManager.SettingsSave._user.ethWallet = wallet;
             Home.WalletReceived();
         }
 
         public void SetTezWallet(string wallet) {
             _api.PatchTezWallet(wallet);
+            SaveManager.SettingsSave._user.tezWallet = wallet;
             Home.WalletReceived();
         }
     }

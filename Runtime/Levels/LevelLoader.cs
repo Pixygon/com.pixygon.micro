@@ -46,13 +46,25 @@ namespace Pixygon.Micro {
             ScoreManager.Initialize(this);
         }
 
-        private void SelectLevel(bool started) {
-            if (!started) return;
+        public void OpenLoadingScreen() {
+            
+        }
+
+        public void StartGame() {
             if (MicroController._instance.HomeMenuOpen) return;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Selected level", this);
             if (_levelLoaded || _loadingLevel) return;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Level was not loaded...", this);
             StartLevel(_currentLevelId);
+        }
+
+        [SerializeField] private bool _useLoadingScreen;
+        private void SelectLevel(bool started) {
+            if (!started) return;
+            if(_useLoadingScreen)
+                OpenLoadingScreen();
+            else
+                StartGame();
         }
 
         public void StartLevel(int i) {

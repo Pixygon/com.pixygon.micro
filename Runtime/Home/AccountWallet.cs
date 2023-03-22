@@ -13,8 +13,19 @@ namespace Pixygon.Micro {
         [SerializeField] private GameObject _ethCheck;
         [SerializeField] private GameObject _tezCheck;
         [SerializeField] private GameObject _walletLoadingScreen;
+        [SerializeField] private GameObject _eventWaxWallets;
         [SerializeField] private GameObject _eventFetching;
+        [SerializeField] private GameObject _waxWallets;
 
+        public void OpenWaxWallets() {
+            _waxWallets.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(_eventWaxWallets);
+        }
+
+        public void CloseWaxWallets() {
+            _waxWallets.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(_eventWallet);
+        }
         public void GetWaxWallet() {
             MicroController._instance.GetWaxWallet();
             _walletLoadingScreen.SetActive(true);
@@ -35,15 +46,10 @@ namespace Pixygon.Micro {
             _walletLoadingScreen.SetActive(true);
             EventSystem.current.SetSelectedGameObject(_eventFetching);
         }
-        /*
-        public void SetWaxWallet(string s) {
-            _walletLoadingScreen.SetActive(false);
-            RefreshWallets();
-        }
-        */
         public void WalletReceived() {
             _walletLoadingScreen.SetActive(false);
             EventSystem.current.SetSelectedGameObject(_eventWallet);
+            CloseWaxWallets();
             RefreshWallets();
         }
         public void OpenWalletScreen() {
