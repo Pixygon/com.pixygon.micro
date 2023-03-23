@@ -65,6 +65,10 @@ namespace Pixygon.Micro {
             if(_destroyOnDeath) Destroy(gameObject);
         }
 
+        public void InstaKill() {
+            Die();
+        }
+
         public virtual void Update() {
             if (Data == null) return;
             if (transform.position.y <= _killheight)
