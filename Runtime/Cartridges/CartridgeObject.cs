@@ -14,8 +14,11 @@ namespace Pixygon.Micro {
             if (cartridge._nftLink.RequiresNFT) {
                 _lockIcon.SetActive(true);
                 CanUse = false;
-                _currentId = cartridge._nftLink.Template[0].collection + cartridge._nftLink.Template[0].schema + cartridge._nftLink.Template[0].template;
-                NFT.NFT.ValidateTemplate(cartridge._nftLink.Template[0], Validate);
+                var verificationId = cartridge._id;
+                _currentId = verificationId;
+                foreach (var s in cartridge._nftLink.Template) {
+                    NFT.NFT.ValidateTemplate(s, Validate, null, verificationId);
+                }
             }
             else {
                 _lockIcon.SetActive(false); 
