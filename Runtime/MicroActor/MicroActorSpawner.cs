@@ -14,15 +14,15 @@ namespace Pixygon.Micro {
         [SerializeField] private int _spawnTimerMax = 300;
         [SerializeField] private int _spawnTimerStart;
         
-        private List<GameObject> _spawnedActor;
         private float _timer;
         private LevelLoader _loader;
         private bool _initialized;
-        
+        public List<GameObject> SpawnedActor { get; private set; }
+        public bool Pause { get; set; }
         public void Initialize(LevelLoader loader) {
             _loader = loader;
             DeSpawnActor();
-            _spawnedActor = new List<GameObject>();
+            SpawnedActor = new List<GameObject>();
             _initialized = true;
             _timer = _spawnTimerStart;
             if(!_repeat)
@@ -33,7 +33,7 @@ namespace Pixygon.Micro {
             var a = await AddressableLoader.LoadGameObject(_actorData._actorRef, transform);
             a.transform.localPosition = Vector3.zero;
             a.GetComponent<MicroActor>().Initialize(_loader, _actorData);
-            _spawnedActor.Add(a);
+            SpawnedActor.Add(a);
         }
         private void DoSpawn() {
             if(_onlyOneActor) DeSpawnActor();
@@ -42,17 +42,17 @@ namespace Pixygon.Micro {
             SpawnActor();
         }
         public void DeSpawnActor() {
-            if(_spawnedActor == null) return;
-            foreach (var a in _spawnedActor) {
+            if(SpawnedActor == null) return;
+            foreach (var a in SpawnedActor) {
                 Destroy(a);
             }
             PruneActorList();
         }
         private void PruneActorList() {
-            _spawnedActor = _spawnedActor.Where(a => a != null).ToList();
+            SpawnedActor = SpawnedActor.Where(a => a != null).ToList();
         }
         private void Update() {
-            if (!_repeat || !_initialized) return;
+            if (!_repeat || !_initialized || Pause) return;
             if (_timer < 0f) DoSpawn();
             else _timer -= Time.deltaTime;
         }
