@@ -1,4 +1,6 @@
+using System;
 using Pixygon.DebugTool;
+using Pixygon.NFT;
 using Pixygon.Saving;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -19,6 +21,7 @@ namespace Pixygon.Micro
         [SerializeField] private bool _skipIntro;
         [SerializeField] private Cartridge[] _cartridges;
         [SerializeField] private Faceplate[] _faceplates;
+        [SerializeField] private FaceplateList _faceplateList;
         [SerializeField] private Camera _cam;
         [SerializeField] private AudioMixer _mixer;
         [SerializeField] private WalletFetcher _walletFetcher;
@@ -33,7 +36,7 @@ namespace Pixygon.Micro
         public bool SkipIntro => _skipIntro;
         public string Version => _version;
         public Cartridge[] Cartridges => _cartridges;
-        public Faceplate[] Faceplates => _faceplates;
+        public Faceplate[] Faceplates => _faceplateList._faceplates;
         public PixygonApi Api => _api;
         
         public Cartridge CurrentlyLoadedCartridge {
@@ -45,9 +48,9 @@ namespace Pixygon.Micro
         }
         public Faceplate CurrentlyLoadedFaceplate {
             get {
-                if(PlayerPrefs.GetInt("Faceplate") >= _faceplates.Length)
+                if(PlayerPrefs.GetInt("Faceplate") >= Faceplates.Length)
                     PlayerPrefs.SetInt("Faceplate", 0);
-                return _faceplates.Length != 0 ? _faceplates[PlayerPrefs.GetInt("Faceplate")] : null;
+                return Faceplates.Length != 0 ? Faceplates[PlayerPrefs.GetInt("Faceplate")] : null;
             }
         }
 
@@ -57,13 +60,7 @@ namespace Pixygon.Micro
             else
                 Destroy(gameObject);
             Initialize();
-            //if(SaveManager.SettingsSave == null)
-                //SetWallet(string.Empty);
-//#if UNITY_EDITOR
-            //SetWallet("md1qw.wam");  
-//#endif
         }
-
         private void Start() {
             UpdateAudioSettings();
         }
@@ -79,37 +76,22 @@ namespace Pixygon.Micro
             Cartridge.Initilize();
             Console.Initialize();
             Home.Initialize();
-            Input._quit += Quit;
             Input._home += OpenHomeMenu;
         }
 
-        private void Quit(bool started) {
-            #if !UNITY_WEBGL
-            Application.Quit();
-            #endif
-        }
-
         public void OpenHomeMenu(bool started) {
-            if(!started || HomeMenuOpen) return;
+            if (!started || HomeMenuOpen) return;
             HomeMenuOpen = true;
-            //This is a bad way to do it...
-            //Time.timeScale = HomeMenuOpen ? 1f : 0f;
             PauseGame(HomeMenuOpen);
             Home.Activate(HomeMenuOpen);
         }
-        
         public void CloseHomeMenu() {
             if (_cartridges.Length == 0) return;
-            Debug.Log("HomeMenuClose: Cartridges exist...");
             if (CurrentlyLoadedCartridge == null) return;
-            Debug.Log("HomeMenuClose: A cartridge is loaded...");
             if(!Api.IsLoggedIn) return;
-            Debug.Log("HomeMenuClose: API is logged in...");
             if(Cartridge.Game == null) return;
-            Debug.Log("Home menu should close!");
             HomeMenuOpen = false;
         }
-
         private void PauseGame(bool pause) {
             foreach (var r in GetComponents<Rigidbody2D>()) {
                 if (pause)
@@ -118,11 +100,9 @@ namespace Pixygon.Micro
                     r.WakeUp();
             }
         }
-
         public void SetZoom(float f) {
             _cam.transform.position = new Vector3(0f, 0f, Mathf.Lerp(-10f, -20f, f));
         }
-
         public void SetCameraToDefault() {
             _cam.transform.position = new Vector3(0f, 0f, -12);
         }
@@ -137,44 +117,32 @@ namespace Pixygon.Micro
             _mixer.SetFloat("BGMVolume", Mathf.Log10(PlayerPrefs.GetFloat("BGMVolume", 1f)) * 20f);
             _mixer.SetFloat("SFXVolume", Mathf.Log10(PlayerPrefs.GetFloat("SFXVolume", 1f)) * 20f);
         }
-
-        public void GetWaxWallet() {
-#if UNITY_WEBGL
-            _walletFetcher.GetWaxAddress();
-#endif
+        public void GetWallet(Chain chain, int walletProvider) {
+            _walletFetcher.GetWallet(chain, walletProvider);
         }
-
-        public void GetAnchorWallet() {
-#if UNITY_WEBGL
-            _walletFetcher.GetAnchorAddress();
-#endif
-        }
-        public void GetEthWallet() {
-#if UNITY_WEBGL
-            _walletFetcher.GetEthAddress();
-#endif
-        }
-        public void GetTezWallet() {
-#if UNITY_WEBGL
-            _walletFetcher.GetTezAddress();
-#endif
-        }
-
-        public void SetWaxWallet(string wallet) {
-            _api.PatchWaxWallet(wallet);
-            SaveManager.SettingsSave._user.waxWallet = wallet;
-            Home.WalletReceived();
-        }
-
-        public void SetEthWallet(string wallet) {
-            _api.PatchEthWallet(wallet);
-            SaveManager.SettingsSave._user.ethWallet = wallet;
-            Home.WalletReceived();
-        }
-
-        public void SetTezWallet(string wallet) {
-            _api.PatchTezWallet(wallet);
-            SaveManager.SettingsSave._user.tezWallet = wallet;
+        public void SetWallet(Chain chain, string wallet) {
+            switch (chain) {
+                case Chain.Wax:
+                    _api.PatchWaxWallet(wallet);
+                    SaveManager.SettingsSave._user.waxWallet = wallet;
+                    break;
+                case Chain.EOS:
+                    break;
+                case Chain.Ethereum:
+                    _api.PatchEthWallet(wallet);
+                    SaveManager.SettingsSave._user.ethWallet = wallet;
+                    break;
+                case Chain.Tezos:
+                    _api.PatchTezWallet(wallet);
+                    SaveManager.SettingsSave._user.tezWallet = wallet;
+                    break;
+                case Chain.Polygon:
+                    break;
+                case Chain.Solana:
+                    break;
+                case Chain.Flow:
+                    break;
+            }
             Home.WalletReceived();
         }
     }

@@ -10,6 +10,8 @@ namespace Pixygon.Micro {
         public string _collabWallet;
         public int _maxSupply;
         public int _price;
+        public bool _getImagesFromURL;
+        public string _collabIconURL;
         public Texture2D _collabIcon;
         public Rarity _rarity;
         public NFTLink _nftLink;
@@ -19,6 +21,7 @@ namespace Pixygon.Micro {
         public Color _detailColor;
         public Color _buttonColor;
         public Texture2D _tex;
+        public string _textureURL;
         public bool _useFaceplateColor;
         public Color _faceplate;
         

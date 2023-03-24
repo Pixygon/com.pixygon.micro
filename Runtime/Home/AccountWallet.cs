@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Pixygon.NFT;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -27,22 +28,22 @@ namespace Pixygon.Micro {
             EventSystem.current.SetSelectedGameObject(_eventWallet);
         }
         public void GetWaxWallet() {
-            MicroController._instance.GetWaxWallet();
+            MicroController._instance.GetWallet(Chain.Wax, 0);
             _walletLoadingScreen.SetActive(true);
             EventSystem.current.SetSelectedGameObject(_eventFetching);
         }
         public void GetAnchorWallet() {
-            MicroController._instance.GetAnchorWallet();
+            MicroController._instance.GetWallet(Chain.Wax, 1);
             _walletLoadingScreen.SetActive(true);
             EventSystem.current.SetSelectedGameObject(_eventFetching);
         }
         public void GetEthWallet() {
-            MicroController._instance.GetEthWallet();
+            MicroController._instance.GetWallet(Chain.Ethereum, 0);
             _walletLoadingScreen.SetActive(true);
             EventSystem.current.SetSelectedGameObject(_eventFetching);
         }
         public void GetTezWallet() {
-            MicroController._instance.GetTezWallet();
+            MicroController._instance.GetWallet(Chain.Tezos, 0);
             _walletLoadingScreen.SetActive(true);
             EventSystem.current.SetSelectedGameObject(_eventFetching);
         }
