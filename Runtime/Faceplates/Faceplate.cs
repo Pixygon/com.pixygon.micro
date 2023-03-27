@@ -1,7 +1,9 @@
+using System;
 using Pixygon.NFT;
 using UnityEngine;
 
 namespace Pixygon.Micro {
+    [Serializable]
     [CreateAssetMenu(menuName = "PixygonMicro/New Faceplate")]
     public class Faceplate : ScriptableObject {
         [Header("NFT Info")]
