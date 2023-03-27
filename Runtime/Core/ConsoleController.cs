@@ -20,7 +20,6 @@ namespace Pixygon.Micro
             }
         }
         public void Initialize() {
-            Debug.Log(JsonUtility.ToJson(MicroController._instance.Faceplates));
             UpdateFaceplate();
         }
 

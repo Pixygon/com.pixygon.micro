@@ -3,8 +3,8 @@ using Pixygon.NFT;
 using UnityEngine;
 
 namespace Pixygon.Micro {
-    [Serializable]
     [CreateAssetMenu(menuName = "PixygonMicro/New Faceplate")]
+    [Serializable]
     public class Faceplate : ScriptableObject {
         [Header("NFT Info")]
         public string _title;
@@ -14,7 +14,7 @@ namespace Pixygon.Micro {
         public int _price;
         public bool _getImagesFromURL;
         public string _collabIconURL;
-        public Texture2D _collabIcon;
+        //public Texture2D _collabIcon;
         public Rarity _rarity;
         public NFTLink _nftLink;
         
@@ -22,11 +22,10 @@ namespace Pixygon.Micro {
         public Color _color;
         public Color _detailColor;
         public Color _buttonColor;
-        public Texture2D _tex;
+        //public Texture2D _tex;
         public string _textureURL;
         public bool _useFaceplateColor;
         public Color _faceplate;
-        
     }
 
     public enum Rarity {

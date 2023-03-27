@@ -46,13 +46,12 @@ namespace Pixygon.Micro
                 return _cartridges.Length != 0 ? _cartridges[PlayerPrefs.GetInt("Cartridge")] : null;
             }
         }
-        public bool FaceplateListLoaded { get; private set; }
-
         private void Awake() {
             if (_instance == null)
                 _instance = this;
             else
                 Destroy(gameObject);
+            Debug.Log(JsonUtility.ToJson(_faceplateList));
             Initialize();
         }
         private void Start() {

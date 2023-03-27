@@ -45,8 +45,8 @@ public class FaceplateSetter : MonoBehaviour {
                 await Task.Yield();
             if (www.error != null) return null;
             face.SetTexture($"_{_textureKeyword}",DownloadHandlerTexture.GetContent(www));
-        } else
-            face.SetTexture($"_{_textureKeyword}", faceplate._tex != null ? faceplate._tex : null);
+        } //else
+          //  face.SetTexture($"_{_textureKeyword}", faceplate._tex != null ? faceplate._tex : null);
         face.color = faceplate._useFaceplateColor ? faceplate._faceplate : Color.white;
         return face;
     }
