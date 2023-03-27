@@ -24,6 +24,7 @@ namespace Pixygon.Micro {
 
         [SerializeField] private SpriteRenderer _powerupRenderer;
         [SerializeField] private Sprite[] _powerups;
+        [SerializeField] private TextMeshPro _versionText;
         
         public GameObject PregameScreen => _pregameScreen;
         public GameObject LevelEndScreen => _levelEndScreen;
@@ -60,6 +61,7 @@ namespace Pixygon.Micro {
         }
         public void TriggerMenuScreen(bool activate) {
             _menuScreen.SetActive(activate);
+            _versionText.text = MicroController._instance.CurrentlyLoadedCartridge._version;
         }
 
         public void TriggerGameOverScreen(bool activate) {

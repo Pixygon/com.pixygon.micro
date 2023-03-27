@@ -1,5 +1,7 @@
+using System.Threading.Tasks;
 using Pixygon.Micro;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class FaceplateSetter : MonoBehaviour {
     [SerializeField] private Material _faceMat;
@@ -12,17 +14,14 @@ public class FaceplateSetter : MonoBehaviour {
     [SerializeField] private MeshRenderer _body;
     [SerializeField] private string _textureKeyword = "BaseColorMap";
 
-    public void SetFaceplate(Faceplate faceplate) {
+    public async void SetFaceplate(Faceplate faceplate) {
         var body = new Material(_bodyMat);
         var details = new Material(_detailsMat);
         var buttons = new Material(_buttonsMat);
-        var face = new Material(_faceMat);
+        var face = await SetTexture(_faceMat, faceplate);
         body.color = faceplate._color;
         details.color = faceplate._detailColor;
         buttons.color = faceplate._buttonColor;
-        face.EnableKeyword(_textureKeyword);
-        face.SetTexture($"_{_textureKeyword}", faceplate._tex != null ? faceplate._tex : null);
-        face.color = faceplate._useFaceplateColor ? faceplate._faceplate : Color.white;
         foreach (var b in _buttons) {
             b.material = buttons;
         }
@@ -34,5 +33,21 @@ public class FaceplateSetter : MonoBehaviour {
             body, face, _body.sharedMaterials[2]
         };
         _body.materials = mats;
+    }
+    private string url = "https://storage.bunnycdn.com/faceplates/";
+    private async Task<Material> SetTexture(Material m, Faceplate faceplate) {
+        var face = new Material(_faceMat);
+        face.EnableKeyword(_textureKeyword);
+        if (faceplate._getImagesFromURL) {
+            var www = UnityWebRequestTexture.GetTexture($"url{faceplate._textureURL}");
+            www.SendWebRequest();
+            while(!www.isDone)
+                await Task.Yield();
+            if (www.error != null) return null;
+            face.SetTexture($"_{_textureKeyword}",DownloadHandlerTexture.GetContent(www));
+        } else
+            face.SetTexture($"_{_textureKeyword}", faceplate._tex != null ? faceplate._tex : null);
+        face.color = faceplate._useFaceplateColor ? faceplate._faceplate : Color.white;
+        return face;
     }
 }
