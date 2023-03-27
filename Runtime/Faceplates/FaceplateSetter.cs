@@ -13,7 +13,7 @@ public class FaceplateSetter : MonoBehaviour {
     [SerializeField] private MeshRenderer[] _shoulders;
     [SerializeField] private MeshRenderer _body;
     [SerializeField] private string _textureKeyword = "BaseColorMap";
-    private string url = "https://pixygon.b-cdn.net/";
+    private string url = "https://PixygonMicro.b-cdn.net/Faceplates/";
 
     public async void SetFaceplate(Faceplate faceplate) {
         var body = new Material(_bodyMat);
