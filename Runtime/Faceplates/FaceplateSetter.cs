@@ -13,6 +13,7 @@ public class FaceplateSetter : MonoBehaviour {
     [SerializeField] private MeshRenderer[] _shoulders;
     [SerializeField] private MeshRenderer _body;
     [SerializeField] private string _textureKeyword = "BaseColorMap";
+    private string url = "https://pixygon.b-cdn.net/";
 
     public async void SetFaceplate(Faceplate faceplate) {
         var body = new Material(_bodyMat);
@@ -34,12 +35,11 @@ public class FaceplateSetter : MonoBehaviour {
         };
         _body.materials = mats;
     }
-    private string url = "https://pixygon.b-cdn.net/";
     private async Task<Material> SetTexture(Material m, Faceplate faceplate) {
         var face = new Material(_faceMat);
         face.EnableKeyword(_textureKeyword);
         if (faceplate._getImagesFromURL) {
-            var www = UnityWebRequestTexture.GetTexture($"{url}{faceplate._textureURL}");
+            var www = UnityWebRequestTexture.GetTexture($"{url}{faceplate._textureURL}.png");
             www.SendWebRequest();
             while(!www.isDone)
                 await Task.Yield();

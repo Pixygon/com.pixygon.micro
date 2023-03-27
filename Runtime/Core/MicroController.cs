@@ -46,13 +46,7 @@ namespace Pixygon.Micro
                 return _cartridges.Length != 0 ? _cartridges[PlayerPrefs.GetInt("Cartridge")] : null;
             }
         }
-        public Faceplate CurrentlyLoadedFaceplate {
-            get {
-                if(PlayerPrefs.GetInt("Faceplate") >= Faceplates.Length)
-                    PlayerPrefs.SetInt("Faceplate", 0);
-                return Faceplates.Length != 0 ? Faceplates[PlayerPrefs.GetInt("Faceplate")] : null;
-            }
-        }
+        public bool FaceplateListLoaded { get; private set; }
 
         private void Awake() {
             if (_instance == null)
