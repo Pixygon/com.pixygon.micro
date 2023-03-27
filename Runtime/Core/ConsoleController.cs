@@ -11,6 +11,7 @@ namespace Pixygon.Micro
         private string _faceplateListURL = "https://pixygon.b-cdn.net/faceplates.json";
         private bool _faceplateListLoaded;
         private Faceplate[] _faceplateList;
+        
         public Faceplate CurrentlyLoadedFaceplate {
             get {
                 if(PlayerPrefs.GetInt("Faceplate") >= _faceplateList.Length)
