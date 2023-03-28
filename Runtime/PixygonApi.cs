@@ -72,6 +72,35 @@ public class PixygonApi : MonoBehaviour {
         Debug.Log("TezWallet Patch: " + www.downloadHandler.text);
     }
 
+    public async Task<Savedata>  GetSave(string gameId, int slot) {
+        //.get("/savedata/:gameId/:userId/:slot", verifyToken, getSavedata)
+        var www = await GetWWW($"savedata/{gameId}/{AccountData.user._id}/{slot}");
+        if (!string.IsNullOrWhiteSpace(www.error)) {
+            Debug.Log("ERROR!! " + www.error + " and this " + www.downloadHandler.text);
+            return null;
+        }
+        Debug.Log("Savefile retrieved: " + www.downloadHandler.text);
+        return JsonUtility.FromJson<Savedata>(www.downloadHandler.text);
+    }
+
+    public async Task<Savedata> PostSave(string gameId, int slot, string savedata) {
+        //.post("/savedata/:gameId/:userId/:slot/", verifyToken, postSavedata)
+        var www = await PostVerifiedWWW($"savedata/{gameId}/{AccountData.user._id}/{slot}", AccountData.token, savedata);
+        if (!string.IsNullOrWhiteSpace(www.error)) {
+            Debug.Log("ERROR!! " + www.error + " and this " + www.downloadHandler.text);
+            return null;
+        }
+        Debug.Log("Savefile created: " + www.downloadHandler.text);
+        return JsonUtility.FromJson<Savedata>(www.downloadHandler.text);
+    }
+    
+    public async void PatchSave(Savedata savedata) {
+        //.patch("/savedata/:id", verifyToken, addSavedata);
+        Debug.Log("Patching savegame for " + savedata.gameId);
+        var www = await PostVerifiedWWW($"savedata/{savedata._id}", AccountData.token, JsonUtility.ToJson(savedata));
+        Debug.Log("Savegame Patch: " + www.downloadHandler.text);
+    }
+
     public async void StartLogout() {
         PlayerPrefs.DeleteKey("RememberMe");
         PlayerPrefs.DeleteKey("Username");
@@ -193,6 +222,15 @@ public class Feedback {
     public float coordinateY;
     public float coordinateZ;
     public string area;
+}
+
+[Serializable]
+public class Savedata {
+    public string _id;
+    public string gameId;
+    public string userId;
+    public int slot;
+    public string save;
 }
 
 [Serializable]
