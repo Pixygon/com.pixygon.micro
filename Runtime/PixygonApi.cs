@@ -76,7 +76,7 @@ public class PixygonApi : MonoBehaviour {
         //.get("/savedata/:gameId/:userId/:slot", verifyToken, getSavedata)
         var www = await GetVerifiedWWW($"savedata/{gameId}/{AccountData.user._id}/{slot}", AccountData.token);
         if (!string.IsNullOrWhiteSpace(www.error)) {
-            Debug.Log("ERROR!! " + www.error + " and this " + www.downloadHandler.text);
+            Debug.Log("GET SAVE ERROR!! " + www.error + " and this " + www.downloadHandler.text);
             return null;
         }
         Debug.Log("Savefile retrieved: " + www.downloadHandler.text);
@@ -87,7 +87,7 @@ public class PixygonApi : MonoBehaviour {
         //.post("/savedata/:gameId/:userId/:slot/", verifyToken, postSavedata)
         var www = await PostVerifiedWWW($"savedata/{gameId}/{AccountData.user._id}/{slot}", AccountData.token, savedata);
         if (!string.IsNullOrWhiteSpace(www.error)) {
-            Debug.Log("ERROR!! " + www.error + " and this " + www.downloadHandler.text);
+            Debug.Log("POST SAVE ERROR!! " + www.error + " and this " + www.downloadHandler.text);
             return null;
         }
         Debug.Log("Savefile created: " + www.downloadHandler.text);
