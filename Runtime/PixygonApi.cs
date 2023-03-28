@@ -85,7 +85,7 @@ public class PixygonApi : MonoBehaviour {
 
     public async Task<Savedata> PostSave(string gameId, int slot, string savedata) {
         //.post("/savedata/:gameId/:userId/:slot/", verifyToken, postSavedata)
-        var www = await PostVerifiedWWW($"general/savedata/{gameId}/{AccountData.user._id}/{slot}", AccountData.token, savedata);
+        var www = await PostVerifiedWWW($"savedata/savedata/{gameId}/{AccountData.user._id}/{slot}", AccountData.token, savedata);
         if (!string.IsNullOrWhiteSpace(www.error)) {
             Debug.Log("ERROR!! " + www.error + " and this " + www.downloadHandler.text);
             return null;
