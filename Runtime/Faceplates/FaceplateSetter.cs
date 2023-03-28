@@ -17,16 +17,32 @@ public class FaceplateSetter : MonoBehaviour {
 
     private string currentPlate;
     public async void SetFaceplate(FaceplateData faceplate) {
+        SetTempMaterials();
         currentPlate = faceplate._title;
         var body = new Material(_bodyMat);
         var details = new Material(_detailsMat);
         var buttons = new Material(_buttonsMat);
         var face = await SetTexture(_faceMat, faceplate);
+        
         if (currentPlate != faceplate._title)
             return;
         body.color = faceplate._color;
         details.color = faceplate._detailColor;
         buttons.color = faceplate._buttonColor;
+        SetMaterials(buttons, details, body, face);
+    }
+    private void SetTempMaterials() {
+        var body = new Material(_bodyMat);
+        var details = new Material(_detailsMat);
+        var buttons = new Material(_buttonsMat);
+        var face = new Material(_faceMat);
+        body.color = Color.black;
+        details.color = Color.black;
+        buttons.color = Color.black;
+        face.color = Color.black;
+        SetMaterials(buttons, details, body, face);
+    }
+    private void SetMaterials(Material buttons, Material details, Material body, Material face) {
         foreach (var b in _buttons) {
             b.material = buttons;
         }
