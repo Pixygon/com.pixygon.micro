@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Pixygon.DebugTool;
 using UnityEngine;
@@ -8,11 +10,11 @@ namespace Pixygon.Micro
 {
     public class ConsoleController : MonoBehaviour {
         [SerializeField] private FaceplateSetter _faceplateSetter;
-        private string _faceplateListURL = "https://pixygon.b-cdn.net/faceplates.json";
+        private string _faceplateListURL = "https://PixygonMicro.b-cdn.net/Faceplates/faceplates.json";
         private bool _faceplateListLoaded;
-        private Faceplate[] _faceplateList;
+        private FaceplateData[] _faceplateList;
         
-        public Faceplate CurrentlyLoadedFaceplate {
+        public FaceplateData CurrentlyLoadedFaceplate {
             get {
                 if(PlayerPrefs.GetInt("Faceplate") >= _faceplateList.Length)
                     PlayerPrefs.SetInt("Faceplate", 0);
@@ -20,6 +22,9 @@ namespace Pixygon.Micro
             }
         }
         public void Initialize() {
+            var s = FaceplateData.ConvertToJson(MicroController._instance.Faceplates);
+            Debug.Log(s);
+            _faceplateList = JsonUtility.FromJson<FaceplateDataList>(s)._data;
             UpdateFaceplate();
         }
 
@@ -33,9 +38,12 @@ namespace Pixygon.Micro
             www.SendWebRequest();
             while(!www.isDone)
                 await Task.Yield();
+            var s = FaceplateData.ConvertToJson(MicroController._instance.Faceplates);
             if (www.error != null) return;
-            _faceplateList = JsonUtility.FromJson<Faceplate[]>(www.downloadHandler.text);
+            //_faceplateList = JsonUtility.FromJson<Faceplate[]>(www.downloadHandler.text);
+            _faceplateList = JsonUtility.FromJson<FaceplateDataList>(s)._data;
             _faceplateListLoaded = true;
+            Debug.Log(s);
         }
         
         public async void UpdateFaceplate() {

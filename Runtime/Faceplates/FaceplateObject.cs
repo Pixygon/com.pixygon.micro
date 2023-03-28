@@ -10,7 +10,7 @@ namespace Pixygon.Micro {
         
         public bool CanUse { get; private set; }
         
-        public void Initialize(Faceplate faceplate) {
+        public void Initialize(FaceplateData faceplate) {
             _faceplate.SetFaceplate(faceplate);
             if (faceplate._nftLink.RequiresNFT) {
                 _lockIcon.SetActive(true);

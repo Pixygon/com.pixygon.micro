@@ -51,16 +51,16 @@ namespace Pixygon.Micro {
         public void PopulateFaceplates() {
             if (_currentFaceplate != 0) {
                 _objects[0].gameObject.SetActive(true);
-                _objects[0].Initialize(_facePlates[_currentFaceplate-1]);
+                //_objects[0].Initialize(_facePlates[_currentFaceplate-1]);
             }
             else {
                 _objects[0].gameObject.SetActive(false);
             }
-            _objects[1].Initialize(_facePlates[_currentFaceplate]);
+            //_objects[1].Initialize(_facePlates[_currentFaceplate]);
 
             if (_currentFaceplate != _facePlates.Length - 1) {
                 _objects[2].gameObject.SetActive(true);
-                _objects[2].Initialize(_facePlates[_currentFaceplate+1]);
+                //_objects[2].Initialize(_facePlates[_currentFaceplate+1]);
             }
             else {
                 _objects[2].gameObject.SetActive(false);

@@ -15,7 +15,7 @@ public class FaceplateSetter : MonoBehaviour {
     [SerializeField] private string _textureKeyword = "BaseColorMap";
     private string url = "https://PixygonMicro.b-cdn.net/Faceplates/";
 
-    public async void SetFaceplate(Faceplate faceplate) {
+    public async void SetFaceplate(FaceplateData faceplate) {
         var body = new Material(_bodyMat);
         var details = new Material(_detailsMat);
         var buttons = new Material(_buttonsMat);
@@ -35,7 +35,7 @@ public class FaceplateSetter : MonoBehaviour {
         };
         _body.materials = mats;
     }
-    private async Task<Material> SetTexture(Material m, Faceplate faceplate) {
+    private async Task<Material> SetTexture(Material m, FaceplateData faceplate) {
         var face = new Material(_faceMat);
         face.EnableKeyword(_textureKeyword);
         if (faceplate._getImagesFromURL) {

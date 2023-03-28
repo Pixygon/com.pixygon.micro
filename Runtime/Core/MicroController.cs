@@ -51,8 +51,8 @@ namespace Pixygon.Micro
                 _instance = this;
             else
                 Destroy(gameObject);
-            Debug.Log(JsonUtility.ToJson(_faceplateList));
             Initialize();
+            FaceplateData.ConvertToJson(_faceplateList._faceplates);
         }
         private void Start() {
             UpdateAudioSettings();

@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: DefaultFaceplate 1
   m_EditorClassIdentifier: 
   _title: Default
-  _collabPartner: 
-  _collabWallet: 
+  _collabPartner: Test
+  _collabWallet: Test
   _maxSupply: 0
   _price: 0
-  _collabIcon: {fileID: 0}
+  _getImagesFromURL: 0
+  _collabIconURL: 
   _rarity: 0
   _nftLink:
     RequiresNFT: 1
@@ -29,6 +30,6 @@ MonoBehaviour:
   _color: {r: 0.79607844, g: 0, b: 0.04820196, a: 1}
   _detailColor: {r: 1, g: 0.23137254, b: 0.52028847, a: 1}
   _buttonColor: {r: 1, g: 0.67995006, b: 0.23137254, a: 1}
-  _tex: {fileID: 2800000, guid: a6011835151fac6499213788aad602e7, type: 3}
+  _textureURL: 
   _useFaceplateColor: 1
   _faceplate: {r: 0.28839418, g: 1, b: 0.23137254, a: 1}
