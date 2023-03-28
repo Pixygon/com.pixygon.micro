@@ -84,8 +84,7 @@ public class PixygonApi : MonoBehaviour {
     }
 
     public async Task<Savedata> PostSave(string gameId, int slot, string savedata) {
-        //.post("/savedata/:gameId/:userId/:slot/", verifyToken, postSavedata)
-        var www = await PostVerifiedWWW($"savedata/{gameId}/{AccountData.user._id}/{slot}", AccountData.token, savedata);
+        var www = await PostVerifiedWWW($"savedata/{gameId}/{AccountData.user._id}/{slot}", AccountData.token, JsonUtility.ToJson(new Savejson(savedata)));
         if (!string.IsNullOrWhiteSpace(www.error)) {
             Debug.Log("POST SAVE ERROR!! " + www.error + " and this " + www.downloadHandler.text);
             return null;
@@ -97,7 +96,7 @@ public class PixygonApi : MonoBehaviour {
     public async void PatchSave(Savedata savedata) {
         //.patch("/savedata/:id", verifyToken, addSavedata);
         Debug.Log("Patching savegame for " + savedata.gameId);
-        var www = await PatchVerifiedWWW($"savedata/{savedata._id}", AccountData.token, JsonUtility.ToJson(savedata.save));
+        var www = await PatchVerifiedWWW($"savedata/{savedata._id}", AccountData.token, JsonUtility.ToJson(new Savejson(savedata.save)));
         Debug.Log("Savegame Patch: " + www.downloadHandler.text);
     }
 
@@ -189,7 +188,6 @@ public class PixygonApi : MonoBehaviour {
         www.SetRequestHeader("Content-Type", "application/json");
         www.SendWebRequest();
         while (!www.isDone) await Task.Yield();
-        //_consoleText.text += $"Result: {www.responseCode} | {www.downloadHandler.text}\n";
         return www;
     }
     private static async Task<UnityWebRequest> PatchVerifiedWWW(string path, string token, string body)
@@ -206,6 +204,13 @@ public class PixygonApi : MonoBehaviour {
     }
 }
 
+[Serializable]
+public class Savejson {
+    public string savejson;
+    public Savejson(string s) {
+        savejson = s;
+    }
+}
 [Serializable]
 public class LoginData {
     public string userName;
