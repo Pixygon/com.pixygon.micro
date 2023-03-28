@@ -74,7 +74,7 @@ public class PixygonApi : MonoBehaviour {
 
     public async Task<Savedata>  GetSave(string gameId, int slot) {
         //.get("/savedata/:gameId/:userId/:slot", verifyToken, getSavedata)
-        var www = await GetWWW($"general/savedata/{gameId}/{AccountData.user._id}/{slot}");
+        var www = await GetWWW($"savedata/{gameId}/{AccountData.user._id}/{slot}");
         if (!string.IsNullOrWhiteSpace(www.error)) {
             Debug.Log("ERROR!! " + www.error + " and this " + www.downloadHandler.text);
             return null;
@@ -85,7 +85,7 @@ public class PixygonApi : MonoBehaviour {
 
     public async Task<Savedata> PostSave(string gameId, int slot, string savedata) {
         //.post("/savedata/:gameId/:userId/:slot/", verifyToken, postSavedata)
-        var www = await PostVerifiedWWW($"savedata/savedata/{gameId}/{AccountData.user._id}/{slot}", AccountData.token, savedata);
+        var www = await PostVerifiedWWW($"savedata/{gameId}/{AccountData.user._id}/{slot}", AccountData.token, savedata);
         if (!string.IsNullOrWhiteSpace(www.error)) {
             Debug.Log("ERROR!! " + www.error + " and this " + www.downloadHandler.text);
             return null;
@@ -97,7 +97,7 @@ public class PixygonApi : MonoBehaviour {
     public async void PatchSave(Savedata savedata) {
         //.patch("/savedata/:id", verifyToken, addSavedata);
         Debug.Log("Patching savegame for " + savedata.gameId);
-        var www = await PostVerifiedWWW($"general/savedata/{savedata._id}", AccountData.token, JsonUtility.ToJson(savedata));
+        var www = await PostVerifiedWWW($"savedata/{savedata._id}", AccountData.token, JsonUtility.ToJson(savedata));
         Debug.Log("Savegame Patch: " + www.downloadHandler.text);
     }
 
