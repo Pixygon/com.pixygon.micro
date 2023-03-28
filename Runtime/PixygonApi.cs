@@ -72,9 +72,9 @@ public class PixygonApi : MonoBehaviour {
         Debug.Log("TezWallet Patch: " + www.downloadHandler.text);
     }
 
-    public async Task<Savedata>  GetSave(string gameId, int slot) {
+    public async Task<Savedata> GetSave(string gameId, int slot) {
         //.get("/savedata/:gameId/:userId/:slot", verifyToken, getSavedata)
-        var www = await GetWWW($"savedata/{gameId}/{AccountData.user._id}/{slot}");
+        var www = await GetVerifiedWWW($"savedata/{gameId}/{AccountData.user._id}/{slot}", AccountData.token);
         if (!string.IsNullOrWhiteSpace(www.error)) {
             Debug.Log("ERROR!! " + www.error + " and this " + www.downloadHandler.text);
             return null;
@@ -153,6 +153,16 @@ public class PixygonApi : MonoBehaviour {
     private static async Task<UnityWebRequest> GetWWW(string path) {
         var www = UnityWebRequest.Get(_debugUrl + path);
         www.timeout = 60;
+        www.SendWebRequest();
+        while (!www.isDone)
+            await Task.Yield();
+        //_consoleText.text += $"Result: {www.responseCode} | {www.downloadHandler.text}\n";
+        return www;
+    }
+    private static async Task<UnityWebRequest> GetVerifiedWWW(string path, string token) {
+        var www = UnityWebRequest.Get(_debugUrl + path);
+        www.timeout = 60;
+        www.SetRequestHeader("Authorization", $"Bearer {token}");
         www.SendWebRequest();
         while (!www.isDone)
             await Task.Yield();
