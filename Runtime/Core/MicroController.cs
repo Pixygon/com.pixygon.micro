@@ -1,4 +1,3 @@
-using System;
 using Pixygon.DebugTool;
 using Pixygon.NFT;
 using Pixygon.Saving;
@@ -49,7 +48,6 @@ namespace Pixygon.Micro
             else
                 Destroy(gameObject);
             Initialize();
-            FaceplateData.ConvertToJson(_faceplateList._faceplates);
         }
         private void Start() {
             UpdateAudioSettings();
