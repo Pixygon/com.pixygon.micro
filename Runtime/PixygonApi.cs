@@ -57,18 +57,18 @@ public class PixygonApi : MonoBehaviour {
     }
 
     public async void PatchWaxWallet(string wallet) {
-        var www = await PostVerifiedWWW($"users/{AccountData.user._id}/wax/{wallet}", AccountData.token, "");
+        var www = await PatchVerifiedWWW($"users/{AccountData.user._id}/wax/{wallet}", AccountData.token, "");
         AccountData.user = JsonUtility.FromJson<AccountData>(www.downloadHandler.text);
         SaveManager.SettingsSave._user = AccountData.user;
     }
     public async void PatchEthWallet(string wallet) {
         Debug.Log("Patching eth-wallet");
-        var www = await PostVerifiedWWW($"users/{AccountData.user._id}/eth/{wallet}", AccountData.token, "");
+        var www = await PatchVerifiedWWW($"users/{AccountData.user._id}/eth/{wallet}", AccountData.token, "");
         Debug.Log("EthWallet Patch: " + www.downloadHandler.text);
     }
     public async void PatchTezWallet(string wallet) {
         Debug.Log("Patching tez-wallet");
-        var www = await PostVerifiedWWW($"users/{AccountData.user._id}/tez/{wallet}", AccountData.token, "");
+        var www = await PatchVerifiedWWW($"users/{AccountData.user._id}/tez/{wallet}", AccountData.token, "");
         Debug.Log("TezWallet Patch: " + www.downloadHandler.text);
     }
 
@@ -97,7 +97,7 @@ public class PixygonApi : MonoBehaviour {
     public async void PatchSave(Savedata savedata) {
         //.patch("/savedata/:id", verifyToken, addSavedata);
         Debug.Log("Patching savegame for " + savedata.gameId);
-        var www = await PostVerifiedWWW($"savedata/{savedata._id}", AccountData.token, JsonUtility.ToJson(savedata));
+        var www = await PatchVerifiedWWW($"savedata/{savedata._id}", AccountData.token, JsonUtility.ToJson(savedata));
         Debug.Log("Savegame Patch: " + www.downloadHandler.text);
     }
 
@@ -181,6 +181,18 @@ public class PixygonApi : MonoBehaviour {
         return www;
     }
     private static async Task<UnityWebRequest> PostVerifiedWWW(string path, string token, string body)
+    {
+        var www = UnityWebRequest.Put(_debugUrl + path, body);
+        www.timeout = 60;
+        www.method = "POST";
+        www.SetRequestHeader("Authorization", $"Bearer {token}");
+        www.SetRequestHeader("Content-Type", "application/json");
+        www.SendWebRequest();
+        while (!www.isDone) await Task.Yield();
+        //_consoleText.text += $"Result: {www.responseCode} | {www.downloadHandler.text}\n";
+        return www;
+    }
+    private static async Task<UnityWebRequest> PatchVerifiedWWW(string path, string token, string body)
     {
         var www = UnityWebRequest.Put(_debugUrl + path, body);
         www.timeout = 60;
