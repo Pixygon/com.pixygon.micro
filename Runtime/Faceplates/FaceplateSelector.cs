@@ -92,7 +92,7 @@ namespace Pixygon.Micro {
         public void SelectFaceplate(bool started) {
             if (!started) return;
             if (!_objects[1].CanUse) return;
-            if(_currentFaceplate > MicroController._instance.Faceplates.Length)
+            if(_currentFaceplate > MicroController._instance.Console.Faceplates.Length)
                 _currentFaceplate = 0;
             PlayerPrefs.SetInt("Faceplate", _currentFaceplate);
             PlayerPrefs.Save();

@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Pixygon.DebugTool;
 using UnityEngine;
@@ -22,9 +19,6 @@ namespace Pixygon.Micro
             }
         }
         public void Initialize() {
-            //var s = FaceplateData.ConvertToJson(MicroController._instance.Faceplates);
-            //Debug.Log(s);
-            //_faceplateList = JsonUtility.FromJson<FaceplateDataList>(s)._data;
             UpdateFaceplate();
         }
 
@@ -38,13 +32,10 @@ namespace Pixygon.Micro
             www.SendWebRequest();
             while(!www.isDone)
                 await Task.Yield();
-            //var s = FaceplateData.ConvertToJson(MicroController._instance.Faceplates);
             if (www.error != null) return;
             Faceplates = JsonUtility.FromJson<FaceplateDataList>(www.downloadHandler.text)._data;
-            //_faceplateList = JsonUtility.FromJson<FaceplateDataList>(s)._data;
             _faceplateListLoaded = true;
             Debug.Log("Got faceplates!");
-            //Debug.Log(s);
         }
         
         public async void UpdateFaceplate() {

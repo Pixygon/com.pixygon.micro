@@ -20,8 +20,6 @@ namespace Pixygon.Micro
         [SerializeField] private string _version;
         [SerializeField] private bool _skipIntro;
         [SerializeField] private Cartridge[] _cartridges;
-        [SerializeField] private Faceplate[] _faceplates;
-        [SerializeField] private FaceplateList _faceplateList;
         [SerializeField] private Camera _cam;
         [SerializeField] private AudioMixer _mixer;
         [SerializeField] private WalletFetcher _walletFetcher;
@@ -36,7 +34,6 @@ namespace Pixygon.Micro
         public bool SkipIntro => _skipIntro;
         public string Version => _version;
         public Cartridge[] Cartridges => _cartridges;
-        public Faceplate[] Faceplates => _faceplateList._faceplates;
         public PixygonApi Api => _api;
         
         public Cartridge CurrentlyLoadedCartridge {
