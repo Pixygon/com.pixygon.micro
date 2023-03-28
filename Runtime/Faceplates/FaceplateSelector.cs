@@ -8,7 +8,7 @@ namespace Pixygon.Micro {
         
         private FaceplateObject[] _objects;
         private int _currentFaceplate;
-        private Faceplate[] _facePlates;
+        private FaceplateData[] _facePlates;
         private float _selectTimer;
         private bool _isClosing;
         
@@ -19,7 +19,7 @@ namespace Pixygon.Micro {
             MicroController._instance.Input._run += DoClose;
             MicroController._instance.Console.HideConsole(true);
             _currentFaceplate = PlayerPrefs.GetInt("Faceplate", 0);
-            _facePlates = MicroController._instance.Faceplates;
+            _facePlates = MicroController._instance.Console.Faceplates;
             _objects = new[] {
                 Instantiate(_faceplatePrefab, new Vector3(-27f, 0f, 0f), Quaternion.identity),
                 Instantiate(_faceplatePrefab, new Vector3(0f, 0f, 0f), Quaternion.identity),
@@ -51,16 +51,16 @@ namespace Pixygon.Micro {
         public void PopulateFaceplates() {
             if (_currentFaceplate != 0) {
                 _objects[0].gameObject.SetActive(true);
-                //_objects[0].Initialize(_facePlates[_currentFaceplate-1]);
+                _objects[0].Initialize(_facePlates[_currentFaceplate-1]);
             }
             else {
                 _objects[0].gameObject.SetActive(false);
             }
-            //_objects[1].Initialize(_facePlates[_currentFaceplate]);
+            _objects[1].Initialize(_facePlates[_currentFaceplate]);
 
             if (_currentFaceplate != _facePlates.Length - 1) {
                 _objects[2].gameObject.SetActive(true);
-                //_objects[2].Initialize(_facePlates[_currentFaceplate+1]);
+                _objects[2].Initialize(_facePlates[_currentFaceplate+1]);
             }
             else {
                 _objects[2].gameObject.SetActive(false);

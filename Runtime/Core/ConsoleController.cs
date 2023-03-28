@@ -10,21 +10,21 @@ namespace Pixygon.Micro
 {
     public class ConsoleController : MonoBehaviour {
         [SerializeField] private FaceplateSetter _faceplateSetter;
-        private string _faceplateListURL = "https://PixygonMicro.b-cdn.net/Faceplates/faceplates.json";
+        private string _faceplateListURL = "https://PixygonMicro.b-cdn.net/Faceplates/Faceplates.json";
         private bool _faceplateListLoaded;
-        private FaceplateData[] _faceplateList;
+        public FaceplateData[] Faceplates { get; private set; }
         
         public FaceplateData CurrentlyLoadedFaceplate {
             get {
-                if(PlayerPrefs.GetInt("Faceplate") >= _faceplateList.Length)
+                if(PlayerPrefs.GetInt("Faceplate") >= Faceplates.Length)
                     PlayerPrefs.SetInt("Faceplate", 0);
-                return _faceplateList.Length != 0 ? _faceplateList[PlayerPrefs.GetInt("Faceplate")] : null;
+                return Faceplates.Length != 0 ? Faceplates[PlayerPrefs.GetInt("Faceplate")] : null;
             }
         }
         public void Initialize() {
-            var s = FaceplateData.ConvertToJson(MicroController._instance.Faceplates);
-            Debug.Log(s);
-            _faceplateList = JsonUtility.FromJson<FaceplateDataList>(s)._data;
+            //var s = FaceplateData.ConvertToJson(MicroController._instance.Faceplates);
+            //Debug.Log(s);
+            //_faceplateList = JsonUtility.FromJson<FaceplateDataList>(s)._data;
             UpdateFaceplate();
         }
 
@@ -38,12 +38,13 @@ namespace Pixygon.Micro
             www.SendWebRequest();
             while(!www.isDone)
                 await Task.Yield();
-            var s = FaceplateData.ConvertToJson(MicroController._instance.Faceplates);
+            //var s = FaceplateData.ConvertToJson(MicroController._instance.Faceplates);
             if (www.error != null) return;
-            //_faceplateList = JsonUtility.FromJson<Faceplate[]>(www.downloadHandler.text);
-            _faceplateList = JsonUtility.FromJson<FaceplateDataList>(s)._data;
+            Faceplates = JsonUtility.FromJson<FaceplateDataList>(www.downloadHandler.text)._data;
+            //_faceplateList = JsonUtility.FromJson<FaceplateDataList>(s)._data;
             _faceplateListLoaded = true;
-            Debug.Log(s);
+            Debug.Log("Got faceplates!");
+            //Debug.Log(s);
         }
         
         public async void UpdateFaceplate() {

@@ -15,11 +15,15 @@ public class FaceplateSetter : MonoBehaviour {
     [SerializeField] private string _textureKeyword = "BaseColorMap";
     private string url = "https://PixygonMicro.b-cdn.net/Faceplates/";
 
+    private string currentPlate;
     public async void SetFaceplate(FaceplateData faceplate) {
+        currentPlate = faceplate._title;
         var body = new Material(_bodyMat);
         var details = new Material(_detailsMat);
         var buttons = new Material(_buttonsMat);
         var face = await SetTexture(_faceMat, faceplate);
+        if (currentPlate != faceplate._title)
+            return;
         body.color = faceplate._color;
         details.color = faceplate._detailColor;
         buttons.color = faceplate._buttonColor;
@@ -44,6 +48,8 @@ public class FaceplateSetter : MonoBehaviour {
             while(!www.isDone)
                 await Task.Yield();
             if (www.error != null) return null;
+            if (currentPlate != faceplate._title)
+                return null;
             face.SetTexture($"_{_textureKeyword}",DownloadHandlerTexture.GetContent(www));
         } //else
           //  face.SetTexture($"_{_textureKeyword}", faceplate._tex != null ? faceplate._tex : null);
