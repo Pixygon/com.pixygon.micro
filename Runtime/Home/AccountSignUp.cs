@@ -59,6 +59,7 @@ namespace Pixygon.Micro {
         }
 
         private void SignupComplete() {
+            if (!MicroController._instance.Api.IsLoggedIn) return;
             _accountScreen.SetAccountScreen();
             _signupLoadingScreen.SetActive(false);
             gameObject.SetActive(false);

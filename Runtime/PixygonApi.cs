@@ -57,9 +57,7 @@ public class PixygonApi : MonoBehaviour {
     }
 
     public async void PatchWaxWallet(string wallet) {
-        Debug.Log("Patching wax-wallet");
         var www = await PostVerifiedWWW($"users/{AccountData.user._id}/wax/{wallet}", AccountData.token, "");
-        Debug.Log("WaxWallet Patch: " + www.downloadHandler.text);
         AccountData.user = JsonUtility.FromJson<AccountData>(www.downloadHandler.text);
         SaveManager.SettingsSave._user = AccountData.user;
     }
@@ -93,6 +91,7 @@ public class PixygonApi : MonoBehaviour {
             return null;
         }
         IsLoggedIn = true;
+        Debug.Log("Logged in: " + www.downloadHandler.text);
         return JsonUtility.FromJson<LoginToken>(www.downloadHandler.text);
     }
     public async Task<LoginToken> Signup(string user, string email, string pass, Action<string> onFail = null) {
@@ -103,6 +102,7 @@ public class PixygonApi : MonoBehaviour {
             return null;
         }
         IsLoggedIn = true;
+        Debug.Log("Signed in: " + www.downloadHandler.text);
         return JsonUtility.FromJson<LoginToken>(www.downloadHandler.text);
     }
 
