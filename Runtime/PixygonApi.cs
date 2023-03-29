@@ -96,7 +96,7 @@ public class PixygonApi : MonoBehaviour {
     public async void PatchSave(Savedata savedata) {
         //.patch("/savedata/:id", verifyToken, addSavedata);
         Debug.Log("Patching savegame for " + savedata.gameId);
-        var www = await PatchVerifiedWWW($"savedata/{savedata._id}", AccountData.token, JsonUtility.ToJson(new Savejson(savedata.save)));
+        var www = await PatchVerifiedWWW($"savedata/{savedata._id}", AccountData.token, JsonUtility.ToJson(new Savejson(savedata.savejson)));
         Debug.Log("Savegame Patch: " + www.downloadHandler.text);
     }
 
@@ -257,7 +257,7 @@ public class Savedata {
     public string gameId;
     public string userId;
     public int slot;
-    public string save;
+    public string savejson;
 }
 
 [Serializable]
