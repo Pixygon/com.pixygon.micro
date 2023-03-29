@@ -59,7 +59,7 @@ public class FaceplateSetter : MonoBehaviour {
         var face = new Material(_faceMat);
         face.EnableKeyword(_textureKeyword);
         if (faceplate._getImagesFromURL) {
-            var www = UnityWebRequestTexture.GetTexture($"{url}{faceplate._textureURL}.png");
+            var www = UnityWebRequestTexture.GetTexture($"{url}{faceplate._textureURL}.jpg");
             www.SendWebRequest();
             while(!www.isDone)
                 await Task.Yield();
