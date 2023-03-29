@@ -39,7 +39,7 @@ namespace Pixygon.Micro {
             else
                 MicroController._instance.SetCameraToDefault();
             if (MicroController._instance.Api.IsLoggedIn)
-                SetUsernameText(MicroController._instance.Api.AccountData.user.userName);
+                SetUsernameText();
         }
         public void TriggerSettingsMenu(bool open) {
             _mainMenu.SetActive(!open);
@@ -77,8 +77,8 @@ namespace Pixygon.Micro {
             MicroController._instance.CloseHomeMenu();
             Activate(false);
         }
-        public void SetUsernameText(string s) {
-            _usernameText.text = "Hi, " + s + "!";
+        public void SetUsernameText() {
+            _usernameText.text = "Hi, " + MicroController._instance.Api.AccountData.user.userName + "!";
         }
 
         public void WalletReceived() {

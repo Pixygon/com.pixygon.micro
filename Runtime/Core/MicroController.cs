@@ -1,5 +1,6 @@
 using Pixygon.DebugTool;
 using Pixygon.NFT;
+using Pixygon.Passport;
 using Pixygon.Saving;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -106,7 +107,7 @@ namespace Pixygon.Micro
             _mixer.SetFloat("SFXVolume", Mathf.Log10(PlayerPrefs.GetFloat("SFXVolume", 1f)) * 20f);
         }
         public void GetWallet(Chain chain, int walletProvider) {
-            _walletFetcher.GetWallet(chain, walletProvider);
+            _walletFetcher.GetWallet(chain, walletProvider, SetWallet);
         }
         public void SetWallet(Chain chain, string wallet) {
             switch (chain) {

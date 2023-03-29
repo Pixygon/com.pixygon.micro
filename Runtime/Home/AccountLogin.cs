@@ -53,6 +53,7 @@ namespace Pixygon.Micro {
             _accountScreen.SetAccountScreen();
             _loginLoadingScreen.SetActive(false);
             gameObject.SetActive(false);
+            MicroController._instance.Home.SetUsernameText();
         }
         
         private void LoginFailed(string s) {
