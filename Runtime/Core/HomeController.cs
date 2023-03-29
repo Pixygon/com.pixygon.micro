@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -20,6 +21,12 @@ namespace Pixygon.Micro {
         [SerializeField] private HomeSettingsScreen _homeSettingsScreen;
 
         [SerializeField] private Sprite _noGameSprite;
+
+        [SerializeField] private AudioSource _selectSfx;
+        [SerializeField] private AudioSource _backSfx;
+
+        public AudioSource SelectSfx => _selectSfx;
+        public AudioSource BackSfx => _backSfx;
         
         private Cartridge _lastUsedCartridge;
         public void Initialize() {
@@ -80,7 +87,6 @@ namespace Pixygon.Micro {
         public void SetUsernameText() {
             _usernameText.text = "Hi, " + MicroController._instance.Api.AccountData.user.userName + "!";
         }
-
         public void WalletReceived() {
             _homeAccountScreen.WalletReceived();
         }

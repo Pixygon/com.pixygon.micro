@@ -29,23 +29,27 @@ namespace Pixygon.Micro {
             _usernameScreen.SetActive(true);
             _passwordScreen.SetActive(false);
             _overviewScreen.SetActive(false);
+            MicroController._instance.Home.SelectSfx.Play();
         }
         
         public void UsernameEdited() {
             EventSystem.current.SetSelectedGameObject(_eventPassword);
             _usernameScreen.SetActive(false);
             _passwordScreen.SetActive(true);
+            MicroController._instance.Home.SelectSfx.Play();
         }
 
         public void PasswordEdited() {
             EventSystem.current.SetSelectedGameObject(_eventLogin);
             _passwordScreen.SetActive(false);
             _overviewScreen.SetActive(true);
+            MicroController._instance.Home.SelectSfx.Play();
         }
         
         public void Login() {
             MicroController._instance.Api.StartLogin(_userInput.text, _passInput.text, true, LoginComplete, LoginFailed);
             _loginLoadingScreen.SetActive(true);
+            MicroController._instance.Home.SelectSfx.Play();
         }
 
         private void LoginComplete() {
@@ -54,6 +58,7 @@ namespace Pixygon.Micro {
             _loginLoadingScreen.SetActive(false);
             gameObject.SetActive(false);
             MicroController._instance.Home.SetUsernameText();
+            MicroController._instance.Home.SelectSfx.Play();
         }
         
         private void LoginFailed(string s) {
@@ -61,12 +66,14 @@ namespace Pixygon.Micro {
             _loginErrorText.text = $"Login failed: {s}";
             _loginLoadingScreen.SetActive(false);
             EventSystem.current.SetSelectedGameObject(_eventLoginFailed);
+            MicroController._instance.Home.SelectSfx.Play();
         }
 
         public void CloseFailedLogin() {
             _loginErrorScreen.SetActive(false);
             _loginErrorText.text = "";
             StartLogin();
+            MicroController._instance.Home.BackSfx.Play();
         }
     }
 }

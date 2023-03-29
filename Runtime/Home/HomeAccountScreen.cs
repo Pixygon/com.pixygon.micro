@@ -25,20 +25,24 @@ namespace Pixygon.Micro {
         public void Logout() {
             MicroController._instance.Api.StartLogout();
             SetAccountScreen();
+            MicroController._instance.Home.BackSfx.Play();
         }
 
         public void StartLogin() {
             _accountLogin.StartLogin();
             _noAccountScreen.SetActive(false);
+            MicroController._instance.Home.SelectSfx.Play();
         }
 
         public void StartSignup() {
             _accountSignup.StartSignup();
             _noAccountScreen.SetActive(false);
+            MicroController._instance.Home.SelectSfx.Play();
         }
 
         public void StartWalletFetch() {
             _accountWallet.OpenWalletScreen();
+            MicroController._instance.Home.SelectSfx.Play();
         }
 
         public void SetAccountScreen() {
@@ -61,6 +65,7 @@ namespace Pixygon.Micro {
                 _homeScreen.TriggerAccountMenu(false);
                 return;
             }
+            MicroController._instance.Home.SelectSfx.Play();
             //EventSystem.current.SetSelectedGameObject(_eventLogin);
             SetAccountScreen();
         }
