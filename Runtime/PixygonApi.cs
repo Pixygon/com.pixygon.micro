@@ -80,7 +80,10 @@ public class PixygonApi : MonoBehaviour {
             return null;
         }
         Debug.Log("Savefile retrieved: " + www.downloadHandler.text);
-        return string.IsNullOrWhiteSpace(www.downloadHandler.text) ? null : JsonUtility.FromJson<Savedata>(www.downloadHandler.text);
+        if (string.IsNullOrWhiteSpace(www.downloadHandler.text) || www.downloadHandler.text == "null")
+            return null;
+        Debug.Log("This json is not null! ");
+        return JsonUtility.FromJson<Savedata>(www.downloadHandler.text);
     }
 
     public async Task<Savedata> PostSave(string gameId, int slot, string savedata) {
