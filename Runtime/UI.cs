@@ -65,7 +65,7 @@ namespace Pixygon.Micro {
             Debug.Log("Activate menu screen...");
             if (MicroController._instance.CurrentlyLoadedCartridge != null) {
                 Debug.Log("Setting versionText...");
-                _versionText.text = MicroController._instance.CurrentlyLoadedCartridge._version;
+                //_versionText.text = MicroController._instance.CurrentlyLoadedCartridge._version;
                 Debug.Log("Version text set!");
             }
             Debug.Log("Done!");
