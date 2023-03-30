@@ -60,9 +60,15 @@ namespace Pixygon.Micro {
             }
         }
         public void TriggerMenuScreen(bool activate) {
+            Debug.Log("Trigger menu screen...");
             _menuScreen.SetActive(activate);
-            if(MicroController._instance.CurrentlyLoadedCartridge != null)
+            Debug.Log("Activate menu screen...");
+            if (MicroController._instance.CurrentlyLoadedCartridge != null) {
+                Debug.Log("Setting versionText...");
                 _versionText.text = MicroController._instance.CurrentlyLoadedCartridge._version;
+                Debug.Log("Version text set!");
+            }
+            Debug.Log("Done!");
         }
 
         public void TriggerGameOverScreen(bool activate) {
