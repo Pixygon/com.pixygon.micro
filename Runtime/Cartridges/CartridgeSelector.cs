@@ -76,12 +76,14 @@ namespace Pixygon.Micro {
             if (_selectTimer > 0f) return;
             switch (v.x) {
                 case < -.5f when _currentCartridge == 0:
-                    return;
+                    _currentCartridge = _cartridges.Length-1;
+                    break;
                 case < -.5f:
                     _currentCartridge -= 1;
                     break;
                 case > .5f when _currentCartridge == _cartridges.Length-1:
-                    return;
+                    _currentCartridge = 0;
+                    break;
                 case > .5f:
                     _currentCartridge += 1;
                     break;

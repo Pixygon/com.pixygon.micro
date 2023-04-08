@@ -35,7 +35,6 @@ namespace Pixygon.Micro
             if (www.error != null) return;
             Faceplates = JsonUtility.FromJson<FaceplateDataList>(www.downloadHandler.text)._data;
             _faceplateListLoaded = true;
-            Debug.Log("Got faceplates!");
         }
         
         public async void UpdateFaceplate() {

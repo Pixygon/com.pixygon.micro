@@ -69,12 +69,19 @@ namespace Pixygon.Micro {
 
         public void Move(Vector2 v) {
             if (_selectTimer > 0f) return;
-            if (v.x < -.5f) {
-                if (_currentFaceplate == 0) return;
-                _currentFaceplate -= 1;
-            } else if (v.x > .5f) {
-                if (_currentFaceplate == _facePlates.Length-1) return;
-                _currentFaceplate += 1;
+            switch (v.x) {
+                case < -.5f when _currentFaceplate == 0:
+                    _currentFaceplate = _facePlates.Length-1;
+                    break;
+                case < -.5f:
+                    _currentFaceplate -= 1;
+                    break;
+                case > .5f when _currentFaceplate == _facePlates.Length-1:
+                    _currentFaceplate = 0;
+                    break;
+                case > .5f:
+                    _currentFaceplate += 1;
+                    break;
             }
             _selectTimer = .2f;
             PopulateFaceplates();
