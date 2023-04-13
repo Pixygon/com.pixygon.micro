@@ -13,7 +13,6 @@ namespace Pixygon.Micro {
 
         [SerializeField] private HomeAccountScreen _accountScreen;
         
-
         [SerializeField] private GameObject _usernameScreen;
         [SerializeField] private GameObject _passwordScreen;
         [SerializeField] private GameObject _overviewScreen;

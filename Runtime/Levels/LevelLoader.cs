@@ -119,14 +119,21 @@ namespace Pixygon.Micro {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Setup Level", this);
         }
         private async Task SetupPlayer() {
-            if(_player == null) 
-                _player = await AddressableLoader.LoadGameObject(_playerData._actorRef, transform);
+            if (CurrentLevelData._playerOverride != null) {
+                if(_player != null)
+                    Destroy(_player.gameObject);
+                _player = await AddressableLoader.LoadGameObject(CurrentLevelData._playerOverride._actorRef, transform);
+            } else {
+                if(_player == null) 
+                    _player = await AddressableLoader.LoadGameObject(_playerData._actorRef, transform);
+            }
             _player.transform.position = CurrentLevel.PlayerSpawn;
             _camera.Initialize(_player.transform);
             _player.GetComponent<MicroActor>().Initialize(this, _playerData);
             Log.DebugMessage(DebugGroup.PixygonMicro, "Setup Player", this);
         }
         private async Task SetupParallax() {
+            if (!CurrentLevelData._useParallax) return;
             if (Parallax == null) {
                 var p = await AddressableLoader.LoadGameObject(_parallaxPrefabRef, transform);
                 Parallax = p.GetComponent<Parallax.Parallax>();
