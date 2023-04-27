@@ -25,9 +25,17 @@ namespace Pixygon.Micro {
         [SerializeField] private SpriteRenderer _powerupRenderer;
         [SerializeField] private Sprite[] _powerups;
         [SerializeField] private TextMeshPro _versionText;
-        
+        [SerializeField] private TextMeshPro _loadPercentageText;
+        [SerializeField] private GameObject _loadScreen;
         public GameObject PregameScreen => _pregameScreen;
         public GameObject LevelEndScreen => _levelEndScreen;
+        public void SetLoadPercentage(float f) {
+            _loadPercentageText.text = f + "%";
+        }
+        public void SetLoadScreen(bool show) {
+            _loadPercentageText.text = "0%";
+            _loadScreen.SetActive(show);
+        }
         public void SetLife(int i) {
             _lifeIcons[0].SetActive(i >= 0);
             _lifeIcons[1].SetActive(i >= 1);
