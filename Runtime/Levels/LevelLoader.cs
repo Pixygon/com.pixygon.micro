@@ -115,16 +115,16 @@ namespace Pixygon.Micro {
             Debug.Log("f:" + f*.2f);
         }
         private void SetPercentageLevel(float f) {
-            Debug.Log("f:" + (f * .2f)+.2f);
+            Debug.Log("f:" + (f * .2f+.2f));
         }
         private void SetPercentagePlayer(float f) {
-            Debug.Log("f:" + (f * .2f)+.4f);
+            Debug.Log("f:" + (f * .2f+.4f));
         }
         private void SetPercentageParallax(float f) {
-            Debug.Log("f:" + (f * .2f)+.6f);
+            Debug.Log("f:" + (f * .2f+.6f));
         }
         private void SetPercentagePostproc(float f) {
-            Debug.Log("f:" + (f * .2f)+.8f);
+            Debug.Log("f:" + (f * .2f+.8f));
         }
         private async Task SetupLevel() {
             if (CurrentLevel != null)
