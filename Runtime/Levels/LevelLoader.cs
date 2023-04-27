@@ -111,13 +111,25 @@ namespace Pixygon.Micro {
             _camera.SnapCamera();
             Log.DebugMessage(DebugGroup.PixygonMicro, "Level loaded!", this);
         }
-        private void SetPercentage(float f) {
-            Debug.Log("f:" + f);
+        private void SetPercentageBgm(float f) {
+            Debug.Log("f:" + f*.2f);
+        }
+        private void SetPercentageLevel(float f) {
+            Debug.Log("f:" + (f * .2f)+.2f);
+        }
+        private void SetPercentagePlayer(float f) {
+            Debug.Log("f:" + (f * .2f)+.4f);
+        }
+        private void SetPercentageParallax(float f) {
+            Debug.Log("f:" + (f * .2f)+.6f);
+        }
+        private void SetPercentagePostproc(float f) {
+            Debug.Log("f:" + (f * .2f)+.8f);
         }
         private async Task SetupLevel() {
             if (CurrentLevel != null)
                 Destroy(CurrentLevel.gameObject);
-            var g = await AddressableLoader.LoadGameObject(CurrentLevelData._levelRef, transform, true, SetPercentage);
+            var g = await AddressableLoader.LoadGameObject(CurrentLevelData._levelRef, transform, true, SetPercentageLevel);
             CurrentLevel = g.GetComponent<Level>();
             Log.DebugMessage(DebugGroup.PixygonMicro, "Setup Level", this);
         }
@@ -125,10 +137,10 @@ namespace Pixygon.Micro {
             if (CurrentLevelData._playerOverride != null) {
                 if(_player != null)
                     Destroy(_player.gameObject);
-                _player = await AddressableLoader.LoadGameObject(CurrentLevelData._playerOverride._actorRef, transform);
+                _player = await AddressableLoader.LoadGameObject(CurrentLevelData._playerOverride._actorRef, transform, true, SetPercentageLevel);
             } else {
                 if(_player == null) 
-                    _player = await AddressableLoader.LoadGameObject(_playerData._actorRef, transform);
+                    _player = await AddressableLoader.LoadGameObject(_playerData._actorRef, transform, true, SetPercentagePlayer);
             }
             _player.transform.position = CurrentLevel.PlayerSpawn;
             _camera.Initialize(_player.transform);
@@ -138,19 +150,19 @@ namespace Pixygon.Micro {
         private async Task SetupParallax() {
             if (!CurrentLevelData._useParallax) return;
             if (Parallax == null) {
-                var p = await AddressableLoader.LoadGameObject(_parallaxPrefabRef, transform);
+                var p = await AddressableLoader.LoadGameObject(_parallaxPrefabRef, transform, true, SetPercentageParallax);
                 Parallax = p.GetComponent<Parallax.Parallax>();
             }
             Parallax.Initialize(_player.transform, MicroController._instance.Display._camera, CurrentLevelData._parallaxLayerDatas);
             Log.DebugMessage(DebugGroup.PixygonMicro, "Setup Parallax", this);
         }
         private async Task SetupBgm() {
-            GetComponent<AudioSource>().clip = await AddressableLoader.LoadAsset<AudioClip>(CurrentLevelData._bgmRef);
+            GetComponent<AudioSource>().clip = await AddressableLoader.LoadAsset<AudioClip>(CurrentLevelData._bgmRef, SetPercentageBgm);
             Log.DebugMessage(DebugGroup.PixygonMicro, "Setup BGM", this);
         }
         private async Task SetupPostProc() {
             MicroController._instance.Display._volume.profile = CurrentLevelData._postProcessingProfileRef != null ?
-                await AddressableLoader.LoadAsset<VolumeProfile>(CurrentLevelData._postProcessingProfileRef) : MicroController._instance.Display._defaultVolume;
+                await AddressableLoader.LoadAsset<VolumeProfile>(CurrentLevelData._postProcessingProfileRef, SetPercentagePostproc) : MicroController._instance.Display._defaultVolume;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Setup PostProc", this);
         }
     }
