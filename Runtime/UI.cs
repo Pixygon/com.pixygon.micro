@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Globalization;
+using TMPro;
 using UnityEngine;
 
 namespace Pixygon.Micro {
@@ -30,7 +31,7 @@ namespace Pixygon.Micro {
         public GameObject PregameScreen => _pregameScreen;
         public GameObject LevelEndScreen => _levelEndScreen;
         public void SetLoadPercentage(float f) {
-            _loadPercentageText.text = f + "%";
+            _loadPercentageText.text = f.ToString("N2", CultureInfo.InvariantCulture) + "%";
         }
         public void SetLoadScreen(bool show) {
             _loadPercentageText.text = "0%";
