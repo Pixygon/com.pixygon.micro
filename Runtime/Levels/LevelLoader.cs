@@ -111,10 +111,13 @@ namespace Pixygon.Micro {
             _camera.SnapCamera();
             Log.DebugMessage(DebugGroup.PixygonMicro, "Level loaded!", this);
         }
+        private void SetPercentage(float f) {
+            Debug.Log("f:" + f);
+        }
         private async Task SetupLevel() {
             if (CurrentLevel != null)
                 Destroy(CurrentLevel.gameObject);
-            var g = await AddressableLoader.LoadGameObject(CurrentLevelData._levelRef, transform);
+            var g = await AddressableLoader.LoadGameObject(CurrentLevelData._levelRef, transform, true, SetPercentage);
             CurrentLevel = g.GetComponent<Level>();
             Log.DebugMessage(DebugGroup.PixygonMicro, "Setup Level", this);
         }
