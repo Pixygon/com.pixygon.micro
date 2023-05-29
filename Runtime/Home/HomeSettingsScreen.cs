@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -26,10 +25,19 @@ namespace Pixygon.Micro
                 _homeScreen.TriggerAccountMenu(false);
                 return;
             }
+            _homeScreen.SelectSfx.Play();
             EventSystem.current.SetSelectedGameObject(_eventSettings);
             SetSettingsScreen();
         }
-        
+
+        private void OnEnable() {
+            MicroController._instance.Input._run += DoClose;
+        }
+
+        private void OnDisable() {
+            MicroController._instance.Input._run -= DoClose;
+        }
+
         public void SetSettingsScreen() {
             _versionText.text = MicroController._instance.Version;
             _masterSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat("MasterVolume", 1f)*10);
@@ -58,6 +66,10 @@ namespace Pixygon.Micro
             PlayerPrefs.Save();
             _sfxText.text = $"{Mathf.RoundToInt(PlayerPrefs.GetFloat("SFXVolume", 1f)*100f)}%";
             MicroController._instance.UpdateAudioSettings();
+        }
+        private void DoClose(bool started) {
+            if (!started) return;
+            _homeScreen.BackSfx.Play();
         }
     }
 }

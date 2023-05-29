@@ -24,9 +24,11 @@ namespace Pixygon.Micro {
 
         [SerializeField] private AudioSource _selectSfx;
         [SerializeField] private AudioSource _backSfx;
+        [SerializeField] private AudioSource _moveSfx;
 
         public AudioSource SelectSfx => _selectSfx;
         public AudioSource BackSfx => _backSfx;
+        public AudioSource MoveSfx => _moveSfx;
         
         private Cartridge _lastUsedCartridge;
         public void Initialize() {

@@ -25,6 +25,7 @@ namespace Pixygon.Micro {
                 Instantiate(_faceplatePrefab, new Vector3(0f, 0f, 0f), Quaternion.identity),
                 Instantiate(_faceplatePrefab, new Vector3(27f, 0f, 0f), Quaternion.identity)
             };
+            _home.SelectSfx.Play();
             PopulateFaceplates();
         }
 
@@ -83,6 +84,7 @@ namespace Pixygon.Micro {
                     _currentFaceplate += 1;
                     break;
             }
+            _home.MoveSfx.Play();
             _selectTimer = .2f;
             PopulateFaceplates();
         }
@@ -93,6 +95,7 @@ namespace Pixygon.Micro {
         }
         private void DoClose(bool started) {
             if (!started) return;
+            _home.BackSfx.Play();
             Close();
         }
 

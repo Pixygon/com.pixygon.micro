@@ -21,6 +21,7 @@ namespace Pixygon.Micro {
             if (_currentCartridge == -1)
                 _currentCartridge = 0;
             _cartridges = MicroController._instance.Cartridges;
+            _home.SelectSfx.Play();
             ClearCartridges();
             PopulateCartridges();
         }
@@ -89,6 +90,7 @@ namespace Pixygon.Micro {
                     break;
             }
             _selectTimer = .2f;
+            _home.MoveSfx.Play();
             RefreshCartridges();
         }
         private void Update() {
@@ -97,6 +99,7 @@ namespace Pixygon.Micro {
         }
         private void DoClose(bool started) {
             if (!started) return;
+            _home.BackSfx.Play();
             Close();
         }
         private void SelectCartridge(bool started) {
