@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Version: 2
+  m_Version: 3
   m_UsePipelineSettings: 1
   m_AdditionalLightsShadowResolutionTier: 2
   m_LightLayerMask: 1
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_ShadowRenderingLayers: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 1
+  m_SoftShadowQuality: 2
 --- !u!1 &1311595641
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,6 +838,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -1114,7 +1115,6 @@ MonoBehaviour:
   _bodyMat: {fileID: 2100000, guid: 8d2f0691998ea7549be286a47e33f054, type: 2}
   _detailsMat: {fileID: 2100000, guid: 3c1c511b802f1be4a98900fd3903174e, type: 2}
   _buttonsMat: {fileID: 2100000, guid: 9aca4b10174ee33479122b98ece5637e, type: 2}
-  _testPlate: {fileID: 0}
   _buttons:
   - {fileID: 3759582790313989084}
   - {fileID: 1279818025467201533}
