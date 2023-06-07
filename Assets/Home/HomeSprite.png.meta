@@ -1493,13 +1493,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HomeSprite_0
+      name: Login_Up
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1144
-        width: 125
-        height: 34
+        x: 2
+        y: 1147
+        width: 121
+        height: 29
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1514,15 +1514,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HomeSprite_1
+      name: WalletBtn_Wax_Up
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1099
-        width: 192
-        height: 45
+        x: 2
+        y: 1101
+        width: 187
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1530,6 +1530,447 @@ TextureImporter:
       bones: []
       spriteID: 30e7a78c7318a4495828accc1e3bc322
       internalID: 1705186736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Login_Highlight
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 1147
+        width: 121
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de928456d27354078a63b8b304568291
+      internalID: 2025498764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logout_Up
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 1147
+        width: 121
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f05b8f90f8496440a8235889ccaf4820
+      internalID: 1723836178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Logout_Highlight
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 1147
+        width: 121
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15b107c5252024fdf921c79e5d202704
+      internalID: 1277067321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wallets_Up
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 1147
+        width: 121
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aea66b17c5a854ac389d458789c07c22
+      internalID: -626307335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wallets_Highlight
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 1147
+        width: 121
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 522a75a22cba842458c03cc0c7802fd3
+      internalID: 232584742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LargeCreateAccount_Up
+      rect:
+        serializedVersion: 2
+        x: 753
+        y: 1147
+        width: 121
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc26dff5eeb54450d98e9b51bffbe195
+      internalID: -1459133232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LargeCreateAccount_Hightlight
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 1147
+        width: 121
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 234f7c1c8eb404768a038c111ec6f0eb
+      internalID: -499496757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CreateAccount_Up
+      rect:
+        serializedVersion: 2
+        x: 1003
+        y: 1147
+        width: 102
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f652ddcbc1854aa5a55d0155e230c9b
+      internalID: 1011478839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CreateAccount_Hightlight
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 1147
+        width: 102
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ced5f12949e19405a9beefd6bb059089
+      internalID: -1013154031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slider_Up
+      rect:
+        serializedVersion: 2
+        x: 1148
+        y: 1108
+        width: 12
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eff82513b2d704d6888d166ae0892932
+      internalID: -1074493341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Slider_Highlight
+      rect:
+        serializedVersion: 2
+        x: 1164
+        y: 1108
+        width: 12
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dcb37842c7d340578d264c365d1b9e8
+      internalID: 2106871208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Badge_Wax
+      rect:
+        serializedVersion: 2
+        x: 1149
+        y: 1077
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2363b2067875e4c6e94830420352bc63
+      internalID: -167400709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Badge_Eth
+      rect:
+        serializedVersion: 2
+        x: 1172
+        y: 1077
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e070d0ccf4804ab198ba7eeab3459c2
+      internalID: 1084592447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Badge_Tez
+      rect:
+        serializedVersion: 2
+        x: 1193
+        y: 1077
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fe045a37b2424a49b8ef8afd380e2cb
+      internalID: -134935434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Toggle_On
+      rect:
+        serializedVersion: 2
+        x: 1124
+        y: 1077
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e2f1e4d859cb4b3ea4b967968c20ea7
+      internalID: 1434009036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Toggle_Off
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 1077
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 780cc3012b6f64712a65bd9d9fb09016
+      internalID: 2042446578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalletBtn_Wax_Highlight
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 1101
+        width: 187
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77e221b6d99f443c1aa0bb3dac7573d7
+      internalID: 930936057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalletBtn_Eth_Up
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1101
+        width: 187
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5350279ba15524a74afa1a7adafcb6ca
+      internalID: 584436642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalletBtn_Eth_Highlight
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 1101
+        width: 187
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 816aa0a0471a9471db56d0e7bad5aec6
+      internalID: -1838991930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalletBtn_Tez_Up
+      rect:
+        serializedVersion: 2
+        x: 765
+        y: 1101
+        width: 187
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8dd47ffcff9541e58457e535cb2db2f
+      internalID: -93132478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WalletBtn_Tez_Highlight
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 1101
+        width: 187
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7772ab5a82133496c9cf0195a9965afc
+      internalID: 1922958981
       vertices: []
       indices: 
       edges: []
@@ -1545,6 +1986,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Badge_Eth: 1084592447
+      Badge_Tez: -134935434
+      Badge_Wax: -167400709
       Button_Account_Down: 411696720
       Button_Account_Highlight_0: 1176437753
       Button_Account_Highlight_1: -541137676
@@ -1589,8 +2033,14 @@ TextureImporter:
       Cartridge_Highlighted: 1317097847
       Cartridge_None: -769357605
       Cartridge_Up: 164635715
-      HomeSprite_0: 1065271778
-      HomeSprite_1: 1705186736
+      CreateAccount_Hightlight: -1013154031
+      CreateAccount_Up: 1011478839
+      LargeCreateAccount_Hightlight: -499496757
+      LargeCreateAccount_Up: -1459133232
+      Login_Highlight: 2025498764
+      Login_Up: 1065271778
+      Logout_Highlight: 1277067321
+      Logout_Up: 1723836178
       Screen_Account: -2097982676
       Screen_AccountSetup: -2069749894
       Screen_Appearance: -94492429
@@ -1610,6 +2060,18 @@ TextureImporter:
       Screen_Themes: 1320199542
       Screen_Wallets: 826228973
       Screen_WaxWallets: 125780997
+      Slider_Highlight: 2106871208
+      Slider_Up: -1074493341
+      Toggle_Off: 2042446578
+      Toggle_On: 1434009036
+      WalletBtn_Eth_Highlight: -1838991930
+      WalletBtn_Eth_Up: 584436642
+      WalletBtn_Tez_Highlight: 1922958981
+      WalletBtn_Tez_Up: -93132478
+      WalletBtn_Wax_Highlight: 930936057
+      WalletBtn_Wax_Up: 1705186736
+      Wallets_Highlight: 232584742
+      Wallets_Up: -626307335
       Wombat_Up: -590320334
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
