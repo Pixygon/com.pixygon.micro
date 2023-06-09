@@ -103,5 +103,14 @@ namespace Pixygon.Micro {
             Gamepad.current.SetMotorSpeeds(0f, 0f);
             InputSystem.PauseHaptics();
         }
+
+        public void ClearInputs() {
+            _move = null;
+            _jump = null;
+            _run = null;
+            _shoulderR = null;
+            _shoulderL = null;
+            _select = null;
+        }
     }
 }
