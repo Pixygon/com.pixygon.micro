@@ -52,6 +52,7 @@ namespace Pixygon.Micro
         }
         private void Start() {
             UpdateAudioSettings();
+            UpdateVisualSettings();
         }
         private void Initialize() {
             Application.targetFrameRate = 60;
@@ -106,6 +107,10 @@ namespace Pixygon.Micro
             _mixer.SetFloat("BGMVolume", Mathf.Log10(PlayerPrefs.GetFloat("BGMVolume", 1f)) * 20f);
             _mixer.SetFloat("SFXVolume", Mathf.Log10(PlayerPrefs.GetFloat("SFXVolume", 1f)) * 20f);
         }
+        public void UpdateVisualSettings() {
+            _cam.transform.position = new Vector3(0f, 0f, Mathf.Lerp(-20f, -7f, PlayerPrefs.GetFloat("Visual Zoom", .5f)));
+            Console.transform.localEulerAngles = new Vector3(PlayerPrefs.GetFloat("Visual Yaw", 0f)*10f, PlayerPrefs.GetFloat("Visual Pitch", 0f)*10f, 0f);
+        }
         public void GetWallet(Chain chain, int walletProvider) {
             _walletFetcher.GetWallet(chain, walletProvider, SetWallet);
         }
@@ -126,6 +131,8 @@ namespace Pixygon.Micro
                     SaveManager.SettingsSave._user.tezWallet = wallet;
                     break;
                 case Chain.Polygon:
+                    _api.PatchMaticWallet(wallet);
+                    SaveManager.SettingsSave._user.maticWallet = wallet;
                     break;
                 case Chain.Solana:
                     break;

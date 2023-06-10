@@ -879,7 +879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9145335157128682669
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1728,8 +1728,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 77, y: 77}
+  m_AnchoredPosition: {x: 1, y: 0}
+  m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3432273883239255036
 CanvasRenderer:
@@ -1813,9 +1813,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5321083034677840298}
-        m_TargetAssemblyTypeName: Pixygon.Micro.HomeController, Pixygon.Micro
-        m_MethodName: TriggerCartridgeSelect
+      - m_Target: {fileID: 8987127745247217579}
+        m_TargetAssemblyTypeName: Pixygon.Micro.HomeSettingsScreen, Pixygon.Micro
+        m_MethodName: OpenVisuals
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4629,7 +4629,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -85, y: 0}
-  m_SizeDelta: {x: 77, y: 77}
+  m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3320340368133400148
 CanvasRenderer:
@@ -4713,9 +4713,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5321083034677840298}
-        m_TargetAssemblyTypeName: Pixygon.Micro.HomeController, Pixygon.Micro
-        m_MethodName: TriggerFaceplateSelect
+      - m_Target: {fileID: 8987127745247217579}
+        m_TargetAssemblyTypeName: Pixygon.Micro.HomeSettingsScreen, Pixygon.Micro
+        m_MethodName: OpenAudio
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5981,9 +5981,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8987127745247217579}
         m_TargetAssemblyTypeName: Pixygon.Micro.HomeSettingsScreen, Pixygon.Micro
-        m_MethodName: OpenScreen
+        m_MethodName: OpenAudio
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12058,10 +12058,10 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
+    m_SelectOnUp: {fileID: 2935932695069155627}
     m_SelectOnDown: {fileID: 6807018035268556348}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnLeft: {fileID: 2935932695069155627}
+    m_SelectOnRight: {fileID: 2935932695069155627}
   m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 0.23113206, g: 0.7177044, b: 1, a: 0}
@@ -12087,9 +12087,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8987127745247217579}
         m_TargetAssemblyTypeName: Pixygon.Micro.HomeSettingsScreen, Pixygon.Micro
-        m_MethodName: OpenScreen
+        m_MethodName: OpenVisuals
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13157,16 +13157,16 @@ MonoBehaviour:
   m_FillRect: {fileID: 8449164894712689112}
   m_HandleRect: {fileID: 6028742143575365124}
   m_Direction: 0
-  m_MinValue: -10
-  m_MaxValue: 10
+  m_MinValue: -8
+  m_MaxValue: 8
   m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8987127745247217579}
         m_TargetAssemblyTypeName: Pixygon.Micro.HomeSettingsScreen, Pixygon.Micro
-        m_MethodName: SetBgmAudioLevel
+        m_MethodName: SetVisualPitch
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14102,10 +14102,10 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnUp: {fileID: 8049660309450409523}
+    m_SelectOnDown: {fileID: 8049660309450409523}
+    m_SelectOnLeft: {fileID: 8049660309450409523}
+    m_SelectOnRight: {fileID: 8155273493449153535}
   m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 0.23113206, g: 0.7177044, b: 1, a: 0}
@@ -15325,8 +15325,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 85, y: 0}
-  m_SizeDelta: {x: 77, y: 77}
+  m_AnchoredPosition: {x: 86, y: 0}
+  m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6590175275555418178
 CanvasRenderer:
@@ -15349,7 +15349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -15405,14 +15405,14 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 3348359648359720822}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5321083034677840298}
-        m_TargetAssemblyTypeName: Pixygon.Micro.HomeController, Pixygon.Micro
-        m_MethodName: TriggerSettingsMenu
+      - m_Target: {fileID: 8987127745247217579}
+        m_TargetAssemblyTypeName: Pixygon.Micro.HomeSettingsScreen, Pixygon.Micro
+        m_MethodName: OpenBindings
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16970,6 +16970,18 @@ MonoBehaviour:
   _bgmText: {fileID: 8215081893856865208}
   _sfxText: {fileID: 8561639012542951478}
   _versionText: {fileID: 3242902583921616804}
+  _audioScreen: {fileID: 294194208248923517}
+  _visualsScreen: {fileID: 6515212799190747426}
+  _bindingsScreen: {fileID: 3625918766760513953}
+  _eventAudioSettings: {fileID: 8084138015528160615}
+  _eventVisualsScreen: {fileID: 9142027046446920125}
+  _eventBindingsScreen: {fileID: 1728959175971497305}
+  _zoomSlider: {fileID: 6807018035268556348}
+  _pitchSlider: {fileID: 3993556738180515440}
+  _yawSlider: {fileID: 2935932695069155627}
+  _zoomText: {fileID: 9091121617273118510}
+  _pitchText: {fileID: 6646261292118386221}
+  _yawText: {fileID: 326082037769370180}
   _eventSettings: {fileID: 1490393758021939893}
 --- !u!1 &7290034960179011037
 GameObject:
@@ -18219,9 +18231,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 393413979, guid: af0feb7ff1e8d1140baea2d4f7e6b729, type: 3}
-    m_PressedSprite: {fileID: -2021416218, guid: af0feb7ff1e8d1140baea2d4f7e6b729, type: 3}
-    m_SelectedSprite: {fileID: 393413979, guid: af0feb7ff1e8d1140baea2d4f7e6b729, type: 3}
+    m_HighlightedSprite: {fileID: 681700636, guid: af0feb7ff1e8d1140baea2d4f7e6b729, type: 3}
+    m_PressedSprite: {fileID: -1167438638, guid: af0feb7ff1e8d1140baea2d4f7e6b729, type: 3}
+    m_SelectedSprite: {fileID: 681700636, guid: af0feb7ff1e8d1140baea2d4f7e6b729, type: 3}
     m_DisabledSprite: {fileID: 21300000, guid: ea918014a19c0b444ae47a08650d153b, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -18333,7 +18345,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 3993556738180515440}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 145840778734949372}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 2
@@ -18361,16 +18373,16 @@ MonoBehaviour:
   m_FillRect: {fileID: 7085314944503831815}
   m_HandleRect: {fileID: 3923957495884784317}
   m_Direction: 0
-  m_MinValue: -10
-  m_MaxValue: 10
+  m_MinValue: -8
+  m_MaxValue: 8
   m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8987127745247217579}
         m_TargetAssemblyTypeName: Pixygon.Micro.HomeSettingsScreen, Pixygon.Micro
-        m_MethodName: SetSfxAudioLevel
+        m_MethodName: SetVisualYaw
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21120,16 +21132,16 @@ MonoBehaviour:
   m_FillRect: {fileID: 3288550078203894016}
   m_HandleRect: {fileID: 3254729556969963930}
   m_Direction: 0
-  m_MinValue: -10
-  m_MaxValue: 10
-  m_WholeNumbers: 1
-  m_Value: 0
+  m_MinValue: 0
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8987127745247217579}
         m_TargetAssemblyTypeName: Pixygon.Micro.HomeSettingsScreen, Pixygon.Micro
-        m_MethodName: SetMasterAudioLevel
+        m_MethodName: SetVisualZoom
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

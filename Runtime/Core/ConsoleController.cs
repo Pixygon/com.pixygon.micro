@@ -48,5 +48,11 @@ namespace Pixygon.Micro
         public void SetZoom(float f) {
             MicroController._instance.SetZoom(f);
         }
+        public void SetPitch(float f) {
+            
+        }
+        public void SetYaw(float f) {
+            
+        }
     }
 }
