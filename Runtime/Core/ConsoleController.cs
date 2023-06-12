@@ -44,10 +44,6 @@ namespace Pixygon.Micro
             Log.DebugMessage(DebugGroup.PixygonMicro, "Set faceplate to " + plate._title, this);
             _faceplateSetter.SetFaceplate(plate);
         }
-
-        public void SetZoom(float f) {
-            MicroController._instance.SetZoom(f);
-        }
         public void SetPitch(float f) {
             
         }

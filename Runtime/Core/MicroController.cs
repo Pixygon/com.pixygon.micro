@@ -90,11 +90,8 @@ namespace Pixygon.Micro
                     r.WakeUp();
             }
         }
-        public void SetZoom(float f) {
-            _cam.transform.position = new Vector3(0f, 0f, Mathf.Lerp(-10f, -20f, f));
-        }
         public void SetCameraToDefault() {
-            _cam.transform.position = new Vector3(0f, 0f, -12);
+            UpdateVisualSettings();
         }
         public void SetCameraToCartridgeSelect() {
             _cam.transform.position = new Vector3(0f, -8f, -20);
