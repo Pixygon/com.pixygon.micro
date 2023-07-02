@@ -128,8 +128,12 @@ namespace Pixygon.Micro
                     SaveManager.SettingsSave._user.tezWallet = wallet;
                     break;
                 case Chain.Polygon:
-                    _api.PatchMaticWallet(wallet);
-                    SaveManager.SettingsSave._user.maticWallet = wallet;
+                    _api.PatchMatWallet(wallet);
+                    SaveManager.SettingsSave._user.matWallet = wallet;
+                    break;
+                case Chain.ImmutableX:
+                    _api.PatchImxWallet(wallet);
+                    SaveManager.SettingsSave._user.imxWallet = wallet;
                     break;
                 case Chain.Solana:
                     break;
