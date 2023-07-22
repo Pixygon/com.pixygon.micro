@@ -1,3 +1,4 @@
+using Pixygon.Passport;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -60,9 +61,9 @@ namespace Pixygon.Micro {
             MicroController._instance.Home.SelectSfx.Play();
         }
         
-        private void LoginFailed(string s) {
+        private void LoginFailed(ErrorResponse error) {
             _loginErrorScreen.SetActive(true);
-            _loginErrorText.text = $"Login failed: {s}";
+            _loginErrorText.text = $"Login failed: {error._msg}";
             _loginLoadingScreen.SetActive(false);
             EventSystem.current.SetSelectedGameObject(_eventLoginFailed);
             MicroController._instance.Home.SelectSfx.Play();

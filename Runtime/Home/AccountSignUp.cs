@@ -1,3 +1,4 @@
+using Pixygon.Passport;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -66,10 +67,10 @@ namespace Pixygon.Micro {
             MicroController._instance.Home.SetUsernameText();
         }
         
-        private void SignupFailed(string s) {
+        private void SignupFailed(ErrorResponse error) {
             _signupLoadingScreen.SetActive(false);
             _signupErrorScreen.SetActive(true);
-            _signupErrorText.text = $"Signup failed: {s}";
+            _signupErrorText.text = $"Signup failed: {error._msg}";
             _signupLoadingScreen.SetActive(false);
             EventSystem.current.SetSelectedGameObject(_eventSignupFailed);
             StartSignup();
