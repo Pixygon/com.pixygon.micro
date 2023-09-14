@@ -13,6 +13,9 @@ namespace Pixygon.Micro {
         private float _killheight;
         protected LevelLoader _levelLoader;
         protected IFrameManager _iFrameManager;
+        protected bool _isPaused;
+        private bool _isAnimNotNull;
+        protected float _defaultAnimSpeed = 1f;
 
         public Animator Anim => _anim;
         public SpriteRenderer Renderer => _sprite;
@@ -39,8 +42,21 @@ namespace Pixygon.Micro {
                 _iFrameManager = gameObject.AddComponent<IFrameManager>();
                 _iFrameManager.Initialize(this, _sprite);
             }
+            _isAnimNotNull = _anim != null;
+            if(_isAnimNotNull) _anim.speed = _defaultAnimSpeed;
+            MicroController._instance.OnPause += OnPause;
+            MicroController._instance.OnUnpause += OnUnpause;
         }
-
+        protected virtual void OnPause() {
+            _isPaused = true;
+            if(_rigid != null) _rigid.Sleep();
+            if(_isAnimNotNull) _anim.speed = 0f;
+        }
+        protected virtual void OnUnpause() {
+            _isPaused = false;
+            if(_rigid != null) _rigid.WakeUp();
+            if(_isAnimNotNull) _anim.speed = _defaultAnimSpeed;
+        }
         public virtual void Damage() {
             if (Invincible) return;
             if (!Data._isKillable) return;

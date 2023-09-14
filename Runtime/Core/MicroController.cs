@@ -3,10 +3,10 @@ using Pixygon.NFT;
 using Pixygon.Passport;
 using Pixygon.Saving;
 using UnityEngine;
-using UnityEngine.Audio;
+using System;
+using Pixygon.Versioning;
 
-namespace Pixygon.Micro
-{
+namespace Pixygon.Micro {
     public class MicroController : MonoBehaviour {
         public static MicroController _instance;
         
@@ -21,9 +21,9 @@ namespace Pixygon.Micro
         [SerializeField] private bool _skipIntro;
         [SerializeField] private Cartridge[] _cartridges;
         [SerializeField] private Camera _cam;
-        [SerializeField] private AudioMixer _mixer;
         [SerializeField] private WalletFetcher _walletFetcher;
         [SerializeField] private PixygonApi _api;
+        [SerializeField] private VersionData[] _versions;
         
         public bool HomeMenuOpen { get; private set; }
         public DisplayController Display { get; private set; }
@@ -32,10 +32,8 @@ namespace Pixygon.Micro
         public ConsoleController Console { get; private set; }
         public HomeController Home { get; private set; }
         public bool SkipIntro => _skipIntro;
-        public string Version => _version;
         public Cartridge[] Cartridges => _cartridges;
         public PixygonApi Api => _api;
-        
         public Cartridge CurrentlyLoadedCartridge {
             get {
                 if (PlayerPrefs.GetInt("Cartridge", -1) == -1)
@@ -43,6 +41,13 @@ namespace Pixygon.Micro
                 return _cartridges.Length != 0 ? _cartridges[PlayerPrefs.GetInt("Cartridge")] : null;
             }
         }
+        public bool Pause { get; protected set; }
+        public VersionData[] Versions => _versions;
+
+        public string Version => _versions[_versions.Length-1].Version;
+
+        public Action OnPause;
+        public Action OnUnpause;
         private void Awake() {
             if (_instance == null)
                 _instance = this;
@@ -51,7 +56,6 @@ namespace Pixygon.Micro
             Initialize();
         }
         private void Start() {
-            UpdateAudioSettings();
             UpdateVisualSettings();
         }
         private void Initialize() {
@@ -68,11 +72,16 @@ namespace Pixygon.Micro
             Home.Initialize();
             Input._home += OpenHomeMenu;
         }
+        public virtual void SetPause(bool pause) {
+            Pause = pause;
+            if(Pause) OnPause?.Invoke();
+            else OnUnpause?.Invoke();
+        }
 
         public void OpenHomeMenu(bool started) {
             if (!started || HomeMenuOpen) return;
             HomeMenuOpen = true;
-            PauseGame(HomeMenuOpen);
+            SetPause(HomeMenuOpen);
             Home.Activate(HomeMenuOpen);
         }
         public void CloseHomeMenu() {
@@ -81,14 +90,7 @@ namespace Pixygon.Micro
             if(!Api.IsLoggedIn) return;
             if(Cartridge.Game == null) return;
             HomeMenuOpen = false;
-        }
-        private void PauseGame(bool pause) {
-            foreach (var r in GetComponents<Rigidbody2D>()) {
-                if (pause)
-                    r.Sleep();
-                else
-                    r.WakeUp();
-            }
+            SetPause(HomeMenuOpen);
         }
         public void SetCameraToDefault() {
             UpdateVisualSettings();
@@ -98,11 +100,6 @@ namespace Pixygon.Micro
         }
         public void SetCameraToFaceplateSelect() {
             _cam.transform.position = new Vector3(0f, 0f, -20);
-        }
-        public void UpdateAudioSettings() {
-            _mixer.SetFloat("MasterVolume", Mathf.Log10(PlayerPrefs.GetFloat("MasterVolume", 1f)) * 20f);
-            _mixer.SetFloat("BGMVolume", Mathf.Log10(PlayerPrefs.GetFloat("BGMVolume", 1f)) * 20f);
-            _mixer.SetFloat("SFXVolume", Mathf.Log10(PlayerPrefs.GetFloat("SFXVolume", 1f)) * 20f);
         }
         public void UpdateVisualSettings() {
             _cam.transform.position = new Vector3(0f, 0f, Mathf.Lerp(-20f, -7f, PlayerPrefs.GetFloat("Visual Zoom", .5f)));
