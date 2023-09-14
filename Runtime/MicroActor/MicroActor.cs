@@ -1,3 +1,4 @@
+using Pixygon.Core;
 using Pixygon.DebugTool;
 using Pixygon.Effects;
 using UnityEngine;
@@ -44,8 +45,8 @@ namespace Pixygon.Micro {
             }
             _isAnimNotNull = _anim != null;
             if(_isAnimNotNull) _anim.speed = _defaultAnimSpeed;
-            MicroController._instance.OnPause += OnPause;
-            MicroController._instance.OnUnpause += OnUnpause;
+            PauseManager.OnPause += OnPause;
+            PauseManager.OnUnpause += OnUnpause;
         }
         protected virtual void OnPause() {
             _isPaused = true;

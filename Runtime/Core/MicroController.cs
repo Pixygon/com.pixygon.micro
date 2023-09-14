@@ -4,6 +4,7 @@ using Pixygon.Passport;
 using Pixygon.Saving;
 using UnityEngine;
 using System;
+using Pixygon.Core;
 using Pixygon.Versioning;
 
 namespace Pixygon.Micro {
@@ -41,13 +42,10 @@ namespace Pixygon.Micro {
                 return _cartridges.Length != 0 ? _cartridges[PlayerPrefs.GetInt("Cartridge")] : null;
             }
         }
-        public bool Pause { get; protected set; }
         public VersionData[] Versions => _versions;
 
         public string Version => _versions[_versions.Length-1].Version;
 
-        public Action OnPause;
-        public Action OnUnpause;
         private void Awake() {
             if (_instance == null)
                 _instance = this;
@@ -72,16 +70,11 @@ namespace Pixygon.Micro {
             Home.Initialize();
             Input._home += OpenHomeMenu;
         }
-        public virtual void SetPause(bool pause) {
-            Pause = pause;
-            if(Pause) OnPause?.Invoke();
-            else OnUnpause?.Invoke();
-        }
 
         public void OpenHomeMenu(bool started) {
             if (!started || HomeMenuOpen) return;
             HomeMenuOpen = true;
-            SetPause(HomeMenuOpen);
+            PauseManager.SetPause(HomeMenuOpen);
             Home.Activate(HomeMenuOpen);
         }
         public void CloseHomeMenu() {
@@ -90,7 +83,7 @@ namespace Pixygon.Micro {
             if(!Api.IsLoggedIn) return;
             if(Cartridge.Game == null) return;
             HomeMenuOpen = false;
-            SetPause(HomeMenuOpen);
+            PauseManager.SetPause(HomeMenuOpen);
         }
         public void SetCameraToDefault() {
             UpdateVisualSettings();
