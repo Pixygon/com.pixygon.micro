@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Pixygon.Addressable;
+using Pixygon.Core;
 using Pixygon.DebugTool;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -14,6 +15,8 @@ namespace Pixygon.Micro {
         [SerializeField] private UI _ui;
         [SerializeField] private bool _useLoadingScreen;
         [SerializeField] private GameObject _loadingScreen;
+        [SerializeField] private bool _useMapScreen;
+        [SerializeField] private GameObject _mapScreen;
         
         private bool _isLoading;
         private GameObject _player;
@@ -58,6 +61,7 @@ namespace Pixygon.Micro {
             _loadingLevel = true;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Select Level: " + i, this);
             Ui.TriggerMenuScreen(false);
+            PauseManager.ResetPause();
             LoadLevel(_level[i]);
         }
         public LevelLoader(ScoreManager scoreManager) {
