@@ -595,10 +595,10 @@ MonoBehaviour:
   _shoulderLDownPos: {x: 9.262, y: 4.848, z: -0.06955823}
   _shoulderRUpPos: {x: -9.387295, y: 4.9623084, z: -0.06955823}
   _shoulderRDownPos: {x: -9.269, y: 4.847, z: -0.06955823}
-  _homeUpPos: {x: -2.060247, y: -4.679642, z: 1.5653075}
-  _homeDownPos: {x: -2.060247, y: -4.679642, z: 1.483}
-  _selectUpPos: {x: 2.05566, y: -4.679643, z: 1.5660462}
-  _selectDownPos: {x: 2.05566, y: -4.679643, z: 1.483}
+  _homeUpPos: {x: 2.05566, y: -4.679642, z: 1.5653075}
+  _homeDownPos: {x: 2.05566, y: -4.679642, z: 1.483}
+  _selectUpPos: {x: -2.060247, y: -4.679643, z: 1.5660462}
+  _selectDownPos: {x: -2.060247, y: -4.679643, z: 1.483}
 --- !u!1 &4528693297401987951
 GameObject:
   m_ObjectHideFlags: 0
