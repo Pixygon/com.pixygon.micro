@@ -583,8 +583,8 @@ MonoBehaviour:
   _jumpButton: {fileID: 3627527222409808813}
   _runButton: {fileID: 7524004597018926908}
   _dpadButton: {fileID: 4989216406682883323}
-  _homeButton: {fileID: 6473274606221371209}
-  _pauseButton: {fileID: 1130561132627919189}
+  _homeButton: {fileID: 1130561132627919189}
+  _pauseButton: {fileID: 6473274606221371209}
   _leftShoulderButton: {fileID: 4375369655748881764}
   _rightShoulderButton: {fileID: 3333319537303507514}
   _jumpUpPos: {x: -9.998813, y: 1.7341559, z: 1.6357385}
@@ -1017,6 +1017,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7715228794691567672, guid: 57deef1da2fe49b4785df28478e36774, type: 3}
+      propertyPath: m_Name
+      value: pause_button
+      objectReference: {fileID: 0}
     - target: {fileID: -6928205700502223274, guid: 57deef1da2fe49b4785df28478e36774, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1053,6 +1057,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 3c1c511b802f1be4a98900fd3903174e, type: 2}
+    - target: {fileID: 5789434725993113910, guid: 57deef1da2fe49b4785df28478e36774, type: 3}
+      propertyPath: m_Name
+      value: home_button
+      objectReference: {fileID: 0}
     - target: {fileID: 7608780483665189322, guid: 57deef1da2fe49b4785df28478e36774, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 

@@ -250,7 +250,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6343291228509907286}
         m_TargetAssemblyTypeName: Pixygon.Micro.InputController, Pixygon.Micro
-        m_MethodName: Select
+        m_MethodName: Pause
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
