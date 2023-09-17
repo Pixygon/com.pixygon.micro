@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2052315423106053445}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6343291228509907285}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7285941481470733399
 MonoBehaviour:
@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
@@ -102,6 +103,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6343291228509907287}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -109,7 +111,6 @@ Transform:
   m_Children:
   - {fileID: 7532025605046511640}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6343291228509907286
 MonoBehaviour:
@@ -164,7 +165,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 98101b9c-4084-4166-87cb-923d3fea066e
-    m_ActionName: PixygonMicro/Move[/Keyboard/upArrow,/Keyboard/w,/Keyboard/downArrow,/Keyboard/s,/Keyboard/leftArrow,/Keyboard/a,/Keyboard/rightArrow,/Keyboard/d]
+    m_ActionName: 'PixygonMicro/Move[/Keyboard/upArrow,/Keyboard/w,/Keyboard/downArrow,/Keyboard/s,/Keyboard/leftArrow,/Keyboard/a,/Keyboard/rightArrow,/Keyboard/d]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6343291228509907286}
@@ -180,7 +181,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 72854aa6-d7ac-47b4-ae12-5118501407e2
-    m_ActionName: PixygonMicro/Jump[/Keyboard/space]
+    m_ActionName: 'PixygonMicro/Jump[/Keyboard/space]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6343291228509907286}
@@ -196,7 +197,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: f36727f7-bae8-4200-8577-60ed45103f9e
-    m_ActionName: PixygonMicro/Run[/Keyboard/shift]
+    m_ActionName: 'PixygonMicro/Run[/Keyboard/shift]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6343291228509907286}
@@ -212,7 +213,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 7b04de3b-e4a6-48de-a711-050952693467
-    m_ActionName: PixygonMicro/ShoulderL[/Keyboard/q]
+    m_ActionName: 'PixygonMicro/ShoulderL[/Keyboard/q]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6343291228509907286}
@@ -228,23 +229,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: f768ab23-998a-4bfe-893a-6bf72a024a3d
-    m_ActionName: PixygonMicro/ShoulderR[/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6343291228509907286}
-        m_TargetAssemblyTypeName: Pixygon.Micro.InputController, Pixygon.Micro
-        m_MethodName: Select
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: fbd12fda-ad3d-4a6e-9d5e-467d92876294
-    m_ActionName: PixygonMicro/Select[/Keyboard/backspace]
+    m_ActionName: 'PixygonMicro/ShoulderR[/Keyboard/e]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6343291228509907286}
@@ -259,8 +244,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+    m_ActionId: fbd12fda-ad3d-4a6e-9d5e-467d92876294
+    m_ActionName: 'PixygonMicro/Select[/Keyboard/backspace]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6343291228509907286}
+        m_TargetAssemblyTypeName: Pixygon.Micro.InputController, Pixygon.Micro
+        m_MethodName: Select
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: cd777a65-7933-420e-8f55-59e4f3813b4f
-    m_ActionName: PixygonMicro/Home[/Keyboard/enter]
+    m_ActionName: 'PixygonMicro/Home[/Keyboard/enter]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6343291228509907286}
@@ -276,15 +277,15 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 5199dec9-013f-4079-ba7a-de77f666e428
-    m_ActionName: PixygonMicro/Quit[/Keyboard/escape]
+    m_ActionName: 'PixygonMicro/Quit[/Keyboard/escape]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: be04b948-3d74-4f60-a56c-84091a799426
-    m_ActionName: PixygonMicro/Point[/Mouse/position]
+    m_ActionName: 'PixygonMicro/Point[/Mouse/position]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 3f3e9839-3818-445a-86dc-33f94f8d5873
-    m_ActionName: PixygonMicro/Click[/Mouse/leftButton]
+    m_ActionName: 'PixygonMicro/Click[/Mouse/leftButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PixygonMicro

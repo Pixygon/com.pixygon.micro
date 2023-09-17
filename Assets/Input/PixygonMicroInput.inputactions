@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Select",
+                    "name": "Home",
                     "type": "Button",
                     "id": "fbd12fda-ad3d-4a6e-9d5e-467d92876294",
                     "expectedControlType": "Button",
@@ -60,7 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Home",
+                    "name": "Pause",
                     "type": "Button",
                     "id": "cd777a65-7933-420e-8f55-59e4f3813b4f",
                     "expectedControlType": "Button",
@@ -313,7 +313,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Select",
+                    "action": "Home",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -324,7 +324,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Select",
+                    "action": "Home",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -335,7 +335,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Home",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -346,7 +346,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Home",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

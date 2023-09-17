@@ -8,7 +8,7 @@ namespace Pixygon.Micro
         [SerializeField] private Transform _runButton;
         [SerializeField] private Transform _dpadButton;
         [SerializeField] private Transform _homeButton;
-        [SerializeField] private Transform _selectButton;
+        [SerializeField] private Transform _pauseButton;
         [SerializeField] private Transform _leftShoulderButton;
         [SerializeField] private Transform _rightShoulderButton;
 
@@ -29,7 +29,7 @@ namespace Pixygon.Micro
             MicroController._instance.Input._jump += Jump;
             MicroController._instance.Input._run += Run;
             MicroController._instance.Input._home += Home;
-            MicroController._instance.Input._select += Select;
+            MicroController._instance.Input._pause += Pause;
             MicroController._instance.Input._shoulderL += ShoulderL;
             MicroController._instance.Input._shoulderR += ShoulderR;
             MicroController._instance.Input._move += Dpad;
@@ -38,7 +38,7 @@ namespace Pixygon.Micro
             MicroController._instance.Input._jump -= Jump;
             MicroController._instance.Input._run -= Run;
             MicroController._instance.Input._home -= Home;
-            MicroController._instance.Input._select -= Select;
+            MicroController._instance.Input._pause -= Pause;
             MicroController._instance.Input._shoulderL -= ShoulderL;
             MicroController._instance.Input._shoulderR -= ShoulderR;
             MicroController._instance.Input._move -= Dpad;
@@ -53,8 +53,8 @@ namespace Pixygon.Micro
         private void Run(bool started) {
             _runButton.transform.localPosition = started ? _runDownPos : _runUpPos;
         }
-        private void Select(bool started) {
-            _selectButton.transform.localPosition = started ? _selectDownPos : _selectUpPos;
+        private void Pause(bool started) {
+            _pauseButton.transform.localPosition = started ? _selectDownPos : _selectUpPos;
         }
         private void Home(bool started) {
             _homeButton.transform.localPosition = started ? _homeDownPos : _homeUpPos;

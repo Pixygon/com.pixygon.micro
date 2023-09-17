@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -12,7 +11,7 @@ namespace Pixygon.Micro {
         public UnityAction<bool> _run;
         public UnityAction<bool> _shoulderR;
         public UnityAction<bool> _shoulderL;
-        public UnityAction<bool> _select;
+        public UnityAction<bool> _pause;
         public UnityAction<bool> _home;
         public UnityAction<bool> _quit;
 
@@ -24,7 +23,7 @@ namespace Pixygon.Micro {
         public InputAction RunAction { get; private set; }
         public InputAction ShoulderRAction { get; private set; }
         public InputAction ShoulderLAction { get; private set; }
-        public InputAction SelectAction { get; private set; }
+        public InputAction PauseAction { get; private set; }
         public InputAction HomeAction { get; private set; }
 
         private void OnEnable() {
@@ -34,7 +33,7 @@ namespace Pixygon.Micro {
             RunAction = InputAsset.FindAction("Run");
             ShoulderRAction = InputAsset.FindAction("ShoulderR");
             ShoulderLAction = InputAsset.FindAction("ShoulderL");
-            SelectAction = InputAsset.FindAction("Select");
+            PauseAction = InputAsset.FindAction("Select");
             HomeAction = InputAsset.FindAction("Jump");
         }
 
@@ -69,12 +68,12 @@ namespace Pixygon.Micro {
             if (context.canceled)
                 _shoulderL.Invoke(false);
         }
-        public void Select(InputAction.CallbackContext context) {
-            if (_select == null) return;
+        public void Pause(InputAction.CallbackContext context) {
+            if (_pause == null) return;
             if (context.performed)
-                _select.Invoke(true);
+                _pause.Invoke(true);
             if (context.canceled)
-                _select.Invoke(false);
+                _pause.Invoke(false);
         }
         public void Home(InputAction.CallbackContext context) {
             if (_home == null) return;
@@ -110,7 +109,7 @@ namespace Pixygon.Micro {
             _run = null;
             _shoulderR = null;
             _shoulderL = null;
-            _select = null;
+            _pause = null;
         }
     }
 }
