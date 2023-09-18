@@ -88,6 +88,7 @@ namespace Pixygon.Micro {
 
         public virtual void Update() {
             if (Data == null) return;
+            if (_isPaused) return;
             if (transform.position.y <= _killheight)
                 Die();
             if(Data._isKillable && Data._useIframes)

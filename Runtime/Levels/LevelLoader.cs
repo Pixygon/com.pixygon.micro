@@ -45,6 +45,7 @@ namespace Pixygon.Micro {
         }
         public void StartGame() {
             if (MicroController._instance.HomeMenuOpen) return;
+            PauseManager.ResetPause();
             Log.DebugMessage(DebugGroup.PixygonMicro, "Selected level", this);
             if (_levelLoaded || _loadingLevel) return;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Level was not loaded...", this);
@@ -61,7 +62,6 @@ namespace Pixygon.Micro {
             _loadingLevel = true;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Select Level: " + i, this);
             Ui.TriggerMenuScreen(false);
-            PauseManager.ResetPause();
             LoadLevel(_level[i]);
         }
         public LevelLoader(ScoreManager scoreManager) {
