@@ -45,7 +45,6 @@ namespace Pixygon.Micro {
         }
         public void StartGame() {
             if (MicroController._instance.HomeMenuOpen) return;
-            PauseManager.ResetPause();
             Log.DebugMessage(DebugGroup.PixygonMicro, "Selected level", this);
             if (_levelLoaded || _loadingLevel) return;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Level was not loaded...", this);
@@ -84,7 +83,10 @@ namespace Pixygon.Micro {
         public void ResetLevels() {
             CurrentLevel.RespawnLevel(this);
         }
-        
+
+        private void Awake() {
+            PauseManager.ResetPause();
+        }
         private void Start() {
             Initialize();
         }

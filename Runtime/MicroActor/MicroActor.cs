@@ -1,3 +1,4 @@
+using System;
 using Pixygon.Core;
 using Pixygon.DebugTool;
 using Pixygon.Effects;
@@ -29,6 +30,16 @@ namespace Pixygon.Micro {
         public MovementConfig MovementConfig => _movementConfig;
         public GroundChecker GroundChecker => _groundChecker;
 
+        private void OnEnable() {
+            PauseManager.OnPause += OnPause;
+            PauseManager.OnUnpause += OnUnpause;
+        }
+
+        private void OnDisable() {
+            PauseManager.OnPause -= OnPause;
+            PauseManager.OnUnpause -= OnUnpause;
+        }
+
         public virtual void Initialize(LevelLoader loader, MicroActorData data) {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Initializing MicroActor");
             Data = data;
@@ -45,8 +56,6 @@ namespace Pixygon.Micro {
             }
             _isAnimNotNull = _anim != null;
             if(_isAnimNotNull) _anim.speed = _defaultAnimSpeed;
-            PauseManager.OnPause += OnPause;
-            PauseManager.OnUnpause += OnUnpause;
         }
         protected virtual void OnPause() {
             _isPaused = true;

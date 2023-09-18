@@ -44,9 +44,11 @@ namespace Pixygon.Micro {
         }
 
         private void SetPauseScreen() {
+            Debug.Log("Hi pause!");
             _pauseScreen.SetActive(true);
         }
         private void DisablePauseScreen() {
+            Debug.Log("Bye pause!");
             _pauseScreen.SetActive(false);
         }
         public void SetLoadPercentage(float f) {
