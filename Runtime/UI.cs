@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Pixygon.Core;
+using TMPro;
 using UnityEngine;
 
 namespace Pixygon.Micro {
@@ -27,8 +28,27 @@ namespace Pixygon.Micro {
         [SerializeField] private TextMeshPro _versionText;
         [SerializeField] private TextMeshPro _loadPercentageText;
         [SerializeField] private GameObject _loadScreen;
+
+        [SerializeField] private GameObject _pauseScreen;
         public GameObject PregameScreen => _pregameScreen;
         public GameObject LevelEndScreen => _levelEndScreen;
+
+        private void OnEnable() {
+            PauseManager.OnPause += SetPauseScreen;
+            PauseManager.OnUnpause += DisablePauseScreen;
+        }
+
+        private void OnDisable() {
+            PauseManager.OnPause -= SetPauseScreen;
+            PauseManager.OnUnpause -= DisablePauseScreen;
+        }
+
+        private void SetPauseScreen() {
+            _pauseScreen.SetActive(true);
+        }
+        private void DisablePauseScreen() {
+            _pauseScreen.SetActive(false);
+        }
         public void SetLoadPercentage(float f) {
             _loadPercentageText.text = Mathf.RoundToInt(f*100f) + "%";
         }
