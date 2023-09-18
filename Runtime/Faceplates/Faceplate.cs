@@ -29,17 +29,6 @@ namespace Pixygon.Micro {
         public Color _faceplate;
     }
 
-    public enum Rarity {
-        Infinite,
-        Promo,
-        Common,
-        Scarce,
-        Rare,
-        Epic,
-        Legendary,
-        Mythical
-    }
-
     [Serializable]
     public class FaceplateData {
         public string _title;
