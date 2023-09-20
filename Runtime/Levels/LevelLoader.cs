@@ -45,10 +45,14 @@ namespace Pixygon.Micro {
         }
         public void StartGame() {
             if (MicroController._instance.HomeMenuOpen) return;
-            Log.DebugMessage(DebugGroup.PixygonMicro, "Selected level", this);
             if (_levelLoaded || _loadingLevel) return;
-            Log.DebugMessage(DebugGroup.PixygonMicro, "Level was not loaded...", this);
-            StartLevel(_currentLevelId);
+            if (_useMapScreen) {
+                _mapScreen.SetActive(true);
+            } else {
+                Log.DebugMessage(DebugGroup.PixygonMicro, "Selected level", this);
+                Log.DebugMessage(DebugGroup.PixygonMicro, "Level was not loaded...", this);
+                StartLevel(_currentLevelId);
+            }
         }
         private void SelectLevel(bool started) {
             if (!started) return;
@@ -70,6 +74,10 @@ namespace Pixygon.Micro {
             if (!_levelLoaded) return;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Ending level!", this);
             _levelLoaded = false;
+            if(_useMapScreen) {
+                _mapScreen.SetActive(true);
+                return;
+            }
             if (_currentLevelId < _level.Length) {
                 _currentLevelId += 1;
                 StartLevel(_currentLevelId);
