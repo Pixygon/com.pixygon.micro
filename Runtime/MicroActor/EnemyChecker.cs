@@ -11,12 +11,14 @@ namespace Pixygon.Micro
     {
         [SerializeField] private EffectData _attackFx;
         [SerializeField] private MicroActor _ignoreActor;
+
+        [SerializeField] private Vector3 _offset = Vector3.down * .5f;
+        [SerializeField] private Vector3 _size = Vector2.one * 1.2f;
         
         public void HandleEnemyCheck(Action onHit) {
             var pos = transform.position;
-            Debug.DrawRay(pos, Vector3.down * .4f);
             var hits = new List<RaycastHit2D>();
-            Physics2D.BoxCast(pos, Vector2.one * .8f, 0f, Vector2.down, new ContactFilter2D().NoFilter(), hits,  .5f);
+            Physics2D.BoxCast(pos+_offset, _size, 0f, Vector2.down, new ContactFilter2D().NoFilter(), hits,  .5f);
             foreach (var hit in hits.Where(hit => hit.collider != null)) {
                 var actor = hit.collider.gameObject.GetComponent<MicroActor>();
                 if (!actor) continue;
@@ -30,6 +32,11 @@ namespace Pixygon.Micro
                 EffectsManager.SpawnEffect(_attackFx.GetFullID, transform.position);
                 onHit.Invoke();
             }
+        }
+
+        private void OnDrawGizmos() {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireCube(transform.position+_offset, _size);
         }
     }
 }

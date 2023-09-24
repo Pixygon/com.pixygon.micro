@@ -30,6 +30,7 @@ namespace Pixygon.Micro {
         public Level CurrentLevel { get; private set; }
         public LevelData CurrentLevelData { get; private set; }
         public Parallax.Parallax Parallax { get; private set; }
+        public LevelData[] Levels => _level;
         public int Difficulty { get; private set; }
         public void SetDifficulty(int difficulty) {
             Difficulty = difficulty;
