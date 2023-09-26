@@ -55,6 +55,10 @@ namespace Pixygon.Micro {
                 StartLevel(_currentLevelId);
             }
         }
+        public void ReturnToMap() {
+            if (_useMapScreen)
+                _mapScreen.SetActive(true);
+        }
         private void SelectLevel(bool started) {
             if (!started) return;
             if(_useLoadingScreen)

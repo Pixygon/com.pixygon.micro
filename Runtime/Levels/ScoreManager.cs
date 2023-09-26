@@ -13,6 +13,8 @@ namespace Pixygon.Micro {
         }
         
         public void AddPoints(int points, Vector3 pos) {
+            if (_levelLoader.Difficulty == 1) points *= 3;
+            if (_levelLoader.Difficulty == 2) points *= 5;
             _points += points;
             _levelLoader.Ui.SetPoints(_points);
             EffectsManager.SpawnScoreEffect(points, pos);
