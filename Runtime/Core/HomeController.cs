@@ -32,8 +32,8 @@ namespace Pixygon.Micro {
         
         private Cartridge _lastUsedCartridge;
         public void Initialize() {
-            GetComponent<Canvas>().worldCamera = MicroController._instance.Display._uiCamera;
-            GetComponent<Canvas>().sortingLayerName = "Menu";
+            //GetComponent<Canvas>().worldCamera = MicroController._instance.Display._uiCamera;
+            //GetComponent<Canvas>().sortingLayerName = "Menu";
             SetCurrentCartridge();
         }
         public void Activate(bool activate) {

@@ -3,7 +3,6 @@ using Pixygon.NFT;
 using Pixygon.Passport;
 using Pixygon.Saving;
 using UnityEngine;
-using System;
 using Pixygon.Core;
 using Pixygon.Versioning;
 
@@ -63,7 +62,7 @@ namespace Pixygon.Micro {
             Input = Instantiate(_inputPrefab, transform);
             Console = Instantiate(_consolePrefab, transform);
             Cartridge = Instantiate(_cartridgePrefab, transform);
-            Home = Instantiate(_homePrefab, transform);
+            Home = Instantiate(_homePrefab, Console.ScreenCanvas);
             Instantiate(_saveManager, transform);
             Cartridge.Initilize();
             Console.Initialize();

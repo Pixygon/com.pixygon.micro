@@ -12,6 +12,9 @@ namespace Pixygon.Micro {
         [Range(0f, 1f)] public float HorizontalDampingBasic = .18f;
         [Range(0f, 1f)] public float HorizontalDampingWhenStopping = .5f;
         [Range(0f, 1f)] public float HorizontalDampingWhenTurning = .3f;
+        [Range(0f, 1f)] public float VerticalDampingBasic = .18f;
+        [Range(0f, 1f)] public float VerticalDampingWhenStopping = .5f;
+        [Range(0f, 1f)] public float VerticalDampingWhenTurning = .3f;
         [Range(0f, 1f)] public float VerticalDamping = .5f;
         [Range(0f, 1f)] public float GroundCheckSize = .2f;
     }

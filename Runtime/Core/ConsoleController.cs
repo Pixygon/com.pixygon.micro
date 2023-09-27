@@ -7,9 +7,16 @@ namespace Pixygon.Micro
 {
     public class ConsoleController : MonoBehaviour {
         [SerializeField] private FaceplateSetter _faceplateSetter;
+        [SerializeField] private Canvas _mainCanvas;
+        [SerializeField] private Transform _screenCanvas;
+        [SerializeField] private GameObject _onScreenControls;
+        
         private string _faceplateListURL = "https://PixygonMicro.b-cdn.net/Faceplates/Faceplates.json";
         private bool _faceplateListLoaded;
         public FaceplateData[] Faceplates { get; private set; }
+        public Transform ScreenCanvas => _screenCanvas;
+
+        public bool TestOnScreenControls;
         
         public FaceplateData CurrentlyLoadedFaceplate {
             get {
@@ -19,7 +26,27 @@ namespace Pixygon.Micro
             }
         }
         public void Initialize() {
+            SetCanvas();
             UpdateFaceplate();
+        }
+
+        private void SetCanvas() {
+            #if UNITY_IOS || UNITY_ANDROID
+                _onScreenControls.SetActive(true);
+                _screenCanvas.GetComponent<CanvasGroup>().interactable = true;
+            #else 
+                _onScreenControls.SetActive(false);
+            #endif
+            /*
+            if (TestOnScreenControls) {
+                _onScreenControls.SetActive(true);
+                _screenCanvas.GetComponent<CanvasGroup>().interactable = true;
+            }
+            else {
+                _onScreenControls.SetActive(false);
+            }
+            */
+            _mainCanvas.worldCamera = Camera.main;
         }
 
         public void HideConsole(bool hide) {
