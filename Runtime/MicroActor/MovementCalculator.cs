@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Pixygon.Micro {
     public class MovementCalculator : MonoBehaviour
     {
-        public static float CalculateForce(float startForce, MovementConfig mov, bool running)
+        public static float CalculateHorizontalForce(float startForce, MovementConfig mov, bool running)
         {
             var horizontalForce = startForce;
             var move = MicroController._instance.Input.Movement.x;
