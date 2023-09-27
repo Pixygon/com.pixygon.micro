@@ -97,12 +97,12 @@ namespace Pixygon.Micro {
             if(_selectTimer > 0f)
                 _selectTimer -= Time.deltaTime;
         }
-        private void DoClose(bool started) {
+        public void DoClose(bool started) {
             if (!started) return;
             _home.BackSfx.Play();
             Close();
         }
-        private void SelectCartridge(bool started) {
+        public void SelectCartridge(bool started) {
             if (!started) return;
             if (!_objects[1].CanUse) return;
             if(_currentCartridge > MicroController._instance.Cartridges.Length)

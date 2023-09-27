@@ -66,6 +66,7 @@ namespace Pixygon.Micro {
         }
         public void TriggerFaceplateSelect(bool open) {
             _mainMenu.SetActive(!open);
+            _faceplateMenu.SetActive(open);
             if (open) _faceplateSelector.Open();
         }
         public void TriggerCartridgeSelect(bool open) {

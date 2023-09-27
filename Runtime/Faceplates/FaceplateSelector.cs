@@ -45,7 +45,7 @@ namespace Pixygon.Micro {
         private async void ActuallyClose() {
             await Task.Yield();
             _objects = null;
-            _home.TriggerCartridgeSelect(false);
+            _home.TriggerFaceplateSelect(false);
             _isClosing = false;
         }
 
