@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+Changelog v0.7.1
+
+Added Features
+   - Pause the game when home-menu is active
+   - Add a popup for recent changes
+   - Fix input for mobile
+
+Fixed
+   - If exiting CartridgeSelector with Home-button, instead of back/select, cartridge isn't deleted
+   - Make sure fonts don't fuck up
+   - Login not working
+   - Add back-button to Cartridge-select
+   - Add back-button to Faceplate-select
+   - Add left/right buttons to faceplate and cartridge-select
+
 ## 0.6.0
 ### Fixed
 - Bug where levels could be double-loaded

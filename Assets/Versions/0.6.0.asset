@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f4ce67e83e6945ad8cc12aef5212b17, type: 3}
+  m_Name: 0.6.0
+  m_EditorClassIdentifier: 
+  _categoryId: 0
+  _id: 0
+  _idType: 0
+  Version: 0.6.0
+  Changelog: 'Changelog 0.6.0
+
+    Fixed
+
+    - Bug where levels could be double-loaded
+
+    -
+    Bug where BGM starts playing twice
+
+    - Bug where audiomixers weren''t properly
+    loaded
+
+    
+
+    Changed
+
+    - More info for faceplates
+
+    
+
+    Added
+
+    -
+    LevelObjects, that can be reset
+
+    - Added more options for pickup-interactions
+
+    -
+    Added color-options for Parallax-effect
+
+    - Exposed all InputActions in InputController
+
+    -
+    PagedContentManager for Cartridges
+
+    - Made item-selection clearer for cartridges
+    and faceplates
+
+    - Scoremanager for keeping track of scores!
+
+    - ActorSpawner
+    can now repeatedly spawn more enemies
+
+    - Added field for Collectables
+
+    -
+    Killheight is now set in levels
+
+    - Added AIListener-system
+
+    - Added
+    AIReaction-system
+
+    - Added AIMover-system
+
+    - Major improvements to
+    AI
+
+    - Added more info to faceplates
+
+    - Added different ItemSpawners
+
+    -
+    Added login to wax-wallet
+
+    - New way of selecting faceplates
+
+    - New
+    way of selecting cartridge
+
+    - Added new Home-menu
+
+    - Added Pixygon
+    Sign Up
+
+    - Added Pixygon Sign In
+
+    - Added Pixygon Passport'

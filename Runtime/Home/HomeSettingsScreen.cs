@@ -1,5 +1,6 @@
 using System;
 using Pixygon.Addressable;
+using Pixygon.Versioning;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -34,6 +35,7 @@ namespace Pixygon.Micro
         [SerializeField] private TextMeshProUGUI _yawText;
         
         [SerializeField] private GameObject _eventSettings;
+        [SerializeField] private ChangelogMenu _changelog;
         public void OpenScreen(bool open) {
             gameObject.SetActive(open);
             if (!open) {
@@ -44,11 +46,9 @@ namespace Pixygon.Micro
             EventSystem.current.SetSelectedGameObject(_eventSettings);
             SetSettingsScreen();
         }
-
         private void OnEnable() {
             MicroController._instance.Input._run += DoClose;
         }
-
         private void OnDisable() {
             MicroController._instance.Input._run -= DoClose;
         }
@@ -80,6 +80,7 @@ namespace Pixygon.Micro
         }
         public void SetSettingsScreen() {
             _versionText.text = MicroController._instance.Version;
+            _changelog.Initialize(MicroController._instance.Versions);
             EventSystem.current.SetSelectedGameObject(_eventSettings);
         }
         

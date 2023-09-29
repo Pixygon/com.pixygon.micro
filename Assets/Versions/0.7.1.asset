@@ -16,4 +16,10 @@ MonoBehaviour:
   _id: 0
   _idType: 0
   Version: 0.7.1
-  Changelog: None
+  Changelog: "Changelog v0.7.1\r\n\r\nAdded Features\r\n   - Pause the game when
+    home-menu is active\r\n   - Add a popup for recent changes\r\n   - Fix input
+    for mobile\r\n\r\nFixed\r\n   - If exiting CartridgeSelector with Home-button,
+    instead of back/select, cartridge isn't deleted\r\n   - Make sure fonts don't
+    fuck up\r\n   - Login not working\r\n   - Add back-button to Cartridge-select\r\n  
+    - Add back-button to Faceplate-select\r\n   - Add left/right buttons to faceplate
+    and cartridge-select"
