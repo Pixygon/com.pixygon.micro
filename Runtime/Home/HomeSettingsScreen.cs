@@ -83,7 +83,13 @@ namespace Pixygon.Micro
             _changelog.Initialize(MicroController._instance.Versions);
             EventSystem.current.SetSelectedGameObject(_eventSettings);
         }
-        
+
+        private void Update() {
+            if (MicroController._instance.Input.TouchZoom != 0) {
+                SetVisualZoom(.1f * MicroController._instance.Input.TouchZoom);
+            }
+        }
+
         public void SetVisualZoom(float f) {
             PlayerPrefs.SetFloat("Visual Zoom", Mathf.Clamp(f, 0f, 1f));
             PlayerPrefs.Save();

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -47,8 +47,7 @@ namespace Pixygon.Micro {
                 EventSystem.current.SetSelectedGameObject(_eventHomeTest);
             else
                 MicroController._instance.SetCameraToDefault();
-            if (MicroController._instance.Api.IsLoggedIn)
-                SetUsernameText();
+            SetUsernameText();
         }
         public void TriggerSettingsMenu(bool open) {
             _mainMenu.SetActive(!open);
@@ -88,7 +87,11 @@ namespace Pixygon.Micro {
             Activate(false);
         }
         public void SetUsernameText() {
-            _usernameText.text = "Hi, " + MicroController._instance.Api.AccountData.user.userName + "!";
+            if (MicroController._instance.Api.IsLoggedIn)
+                _usernameText.text = "Hi, " + MicroController._instance.Api.AccountData.user.userName + "!";
+            else {
+                _usernameText.text = "Not logged in";
+            }
         }
         public void WalletReceived() {
             _homeAccountScreen.WalletReceived();

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -25,6 +26,10 @@ namespace Pixygon.Micro {
         public InputAction ShoulderLAction { get; private set; }
         public InputAction PauseAction { get; private set; }
         public InputAction HomeAction { get; private set; }
+        public InputAction PrimaryFingerPos { get; private set; }
+        public InputAction SecondaryFingerPos { get; private set; }
+        public InputAction TouchAction { get; private set; }
+        public int TouchZoom { get; private set; }
 
         private void OnEnable() {
             _moveAction = InputAsset.FindAction("Move");
@@ -35,6 +40,11 @@ namespace Pixygon.Micro {
             ShoulderLAction = InputAsset.FindAction("ShoulderL");
             PauseAction = InputAsset.FindAction("Select");
             HomeAction = InputAsset.FindAction("Jump");
+            PrimaryFingerPos = InputAsset.FindAction("PrimaryFingerPosition");
+            SecondaryFingerPos = InputAsset.FindAction("SecondaryFingerPosition");
+            TouchAction = InputAsset.FindAction("SecondaryTouchContact");
+            TouchAction.started += _ => ZoomStart();
+            TouchAction.canceled += _ => ZoomEnd();
         }
 
         public void Move(InputAction.CallbackContext context) {
@@ -102,6 +112,39 @@ namespace Pixygon.Micro {
             Gamepad.current.SetMotorSpeeds(0f, 0f);
             InputSystem.PauseHaptics();
         }
+        
+        private Coroutine ZoomCoroutine;
+        public void ZoomStart() {
+            if (!MicroController._instance.HomeMenuOpen) return;
+            ZoomCoroutine = StartCoroutine(ZoomDetection());
+            TouchZoom = 0;
+        }
+
+        public void ZoomEnd() {
+            if (!MicroController._instance.HomeMenuOpen) return;
+            StopCoroutine(ZoomCoroutine);
+            TouchZoom = 0;
+        }
+
+        private IEnumerator ZoomDetection() {
+            var prevDistance = 0f;
+            while (true) {
+                TouchZoom = 0;
+                var distance = Vector2.Distance(MicroController._instance.Input.PrimaryFingerPos.ReadValue<Vector2>(),
+                    MicroController._instance.Input.SecondaryFingerPos.ReadValue<Vector2>());
+
+                //if (Vector2.Dot(primaryDelta, secondaryDelta) < -.9f) {
+                    //1 if swipe, -1 if pinch
+                //}
+                if (distance > prevDistance) {
+                    TouchZoom = -1;
+                } else if (distance < prevDistance) {
+                    TouchZoom = 1;
+                }
+                prevDistance = distance;
+            }
+        }
+        
 
         public void ClearInputs() {
             _move = null;

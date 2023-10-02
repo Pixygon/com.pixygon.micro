@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3965240310092523280}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5250042263949909182}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4343666993450949090
 MonoBehaviour:
@@ -44,17 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6eba4f8a2010104ca774de0710c2138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameId: 
-  _feedback:
-    gameId: 
-    title: 
-    feedbackType: 
-    description: 
-    rating: 0
-    coordinateX: 0
-    coordinateY: 0
-    coordinateZ: 0
-    area: 
 --- !u!1 &4957823692606078818
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,13 +68,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4957823692606078818}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5250042263949909182}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4883480438912146272
 MonoBehaviour:
@@ -109,6 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5250042263949909182}
   - component: {fileID: 2666906224468455078}
+  - component: {fileID: 2670766749810366378}
   m_Layer: 0
   m_Name: PixygonMicro
   m_TagString: Untagged
@@ -123,6 +113,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5756036675148950165}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -131,7 +122,6 @@ Transform:
   - {fileID: 8593434519685708296}
   - {fileID: 4486607451237712401}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2666906224468455078
 MonoBehaviour:
@@ -152,11 +142,25 @@ MonoBehaviour:
   _consolePrefab: {fileID: 6011951935827920969, guid: 76328be2e7b034646b916ff5875cb0c2, type: 3}
   _homePrefab: {fileID: 5321083034677840298, guid: 8e6e17919a6d908438687f4da9b6aaa8, type: 3}
   _saveManager: {fileID: 8802132155151757322, guid: 0f8c484b759fa8348b3ba249ef24f825, type: 3}
-  _version: 0.5.6
+  _version: 0.7.2
   _skipIntro: 0
   _cartridges: []
-  _faceplates: []
   _cam: {fileID: 0}
-  _mixer: {fileID: 0}
   _walletFetcher: {fileID: 4883480438912146272}
   _api: {fileID: 4343666993450949090}
+  _versions:
+  - {fileID: 11400000, guid: c70669ff178eced4bb2c17edb0bf40a9, type: 2}
+  - {fileID: 11400000, guid: 44ab1224e23f5eb4e9741dfb32a80e66, type: 2}
+--- !u!114 &2670766749810366378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5756036675148950165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22579036435e412bbc472eea1823bd78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mixer: {fileID: 24100000, guid: d4ec974ae6554804993cecaf29f69344, type: 2}

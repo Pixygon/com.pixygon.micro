@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+Changelog v0.7.2
+
+Fixed
+   - Login-button not working
+   - When logging out, it will still show your name
+   - Pinch to zoom
+   - Make touch-controls much larger
+   - Login: Always show input-fields
+   - Increase size of slider-handles in homescreen
+
 Changelog v0.7.1
 
 Added Features

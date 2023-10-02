@@ -50,6 +50,7 @@ namespace Pixygon.Micro {
                 _accountUserPage.SetActive(false);
                 _noAccountScreen.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(_eventNoAccount);
+                MicroController._instance.Home.SetUsernameText();
             } else {
                 _accountUserPage.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(_eventAccount);
