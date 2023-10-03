@@ -52,8 +52,10 @@ namespace Pixygon.Micro {
         }
         public void Jump(InputAction.CallbackContext context) {
             if (_jump == null) return;
-            if (context.performed)
+            if (context.performed) {
                 _jump.Invoke(true);
+                Handheld.Vibrate();
+            }
             if (context.canceled)
                 _jump.Invoke(false);
         }
@@ -106,6 +108,7 @@ namespace Pixygon.Micro {
             var time = 0f;
             while (time < duration) {
                 time += Time.deltaTime;
+                Handheld.Vibrate();
                 Gamepad.current.SetMotorSpeeds(intensity*curve.Evaluate(time/duration), intensity*curve.Evaluate(time/duration));
                 await Task.Yield();
             }
