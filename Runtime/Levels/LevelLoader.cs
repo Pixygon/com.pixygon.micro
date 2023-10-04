@@ -88,7 +88,7 @@ namespace Pixygon.Micro {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Ending level!", this);
             _levelLoaded = false;
             if(_useMapScreen) {
-                _mapScreen.SetActive(true);
+                ReturnToMap();
                 return;
             }
             if (_currentLevelId < _level.Length) {
