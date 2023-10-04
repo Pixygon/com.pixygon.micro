@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Pixygon.DebugTool;
 using Pixygon.NFT;
 using Pixygon.Passport;
@@ -56,6 +57,14 @@ namespace Pixygon.Micro {
             UpdateVisualSettings();
         }
         private void Initialize() {
+            #if UNITY_IOS || UNITY_ANDROID
+            var newCarts = new List<Cartridge>();
+            foreach (var c in Cartridges) {
+                if (!c._testingCartridge)
+                    newCarts.Add(c);
+            }
+            _cartridges = newCarts.ToArray();
+            #endif
             Application.targetFrameRate = 60;
             Instantiate(_debuggerPrefab, transform);
             Display = Instantiate(_displayPrefab, transform);

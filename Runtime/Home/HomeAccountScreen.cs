@@ -45,6 +45,8 @@ namespace Pixygon.Micro {
             MicroController._instance.Home.SelectSfx.Play();
         }
 
+        [SerializeField] private GameObject _walletSelectionButton;
+
         public void SetAccountScreen() {
             if (!MicroController._instance.Api.IsLoggedIn) {
                 _accountUserPage.SetActive(false);
@@ -58,6 +60,9 @@ namespace Pixygon.Micro {
                 _ethIcon.SetActive(!string.IsNullOrWhiteSpace(Saving.SaveManager.SettingsSave._user.ethWallet));
                 _tezIcon.SetActive(!string.IsNullOrWhiteSpace(Saving.SaveManager.SettingsSave._user.tezWallet));
                 _usernameText.text = Saving.SaveManager.SettingsSave._user.userName;
+                #if UNITY_IOS || UNITY_ANDROID
+                _walletSelectionButton.SetActive(false);
+                #endif
             }
         }
         public void OpenScreen(bool open) {

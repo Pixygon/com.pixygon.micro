@@ -13,5 +13,6 @@ namespace Pixygon.Micro {
         public Sprite _cartridgeBanner;
         public Color _cartridgeColor;
         public NFTLink _nftLink;
+        public bool _testingCartridge;
     }
 }
