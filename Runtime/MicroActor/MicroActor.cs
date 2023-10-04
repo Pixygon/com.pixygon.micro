@@ -61,7 +61,11 @@ namespace Pixygon.Micro {
         protected virtual void OnPause() {
             _isPaused = true;
             if(_rigid != null) _rigid.Sleep();
-            if(_isAnimNotNull) _anim.speed = 0f;
+            if (_anim == null) {
+                Debug.Log("Hey! I've been... removed??");
+                Debug.Log(gameObject.name);
+            }
+            if(_isAnimNotNull && _anim != null) _anim.speed = 0f;
         }
         protected virtual void OnUnpause() {
             _isPaused = false;
