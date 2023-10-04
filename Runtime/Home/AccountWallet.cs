@@ -19,6 +19,9 @@ namespace Pixygon.Micro {
         [SerializeField] private GameObject _waxWallets;
 
         public void OpenWaxWallets() {
+            #if UNITY_IOS || UNITY_ANDROID
+            return;
+            #endif
             _waxWallets.SetActive(true);
             EventSystem.current.SetSelectedGameObject(_eventWaxWallets);
         }
@@ -38,11 +41,17 @@ namespace Pixygon.Micro {
             EventSystem.current.SetSelectedGameObject(_eventFetching);
         }
         public void GetEthWallet() {
+#if UNITY_IOS || UNITY_ANDROID
+            return;
+#endif
             MicroController._instance.GetWallet(Chain.Ethereum, 0);
             _walletLoadingScreen.SetActive(true);
             EventSystem.current.SetSelectedGameObject(_eventFetching);
         }
         public void GetTezWallet() {
+#if UNITY_IOS || UNITY_ANDROID
+            return;
+#endif
             MicroController._instance.GetWallet(Chain.Tezos, 0);
             _walletLoadingScreen.SetActive(true);
             EventSystem.current.SetSelectedGameObject(_eventFetching);

@@ -54,61 +54,79 @@ namespace Pixygon.Micro {
             if (_jump == null) return;
             if (context.performed) {
                 _jump.Invoke(true);
-                Handheld.Vibrate();
+                Taptic.Vibrate();
             }
             if (context.canceled)
                 _jump.Invoke(false);
         }
         public void Run(InputAction.CallbackContext context) {
             if (_run == null) return;
-            if (context.performed)
+            if (context.performed) {
                 _run.Invoke(true);
+                Taptic.Vibrate();
+            }
             if (context.canceled)
                 _run.Invoke(false);
         }
         public void ShoulderR(InputAction.CallbackContext context) {
             if (_shoulderR == null) return;
-            if (context.performed)
+            if (context.performed) {
                 _shoulderR.Invoke(true);
+                Taptic.Vibrate();
+            }
             if (context.canceled)
                 _shoulderR.Invoke(false);
         }
         public void ShoulderL(InputAction.CallbackContext context) {
             if (_shoulderL == null) return;
-            if (context.performed)
+            if (context.performed) {
                 _shoulderL.Invoke(true);
+                Taptic.Vibrate();
+            }
             if (context.canceled)
                 _shoulderL.Invoke(false);
         }
         public void Pause(InputAction.CallbackContext context) {
             if (_pause == null) return;
-            if (context.performed)
+            if (context.performed) {
                 _pause.Invoke(true);
+                Taptic.Vibrate();
+            }
             if (context.canceled)
                 _pause.Invoke(false);
         }
         public void Home(InputAction.CallbackContext context) {
             if (_home == null) return;
-            if (context.performed)
+            if (context.performed) {
                 _home.Invoke(true);
+                Taptic.Success();
+            }
             if (context.canceled)
                 _home.Invoke(false);
         }
         public void Quit(InputAction.CallbackContext context) {
             if (_quit == null) return;
-            if (context.performed)
+            if (context.performed) {
                 _quit.Invoke(true);
+                Taptic.Vibrate();
+            }
             if (context.canceled)
                 _quit.Invoke(false);
         }
         public static async void Rumble(float duration, float intensity = 1f) {
             InputSystem.ResumeHaptics();
             if (Gamepad.current == null) return;
+            if (intensity < .3f) {
+                Taptic.Light();
+            } else if (intensity > .3f && intensity < .7f) {
+                Taptic.Medium();
+            } else if (intensity > .7f) {
+                Taptic.Heavy();
+            }
             var curve = AnimationCurve.EaseInOut(0f, 1f, 1f, 0f);
             var time = 0f;
             while (time < duration) {
                 time += Time.deltaTime;
-                Handheld.Vibrate();
                 Gamepad.current.SetMotorSpeeds(intensity*curve.Evaluate(time/duration), intensity*curve.Evaluate(time/duration));
                 await Task.Yield();
             }
