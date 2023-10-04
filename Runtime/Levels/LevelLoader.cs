@@ -58,6 +58,14 @@ namespace Pixygon.Micro {
         public void ReturnToMap() {
             if (_useMapScreen)
                 _mapScreen.SetActive(true);
+            //Unload everything related to last level
+            GetComponent<AudioSource>().Stop();
+            Destroy(CurrentLevel);
+            Destroy(_player.gameObject);
+            Destroy(Parallax.gameObject);
+            _levelLoaded = false;
+            _loadingLevel = false;
+            CurrentLevelData = null;
         }
         private void SelectLevel(bool started) {
             if (!started) return;

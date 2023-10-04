@@ -9,12 +9,14 @@ namespace Pixygon.Micro
         [SerializeField] private FaceplateSetter _faceplateSetter;
         [SerializeField] private Canvas _mainCanvas;
         [SerializeField] private Transform _screenCanvas;
+        [SerializeField] private Transform _gameUi;
         [SerializeField] private GameObject _onScreenControls;
         
         private string _faceplateListURL = "https://PixygonMicro.b-cdn.net/Faceplates/Faceplates.json";
         private bool _faceplateListLoaded;
         public FaceplateData[] Faceplates { get; private set; }
         public Transform ScreenCanvas => _screenCanvas;
+        public Transform GameUi => _gameUi;
 
         public bool TestOnScreenControls;
         

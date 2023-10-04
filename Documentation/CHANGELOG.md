@@ -2,24 +2,13 @@
 
 ## Unreleased
 
-Changelog v0.7.2
-
-Fixed
-   - Login-button not working
-   - When logging out, it will still show your name
-   - Pinch to zoom
-   - Make touch-controls much larger
-   - Login: Always show input-fields
-   - Increase size of slider-handles in homescreen
-
-Changelog v0.7.1
-
-Added Features
+## Changelog v0.7.1
+### Added Features
    - Pause the game when home-menu is active
    - Add a popup for recent changes
    - Fix input for mobile
 
-Fixed
+### Fixed
    - If exiting CartridgeSelector with Home-button, instead of back/select, cartridge isn't deleted
    - Make sure fonts don't fuck up
    - Login not working
