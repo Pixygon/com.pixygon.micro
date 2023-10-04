@@ -61,7 +61,7 @@ namespace Pixygon.Micro {
                 _mapScreen.SetActive(true);
             //Unload everything related to last level
             PauseManager.SetPause(false);
-            PauseManager.ResetPause();
+            //PauseManager.ResetPause();
             GetComponent<AudioSource>().Stop();
             Destroy(CurrentLevel.gameObject);
             Destroy(_player.gameObject);
