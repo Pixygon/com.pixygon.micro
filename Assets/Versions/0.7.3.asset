@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f4ce67e83e6945ad8cc12aef5212b17, type: 3}
+  m_Name: 0.7.3
+  m_EditorClassIdentifier: 
+  _categoryId: 0
+  _id: 0
+  _idType: 0
+  Version: 0.7.3
+  Changelog: "Changelog v0.7.3\r\n\r\nFixed\r\n   - Opening and then closing home
+    menu makes it impossible to open again\r\n   - Can't go back from login-screen\r\n  
+    - Improve screen-rotation\r\n   - Fields for login says \"password\" in wrong
+    place!\r\n   - Add slight haptic feedback on button-press\r\n   - Set color-mode
+    to linear\r\n   - Hide \"connect wallet\"-buttons on mobile\r\n   - Skin-select:
+    Hide purchase on mobile\r\n   - Add link to discord"

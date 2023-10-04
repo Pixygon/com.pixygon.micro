@@ -46,6 +46,14 @@ namespace Pixygon.Micro
             EventSystem.current.SetSelectedGameObject(_eventSettings);
             SetSettingsScreen();
         }
+
+        public void OpenDiscord() {
+            Application.OpenURL("https://discord.gg/aNFfuYaxXP");
+        }
+
+        public void OpenX() {
+            Application.OpenURL("https://twitter.com/Pixygon");
+        }
         private void OnEnable() {
             MicroController._instance.Input._run += DoClose;
         }

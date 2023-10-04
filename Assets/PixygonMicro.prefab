@@ -151,6 +151,7 @@ MonoBehaviour:
   _versions:
   - {fileID: 11400000, guid: c70669ff178eced4bb2c17edb0bf40a9, type: 2}
   - {fileID: 11400000, guid: 44ab1224e23f5eb4e9741dfb32a80e66, type: 2}
+  - {fileID: 11400000, guid: 5149bf14d956b36449ed778e7adf67b9, type: 2}
 --- !u!114 &2670766749810366378
 MonoBehaviour:
   m_ObjectHideFlags: 0
