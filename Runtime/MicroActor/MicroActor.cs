@@ -29,6 +29,7 @@ namespace Pixygon.Micro {
         public Rigidbody2D Rigid => _rigid;
         public MovementConfig MovementConfig => _movementConfig;
         public GroundChecker GroundChecker => _groundChecker;
+        public Vector3 LastSafePosition { get; set; }
 
         private void OnEnable() {
             PauseManager.OnPause += OnPause;
