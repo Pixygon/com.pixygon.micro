@@ -66,7 +66,7 @@ namespace Pixygon.Micro {
         protected virtual void OnUnpause() {
             _isPaused = false;
             if(_rigid != null) _rigid.WakeUp();
-            if(_isAnimNotNull) _anim.speed = _defaultAnimSpeed;
+            if(_isAnimNotNull && _anim != null) _anim.speed = _defaultAnimSpeed;
         }
         public virtual void Damage(bool resetPosition = false) {
             if (Invincible) return;
