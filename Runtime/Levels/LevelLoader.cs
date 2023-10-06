@@ -32,6 +32,22 @@ namespace Pixygon.Micro {
         public Parallax.Parallax Parallax { get; private set; }
         public LevelData[] Levels => _level;
         public int Difficulty { get; private set; }
+        
+        public LevelLoader(ScoreManager scoreManager) {
+            ScoreManager = scoreManager;
+        }
+        private void Awake() {
+            PauseManager.ResetPause();
+        }
+        private void Start() {
+            Initialize();
+        }
+        private void OnEnable() {
+            MicroController._instance.Input._jump += SelectLevel;
+        }
+        private void OnDisable() {
+            MicroController._instance.Input._jump -= SelectLevel;
+        }
         public void SetDifficulty(int difficulty) {
             Difficulty = difficulty;
         }
@@ -81,8 +97,13 @@ namespace Pixygon.Micro {
             Ui.TriggerMenuScreen(false);
             LoadLevel(_level[i]);
         }
-        public LevelLoader(ScoreManager scoreManager) {
-            ScoreManager = scoreManager;
+        
+        public void SwitchLevel(int level) {
+            if (!_levelLoaded) return;
+            Log.DebugMessage(DebugGroup.PixygonMicro, "Switch level!", this);
+            _levelLoaded = false;
+            _currentLevelId = level;
+            StartLevel(_currentLevelId);
         }
         public void EndLevel() {
             if (!_levelLoaded) return;
@@ -104,19 +125,6 @@ namespace Pixygon.Micro {
         }
         public void ResetLevels() {
             CurrentLevel.RespawnLevel(this);
-        }
-
-        private void Awake() {
-            PauseManager.ResetPause();
-        }
-        private void Start() {
-            Initialize();
-        }
-        private void OnEnable() {
-            MicroController._instance.Input._jump += SelectLevel;
-        }
-        private void OnDisable() {
-            MicroController._instance.Input._jump -= SelectLevel;
         }
         private void Initialize() {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Game started", this);
