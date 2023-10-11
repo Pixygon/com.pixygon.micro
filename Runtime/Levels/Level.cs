@@ -13,8 +13,9 @@ namespace Pixygon.Micro {
         [ContextMenuItem("Get LevelObjects", "GatherLevelObjects")]
         [SerializeField] private LevelObject[] _levelObjects;
         [SerializeField] private Transform _playerSpawn;
+        [SerializeField] private Transform[] _playerSpawns;
         [SerializeField] private int _killHeight;
-        public Vector3 PlayerSpawn => _playerSpawn.position;
+        public Transform[] PlayerSpawns => _playerSpawns;
         public int KillHeight => _killHeight;
 
         public void RespawnLevel(LevelLoader loader) {

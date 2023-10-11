@@ -68,6 +68,7 @@ namespace Pixygon.Micro {
             } else {
                 Log.DebugMessage(DebugGroup.PixygonMicro, "Selected level", this);
                 Log.DebugMessage(DebugGroup.PixygonMicro, "Level was not loaded...", this);
+                _playerSpawn = 0;
                 StartLevel(_currentLevelId);
             }
         }
@@ -97,18 +98,21 @@ namespace Pixygon.Micro {
             Ui.TriggerMenuScreen(false);
             LoadLevel(_level[i]);
         }
-        
-        public void SwitchLevel(int level) {
+
+        private int _playerSpawn;
+        public void SwitchLevel(int level, int playerSpawn = 0) {
             if (!_levelLoaded) return;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Switch level!", this);
             _levelLoaded = false;
             _currentLevelId = level;
+            _playerSpawn = playerSpawn;
             StartLevel(_currentLevelId);
         }
         public void EndLevel() {
             if (!_levelLoaded) return;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Ending level!", this);
             _levelLoaded = false;
+            _playerSpawn = 0;
             if(_useMapScreen) {
                 ReturnToMap();
                 return;
@@ -169,7 +173,7 @@ namespace Pixygon.Micro {
                 if(_player == null) 
                     _player = await AddressableLoader.LoadGameObject(_playerData._actorRef, transform, true, f => Ui.SetLoadPercentage(f*.2f+.4f));
             }
-            _player.transform.position = CurrentLevel.PlayerSpawn;
+            _player.transform.position = CurrentLevel.PlayerSpawns[_playerSpawn].position;
             _camera.Initialize(_player.transform);
             _player.GetComponent<MicroActor>().Initialize(this, _playerData);
             Log.DebugMessage(DebugGroup.PixygonMicro, "Setup Player", this);
