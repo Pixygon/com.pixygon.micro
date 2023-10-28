@@ -1,4 +1,3 @@
-using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -12,7 +11,6 @@ namespace Pixygon.Micro {
         [SerializeField] private MicroActorSpawner[] _actors;
         [ContextMenuItem("Get LevelObjects", "GatherLevelObjects")]
         [SerializeField] private LevelObject[] _levelObjects;
-        [SerializeField] private Transform _playerSpawn;
         [SerializeField] private Transform[] _playerSpawns;
         [SerializeField] private int _killHeight;
         public Transform[] PlayerSpawns => _playerSpawns;
