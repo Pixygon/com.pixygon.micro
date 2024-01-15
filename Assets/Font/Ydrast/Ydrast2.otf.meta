@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 737b67f7905ba2f4b9008200b42c5fdf
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Ydrast-Lite
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 2
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
