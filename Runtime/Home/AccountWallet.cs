@@ -18,6 +18,8 @@ namespace Pixygon.Micro {
         [SerializeField] private GameObject _eventFetching;
         [SerializeField] private GameObject _waxWallets;
 
+        [SerializeField] private GameObject _walletObjects;
+        
         public void OpenWaxWallets() {
             #if UNITY_IOS || UNITY_ANDROID
             return;
@@ -65,6 +67,11 @@ namespace Pixygon.Micro {
         public void OpenWalletScreen() {
             gameObject.SetActive(true);
             EventSystem.current.SetSelectedGameObject(_eventWallet);
+            
+            
+#if UNITY_IOS || UNITY_ANDROID
+            _walletObjects.SetAtive(false);
+#endif
             RefreshWallets();
         }
 
