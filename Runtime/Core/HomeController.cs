@@ -60,9 +60,9 @@ namespace Pixygon.Micro {
         }
         public void TriggerAccountMenu(bool open) {
             _mainMenu.SetActive(!open);
-            if(!open)
-                EventSystem.current.SetSelectedGameObject(_eventHomeTest);
-            else
+            if(open)
+                //EventSystem.current.SetSelectedGameObject(_eventHomeTest);
+            //else
                 _homeAccountScreen.OpenScreen(true);
         }
         public void TriggerFaceplateSelect(bool open) {
@@ -72,13 +72,13 @@ namespace Pixygon.Micro {
         }
         public void TriggerCartridgeSelect(bool open) {
             _mainMenu.SetActive(!open);
-            _cartridgeMenu.SetActive(open);
+            //_cartridgeMenu.SetActive(open);
             if (open) _cartridgeSelector.Open();
         }
         public void SetCurrentCartridge() {
             var hasCartridge = MicroController._instance.CurrentlyLoadedCartridge != null;
             //_gameTitleText.text = hasCartridge ? MicroController._instance.CurrentlyLoadedCartridge._title : "No cartridge";
-            _gameBannerImage.sprite = hasCartridge ? MicroController._instance.CurrentlyLoadedCartridge._cartridgeBanner : _noGameSprite;
+            //_gameBannerImage.sprite = hasCartridge ? MicroController._instance.CurrentlyLoadedCartridge._cartridgeBanner : _noGameSprite;
         }
         public void StartGame() {
             if (MicroController._instance.CurrentlyLoadedCartridge == null) return;
