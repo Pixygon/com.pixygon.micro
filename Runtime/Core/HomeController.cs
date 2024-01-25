@@ -9,18 +9,20 @@ namespace Pixygon.Micro {
         [SerializeField] private GameObject _homeMenu;
         [SerializeField] private GameObject _mainMenu;
         [SerializeField] private GameObject _faceplateMenu;
-        [SerializeField] private GameObject _cartridgeMenu;
+        //[SerializeField] private GameObject _cartridgeMenu;
+        [SerializeField] private GameObject _gameIconButton;
         [SerializeField] private Image _gameBannerImage;
         [SerializeField] private TextMeshProUGUI _usernameText;
-        [SerializeField] private GameObject _eventHomeTest;
-        [SerializeField] private Button _startGameButton;
+        [SerializeField] private TextMeshProUGUI _currentActivityText;
+        //[SerializeField] private GameObject _eventHomeTest;
+        //[SerializeField] private Button _startGameButton;
         [SerializeField] private CartridgeSelector _cartridgeSelector;
         [SerializeField] private FaceplateSelector _faceplateSelector;
         
         [SerializeField] private HomeAccountScreen _homeAccountScreen;
         [SerializeField] private HomeSettingsScreen _homeSettingsScreen;
 
-        [SerializeField] private Sprite _noGameSprite;
+        //[SerializeField] private Sprite _noGameSprite;
 
         [SerializeField] private AudioSource _selectSfx;
         [SerializeField] private AudioSource _backSfx;
@@ -39,21 +41,21 @@ namespace Pixygon.Micro {
         public void Activate(bool activate) {
             _homeMenu.SetActive(activate);
             _mainMenu.SetActive(activate);
-            _cartridgeMenu.SetActive(false);
+            //_cartridgeMenu.SetActive(false);
             _faceplateMenu.SetActive(false);
             _homeAccountScreen.gameObject.SetActive(false);
             _homeSettingsScreen.gameObject.SetActive(false);
-            if(activate)
-                EventSystem.current.SetSelectedGameObject(_eventHomeTest);
-            else
+            if(!activate)
+            //    EventSystem.current.SetSelectedGameObject(_eventHomeTest);
+            //else
                 MicroController._instance.SetCameraToDefault();
             SetUsernameText();
         }
         public void TriggerSettingsMenu(bool open) {
             _mainMenu.SetActive(!open);
-            if(!open)
-                EventSystem.current.SetSelectedGameObject(_eventHomeTest);
-            else
+            if(open)
+            //    EventSystem.current.SetSelectedGameObject(_eventHomeTest);
+            //else
                 _homeSettingsScreen.OpenScreen(true);
         }
         public void TriggerAccountMenu(bool open) {
