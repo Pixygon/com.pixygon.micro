@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: TestCartridge
   m_EditorClassIdentifier: 
   _id: 
-  _title: SampleGame
-  _description: This is a sample
+  _title: 'Pixiel: Echoes of the Lost'
+  _description: 
   _version: 0.5.0
   _gamePrefab: {fileID: 1708818856127366985, guid: 8c760b4f2ca0f504289b93f6d4f631ce, type: 3}
   _cartridgeImage: {fileID: 2800000, guid: ce5f11cd993284c4f9c54f854bdc8c9c, type: 3}
-  _cartridgeBanner: {fileID: 0}
+  _cartridgeBanner: {fileID: 21300000, guid: 7f31797cc0de20f40aab3d2a54a986a3, type: 3}
+  _cartridgeBackground: {fileID: 21300000, guid: 593c67067b77c9b4d9e7f9d155789439, type: 3}
   _cartridgeColor: {r: 1, g: 1, b: 1, a: 1}
   _nftLink:
     RequiresNFT: 0
     Template: []
+  _testingCartridge: 0

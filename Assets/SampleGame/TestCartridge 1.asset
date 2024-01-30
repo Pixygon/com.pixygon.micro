@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: TestCartridge 1
   m_EditorClassIdentifier: 
   _id: 
-  _title: SampleGame
+  _title: Anima
   _description: This is a sample
   _version: 0.5.0
   _gamePrefab: {fileID: 1708818856127366985, guid: 8c760b4f2ca0f504289b93f6d4f631ce, type: 3}
   _cartridgeImage: {fileID: 2800000, guid: ce5f11cd993284c4f9c54f854bdc8c9c, type: 3}
-  _cartridgeBanner: {fileID: 0}
+  _cartridgeBanner: {fileID: 21300000, guid: 8de5f1f2f998eeb42bd09e1c040d0f84, type: 3}
+  _cartridgeBackground: {fileID: 21300000, guid: 6ce852b22fd846a498c65100712a8882, type: 3}
   _cartridgeColor: {r: 1, g: 0, b: 0, a: 1}
   _nftLink:
     RequiresNFT: 0
     Template: []
+  _testingCartridge: 0

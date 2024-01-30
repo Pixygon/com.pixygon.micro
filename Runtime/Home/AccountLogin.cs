@@ -57,7 +57,7 @@ namespace Pixygon.Micro {
             _accountScreen.SetAccountScreen();
             _loginLoadingScreen.SetActive(false);
             gameObject.SetActive(false);
-            MicroController._instance.Home.SetUsernameText();
+            MicroController._instance.Home.HomeMainScreen.SetUsernameText();
             MicroController._instance.Home.SelectSfx.Play();
         }
         

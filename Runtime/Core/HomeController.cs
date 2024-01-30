@@ -1,29 +1,17 @@
-﻿using System.Collections;
-using TMPro;
+﻿using Pixygon.Passport;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace Pixygon.Micro {
     public class HomeController : MonoBehaviour {
         [SerializeField] private GameObject _homeMenu;
         [SerializeField] private GameObject _mainMenu;
         [SerializeField] private GameObject _faceplateMenu;
-        //[SerializeField] private GameObject _cartridgeMenu;
-        [SerializeField] private GameObject _gameIconButton;
-        [SerializeField] private Image _gameBannerImage;
-        [SerializeField] private TextMeshProUGUI _usernameText;
-        [SerializeField] private TextMeshProUGUI _currentActivityText;
-        //[SerializeField] private GameObject _eventHomeTest;
-        //[SerializeField] private Button _startGameButton;
         [SerializeField] private CartridgeSelector _cartridgeSelector;
         [SerializeField] private FaceplateSelector _faceplateSelector;
-        
+        [SerializeField] private HomeMainScreen _homeMainScreen;
         [SerializeField] private HomeAccountScreen _homeAccountScreen;
         [SerializeField] private HomeSettingsScreen _homeSettingsScreen;
-
-        //[SerializeField] private Sprite _noGameSprite;
-
+        [SerializeField] private AccountUI _accountUI;
         [SerializeField] private AudioSource _selectSfx;
         [SerializeField] private AudioSource _backSfx;
         [SerializeField] private AudioSource _moveSfx;
@@ -31,6 +19,7 @@ namespace Pixygon.Micro {
         public AudioSource SelectSfx => _selectSfx;
         public AudioSource BackSfx => _backSfx;
         public AudioSource MoveSfx => _moveSfx;
+        public HomeMainScreen HomeMainScreen => _homeMainScreen;
         
         private Cartridge _lastUsedCartridge;
         public void Initialize() {
@@ -38,18 +27,24 @@ namespace Pixygon.Micro {
             //GetComponent<Canvas>().sortingLayerName = "Menu";
             SetCurrentCartridge();
         }
+        private void OnEnable() {
+            _accountUI.OnLoginAction += () => { _homeMainScreen.PassportBadge.Set(); };
+            _accountUI.OnLogoutAction += () => { _homeMainScreen.PassportBadge.Set(); };
+        }
+        private void OnDisable() {
+            _accountUI.OnLoginAction -= () => { _homeMainScreen.PassportBadge.Set(); };
+            _accountUI.OnLogoutAction -= () => { _homeMainScreen.PassportBadge.Set(); };
+        }
         public void Activate(bool activate) {
             _homeMenu.SetActive(activate);
             _mainMenu.SetActive(activate);
-            //_cartridgeMenu.SetActive(false);
+            _homeMainScreen.Activate();
             _faceplateMenu.SetActive(false);
             _homeAccountScreen.gameObject.SetActive(false);
             _homeSettingsScreen.gameObject.SetActive(false);
             if(!activate)
-            //    EventSystem.current.SetSelectedGameObject(_eventHomeTest);
-            //else
                 MicroController._instance.SetCameraToDefault();
-            SetUsernameText();
+            HomeMainScreen.Activate();
         }
         public void TriggerSettingsMenu(bool open) {
             _mainMenu.SetActive(!open);
@@ -63,7 +58,8 @@ namespace Pixygon.Micro {
             if(open)
                 //EventSystem.current.SetSelectedGameObject(_eventHomeTest);
             //else
-                _homeAccountScreen.OpenScreen(true);
+            _accountUI.StartLogin();
+                //_homeAccountScreen.OpenScreen(true);
         }
         public void TriggerFaceplateSelect(bool open) {
             _mainMenu.SetActive(!open);
@@ -87,13 +83,6 @@ namespace Pixygon.Micro {
             _lastUsedCartridge = MicroController._instance.CurrentlyLoadedCartridge;
             MicroController._instance.CloseHomeMenu();
             Activate(false);
-        }
-        public void SetUsernameText() {
-            if (MicroController._instance.Api.IsLoggedIn)
-                _usernameText.text = "Hi, " + MicroController._instance.Api.AccountData.user.userName + "!";
-            else {
-                _usernameText.text = "Not logged in";
-            }
         }
         public void WalletReceived() {
             _homeAccountScreen.WalletReceived();

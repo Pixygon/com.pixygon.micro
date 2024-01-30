@@ -136,6 +136,7 @@ namespace Pixygon.Micro
         }
         private void DoClose(bool started) {
             if (!started) return;
+            _homeScreen.Activate(true);
             _homeScreen.BackSfx.Play();
         }
     }
