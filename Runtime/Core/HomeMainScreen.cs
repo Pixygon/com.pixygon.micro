@@ -26,7 +26,7 @@ namespace Pixygon.Micro {
                 _slots.Add(slot);
                 i++;
             }
-
+            _gameSlotsRect.sizeDelta = new Vector2(330 * _slots.Count, _gameSlotsRect.sizeDelta.y);
             _currentlyActiveSlot = 0;
             _slots[_currentlyActiveSlot].Select();
         }
