@@ -113,6 +113,7 @@ MonoBehaviour:
   _bg: {fileID: 8729930677748298333}
   _home: {fileID: 5321083034677840298}
   _gameBgAnimated: {fileID: 1886123115660523503}
+  _scrollRect: {fileID: 8199586111388182619}
 --- !u!1 &53262085080894072
 GameObject:
   m_ObjectHideFlags: 0

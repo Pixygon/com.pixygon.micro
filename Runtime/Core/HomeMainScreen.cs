@@ -26,10 +26,12 @@ namespace Pixygon.Micro {
                 _slots.Add(slot);
                 i++;
             }
-            _gameSlotsRect.sizeDelta = new Vector2(330 * _slots.Count, _gameSlotsRect.sizeDelta.y);
+            _gameSlotsRect.sizeDelta = new Vector2((330f * (_slots.Count + 1f)) + 100f, _gameSlotsRect.sizeDelta.y);
             _currentlyActiveSlot = 0;
             _slots[_currentlyActiveSlot].Select();
         }
+
+        [SerializeField] private ScrollRect _scrollRect;
 
         public void Clear() {
             if(_slots != null) {
@@ -44,6 +46,9 @@ namespace Pixygon.Micro {
             _slots[_currentlyActiveSlot].Deselect();
             _currentlyActiveSlot = i;
             _slots[_currentlyActiveSlot].Select();
+            var num = _slots[_currentlyActiveSlot].GetComponent<RectTransform>().anchoredPosition.x /
+                      _gameSlotsRect.sizeDelta.x;
+            _scrollRect.horizontalNormalizedPosition = num;
             _gameBgAnimated.SetNewBg(_slots[_currentlyActiveSlot].Cartridge._cartridgeBackground);
             if (!_slots[_currentlyActiveSlot].CanUse) return;
             if(_currentlyActiveSlot > MicroController._instance.Cartridges.Length)
