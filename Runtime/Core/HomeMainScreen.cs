@@ -32,7 +32,7 @@ namespace Pixygon.Micro {
         }
 
         [SerializeField] private ScrollRect _scrollRect;
-
+        [SerializeField] private float _offset = 300f;
         public void Clear() {
             if(_slots != null) {
                 foreach (var g in _slots) {
@@ -46,9 +46,7 @@ namespace Pixygon.Micro {
             _slots[_currentlyActiveSlot].Deselect();
             _currentlyActiveSlot = i;
             _slots[_currentlyActiveSlot].Select();
-            var num = _slots[_currentlyActiveSlot].GetComponent<RectTransform>().anchoredPosition.x /
-                      _gameSlotsRect.sizeDelta.x;
-            _scrollRect.horizontalNormalizedPosition = num;
+            AdjustScrollRect();
             _gameBgAnimated.SetNewBg(_slots[_currentlyActiveSlot].Cartridge._cartridgeBackground);
             if (!_slots[_currentlyActiveSlot].CanUse) return;
             if(_currentlyActiveSlot > MicroController._instance.Cartridges.Length)
@@ -56,6 +54,16 @@ namespace Pixygon.Micro {
             PlayerPrefs.SetInt("Cartridge", _currentlyActiveSlot);
             PlayerPrefs.Save();
             _home.SetCurrentCartridge();
+        }
+
+        private void AdjustScrollRect() {
+            var num = _scrollRect.transform.InverseTransformPoint(_gameSlotsRect.position).x
+                        - _scrollRect.transform.InverseTransformPoint(_slots[_currentlyActiveSlot].GetComponent<RectTransform>().position).x;
+            _gameSlotsRect.anchoredPosition = new Vector2(num+_offset, _gameSlotsRect.anchoredPosition.y);
+
+            //var num = (_slots[_currentlyActiveSlot].GetComponent<RectTransform>().anchoredPosition.x-_subtraction) /
+            //          _gameSlotsRect.sizeDelta.x;
+            //_scrollRect.horizontalNormalizedPosition = num;
         }
         public void SetUsernameText() {
             _passportBadge.Set();
