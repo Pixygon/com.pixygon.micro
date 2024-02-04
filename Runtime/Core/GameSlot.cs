@@ -64,6 +64,7 @@ namespace Pixygon.Micro
 
         private void Validate(string id) {
             if (_currentId != id) return;
+            Debug.Log("Valid!");
             CanUse = true;
             _startBtn.SetActive(_isActive);
         }
