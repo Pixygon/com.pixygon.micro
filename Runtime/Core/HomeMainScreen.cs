@@ -12,6 +12,8 @@ namespace Pixygon.Micro {
         [SerializeField] private Image _bg;
         [SerializeField] private HomeController _home;
         [SerializeField] private GameBgSet _gameBgAnimated;
+        [SerializeField] private ScrollRect _scrollRect;
+        [SerializeField] private float _offset = 300f;
 
         private List<GameSlot> _slots;
         private int _currentlyActiveSlot;
@@ -30,9 +32,6 @@ namespace Pixygon.Micro {
             _currentlyActiveSlot = 0;
             _slots[_currentlyActiveSlot].Select();
         }
-
-        [SerializeField] private ScrollRect _scrollRect;
-        [SerializeField] private float _offset = 300f;
         public void Clear() {
             if(_slots != null) {
                 foreach (var g in _slots) {
