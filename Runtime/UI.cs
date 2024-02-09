@@ -26,12 +26,13 @@ namespace Pixygon.Micro {
         [SerializeField] private SpriteRenderer _powerupRenderer;
         [SerializeField] private Sprite[] _powerups;
         [SerializeField] private TextMeshPro _versionText;
-        [SerializeField] private TextMeshPro _loadPercentageText;
-        [SerializeField] private GameObject _loadScreen;
+        
+        [SerializeField] private LevelLoadScreen _loadScreen;
 
         [SerializeField] private GameObject _pauseScreen;
         public GameObject PregameScreen => _pregameScreen;
         public GameObject LevelEndScreen => _levelEndScreen;
+        public LevelLoadScreen LoadScreen => _loadScreen;
 
         private void OnEnable() {
             PauseManager.OnPause += SetPauseScreen;
@@ -51,12 +52,8 @@ namespace Pixygon.Micro {
             Debug.Log("Bye pause!");
             _pauseScreen.SetActive(false);
         }
-        public void SetLoadPercentage(float f) {
-            _loadPercentageText.text = Mathf.RoundToInt(f*100f) + "%";
-        }
         public void SetLoadScreen(bool show) {
-            _loadPercentageText.text = "0%";
-            _loadScreen.SetActive(show);
+            _loadScreen.Activate(show);
         }
         public void SetLife(int i) {
             _lifeIcons[0].SetActive(i >= 0);

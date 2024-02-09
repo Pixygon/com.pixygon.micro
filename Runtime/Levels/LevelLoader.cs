@@ -13,16 +13,20 @@ namespace Pixygon.Micro {
         [SerializeField] private AssetReference _parallaxPrefabRef;
         [SerializeField] private CameraController _camera;
         [SerializeField] private UI _ui;
+        [SerializeField] private bool _useFileSelectScreen;
+        [SerializeField] private GameObject _fileSelectScreen;
         [SerializeField] private bool _useLoadingScreen;
         [SerializeField] private GameObject _loadingScreen;
         [SerializeField] private bool _useMapScreen;
         [SerializeField] private GameObject _mapScreen;
-        
+
+        private bool _isSelectingFile;
         private bool _isLoading;
         private GameObject _player;
         private bool _levelLoaded;
         private int _currentLevelId;
         private bool _loadingLevel;
+        private int _playerSpawn;
 
         public UI Ui => _ui;
         public ScoreManager ScoreManager { get; private set; }
@@ -51,14 +55,14 @@ namespace Pixygon.Micro {
         public void SetDifficulty(int difficulty) {
             Difficulty = difficulty;
         }
-        public void OpenLoadingScreen() {
-            if (_isLoading) return;
-            _isLoading = true;
-            _loadingScreen.SetActive(true);
+        public void OpenFileSelectScreen() {
+            if (_isSelectingFile) return;
+            _isSelectingFile = true;
+            _fileSelectScreen.SetActive(true);
         }
-        public void CloseLoadingScreen() {
-            _isLoading = false;
-            _loadingScreen.SetActive(false);
+        public void CloseFileSelectScreen() {
+            _isSelectingFile = false;
+            _fileSelectScreen.SetActive(false);
         }
         public void StartGame() {
             if (MicroController._instance.HomeMenuOpen) return;
@@ -87,8 +91,8 @@ namespace Pixygon.Micro {
         }
         private void SelectLevel(bool started) {
             if (!started) return;
-            if(_useLoadingScreen)
-                OpenLoadingScreen();
+            if(_useFileSelectScreen)
+                OpenFileSelectScreen();
             else
                 StartGame();
         }
@@ -98,8 +102,6 @@ namespace Pixygon.Micro {
             Ui.TriggerMenuScreen(false);
             LoadLevel(_level[i]);
         }
-
-        private int _playerSpawn;
         public void SwitchLevel(int level, int playerSpawn = 0) {
             if (!_levelLoaded) return;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Switch level!", this);
@@ -154,13 +156,13 @@ namespace Pixygon.Micro {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Level loaded!", this);
         }
         private async Task SetupBgm() {
-            GetComponent<AudioSource>().clip = await AddressableLoader.LoadAsset<AudioClip>(CurrentLevelData._bgmRef, f => Ui.SetLoadPercentage(f*.2f));
+            GetComponent<AudioSource>().clip = await AddressableLoader.LoadAsset<AudioClip>(CurrentLevelData._bgmRef, f => Ui.LoadScreen.SetLoadPercentage(f*.2f));
             Log.DebugMessage(DebugGroup.PixygonMicro, "Setup BGM", this);
         }
         private async Task SetupLevel() {
             if (CurrentLevel != null)
                 Destroy(CurrentLevel.gameObject);
-            var g = await AddressableLoader.LoadGameObject(CurrentLevelData._levelRef, transform, true, f => Ui.SetLoadPercentage(f*.2f+.2f));
+            var g = await AddressableLoader.LoadGameObject(CurrentLevelData._levelRef, transform, true, f => Ui.LoadScreen.SetLoadPercentage(f*.2f+.2f));
             CurrentLevel = g.GetComponent<Level>();
             Log.DebugMessage(DebugGroup.PixygonMicro, "Setup Level", this);
         }
@@ -168,10 +170,10 @@ namespace Pixygon.Micro {
             if (CurrentLevelData._playerOverride != null) {
                 if(_player != null)
                     Destroy(_player.gameObject);
-                _player = await AddressableLoader.LoadGameObject(CurrentLevelData._playerOverride._actorRef, transform, true, f => Ui.SetLoadPercentage(f*.2f+.4f));
+                _player = await AddressableLoader.LoadGameObject(CurrentLevelData._playerOverride._actorRef, transform, true, f => Ui.LoadScreen.SetLoadPercentage(f*.2f+.4f));
             } else {
                 if(_player == null) 
-                    _player = await AddressableLoader.LoadGameObject(_playerData._actorRef, transform, true, f => Ui.SetLoadPercentage(f*.2f+.4f));
+                    _player = await AddressableLoader.LoadGameObject(_playerData._actorRef, transform, true, f => Ui.LoadScreen.SetLoadPercentage(f*.2f+.4f));
             }
             _player.transform.position = CurrentLevel.PlayerSpawns[_playerSpawn].position;
             _camera.Initialize(_player.transform);
@@ -181,7 +183,7 @@ namespace Pixygon.Micro {
         private async Task SetupParallax() {
             if (!CurrentLevelData._useParallax) return;
             if (Parallax == null) {
-                var p = await AddressableLoader.LoadGameObject(_parallaxPrefabRef, transform, true, f => Ui.SetLoadPercentage(f*.2f+.6f));
+                var p = await AddressableLoader.LoadGameObject(_parallaxPrefabRef, transform, true, f => Ui.LoadScreen.SetLoadPercentage(f*.2f+.6f));
                 Parallax = p.GetComponent<Parallax.Parallax>();
             }
             Parallax.Initialize(_player.transform, MicroController._instance.Display._camera, CurrentLevelData._parallaxLayerDatas);
@@ -189,7 +191,7 @@ namespace Pixygon.Micro {
         }
         private async Task SetupPostProc() {
             MicroController._instance.Display._volume.profile = CurrentLevelData._postProcessingProfileRef != null ?
-                await AddressableLoader.LoadAsset<VolumeProfile>(CurrentLevelData._postProcessingProfileRef, f => Ui.SetLoadPercentage(f*.2f+.8f)) : MicroController._instance.Display._defaultVolume;
+                await AddressableLoader.LoadAsset<VolumeProfile>(CurrentLevelData._postProcessingProfileRef, f => Ui.LoadScreen.SetLoadPercentage(f*.2f+.8f)) : MicroController._instance.Display._defaultVolume;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Setup PostProc", this);
         }
     }
