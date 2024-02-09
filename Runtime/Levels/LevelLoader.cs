@@ -25,6 +25,7 @@ namespace Pixygon.Micro {
         private int _currentLevelId;
         private bool _loadingLevel;
         private int _playerSpawn;
+        private bool _fileSelected;
 
         public UI Ui => _ui;
         public ScoreManager ScoreManager { get; private set; }
@@ -45,10 +46,10 @@ namespace Pixygon.Micro {
             Initialize();
         }
         private void OnEnable() {
-            //MicroController._instance.Input._jump += SelectLevel;
+            MicroController._instance.Input._jump += SelectLevel;
         }
         private void OnDisable() {
-            //MicroController._instance.Input._jump -= SelectLevel;
+            MicroController._instance.Input._jump -= SelectLevel;
         }
         public void SetDifficulty(int difficulty) {
             Difficulty = difficulty;
@@ -62,6 +63,7 @@ namespace Pixygon.Micro {
         public void CloseFileSelectScreen() {
             Debug.Log("Close file select");
             _isSelectingFile = false;
+            _fileSelected = true;
             _fileSelectScreen.SetActive(false);
         }
         public void StartGame() {
@@ -92,7 +94,7 @@ namespace Pixygon.Micro {
         }
         private void SelectLevel(bool started) {
             if (!started) return;
-            if(_useFileSelectScreen)
+            if(_useFileSelectScreen && !_fileSelected)
                 OpenFileSelectScreen();
             else
                 StartGame();
