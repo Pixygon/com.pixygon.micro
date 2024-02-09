@@ -35,6 +35,7 @@ namespace Pixygon.Micro {
         public Parallax.Parallax Parallax { get; private set; }
         public LevelData[] Levels => _level;
         public int Difficulty { get; private set; }
+        public int LoadedLevel { get; private set; }
         
         public LevelLoader(ScoreManager scoreManager) {
             ScoreManager = scoreManager;
@@ -101,6 +102,7 @@ namespace Pixygon.Micro {
         }
         public void StartLevel(int i) {
             _loadingLevel = true;
+            LoadedLevel = i;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Select Level: " + i, this);
             Ui.TriggerMenuScreen(false);
             LoadLevel(_level[i]);
