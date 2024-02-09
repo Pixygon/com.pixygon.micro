@@ -45,10 +45,10 @@ namespace Pixygon.Micro {
             Initialize();
         }
         private void OnEnable() {
-            MicroController._instance.Input._jump += SelectLevel;
+            //MicroController._instance.Input._jump += SelectLevel;
         }
         private void OnDisable() {
-            MicroController._instance.Input._jump -= SelectLevel;
+            //MicroController._instance.Input._jump -= SelectLevel;
         }
         public void SetDifficulty(int difficulty) {
             Difficulty = difficulty;
