@@ -55,10 +55,12 @@ namespace Pixygon.Micro {
         }
         public void OpenFileSelectScreen() {
             if (_isSelectingFile) return;
+            Debug.Log("Open file select");
             _isSelectingFile = true;
             _fileSelectScreen.SetActive(true);
         }
         public void CloseFileSelectScreen() {
+            Debug.Log("Close file select");
             _isSelectingFile = false;
             _fileSelectScreen.SetActive(false);
         }
