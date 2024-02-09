@@ -15,8 +15,6 @@ namespace Pixygon.Micro {
         [SerializeField] private UI _ui;
         [SerializeField] private bool _useFileSelectScreen;
         [SerializeField] private GameObject _fileSelectScreen;
-        [SerializeField] private bool _useLoadingScreen;
-        [SerializeField] private GameObject _loadingScreen;
         [SerializeField] private bool _useMapScreen;
         [SerializeField] private GameObject _mapScreen;
 
@@ -67,6 +65,7 @@ namespace Pixygon.Micro {
         public void StartGame() {
             if (MicroController._instance.HomeMenuOpen) return;
             if (_levelLoaded || _loadingLevel) return;
+            CloseFileSelectScreen();
             if (_useMapScreen) {
                 _mapScreen.SetActive(true);
             } else {
