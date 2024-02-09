@@ -4,9 +4,9 @@ using UnityEngine;
 namespace Pixygon.Micro {
     public class ScoreManager : MonoBehaviour {
         private LevelLoader _levelLoader;
-        private int _points;
-        private int _savedPoints;
 
+        public int Points { get; private set; }
+        public int PointsTotal { get; private set; }
         public void Initialize(LevelLoader loader) {
             _levelLoader = loader;
             ResetPoints();
@@ -15,23 +15,23 @@ namespace Pixygon.Micro {
         public void AddPoints(int points, Vector3 pos) {
             if (_levelLoader.Difficulty == 1) points *= 3;
             if (_levelLoader.Difficulty == 2) points *= 5;
-            _points += points;
-            _levelLoader.Ui.SetPoints(_points);
+            Points += points;
+            _levelLoader.Ui.SetPoints(Points);
             EffectsManager.SpawnScoreEffect(points, pos);
         }
 
         public void SetSavedPoints() {
-            _savedPoints = _points;
+            PointsTotal = Points;
         }
 
         public void ResetPointsToSaved() {
-            _points = _savedPoints;
-            _levelLoader.Ui.SetPoints(_points);
+            Points = PointsTotal;
+            _levelLoader.Ui.SetPoints(Points);
         }
 
         private void ResetPoints() {
-            _points = 0;
-            _levelLoader.Ui.SetPoints(_points);
+            Points = 0;
+            _levelLoader.Ui.SetPoints(Points);
         }
     }
 }
