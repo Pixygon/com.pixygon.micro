@@ -1,4 +1,4 @@
-using System;
+using Pixygon.Actors;
 using Pixygon.Core;
 using Pixygon.DebugTool;
 using Pixygon.Effects;
@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Pixygon.Micro {
     public class MicroActor : MonoBehaviour {
-        [SerializeField] protected SpriteRenderer _sprite;
+        [SerializeField] protected SpriteRenderer _sprite; //Added
         [SerializeField] protected Animator _anim;
         [SerializeField] private bool _destroyOnDeath;
         [SerializeField] private Rigidbody2D _rigid;
@@ -14,8 +14,8 @@ namespace Pixygon.Micro {
         [SerializeField] private GroundChecker _groundChecker;
         private float _killheight;
         protected LevelLoader _levelLoader;
-        protected IFrameManager _iFrameManager;
-        protected bool _isPaused;
+        protected IFrameHandler _iFrameManager; //Added
+        protected bool _isPaused; //Added
         private bool _isAnimNotNull;
         protected float _defaultAnimSpeed = 1f;
 
@@ -31,12 +31,12 @@ namespace Pixygon.Micro {
         public GroundChecker GroundChecker => _groundChecker;
         public Vector3 LastSafePosition { get; set; }
 
-        private void OnEnable() {
+        private void OnEnable() {   //Added
             PauseManager.OnPause += OnPause;
             PauseManager.OnUnpause += OnUnpause;
         }
 
-        private void OnDisable() {
+        private void OnDisable() {   //Added
             PauseManager.OnPause -= OnPause;
             PauseManager.OnUnpause -= OnUnpause;
         }
@@ -52,12 +52,13 @@ namespace Pixygon.Micro {
             _levelLoader = loader;
             _killheight = _levelLoader.CurrentLevel.KillHeight;
             if (Data._useIframes) {
-                _iFrameManager = gameObject.AddComponent<IFrameManager>();
-                _iFrameManager.Initialize(this, _sprite);
+                _iFrameManager = gameObject.AddComponent<IFrameHandler>();
+                //_iFrameManager.Initialize(this, _sprite);
             }
             _isAnimNotNull = _anim != null;
             if(_isAnimNotNull) _anim.speed = _defaultAnimSpeed;
         }
+        //Added
         protected virtual void OnPause() {
             _isPaused = true;
             if(_rigid != null) _rigid.Sleep();
@@ -67,6 +68,7 @@ namespace Pixygon.Micro {
             }
             if(_isAnimNotNull && _anim != null) _anim.speed = 0f;
         }
+        //Added
         protected virtual void OnUnpause() {
             _isPaused = false;
             if(_rigid != null) _rigid.WakeUp();

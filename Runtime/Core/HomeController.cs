@@ -4,10 +4,10 @@ using UnityEngine;
 namespace Pixygon.Micro {
     public class HomeController : MonoBehaviour {
         [SerializeField] private GameObject _homeMenu;
-        [SerializeField] private GameObject _mainMenu;
         [SerializeField] private GameObject _faceplateMenu;
         [SerializeField] private CartridgeSelector _cartridgeSelector;
         [SerializeField] private FaceplateSelector _faceplateSelector;
+        [SerializeField] private HomeSignInScreen _signInScreen;
         [SerializeField] private HomeMainScreen _homeMainScreen;
         [SerializeField] private HomeAccountScreen _homeAccountScreen;
         [SerializeField] private HomeSettingsScreen _homeSettingsScreen;
@@ -29,47 +29,56 @@ namespace Pixygon.Micro {
         }
         private void OnEnable() {
             _accountUI.OnLoginAction += () => { _homeMainScreen.PassportBadge.Set(); };
-            _accountUI.OnLogoutAction += () => { _homeMainScreen.PassportBadge.Set(); };
+            _accountUI.OnLogoutAction += OnLogout;
         }
         private void OnDisable() {
             _accountUI.OnLoginAction -= () => { _homeMainScreen.PassportBadge.Set(); };
-            _accountUI.OnLogoutAction -= () => { _homeMainScreen.PassportBadge.Set(); };
+            _accountUI.OnLogoutAction -= OnLogout;
         }
         public void Activate(bool activate) {
             _homeMenu.SetActive(activate);
-            _mainMenu.SetActive(activate);
-            _homeMainScreen.Activate();
+            if (PixygonApi.Instance.AccountData == null)
+                _signInScreen.gameObject.SetActive(true);
+            else
+                HomeMainScreen.Activate();
             _faceplateMenu.SetActive(false);
             _homeAccountScreen.gameObject.SetActive(false);
             _homeSettingsScreen.gameObject.SetActive(false);
             if(!activate)
                 MicroController._instance.SetCameraToDefault();
-            HomeMainScreen.Activate();
+        }
+        private void OnLogout() {
+            _homeMainScreen.Close();
+            _signInScreen.gameObject.SetActive(true);
+            _homeSettingsScreen.OpenScreen(false);
         }
         public void TriggerSettingsMenu(bool open) {
-            _mainMenu.SetActive(!open);
-            if(open)
-            //    EventSystem.current.SetSelectedGameObject(_eventHomeTest);
-            //else
+            if(open) {
+                HomeMainScreen.Close();
                 _homeSettingsScreen.OpenScreen(true);
+            } else {
+                if (PixygonApi.Instance.AccountData == null)
+                    _signInScreen.gameObject.SetActive(true);
+                else
+                    HomeMainScreen.Activate();
+            }
         }
         public void TriggerAccountMenu(bool open) {
-            _mainMenu.SetActive(!open);
-            if(open)
-                //EventSystem.current.SetSelectedGameObject(_eventHomeTest);
-            //else
-            _accountUI.StartLogin();
-                //_homeAccountScreen.OpenScreen(true);
+            if(open) {
+                HomeMainScreen.Close();
+                _signInScreen.gameObject.SetActive(true);
+                _accountUI.StartLogin();
+            } else {
+                if (PixygonApi.Instance.AccountData == null)
+                    _signInScreen.gameObject.SetActive(true);
+                else
+                    HomeMainScreen.Activate();
+            }
         }
         public void TriggerFaceplateSelect(bool open) {
-            _mainMenu.SetActive(!open);
+            //_mainMenu.SetActive(!open);
             _faceplateMenu.SetActive(open);
             if (open) _faceplateSelector.Open();
-        }
-        public void TriggerCartridgeSelect(bool open) {
-            _mainMenu.SetActive(!open);
-            //_cartridgeMenu.SetActive(open);
-            if (open) _cartridgeSelector.Open();
         }
         public void SetCurrentCartridge() {
             var hasCartridge = MicroController._instance.CurrentlyLoadedCartridge != null;

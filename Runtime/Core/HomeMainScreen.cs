@@ -31,6 +31,13 @@ namespace Pixygon.Micro {
             _gameSlotsRect.sizeDelta = new Vector2((330f * (_slots.Count + 1f)) + 100f, _gameSlotsRect.sizeDelta.y);
             _currentlyActiveSlot = 0;
             _slots[_currentlyActiveSlot].Select();
+            gameObject.SetActive(true);
+            Debug.Log("Open Main-screen!");
+        }
+
+        public void Close() {
+            gameObject.SetActive(false);
+            Debug.Log("Close Main-screen!");
         }
         public void Clear() {
             if(_slots != null) {
@@ -67,7 +74,6 @@ namespace Pixygon.Micro {
         public void SetUsernameText() {
             _passportBadge.Set();
         }
-
         public void SetBg() {
             _bg.sprite = _slots[_currentlyActiveSlot].Cartridge._cartridgeBackground;
         }

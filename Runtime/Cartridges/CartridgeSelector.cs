@@ -37,7 +37,6 @@ namespace Pixygon.Micro {
         private async void ActuallyClose() {
             await Task.Yield();
             _objects = null;
-            _home.TriggerCartridgeSelect(false);
             _isClosing = false;
         }
         private void PopulateCartridges() {
