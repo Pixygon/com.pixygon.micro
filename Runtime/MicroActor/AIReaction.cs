@@ -4,6 +4,7 @@ namespace Pixygon.Micro {
         Teleport,
         Rush,
         Attack,
+        Find,
         None
     }
 }
