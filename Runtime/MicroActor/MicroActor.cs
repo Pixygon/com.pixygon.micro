@@ -5,7 +5,7 @@ using Pixygon.Effects;
 using UnityEngine;
 
 namespace Pixygon.Micro {
-    public class MicroActor : MonoBehaviour {
+    public class MicroActor : Actors.Actor {
         [SerializeField] protected SpriteRenderer _sprite; //Added
         [SerializeField] protected Animator _anim;
         [SerializeField] private bool _destroyOnDeath;
@@ -53,7 +53,7 @@ namespace Pixygon.Micro {
             _killheight = _levelLoader.CurrentLevel.KillHeight;
             if (Data._useIframes) {
                 _iFrameManager = gameObject.AddComponent<IFrameHandler>();
-                //_iFrameManager.Initialize(this, _sprite);
+                _iFrameManager.Initialize(this, _sprite);
             }
             _isAnimNotNull = _anim != null;
             if(_isAnimNotNull) _anim.speed = _defaultAnimSpeed;
