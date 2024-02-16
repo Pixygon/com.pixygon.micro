@@ -34,7 +34,8 @@ namespace Pixygon.Micro {
             Log.DebugMessage(DebugGroup.Actor, "Spawning actor", this);
             var a = await AddressableLoader.LoadGameObject(_actorData._actorRef, transform);
             a.transform.localPosition = Vector3.zero;
-            a.GetComponent<Actors.Actor>().SetPatrolData(_actorPatrolPattern.PatrolData);
+            if(_actorPatrolPattern != null)
+                a.GetComponent<Actors.Actor>().SetPatrolData(_actorPatrolPattern.PatrolData);
             a.GetComponent<MicroActor>().Initialize(_loader, _actorData);
             SpawnedActor.Add(a);
         }
