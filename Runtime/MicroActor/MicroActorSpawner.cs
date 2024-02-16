@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Pixygon.Actors;
 using Pixygon.DebugTool;
 using Pixygon.Addressable;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace Pixygon.Micro {
         [SerializeField] private int _spawnTimerMin = 150;
         [SerializeField] private int _spawnTimerMax = 300;
         [SerializeField] private int _spawnTimerStart;
+        [SerializeField] private ActorPatrolPattern _actorPatrolPattern;
         
         private float _timer;
         private LevelLoader _loader;
@@ -33,6 +35,7 @@ namespace Pixygon.Micro {
             var a = await AddressableLoader.LoadGameObject(_actorData._actorRef, transform);
             a.transform.localPosition = Vector3.zero;
             a.GetComponent<MicroActor>().Initialize(_loader, _actorData);
+            a.GetComponent<Actors.Actor>().SetPatrolPattern(_actorPatrolPattern);
             SpawnedActor.Add(a);
         }
         private void DoSpawn() {
