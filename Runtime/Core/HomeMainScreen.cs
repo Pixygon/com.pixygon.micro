@@ -49,7 +49,8 @@ namespace Pixygon.Micro {
         }
 
         public void SetActiveSlot(int i) {
-            _slots[_currentlyActiveSlot].Deselect();
+            if(_currentlyActiveSlot != i)
+                _slots[_currentlyActiveSlot].Deselect();
             _currentlyActiveSlot = i;
             _slots[_currentlyActiveSlot].Select();
             AdjustScrollRect();
