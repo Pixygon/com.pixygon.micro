@@ -105,6 +105,7 @@ namespace Pixygon.Micro {
             LoadedLevel = i;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Select Level: " + i, this);
             Ui.TriggerMenuScreen(false);
+            Ui.PregameScreen.SetActive(true);
             LoadLevel(_level[i]);
         }
         public void SwitchLevel(int level, int playerSpawn = 0) {

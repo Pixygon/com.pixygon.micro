@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -13,37 +14,68 @@ namespace Pixygon.Micro {
         [SerializeField] private LevelObject[] _levelObjects;
         [SerializeField] private Transform[] _playerSpawns;
         [SerializeField] private int _killHeight;
-        public Transform[] PlayerSpawns => _playerSpawns;
+
+        [SerializeField] private bool _useMissions;
+        [SerializeField] private LevelMission[] _levelMissions;
+        public Transform[] PlayerSpawns => _useMissions ? _levelMissions[CurrentMission]._playerSpawns : _playerSpawns;
         public int KillHeight => _killHeight;
+        public int CurrentMission => _currentMission;
+        
+        public Action _removeOnRestartAction;
+
+        private int _currentMission;
 
         public void RespawnLevel(LevelLoader loader) {
-            foreach (var coin in _pickups) {
-                coin.Respawn();
-            }
-            foreach (var spawner in _actors) {
-                spawner.Initialize(loader);
-            }
-            foreach (var levelObject in _levelObjects) {
-                levelObject.Reset();
+            _removeOnRestartAction?.Invoke();
+            _removeOnRestartAction = null;
+            if (!_useMissions) {
+                foreach (var coin in _pickups) {
+                    coin.Respawn();
+                }
+                foreach (var spawner in _actors) {
+                    spawner.Initialize(loader);
+                }
+                foreach (var levelObject in _levelObjects) {
+                    levelObject.Reset();
+                }
+            } else {
+                foreach (var coin in _levelMissions[CurrentMission]._pickups) {
+                    coin.Respawn();
+                }
+                foreach (var spawner in _levelMissions[CurrentMission]._actors) {
+                    spawner.Initialize(loader);
+                }
+                foreach (var levelObject in _levelMissions[CurrentMission]._levelObjects) {
+                    levelObject.Reset();
+                }
             }
         }
 
         private void GatherPickups() {
-            _pickups = GetComponentsInChildren<Pickup>();
+            if(_useMissions)
+                _levelMissions[CurrentMission]._pickups = GetComponentsInChildren<Pickup>();
+            else
+                _pickups = GetComponentsInChildren<Pickup>();
 #if UNITY_EDITOR
             EditorUtility.SetDirty(this);
 #endif
         }
 
         private void GatherActors() {
-            _actors = GetComponentsInChildren<MicroActorSpawner>();
+            if(_useMissions)
+                _levelMissions[CurrentMission]._actors = GetComponentsInChildren<MicroActorSpawner>();
+            else
+                _actors = GetComponentsInChildren<MicroActorSpawner>();
 #if UNITY_EDITOR
             EditorUtility.SetDirty(this);
 #endif
         }
 
         private void GatherLevelObjects() {
-            _levelObjects = GetComponentsInChildren<LevelObject>();
+            if(_useMissions)
+                _levelMissions[CurrentMission]._levelObjects = GetComponentsInChildren<LevelObject>();
+            else
+                _levelObjects = GetComponentsInChildren<LevelObject>();
 #if UNITY_EDITOR
             EditorUtility.SetDirty(this);
 #endif
