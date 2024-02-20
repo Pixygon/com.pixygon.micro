@@ -75,6 +75,7 @@ namespace Pixygon.Micro {
             if(_isAnimNotNull && _anim != null) _anim.speed = _defaultAnimSpeed;
         }
         public virtual void Damage(bool resetPosition = false) {
+            if (IsDead) return;
             if (Invincible) return;
             if (!Data._isKillable) return;
             if(Data._useIframes)
