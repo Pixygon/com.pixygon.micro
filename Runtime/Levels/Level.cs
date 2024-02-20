@@ -13,17 +13,17 @@ namespace Pixygon.Micro {
         [ContextMenuItem("Get LevelObjects", "GatherLevelObjects")]
         [SerializeField] private LevelObject[] _levelObjects;
         [SerializeField] private Transform[] _playerSpawns;
+        [SerializeField] private bool _useKillHeight;
         [SerializeField] private int _killHeight;
 
         [SerializeField] private bool _useMissions;
+        [SerializeField] private int _currentMission;
         [SerializeField] private LevelMission[] _levelMissions;
         public Transform[] PlayerSpawns => _useMissions ? _levelMissions[CurrentMission]._playerSpawns : _playerSpawns;
-        public int KillHeight => _killHeight;
+        public int KillHeight => _useKillHeight ? _killHeight : -99999;
         public int CurrentMission => _currentMission;
         
         public Action _removeOnRestartAction;
-
-        private int _currentMission;
 
         public void RespawnLevel(LevelLoader loader) {
             _removeOnRestartAction?.Invoke();
