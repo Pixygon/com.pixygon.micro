@@ -36,6 +36,7 @@ namespace Pixygon.Micro {
         public LevelData[] Levels => _level;
         public int Difficulty { get; private set; }
         public int LoadedLevel { get; private set; }
+        public int SelectedMission { get; private set; }
         
         public LevelLoader(ScoreManager scoreManager) {
             ScoreManager = scoreManager;
@@ -108,12 +109,13 @@ namespace Pixygon.Micro {
             Ui.PregameScreen.SetActive(true);
             LoadLevel(_level[i]);
         }
-        public void SwitchLevel(int level, int playerSpawn = 0) {
+        public void SwitchLevel(int level, int playerSpawn = 0, int selectedMission = 0) {
             if (!_levelLoaded) return;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Switch level!", this);
             _levelLoaded = false;
             _currentLevelId = level;
             _playerSpawn = playerSpawn;
+            SelectedMission = selectedMission;
             StartLevel(_currentLevelId);
         }
         public void EndLevel() {
@@ -136,7 +138,7 @@ namespace Pixygon.Micro {
             }
         }
         public void ResetLevels() {
-            CurrentLevel.RespawnLevel(this);
+            CurrentLevel.RespawnLevel(this, SelectedMission);
         }
         private void Initialize() {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Game started", this);
