@@ -6,17 +6,18 @@ using UnityEngine.Serialization;
 namespace Pixygon.Micro {
     public class Level : MonoBehaviour {
         [FormerlySerializedAs("_coins")]
-        [ContextMenuItem("Get Pickups", "GatherPickups")]
         [SerializeField] private Pickup[] _pickups;
-        [ContextMenuItem("Get ActorSpawners", "GatherActors")]
         [SerializeField] private MicroActorSpawner[] _actors;
-        [ContextMenuItem("Get LevelObjects", "GatherLevelObjects")]
         [SerializeField] private LevelObject[] _levelObjects;
         [SerializeField] private Transform[] _playerSpawns;
         [SerializeField] private bool _useKillHeight;
         [SerializeField] private int _killHeight;
 
         [SerializeField] private bool _useMissions;
+        
+        [ContextMenuItem("Get Pickups", "GatherPickups")]
+        [ContextMenuItem("Get ActorSpawners", "GatherActors")]
+        [ContextMenuItem("Get LevelObjects", "GatherLevelObjects")]
         [SerializeField] private int _currentMission;
         [SerializeField] private LevelMission[] _levelMissions;
         public Transform[] PlayerSpawns => _useMissions ? _levelMissions[CurrentMission]._playerSpawns : _playerSpawns;
@@ -50,7 +51,6 @@ namespace Pixygon.Micro {
                 }
             }
         }
-
         private void GatherPickups() {
             if(_useMissions)
                 _levelMissions[CurrentMission]._pickups = GetComponentsInChildren<Pickup>();
@@ -60,7 +60,6 @@ namespace Pixygon.Micro {
             EditorUtility.SetDirty(this);
 #endif
         }
-
         private void GatherActors() {
             if(_useMissions)
                 _levelMissions[CurrentMission]._actors = GetComponentsInChildren<MicroActorSpawner>();
@@ -70,7 +69,6 @@ namespace Pixygon.Micro {
             EditorUtility.SetDirty(this);
 #endif
         }
-
         private void GatherLevelObjects() {
             if(_useMissions)
                 _levelMissions[CurrentMission]._levelObjects = GetComponentsInChildren<LevelObject>();
@@ -80,7 +78,6 @@ namespace Pixygon.Micro {
             EditorUtility.SetDirty(this);
 #endif
         }
-
         private void OnDrawGizmos() {
             Gizmos.color = Color.red;
             Gizmos.DrawLine(new Vector3(-1000, _killHeight, 0), new Vector3(1000, _killHeight, 0));
