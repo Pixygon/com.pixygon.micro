@@ -139,7 +139,7 @@ namespace Pixygon.Micro {
             }
         }
         public void ResetLevels() {
-            CurrentLevel.RespawnLevel(this, SelectedMission);
+            CurrentLevel.RespawnLevel(this);
         }
         private void Initialize() {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Game started", this);
