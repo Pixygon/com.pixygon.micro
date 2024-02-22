@@ -9,6 +9,7 @@ using UnityEngine.Rendering;
 namespace Pixygon.Micro {
     public class LevelLoader : MonoBehaviour {
         [SerializeField] private LevelData[] _level;
+        [SerializeField] private MissionData[] _missionDatas;
         [SerializeField] private MicroActorData _playerData;
         [SerializeField] private AssetReference _parallaxPrefabRef;
         [SerializeField] private CameraController _camera;
@@ -34,6 +35,7 @@ namespace Pixygon.Micro {
         public LevelData CurrentLevelData { get; private set; }
         public Parallax.Parallax Parallax { get; private set; }
         public LevelData[] Levels => _level;
+        public MissionData[] MissionDatas => _missionDatas;
         public int Difficulty { get; private set; }
         public int LoadedLevel { get; private set; }
         public int SelectedMission { get; private set; }
