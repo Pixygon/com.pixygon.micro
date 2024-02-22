@@ -10,6 +10,7 @@ namespace Pixygon.Micro {
         public int MissionDifficulty;
         public int LevelId;
         public int MissionId;
+        public int Reward;
         public string FullMissionId => $"{LevelId:02}{MissionId:04}";
         public MissionRequirements _missionRequirements;
     }
