@@ -18,11 +18,10 @@ namespace Pixygon.Micro {
         [ContextMenuItem("Get Pickups", "GatherPickups")]
         [ContextMenuItem("Get ActorSpawners", "GatherActors")]
         [ContextMenuItem("Get LevelObjects", "GatherLevelObjects")]
-        [SerializeField] private int _currentMission;
         [SerializeField] private LevelMission[] _levelMissions;
         public Transform[] PlayerSpawns => _useMissions ? _levelMissions[CurrentMission]._playerSpawns : _playerSpawns;
         public int KillHeight => _useKillHeight ? _killHeight : -99999;
-        public int CurrentMission => _currentMission;
+        public int CurrentMission => MicroController._instance.Cartridge.LevelLoader.SelectedMission;
         
         public Action _removeOnRestartAction;
 
