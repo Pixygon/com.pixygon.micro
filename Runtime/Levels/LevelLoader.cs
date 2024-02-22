@@ -112,6 +112,7 @@ namespace Pixygon.Micro {
         public void SwitchLevel(int level, int playerSpawn = 0, int selectedMission = 0) {
             if (!_levelLoaded) return;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Switch level!", this);
+            CurrentLevel.Unload();
             _levelLoaded = false;
             _currentLevelId = level;
             _playerSpawn = playerSpawn;

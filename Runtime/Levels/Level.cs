@@ -26,11 +26,14 @@ namespace Pixygon.Micro {
         
         public Action _removeOnRestartAction;
 
+        public void Unload() {
+            _removeOnRestartAction?.Invoke();
+            _removeOnRestartAction = null;
+        }
         public void RespawnLevel(LevelLoader loader, int mission) {
             _currentMission = mission;
             _levelMissions[CurrentMission]._missionObject?.SetActive(true);
-            _removeOnRestartAction?.Invoke();
-            _removeOnRestartAction = null;
+            Unload();
             if (!_useMissions) {
                 foreach (var coin in _pickups) {
                     coin.Respawn();
