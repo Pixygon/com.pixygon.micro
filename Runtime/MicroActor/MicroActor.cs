@@ -3,6 +3,7 @@ using Pixygon.Core;
 using Pixygon.DebugTool;
 using Pixygon.Effects;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Pixygon.Micro {
     public class MicroActor : Actors.Actor {
@@ -18,6 +19,8 @@ namespace Pixygon.Micro {
         protected bool _isPaused; //Added
         private bool _isAnimNotNull;
         protected float _defaultAnimSpeed = 1f;
+
+        private UnityEvent _actorOnKill;
 
         public Animator Anim => _anim;
         public SpriteRenderer Renderer => _sprite;
@@ -41,7 +44,7 @@ namespace Pixygon.Micro {
             PauseManager.OnUnpause -= OnUnpause;
         }
 
-        public virtual void Initialize(LevelLoader loader, MicroActorData data) {
+        public virtual void Initialize(LevelLoader loader, MicroActorData data, UnityEvent _events) {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Initializing MicroActor");
             Data = data;
             HP = data._hp;
@@ -57,6 +60,7 @@ namespace Pixygon.Micro {
             }
             _isAnimNotNull = _anim != null;
             if(_isAnimNotNull) _anim.speed = _defaultAnimSpeed;
+            _actorOnKill = _events;
         }
         //Added
         protected virtual void OnPause() {
@@ -97,6 +101,7 @@ namespace Pixygon.Micro {
             if(Data._deathFx != null)
                 EffectsManager.SpawnEffect(Data._deathFx.GetFullID, transform.position);
             if(_destroyOnDeath) Destroy(gameObject);
+            _actorOnKill?.Invoke();
         }
 
         public void InstaKill() {

@@ -4,6 +4,7 @@ using Pixygon.Actors;
 using Pixygon.DebugTool;
 using Pixygon.Addressable;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 namespace Pixygon.Micro {
@@ -15,6 +16,7 @@ namespace Pixygon.Micro {
         [SerializeField] private int _spawnTimerMax = 300;
         [SerializeField] private int _spawnTimerStart;
         [SerializeField] private PatrolData _patrolData;
+        [SerializeField] private UnityEvent _actorOnKill;
         
         private float _timer;
         private LevelLoader _loader;
@@ -35,7 +37,7 @@ namespace Pixygon.Micro {
             var a = await AddressableLoader.LoadGameObject(_actorData._actorRef, transform);
             a.transform.localPosition = Vector3.zero;
             a.GetComponent<Actors.Actor>().SetPatrolData(_patrolData);
-            a.GetComponent<MicroActor>().Initialize(_loader, _actorData);
+            a.GetComponent<MicroActor>().Initialize(_loader, _actorData, _actorOnKill);
             SpawnedActor.Add(a);
         }
         private void DoSpawn() {
