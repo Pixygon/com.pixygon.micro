@@ -44,7 +44,7 @@ namespace Pixygon.Micro {
             PauseManager.OnUnpause -= OnUnpause;
         }
 
-        public virtual void Initialize(LevelLoader loader, MicroActorData data, UnityEvent _events) {
+        public virtual void Initialize(LevelLoader loader, MicroActorData data, UnityEvent _events = null) {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Initializing MicroActor");
             Data = data;
             HP = data._hp;
@@ -60,7 +60,8 @@ namespace Pixygon.Micro {
             }
             _isAnimNotNull = _anim != null;
             if(_isAnimNotNull) _anim.speed = _defaultAnimSpeed;
-            _actorOnKill = _events;
+            if(_events != null)
+                _actorOnKill = _events;
         }
         //Added
         protected virtual void OnPause() {
