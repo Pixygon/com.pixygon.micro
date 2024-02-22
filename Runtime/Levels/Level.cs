@@ -28,7 +28,7 @@ namespace Pixygon.Micro {
 
         public void RespawnLevel(LevelLoader loader, int mission) {
             _currentMission = mission;
-            _levelMissions[CurrentMission]._missionObject.SetActive(true);
+            _levelMissions[CurrentMission]._missionObject?.SetActive(true);
             _removeOnRestartAction?.Invoke();
             _removeOnRestartAction = null;
             if (!_useMissions) {
