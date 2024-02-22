@@ -32,7 +32,8 @@ namespace Pixygon.Micro {
         }
         public void RespawnLevel(LevelLoader loader, int mission) {
             _currentMission = mission;
-            _levelMissions[CurrentMission]._missionObject?.SetActive(true);
+            if(_levelMissions[CurrentMission]._missionObject != null)
+                _levelMissions[CurrentMission]._missionObject.SetActive(true);
             Unload();
             if (!_useMissions) {
                 foreach (var coin in _pickups) {
