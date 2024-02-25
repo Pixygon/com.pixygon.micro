@@ -70,7 +70,7 @@ namespace Pixygon.Micro {
             
             
 #if UNITY_IOS || UNITY_ANDROID
-            _walletObjects.SetAtive(false);
+            _walletObjects.SetActive(false);
 #endif
             RefreshWallets();
         }
