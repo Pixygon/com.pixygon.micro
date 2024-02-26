@@ -9,5 +9,6 @@ namespace Pixygon.Micro {
         public MicroActorSpawner[] _actors;
         public LevelObject[] _levelObjects;
         public Transform[] _playerSpawns;
+        public MissionData _connectedMission;
     }
 }

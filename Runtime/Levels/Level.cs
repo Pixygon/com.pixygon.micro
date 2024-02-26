@@ -22,7 +22,7 @@ namespace Pixygon.Micro {
         public Transform[] PlayerSpawns => _useMissions ? _levelMissions[CurrentMission]._playerSpawns : _playerSpawns;
         public int KillHeight => _useKillHeight ? _killHeight : -99999;
         public int CurrentMission => MicroController._instance.Cartridge.LevelLoader.SelectedMission;
-        
+        public MissionData CurrentMissionData => _levelMissions[CurrentMission]._connectedMission;
         public Action _removeOnRestartAction;
 
         public void Unload() {
