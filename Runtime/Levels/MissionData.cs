@@ -4,6 +4,7 @@ using UnityEngine;
 namespace Pixygon.Micro {
     [CreateAssetMenu(menuName = "Pixygon/MissionData")]
     public class MissionData : ScriptableObject {
+        public string Id;
         public string MissionTitle;
         public string MissionDescription;
         public string MissionIssuer;
