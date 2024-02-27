@@ -21,7 +21,7 @@ namespace Pixygon.Micro {
         [SerializeField] private bool _useMapScreen;
         [SerializeField] private GameObject _mapScreen;
         [SerializeField] private bool _useIntroLevel;
-        [SerializeField] private int _introId;
+        [SerializeField] private int _introLevelId;
 
         private bool _isSelectingFile;
         private bool _isLoading;
@@ -43,6 +43,7 @@ namespace Pixygon.Micro {
         public int Difficulty { get; private set; }
         public int LoadedLevel { get; private set; }
         public int SelectedMission { get; private set; }
+        public bool PlayIntro { get; set; }
         
         public LevelLoader(ScoreManager scoreManager) {
             ScoreManager = scoreManager;
@@ -74,7 +75,7 @@ namespace Pixygon.Micro {
             _fileSelected = true;
             _fileSelectScreen.SetActive(false);
         }
-        public void StartGame(bool playIntro = false) {
+        public void StartGame(bool playIntro) {
             if (MicroController._instance.HomeMenuOpen) return;
             if (_levelLoaded || _loadingLevel) return;
             CloseFileSelectScreen();
@@ -85,7 +86,7 @@ namespace Pixygon.Micro {
                 Log.DebugMessage(DebugGroup.PixygonMicro, "Level was not loaded...", this);
                 _playerSpawn = 0;
                 if(_useIntroLevel && playIntro)
-                    StartLevel(_introId);
+                    StartLevel(_introLevelId);
                 else
                     StartLevel(_currentLevelId);
             }
@@ -108,7 +109,7 @@ namespace Pixygon.Micro {
             if(_useFileSelectScreen && !_fileSelected)
                 OpenFileSelectScreen();
             else
-                StartGame();
+                StartGame(PlayIntro);
         }
         public void StartLevel(int i) {
             _loadingLevel = true;
