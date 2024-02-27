@@ -2,6 +2,8 @@ using System.Threading.Tasks;
 using Pixygon.Addressable;
 using Pixygon.Core;
 using Pixygon.DebugTool;
+using Pixygon.Passport;
+using Pixygon.Saving;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Rendering;
@@ -18,6 +20,8 @@ namespace Pixygon.Micro {
         [SerializeField] private GameObject _fileSelectScreen;
         [SerializeField] private bool _useMapScreen;
         [SerializeField] private GameObject _mapScreen;
+        [SerializeField] private bool _useIntroLevel;
+        [SerializeField] private int _introId;
 
         private bool _isSelectingFile;
         private bool _isLoading;
@@ -70,7 +74,7 @@ namespace Pixygon.Micro {
             _fileSelected = true;
             _fileSelectScreen.SetActive(false);
         }
-        public void StartGame() {
+        public void StartGame(bool playIntro = false) {
             if (MicroController._instance.HomeMenuOpen) return;
             if (_levelLoaded || _loadingLevel) return;
             CloseFileSelectScreen();
@@ -80,7 +84,10 @@ namespace Pixygon.Micro {
                 Log.DebugMessage(DebugGroup.PixygonMicro, "Selected level", this);
                 Log.DebugMessage(DebugGroup.PixygonMicro, "Level was not loaded...", this);
                 _playerSpawn = 0;
-                StartLevel(_currentLevelId);
+                if(_useIntroLevel && playIntro)
+                    StartLevel(_introId);
+                else
+                    StartLevel(_currentLevelId);
             }
         }
         public void ReturnToMap() {
