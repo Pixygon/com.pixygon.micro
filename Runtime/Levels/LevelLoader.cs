@@ -75,7 +75,7 @@ namespace Pixygon.Micro {
             _fileSelected = true;
             _fileSelectScreen.SetActive(false);
         }
-        public void StartGame(bool playIntro) {
+        public void StartGame(bool completedIntro) {
             if (MicroController._instance.HomeMenuOpen) return;
             if (_levelLoaded || _loadingLevel) return;
             CloseFileSelectScreen();
@@ -85,7 +85,7 @@ namespace Pixygon.Micro {
                 Log.DebugMessage(DebugGroup.PixygonMicro, "Selected level", this);
                 Log.DebugMessage(DebugGroup.PixygonMicro, "Level was not loaded...", this);
                 _playerSpawn = 0;
-                if(_useIntroLevel && playIntro)
+                if(_useIntroLevel && !completedIntro)
                     StartLevel(_introLevelId);
                 else
                     StartLevel(_currentLevelId);
