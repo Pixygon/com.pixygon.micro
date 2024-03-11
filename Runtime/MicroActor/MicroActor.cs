@@ -20,7 +20,7 @@ namespace Pixygon.Micro {
         private bool _isAnimNotNull;
         protected float _defaultAnimSpeed = 1f;
 
-        private UnityEvent _actorOnKill;
+        protected UnityEvent _actorOnKill;
 
         public Animator Anim => _anim;
         public SpriteRenderer Renderer => _sprite;
