@@ -101,8 +101,10 @@ namespace Pixygon.Micro {
             _sprite.enabled = false;
             if(Data._deathFx != null)
                 EffectsManager.SpawnEffect(Data._deathFx.GetFullID, transform.position);
-            if(_destroyOnDeath) Destroy(gameObject);
+            Debug.Log("Hello i died???");
             _actorOnKill?.Invoke();
+            if(_destroyOnDeath) Destroy(gameObject);
+            Debug.Log("Hello i died!");
         }
 
         public void InstaKill() {
