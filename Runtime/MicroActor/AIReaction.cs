@@ -5,6 +5,7 @@ namespace Pixygon.Micro {
         Rush,
         Attack,
         Find,
+        Investigate,
         None
     }
 }
