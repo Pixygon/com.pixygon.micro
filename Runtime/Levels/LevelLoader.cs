@@ -197,6 +197,7 @@ namespace Pixygon.Micro {
             _player.transform.position = CurrentLevel.PlayerSpawns[_playerSpawn].position;
             _camera.Initialize(_player.transform);
             _player.GetComponent<MicroActor>().Initialize(this, _playerData);
+            AudioMaster.Instance.SetAudioListener(_player);
             Log.DebugMessage(DebugGroup.PixygonMicro, "Setup Player", this);
         }
         private async Task SetupParallax() {
