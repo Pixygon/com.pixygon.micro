@@ -25,9 +25,12 @@ namespace Pixygon.Micro {
         public List<GameObject> SpawnedActor { get; private set; }
         public bool Pause { get; set; }
 
-        private void UpgradePatrolData() {
+#if UNITY_EDITOR
+        public void UpgradePatrolData() {
             _patrolData.UpgradeToNewSystem();
+            UnityEditor.EditorUtility.SetDirty(this);
         }
+#endif
         public void Initialize(LevelLoader loader) {
             _loader = loader;
             DeSpawnActor();
