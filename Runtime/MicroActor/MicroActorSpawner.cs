@@ -15,7 +15,7 @@ namespace Pixygon.Micro {
         [SerializeField] private int _spawnTimerMin = 150;
         [SerializeField] private int _spawnTimerMax = 300;
         [SerializeField] private int _spawnTimerStart;
-        [ContextMenuItem("Upgrade to new system", "UpgradeToNewSystem")]
+        [ContextMenuItem("Upgrade to new system", "UpgradePatrolData")]
         [SerializeField] private PatrolData _patrolData;
         [SerializeField] private UnityEvent _actorOnKill;
         
