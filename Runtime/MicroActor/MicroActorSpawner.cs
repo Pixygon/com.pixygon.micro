@@ -15,7 +15,6 @@ namespace Pixygon.Micro {
         [SerializeField] private int _spawnTimerMin = 150;
         [SerializeField] private int _spawnTimerMax = 300;
         [SerializeField] private int _spawnTimerStart;
-        [ContextMenuItem("Upgrade to new system", "UpgradePatrolData")]
         [SerializeField] private PatrolData _patrolData;
         [SerializeField] private UnityEvent _actorOnKill;
         
@@ -24,13 +23,6 @@ namespace Pixygon.Micro {
         private bool _initialized;
         public List<GameObject> SpawnedActor { get; private set; }
         public bool Pause { get; set; }
-
-#if UNITY_EDITOR
-        public void UpgradePatrolData() {
-            _patrolData.UpgradeToNewSystem();
-            UnityEditor.EditorUtility.SetDirty(this);
-        }
-#endif
         public void Initialize(LevelLoader loader) {
             _loader = loader;
             DeSpawnActor();
