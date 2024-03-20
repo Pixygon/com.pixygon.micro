@@ -1,3 +1,4 @@
+using Pixygon.Actors;
 using Pixygon.Micro.Parallax;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -8,7 +9,7 @@ namespace Pixygon.Micro
     public class LevelData : ScriptableObject {
         public string _levelName;
         public string _levelId;
-        public MicroActorData _playerOverride;
+        public ActorData _playerOverride;
         public AssetReference _levelRef;
         public AssetReference _bgmRef;
         public AssetReference _levelClearSfxRef;

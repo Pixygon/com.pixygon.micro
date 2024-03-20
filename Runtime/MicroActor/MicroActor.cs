@@ -25,7 +25,7 @@ namespace Pixygon.Micro {
         public Animator Anim => _anim;
         public SpriteRenderer Renderer => _sprite;
         public bool Invincible { get; set; }
-        public MicroActorData Data { get; private set; }
+        public ActorData Data { get; private set; }
         public bool IsDead { get; protected set; }
         public bool IgnoreMovement { get; protected set; }
         public int HP { get; protected set;}
@@ -44,7 +44,7 @@ namespace Pixygon.Micro {
             PauseManager.OnUnpause -= OnUnpause;
         }
 
-        public virtual void Initialize(LevelLoader loader, MicroActorData data, UnityEvent _events = null) {
+        public virtual void Initialize(LevelLoader loader, ActorData data, UnityEvent _events = null) {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Initializing MicroActor");
             Data = data;
             HP = data._hp;

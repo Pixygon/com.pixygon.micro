@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 
 namespace Pixygon.Micro {
     public class MicroActorSpawner : MonoBehaviour {
-        [SerializeField] private MicroActorData _actorData;
+        [SerializeField] private ActorData _actorData;
         [SerializeField] private bool _onlyOneActor = true;
         [SerializeField] private bool _repeat;
         [SerializeField] private int _spawnTimerMin = 150;

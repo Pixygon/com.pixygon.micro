@@ -2,8 +2,7 @@ using System.Threading.Tasks;
 using Pixygon.Addressable;
 using Pixygon.Core;
 using Pixygon.DebugTool;
-using Pixygon.Passport;
-using Pixygon.Saving;
+using Pixygon.Actors;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Rendering;
@@ -12,7 +11,7 @@ namespace Pixygon.Micro {
     public class LevelLoader : MonoBehaviour {
         [SerializeField] private LevelData[] _level;
         [SerializeField] private MissionData[] _missionDatas;
-        [SerializeField] private MicroActorData _playerData;
+        [SerializeField] private ActorData _playerData;
         [SerializeField] private AssetReference _parallaxPrefabRef;
         [SerializeField] private CameraController _camera;
         [SerializeField] private UI _ui;
