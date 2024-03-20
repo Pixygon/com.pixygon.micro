@@ -16,7 +16,6 @@ namespace Pixygon.Micro {
         private float _killheight;
         protected LevelLoader _levelLoader;
         protected IFrameHandler _iFrameManager; //Added
-        protected bool _isPaused; //Added
         private bool _isAnimNotNull;
         protected float _defaultAnimSpeed = 1f;
 
@@ -25,8 +24,6 @@ namespace Pixygon.Micro {
         public Animator Anim => _anim;
         public SpriteRenderer Renderer => _sprite;
         public bool Invincible { get; set; }
-        public ActorData Data { get; private set; }
-        public bool IsDead { get; protected set; }
         public bool IgnoreMovement { get; protected set; }
         public int HP { get; protected set;}
         public Rigidbody2D Rigid => _rigid;
@@ -46,15 +43,15 @@ namespace Pixygon.Micro {
 
         public virtual void Initialize(LevelLoader loader, ActorData data, UnityEvent _events = null) {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Initializing MicroActor");
-            Data = data;
+            ActorData = data;
             HP = data._hp;
-            if (!Data._isKillable)
+            if (!ActorData._isKillable)
                 Invincible = true;
-            if (Data._isHostile)
+            if (ActorData._isHostile)
                 gameObject.AddComponent<DamageObject>();
             _levelLoader = loader;
             _killheight = _levelLoader.CurrentLevel.KillHeight;
-            if (Data._useIframes) {
+            if (ActorData._useIframes) {
                 _iFrameManager = gameObject.AddComponent<IFrameHandler>();
                 _iFrameManager.Initialize(this, _sprite);
             }
@@ -82,11 +79,11 @@ namespace Pixygon.Micro {
         public virtual void Damage(bool resetPosition = false) {
             if (IsDead) return;
             if (Invincible) return;
-            if (!Data._isKillable) return;
-            if(Data._useIframes)
+            if (!ActorData._isKillable) return;
+            if(ActorData._useIframes)
                 _iFrameManager.SetIFrames();
-            if(Data._damageFx != null)
-                EffectsManager.SpawnEffect(Data._damageFx.GetFullID, transform.position);
+            if(ActorData._damageFx != null)
+                EffectsManager.SpawnEffect(ActorData._damageFx.GetFullID, transform.position);
             //_anim.Damage();
             if (HP != 0)
                 HP -= 1;
@@ -96,11 +93,11 @@ namespace Pixygon.Micro {
 
         protected virtual void Die() {
             IsDead = true;
-            if(Data._useIframes)
+            if(ActorData._useIframes)
                 _iFrameManager.StopIFrames();
             _sprite.enabled = false;
-            if(Data._deathFx != null)
-                EffectsManager.SpawnEffect(Data._deathFx.GetFullID, transform.position);
+            if(ActorData._deathFx != null)
+                EffectsManager.SpawnEffect(ActorData._deathFx.GetFullID, transform.position);
             Debug.Log("Hello i died???");
             _actorOnKill?.Invoke();
             if(_destroyOnDeath) Destroy(gameObject);
@@ -112,11 +109,11 @@ namespace Pixygon.Micro {
         }
 
         public virtual void Update() {
-            if (Data == null) return;
+            if (ActorData == null) return;
             if (_isPaused) return;
             if (transform.position.y <= _killheight)
                 Die();
-            if(Data._isKillable && Data._useIframes)
+            if(ActorData._isKillable && ActorData._useIframes)
                 _iFrameManager.HandleIFrames();
         }
         
