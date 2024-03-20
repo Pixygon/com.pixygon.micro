@@ -6,7 +6,7 @@ namespace Pixygon.Micro {
     public class LevelMission {
         public GameObject _missionObject;
         public Pickup[] _pickups;
-        public MicroActorSpawner[] _actors;
+        public ActorSpawner[] _actors;
         public LevelObject[] _levelObjects;
         public Transform[] _playerSpawns;
         public MissionData _connectedMission;

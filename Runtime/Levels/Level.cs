@@ -7,7 +7,7 @@ namespace Pixygon.Micro {
     public class Level : MonoBehaviour {
         [FormerlySerializedAs("_coins")]
         [SerializeField] private Pickup[] _pickups;
-        [SerializeField] private MicroActorSpawner[] _actors;
+        [SerializeField] private ActorSpawner[] _actors;
         [SerializeField] private LevelObject[] _levelObjects;
         [SerializeField] private Transform[] _playerSpawns;
         [SerializeField] private bool _useKillHeight;
@@ -66,9 +66,9 @@ namespace Pixygon.Micro {
         }
         private void GatherActors() {
             if(_useMissions)
-                _levelMissions[CurrentMission]._actors = GetComponentsInChildren<MicroActorSpawner>();
+                _levelMissions[CurrentMission]._actors = GetComponentsInChildren<ActorSpawner>();
             else
-                _actors = GetComponentsInChildren<MicroActorSpawner>();
+                _actors = GetComponentsInChildren<ActorSpawner>();
 #if UNITY_EDITOR
             EditorUtility.SetDirty(this);
 #endif

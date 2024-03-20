@@ -2,6 +2,6 @@
 
 namespace Pixygon.Micro {
     public class SpawnerGroup {
-        [SerializeField] private MicroActorSpawner[] _spawners;
+        [SerializeField] private ActorSpawner[] _spawners;
     }
 }

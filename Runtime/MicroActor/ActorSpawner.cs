@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Pixygon.Actors;
@@ -8,7 +9,7 @@ using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 namespace Pixygon.Micro {
-    public class MicroActorSpawner : MonoBehaviour {
+    public class ActorSpawner : MonoBehaviour {
         [SerializeField] private ActorData _actorData;
         [SerializeField] private bool _onlyOneActor = true;
         [SerializeField] private bool _repeat;
@@ -60,6 +61,17 @@ namespace Pixygon.Micro {
             if (!_repeat || !_initialized || Pause) return;
             if (_timer < 0f) DoSpawn();
             else _timer -= Time.deltaTime;
+        }
+
+        private void OnDrawGizmosSelected() {
+            if (_patrolData._usePatrol) {
+                var points = new Vector3[_patrolData._patrolPointDatas.Length];
+                for (var i = 0; i < _patrolData._patrolPointDatas.Length; i++) {
+                    points[i] = _patrolData._patrolPointDatas[i]._pos;
+                    Gizmos.DrawIcon(_patrolData._patrolPointDatas[i]._pos, $"({i})");
+                }
+                Gizmos.DrawLineStrip(points, true);
+            }
         }
     }
 }
