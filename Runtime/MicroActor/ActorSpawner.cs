@@ -4,6 +4,7 @@ using System.Linq;
 using Pixygon.Actors;
 using Pixygon.DebugTool;
 using Pixygon.Addressable;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -62,16 +63,36 @@ namespace Pixygon.Micro {
             if (_timer < 0f) DoSpawn();
             else _timer -= Time.deltaTime;
         }
-
+        #if UNITY_EDITOR
         private void OnDrawGizmosSelected() {
             if (_patrolData._usePatrol) {
-                var points = new Vector3[_patrolData._patrolPointDatas.Length];
                 for (var i = 0; i < _patrolData._patrolPointDatas.Length; i++) {
-                    points[i] = _patrolData._patrolPointDatas[i]._pos;
-                    Gizmos.DrawIcon(_patrolData._patrolPointDatas[i]._pos, $"({i})");
+                    var patrolPointData = _patrolData._patrolPointDatas[i]._pos;
+                    if (_patrolData._patrolPointDatas[i]._useLocalPos)
+                        patrolPointData += transform.position;
+                    Gizmos.color = Color.Lerp(Color.green, Color.red, (float)i / _patrolData._patrolPointDatas.Length);
+                    Handles.Label(patrolPointData, $"({i})");
+                    if (i == 0) {
+                        ForGizmo(patrolPointData,
+                            Vector3.Normalize(patrolPointData - _patrolData._patrolPointDatas[_patrolData._patrolPointDatas.Length-1]._pos));
+                    } else {
+                        ForGizmo(patrolPointData, Vector3.Normalize(patrolPointData - _patrolData._patrolPointDatas[i-1]._pos));
+                    }
+                    if (i == _patrolData._patrolPointDatas.Length-1) {
+                        Gizmos.DrawLine(patrolPointData, _patrolData._patrolPointDatas[0]._pos);
+                    } else {
+                        Gizmos.DrawLine(patrolPointData, _patrolData._patrolPointDatas[i+1]._useLocalPos ? _patrolData._patrolPointDatas[i+1]._pos + transform.position : _patrolData._patrolPointDatas[i+1]._pos);
+                    }
                 }
-                Gizmos.DrawLineStrip(points, true);
             }
         }
+        private static void ForGizmo(Vector3 pos, Vector3 direction, float arrowHeadLength = 0.25f, float arrowHeadAngle = 20.0f) {
+            if (direction == Vector3.zero) return;
+            var right = Quaternion.LookRotation(direction) * Quaternion.Euler(180+arrowHeadAngle, 0, 0) * Vector3.forward;
+            var left = Quaternion.LookRotation(direction) * Quaternion.Euler(180-arrowHeadAngle, 0,0) * Vector3.forward;
+            Gizmos.DrawRay(pos, right * arrowHeadLength);
+            Gizmos.DrawRay(pos, left * arrowHeadLength);
+        }
+        #endif
     }
 }
