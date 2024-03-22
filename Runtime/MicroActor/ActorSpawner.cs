@@ -68,8 +68,8 @@ namespace Pixygon.Micro {
             PatrolPointData prevPatrolPoint = null;
             PatrolPointData nextPatrolPoint = null;
             if (!_patrolData._usePatrol) return;
-            for (var i = 0; i < _patrolData._patrolPointDatas.Length; i++) {
-                var currentPoint = _patrolData._patrolPointDatas[i];
+            for (var i = 0; i < _patrolData.PatrolPointData.Length; i++) {
+                var currentPoint = _patrolData.PatrolPointData[i];
                 if (currentPoint._onlyLook) {
                     Gizmos.color = Color.blue;
                     Handles.Label(currentPoint._pos, "<o>");
@@ -82,17 +82,17 @@ namespace Pixygon.Micro {
                         currentPos += transform.position;
                     lastPos = currentPos;
                 
-                    var nextPoint = i == _patrolData._patrolPointDatas.Length-1 ? _patrolData._patrolPointDatas[0] : _patrolData._patrolPointDatas[i+1];
+                    var nextPoint = i == _patrolData.PatrolPointData.Length-1 ? _patrolData.PatrolPointData[0] : _patrolData.PatrolPointData[i+1];
                     var nextPos = nextPoint._pos;
                     if (!nextPoint._useWorldPos)
                         nextPos += transform.position;
                 
-                    var prevPoint = i == 0 ? _patrolData._patrolPointDatas[^1] : _patrolData._patrolPointDatas[i - 1];
+                    var prevPoint = i == 0 ? _patrolData.PatrolPointData[^1] : _patrolData.PatrolPointData[i - 1];
                     var prevPos = prevPoint._pos;
                     if (!prevPoint._useWorldPos)
                         prevPos += transform.position;
                 
-                    Gizmos.color = Color.Lerp(Color.green, Color.red, (float)i / _patrolData._patrolPointDatas.Length);
+                    Gizmos.color = Color.Lerp(Color.green, Color.red, (float)i / _patrolData.PatrolPointData.Length);
                     Handles.Label(currentPos, $"({i})");
                     ForGizmo(currentPos, Vector3.Normalize(currentPos - prevPos));
                     Gizmos.DrawLine(currentPos, nextPos);
