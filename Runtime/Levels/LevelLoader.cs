@@ -176,10 +176,17 @@ namespace Pixygon.Micro {
             await SetupParallax();
             await SetupPostProc();
             Ui.SetLoadScreen(false);
+            await ShowSplash();
             _levelLoaded = true;
             _loadingLevel = false;
             _camera.SnapCamera();
             Log.DebugMessage(DebugGroup.PixygonMicro, "Level loaded!", this);
+        }
+
+        private async Task ShowSplash() {
+            if (CurrentLevel.SplashScreen != null) {
+                await CurrentLevel.SplashScreen.ShowSplashScreens();
+            }
         }
         private async Task SetupLevel() {
             if (CurrentLevel != null)
@@ -187,9 +194,6 @@ namespace Pixygon.Micro {
             var g = await AddressableLoader.LoadGameObject(CurrentLevelData._levelRef, transform, true, f => Ui.LoadScreen.SetLoadPercentage(f*.2f+.2f));
             CurrentLevel = g.GetComponent<Level>();
             Log.DebugMessage(DebugGroup.PixygonMicro, "Setup Level", this);
-            if (CurrentLevel.SplashScreen != null) {
-                await CurrentLevel.SplashScreen.ShowSplashScreens();
-            }
         }
         private async Task SetupBgm() {
             GetComponent<AudioSource>().clip = await AddressableLoader.LoadAsset<AudioClip>(CurrentLevelData._bgmRef, f => Ui.LoadScreen.SetLoadPercentage(f*.2f));
