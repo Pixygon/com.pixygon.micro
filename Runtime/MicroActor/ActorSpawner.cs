@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Pixygon.Actors;
@@ -65,24 +64,38 @@ namespace Pixygon.Micro {
         }
         #if UNITY_EDITOR
         private void OnDrawGizmosSelected() {
-            if (_patrolData._usePatrol) {
-                for (var i = 0; i < _patrolData._patrolPointDatas.Length; i++) {
-                    var patrolPointData = _patrolData._patrolPointDatas[i]._pos;
-                    if (_patrolData._patrolPointDatas[i]._useLocalPos)
-                        patrolPointData += transform.position;
+            var lastPos = transform.position;
+            PatrolPointData prevPatrolPoint = null;
+            PatrolPointData nextPatrolPoint = null;
+            if (!_patrolData._usePatrol) return;
+            for (var i = 0; i < _patrolData._patrolPointDatas.Length; i++) {
+                var currentPoint = _patrolData._patrolPointDatas[i];
+                if (currentPoint._onlyLook) {
+                    Gizmos.color = Color.blue;
+                    Handles.Label(currentPoint._pos, "<o>");
+                    ForGizmo(currentPoint._pos, Vector3.Normalize(currentPoint._pos- lastPos));
+                    Gizmos.DrawLine(lastPos, currentPoint._pos);
+                }
+                else {
+                    var currentPos = currentPoint._pos;
+                    if (currentPoint._useLocalPos)
+                        currentPos += transform.position;
+                    lastPos = currentPos;
+                
+                    var nextPoint = i == _patrolData._patrolPointDatas.Length-1 ? _patrolData._patrolPointDatas[0] : _patrolData._patrolPointDatas[i+1];
+                    var nextPos = nextPoint._pos;
+                    if (nextPoint._useLocalPos)
+                        nextPos += transform.position;
+                
+                    var prevPoint = i == 0 ? _patrolData._patrolPointDatas[^1] : _patrolData._patrolPointDatas[i - 1];
+                    var prevPos = prevPoint._pos;
+                    if (prevPoint._useLocalPos)
+                        prevPos += transform.position;
+                
                     Gizmos.color = Color.Lerp(Color.green, Color.red, (float)i / _patrolData._patrolPointDatas.Length);
-                    Handles.Label(patrolPointData, $"({i})");
-                    if (i == 0) {
-                        ForGizmo(patrolPointData,
-                            Vector3.Normalize(patrolPointData - _patrolData._patrolPointDatas[_patrolData._patrolPointDatas.Length-1]._pos));
-                    } else {
-                        ForGizmo(patrolPointData, Vector3.Normalize(patrolPointData - _patrolData._patrolPointDatas[i-1]._pos));
-                    }
-                    if (i == _patrolData._patrolPointDatas.Length-1) {
-                        Gizmos.DrawLine(patrolPointData, _patrolData._patrolPointDatas[0]._pos);
-                    } else {
-                        Gizmos.DrawLine(patrolPointData, _patrolData._patrolPointDatas[i+1]._useLocalPos ? _patrolData._patrolPointDatas[i+1]._pos + transform.position : _patrolData._patrolPointDatas[i+1]._pos);
-                    }
+                    Handles.Label(currentPos, $"({i})");
+                    ForGizmo(currentPos, Vector3.Normalize(currentPos - prevPos));
+                    Gizmos.DrawLine(currentPos, nextPos);
                 }
             }
         }
