@@ -13,6 +13,7 @@ namespace Pixygon.Micro {
         [SerializeField] private Transform[] _playerSpawns;
         [SerializeField] private bool _useKillHeight;
         [SerializeField] private int _killHeight;
+        [SerializeField] private SplashScreen _splashScreen;
 
         [SerializeField] private bool _useMissions;
         
@@ -25,6 +26,7 @@ namespace Pixygon.Micro {
         public int CurrentMission => MicroController._instance.Cartridge.LevelLoader.SelectedMission;
         public MissionData CurrentMissionData => _levelMissions[CurrentMission]._connectedMission;
         public Action _removeOnRestartAction;
+        public SplashScreen SplashScreen => _splashScreen;
 
         public void Unload() {
             _removeOnRestartAction?.Invoke();

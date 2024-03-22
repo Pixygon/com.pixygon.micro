@@ -150,9 +150,17 @@ namespace Pixygon.Micro {
         public void ResetLevels() {
             CurrentLevel.RespawnLevel(this);
         }
+
+        [SerializeField] private SplashScreen _splashScreen;
         private void Initialize() {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Game started", this);
             //Ui.Initialize();
+            if (_splashScreen)
+                _splashScreen.ShowSplashScreens(StartGameMenu);
+            else StartGameMenu();
+        }
+
+        private void StartGameMenu() {
             Ui.TriggerMenuScreen(true);
             ScoreManager = gameObject.AddComponent<ScoreManager>();
             ScoreManager.Initialize(this);
@@ -162,8 +170,8 @@ namespace Pixygon.Micro {
             _levelLoaded = false;
             CurrentLevelData = level;
             Ui.SetLoadScreen(true);
-            await SetupBgm();
             await SetupLevel();
+            await SetupBgm();
             await SetupPlayer();
             await SetupParallax();
             await SetupPostProc();
@@ -173,16 +181,19 @@ namespace Pixygon.Micro {
             _camera.SnapCamera();
             Log.DebugMessage(DebugGroup.PixygonMicro, "Level loaded!", this);
         }
-        private async Task SetupBgm() {
-            GetComponent<AudioSource>().clip = await AddressableLoader.LoadAsset<AudioClip>(CurrentLevelData._bgmRef, f => Ui.LoadScreen.SetLoadPercentage(f*.2f));
-            Log.DebugMessage(DebugGroup.PixygonMicro, "Setup BGM", this);
-        }
         private async Task SetupLevel() {
             if (CurrentLevel != null)
                 Destroy(CurrentLevel.gameObject);
             var g = await AddressableLoader.LoadGameObject(CurrentLevelData._levelRef, transform, true, f => Ui.LoadScreen.SetLoadPercentage(f*.2f+.2f));
             CurrentLevel = g.GetComponent<Level>();
             Log.DebugMessage(DebugGroup.PixygonMicro, "Setup Level", this);
+            if (CurrentLevel.SplashScreen != null) {
+                await CurrentLevel.SplashScreen.ShowSplashScreens();
+            }
+        }
+        private async Task SetupBgm() {
+            GetComponent<AudioSource>().clip = await AddressableLoader.LoadAsset<AudioClip>(CurrentLevelData._bgmRef, f => Ui.LoadScreen.SetLoadPercentage(f*.2f));
+            Log.DebugMessage(DebugGroup.PixygonMicro, "Setup BGM", this);
         }
         private async Task SetupPlayer() {
             if (CurrentLevelData._playerOverride != null) {
