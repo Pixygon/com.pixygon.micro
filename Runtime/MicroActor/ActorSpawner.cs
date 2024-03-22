@@ -78,18 +78,18 @@ namespace Pixygon.Micro {
                 }
                 else {
                     var currentPos = currentPoint._pos;
-                    if (currentPoint._useLocalPos)
+                    if (!currentPoint._useWorldPos)
                         currentPos += transform.position;
                     lastPos = currentPos;
                 
                     var nextPoint = i == _patrolData._patrolPointDatas.Length-1 ? _patrolData._patrolPointDatas[0] : _patrolData._patrolPointDatas[i+1];
                     var nextPos = nextPoint._pos;
-                    if (nextPoint._useLocalPos)
+                    if (!nextPoint._useWorldPos)
                         nextPos += transform.position;
                 
                     var prevPoint = i == 0 ? _patrolData._patrolPointDatas[^1] : _patrolData._patrolPointDatas[i - 1];
                     var prevPos = prevPoint._pos;
-                    if (prevPoint._useLocalPos)
+                    if (!prevPoint._useWorldPos)
                         prevPos += transform.position;
                 
                     Gizmos.color = Color.Lerp(Color.green, Color.red, (float)i / _patrolData._patrolPointDatas.Length);
