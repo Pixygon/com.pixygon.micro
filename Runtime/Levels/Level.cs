@@ -1,4 +1,5 @@
 using System;
+using Pixygon.DebugTool;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -37,23 +38,47 @@ namespace Pixygon.Micro {
                 _levelMissions[CurrentMission]._missionObject.SetActive(true);
             Unload();
             if (!_useMissions) {
-                foreach (var coin in _pickups) {
-                    coin.Respawn();
+                foreach (var pickup in _pickups) {
+                    if (pickup == null) {
+                        Log.DebugMessage(DebugGroup.PixygonMicro, "Missing Pickup in level", this);
+                        continue;    
+                    }
+                    pickup.Respawn();
                 }
                 foreach (var spawner in _actors) {
+                    if (spawner == null) {
+                        Log.DebugMessage(DebugGroup.PixygonMicro, "Missing Spawner in level", this);
+                        continue;    
+                    }
                     spawner.Initialize(loader);
                 }
                 foreach (var levelObject in _levelObjects) {
+                    if (levelObject == null) {
+                        Log.DebugMessage(DebugGroup.PixygonMicro, "Missing LevelObject in level", this);
+                        continue;    
+                    }
                     levelObject.Reset();
                 }
             } else {
-                foreach (var coin in _levelMissions[CurrentMission]._pickups) {
-                    coin.Respawn();
+                foreach (var pickup in _levelMissions[CurrentMission]._pickups) {
+                    if (pickup == null) {
+                        Log.DebugMessage(DebugGroup.PixygonMicro, "Missing Pickup in level", this);
+                        continue;    
+                    }
+                    pickup.Respawn();
                 }
                 foreach (var spawner in _levelMissions[CurrentMission]._actors) {
+                    if (spawner == null) {
+                        Log.DebugMessage(DebugGroup.PixygonMicro, "Missing Spawner in level", this);
+                        continue;    
+                    }
                     spawner.Initialize(loader);
                 }
                 foreach (var levelObject in _levelMissions[CurrentMission]._levelObjects) {
+                    if (levelObject == null) {
+                        Log.DebugMessage(DebugGroup.PixygonMicro, "Missing LevelObject in level", this);
+                        continue;    
+                    }
                     levelObject.Reset();
                 }
             }
