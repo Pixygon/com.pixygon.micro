@@ -155,12 +155,13 @@ namespace Pixygon.Micro {
         private void Initialize() {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Game started", this);
             //Ui.Initialize();
-            if (_splashScreen)
+            if (_splashScreen != null)
                 _splashScreen.ShowSplashScreens(StartGameMenu);
             else StartGameMenu();
         }
 
         private void StartGameMenu() {
+            Debug.Log("Play!");
             Ui.TriggerMenuScreen(true);
             ScoreManager = gameObject.AddComponent<ScoreManager>();
             ScoreManager.Initialize(this);
