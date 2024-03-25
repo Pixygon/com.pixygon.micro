@@ -22,6 +22,8 @@ namespace Pixygon.Micro {
         [SerializeField] private bool _useIntroLevel;
         [SerializeField] private int _introLevelId;
 
+        [SerializeField] private SplashScreen _splashScreen;
+
         private bool _isSelectingFile;
         private bool _isLoading;
         private GameObject _player;
@@ -30,6 +32,7 @@ namespace Pixygon.Micro {
         private bool _loadingLevel;
         private int _playerSpawn;
         private bool _fileSelected;
+        private bool _showingSplash;
 
         public UI Ui => _ui;
         public ScoreManager ScoreManager { get; private set; }
@@ -104,7 +107,7 @@ namespace Pixygon.Micro {
             CurrentLevelData = null;
         }
         private void SelectLevel(bool started) {
-            if (!started) return;
+            if (!started || _showingSplash) return;
             if(_useFileSelectScreen && !_fileSelected)
                 OpenFileSelectScreen();
             else
@@ -150,18 +153,18 @@ namespace Pixygon.Micro {
         public void ResetLevels() {
             CurrentLevel.RespawnLevel(this);
         }
-
-        [SerializeField] private SplashScreen _splashScreen;
         private void Initialize() {
             Log.DebugMessage(DebugGroup.PixygonMicro, "Game started", this);
             //Ui.Initialize();
-            if (_splashScreen != null)
+            if (_splashScreen != null) {
+                _showingSplash = true;
                 _splashScreen.ShowSplashScreens(StartGameMenu);
+            }
             else StartGameMenu();
         }
 
         private void StartGameMenu() {
-            Debug.Log("Play!");
+            _showingSplash = false;
             Ui.TriggerMenuScreen(true);
             ScoreManager = gameObject.AddComponent<ScoreManager>();
             ScoreManager.Initialize(this);
