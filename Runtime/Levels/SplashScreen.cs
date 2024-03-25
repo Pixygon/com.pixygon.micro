@@ -18,7 +18,7 @@ namespace Pixygon.Micro {
                 while (_timer >= 0f) {
                     _timer -= Time.deltaTime;
                     if (MicroController._instance.Input.JumpAction.WasPerformedThisFrame())
-                        _timer = 2f;
+                        _timer = .5f;
                     await Task.Yield();
                 }
             }
