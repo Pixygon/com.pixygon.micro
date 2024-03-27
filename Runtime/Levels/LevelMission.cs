@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Pixygon.Core;
 
 namespace Pixygon.Micro {
     [Serializable]
