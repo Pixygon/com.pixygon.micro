@@ -55,7 +55,7 @@ namespace Pixygon.Micro {
             if (_actor.IsDead) return;
             if (_actor.IgnoreMovement) return;
             var playFx = false;
-            var velocity = _rigid.velocity;
+            var velocity = _rigid.linearVelocity;
             if (started && IsGrounded) {
                 velocity = new Vector2(velocity.x, _jumpPower);
                 _coyoteTime = 0f;
@@ -90,7 +90,7 @@ namespace Pixygon.Micro {
                 _jumpSfx.Play();
                 _anim.Jump();
             }
-            _rigid.velocity = velocity;
+            _rigid.linearVelocity = velocity;
         }
         private void Run(bool started) {
             if (_actor.IsDead) return;
@@ -127,7 +127,7 @@ namespace Pixygon.Micro {
                 _coyoteTime -= Time.deltaTime;
             if (_jumpBuffer > 0f)
                 _jumpBuffer -= Time.deltaTime;
-            var horizontalForce = _rigid.velocity.x;
+            var horizontalForce = _rigid.linearVelocity.x;
             var move = _actor.IgnoreMovement ? 0f : MicroController._instance.Input.Movement.x;
             if (!_actor.Invincible) {
                 horizontalForce += move * _speed;
@@ -148,19 +148,19 @@ namespace Pixygon.Micro {
                 _runFx.Play();
             horizontalForce = Mathf.Clamp(horizontalForce, -_maxSpeed, _maxSpeed);
             _anim.SetMovement(Mathf.Abs(horizontalForce));
-            _rigid.velocity = new Vector2(horizontalForce, _rigid.velocity.y);
+            _rigid.linearVelocity = new Vector2(horizontalForce, _rigid.linearVelocity.y);
         }
 
         public void SetDead() {
             _rigid.isKinematic = true;
-            _rigid.velocity = Vector2.zero;
+            _rigid.linearVelocity = Vector2.zero;
             _runFx.Stop();
         }
         public void SetKinematic() {
         }
         public void ResetController() {
             _rigid.isKinematic = false;
-            _rigid.velocity = Vector2.zero;
+            _rigid.linearVelocity = Vector2.zero;
         }
     }
 }
