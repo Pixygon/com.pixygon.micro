@@ -107,39 +107,13 @@ namespace Pixygon.Micro {
             _cam.transform.position = new Vector3(0f, 0f, Mathf.Lerp(-20f, -7f, PlayerPrefs.GetFloat("Visual Zoom", .5f)));
             Console.transform.localEulerAngles = new Vector3(PlayerPrefs.GetFloat("Visual Yaw", 0f)*10f, PlayerPrefs.GetFloat("Visual Pitch", 0f)*10f, 0f);
         }
+        // Pixygon NFT wallet linking was removed: WalletFetcher is now a no-op
+        // stub (see com.pixygon.passport) that never invokes the callback, so
+        // the old SetWallet handler is dead and has been deleted. GetWallet is
+        // kept as a thin stub call so AccountWallet's buttons still compile and
+        // bind; clicking one just logs the WalletFetcher's one-shot warning.
         public void GetWallet(Chain chain, int walletProvider) {
-            _walletFetcher.GetWallet(chain, walletProvider, SetWallet);
-        }
-        public void SetWallet(Chain chain, string wallet) {
-            switch (chain) {
-                case Chain.Wax:
-                    _api.PatchWaxWallet(wallet);
-                    SaveManager.SettingsSave._user.waxWallet = wallet;
-                    break;
-                case Chain.EOS:
-                    break;
-                case Chain.Ethereum:
-                    _api.PatchEthWallet(wallet);
-                    SaveManager.SettingsSave._user.ethWallet = wallet;
-                    break;
-                case Chain.Tezos:
-                    _api.PatchTezWallet(wallet);
-                    SaveManager.SettingsSave._user.tezWallet = wallet;
-                    break;
-                case Chain.Polygon:
-                    _api.PatchMatWallet(wallet);
-                    SaveManager.SettingsSave._user.matWallet = wallet;
-                    break;
-                case Chain.ImmutableX:
-                    _api.PatchImxWallet(wallet);
-                    SaveManager.SettingsSave._user.imxWallet = wallet;
-                    break;
-                case Chain.Solana:
-                    break;
-                case Chain.Flow:
-                    break;
-            }
-            Home.WalletReceived();
+            _walletFetcher.GetWallet((int)chain, walletProvider, null);
         }
     }
 }
