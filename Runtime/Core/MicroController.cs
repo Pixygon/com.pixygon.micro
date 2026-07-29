@@ -20,6 +20,13 @@ namespace Pixygon.Micro {
         [SerializeField] private SaveManager _saveManager;
         [SerializeField] private string _version;
         [SerializeField] private bool _skipIntro;
+        [Header("Standalone (single-game build, no console shell)")]
+        [Tooltip("Boot straight into one game rendered fullscreen — no 3D console model, cartridge picker, " +
+                 "home menu, intro, perspective cam or wallet. Used when a game ships as its own standalone build. " +
+                 "The account/save layer (login, ownership, cloud save) stays intact.")]
+        [SerializeField] private bool _standalone;
+        [Tooltip("The single game booted in standalone mode.")]
+        [SerializeField] private Cartridge _standaloneCartridge;
         [SerializeField] private Cartridge[] _cartridges;
         [SerializeField] private Camera _cam;
         [SerializeField] private WalletFetcher _walletFetcher;
@@ -37,6 +44,7 @@ namespace Pixygon.Micro {
         public PixygonApi Api => _api;
         public Cartridge CurrentlyLoadedCartridge {
             get {
+                if (_standalone) return _standaloneCartridge; // one fixed game; keeps cloud save keyed on its id
                 if (PlayerPrefs.GetInt("Cartridge", -1) == -1)
                     return null;
                 return _cartridges.Length != 0 ? _cartridges[PlayerPrefs.GetInt("Cartridge")] : null;
@@ -54,10 +62,11 @@ namespace Pixygon.Micro {
             Initialize();
         }
         private void Start() {
+            if (_standalone) return; // no 3D console model to position in standalone
             UpdateVisualSettings();
         }
         private void Initialize() {
-            
+            if (_standalone) { InitializeStandalone(); return; }
 #if !UNITY_EDITOR && (UNITY_IOS || UNITY_ANDROID)
             var newCarts = new List<Cartridge>();
             foreach (var c in Cartridges) {
@@ -78,6 +87,23 @@ namespace Pixygon.Micro {
             Console.Initialize();
             Home.Initialize();
             Input._home += OpenHomeMenu;
+        }
+
+        // Standalone boot: one game, rendered straight to the screen, account/save layer intact, but none
+        // of the console shell (model, cartridge picker, home menu, intro, perspective cam, wallet). All 89
+        // MicroController._instance call-sites keep working — they just get a screen Display + Input + Api.
+        // Login / ownership / free-demo gating is layered on top by the game's standalone boot (next step).
+        private void InitializeStandalone() {
+            Application.targetFrameRate = 60;
+            Instantiate(_debuggerPrefab, transform);
+            Display = Instantiate(_displayPrefab, transform);
+            // Render to the real screen instead of the console's fixed 640x360 RenderTexture.
+            if (Display._camera != null) Display._camera.targetTexture = null;
+            if (Display._uiCamera != null) Display._uiCamera.targetTexture = null;
+            Input = Instantiate(_inputPrefab, transform);
+            Instantiate(_saveManager, transform);          // login + cloud save retained
+            Cartridge = Instantiate(_cartridgePrefab, transform);
+            Cartridge.LoadCartridge(_standaloneCartridge); // boot the one game directly
         }
 
         public void OpenHomeMenu(bool started) {
