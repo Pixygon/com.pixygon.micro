@@ -114,12 +114,31 @@ namespace Pixygon.Micro {
                 StartGame(PlayIntro);
         }
         public void StartLevel(int i) {
+            if (DemoGated(i)) return; // non-owner past the free levels → storefront, don't load
             _loadingLevel = true;
             LoadedLevel = i;
             Log.DebugMessage(DebugGroup.PixygonMicro, "Select Level: " + i, this);
             Ui.TriggerMenuScreen(false);
             Ui.PregameScreen.SetActive(true);
             LoadLevel(_level[i]);
+        }
+
+        // Demo gate: a non-owner may play the first _freeLevels of a paid game (the demo "course"); past
+        // that they're sent to the storefront instead of loading the level. Config lives on the game's
+        // Cartridge (_freeLevels / _ownershipSlug / _storefrontUrl). Owners and un-gated games play through.
+        private bool DemoGated(int levelIndex) {
+            var mc = MicroController._instance;
+            var cart = mc != null ? mc.CurrentlyLoadedCartridge : null;
+            if (cart == null || cart._freeLevels <= 0) return false;        // no demo gate configured
+            if (levelIndex < cart._freeLevels) return false;                // still inside the free course
+            if (string.IsNullOrEmpty(cart._ownershipSlug)) return false;    // nothing to check against
+            var api = mc.Api;
+            if (api != null && api.IsLoggedIn && api.OwnsGame(cart._ownershipSlug)) return false; // owner
+            // Non-owner beyond the demo — send to the storefront and stay out of the level.
+            if (!string.IsNullOrEmpty(cart._storefrontUrl)) Application.OpenURL(cart._storefrontUrl);
+            Log.DebugMessage(DebugGroup.PixygonMicro, $"Demo limit reached (free={cart._freeLevels}) — storefront.", this);
+            if (_useMapScreen && _mapScreen != null) _mapScreen.SetActive(true);
+            return true;
         }
         public void SwitchLevel(int level, int playerSpawn = 0, int selectedMission = 0) {
             if (!_levelLoaded) return;
