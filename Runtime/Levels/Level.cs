@@ -34,11 +34,16 @@ namespace Pixygon.Micro {
             _removeOnRestartAction = null;
         }
         public void RespawnLevel(LevelLoader loader) {
-            foreach (var mission in _levelMissions) {
-                mission._missionObject.SetActive(false);
+            // Mission toggling only applies to mission-based levels. A plain level (e.g. a Pixiel platformer
+            // stage) has _useMissions == false and an empty _levelMissions, so indexing it here threw
+            // IndexOutOfRange and aborted the whole respawn. Guard it.
+            if (_useMissions && _levelMissions.Length > 0) {
+                foreach (var mission in _levelMissions) {
+                    mission._missionObject.SetActive(false);
+                }
+                if (CurrentMission < _levelMissions.Length && _levelMissions[CurrentMission]._missionObject != null)
+                    _levelMissions[CurrentMission]._missionObject.SetActive(true);
             }
-            if(_levelMissions[CurrentMission]._missionObject != null)
-                _levelMissions[CurrentMission]._missionObject.SetActive(true);
             Unload();
             if (!_useMissions) {
                 foreach (var pickup in _pickups) {

@@ -241,8 +241,15 @@ namespace Pixygon.Micro {
             if (!CurrentLevelData._useParallax) return;
             if (Parallax == null) {
                 var p = await AddressableLoader.LoadGameObject(_parallaxPrefabRef, transform, true, f => Ui.LoadScreen.SetLoadPercentage(f*.2f+.6f));
+                if (p == null) {
+                    // Parallax prefab couldn't be resolved (e.g. not marked Addressable). Skip gracefully
+                    // instead of NRE-ing here, which would abort the rest of LoadLevel (post-proc, load screen).
+                    Log.DebugMessage(DebugGroup.PixygonMicro, "Parallax prefab failed to load — skipping parallax", this);
+                    return;
+                }
                 Parallax = p.GetComponent<Parallax.Parallax>();
             }
+            if (Parallax == null) return;
             Parallax.Initialize(_player.transform, MicroController._instance.Display._camera, CurrentLevelData._parallaxLayerDatas);
             Log.DebugMessage(DebugGroup.PixygonMicro, "Setup Parallax", this);
         }
