@@ -23,7 +23,10 @@ namespace Pixygon.Micro {
         [ContextMenuItem("Get LevelObjects", "GatherLevelObjects")]
         [SerializeField] private LevelMission[] _levelMissions;
         public Transform[] PlayerSpawns => _useMissions ? _levelMissions[CurrentMission]._playerSpawns : _playerSpawns;
-        public int KillHeight => _useKillHeight ? _killHeight : -99999;
+        // Use the configured kill height whenever one is set (all levels set a negative value); only fall back
+        // to "never" when it's left at 0. The old _useKillHeight gate defaulted off, so levels never killed on
+        // a fall even though _killHeight was authored.
+        public int KillHeight => _killHeight != 0 ? _killHeight : (_useKillHeight ? _killHeight : -99999);
         public int CurrentMission => MicroController._instance.Cartridge.LevelLoader.SelectedMission;
         public MissionData CurrentMissionData => _levelMissions[CurrentMission]._connectedMission;
         public Action _removeOnRestartAction;

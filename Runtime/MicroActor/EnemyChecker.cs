@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Pixygon.DebugTool;
 using Pixygon.Effects;
 using UnityEngine;
 
@@ -14,19 +12,23 @@ namespace Pixygon.Micro
 
         [SerializeField] private Vector3 _offset = Vector3.down * .5f;
         [SerializeField] private Vector3 _size = Vector2.one * 1.2f;
-        
+
+        // Cached so the airborne stomp check (runs every frame while falling/jumping) allocates nothing.
+        private readonly List<RaycastHit2D> _hits = new();
+        private ContactFilter2D _filter;
+        private bool _filterReady;
+
         public void HandleEnemyCheck(Action onHit) {
-            var pos = transform.position;
-            var hits = new List<RaycastHit2D>();
-            Physics2D.BoxCast(pos+_offset, _size, 0f, Vector2.down, new ContactFilter2D().NoFilter(), hits,  .5f);
-            foreach (var hit in hits.Where(hit => hit.collider != null)) {
-                var actor = hit.collider.gameObject.GetComponent<MicroActor>();
-                if (!actor) continue;
+            if (!_filterReady) { _filter = new ContactFilter2D().NoFilter(); _filterReady = true; }
+            _hits.Clear();
+            Physics2D.BoxCast(transform.position + _offset, _size, 0f, Vector2.down, _filter, _hits, .5f);
+            for (var i = 0; i < _hits.Count; i++) {
+                var col = _hits[i].collider;
+                if (col == null) continue;
+                if (!col.TryGetComponent<MicroActor>(out var actor)) continue;
                 if (actor == _ignoreActor) continue;
                 if (actor.Invincible) continue;
-                Log.DebugMessage(DebugGroup.Actor, "Hit something! " + actor.name);
                 actor.Damage();
-                //TimeEffects.Stop(100);
                 CameraController.Shake(.01f, .2f);
                 InputController.Rumble(.1f, .2f);
                 EffectsManager.SpawnEffect(_attackFx.GetFullID, transform.position);

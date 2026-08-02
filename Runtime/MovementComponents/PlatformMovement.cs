@@ -62,13 +62,11 @@ namespace Pixygon.Micro {
                 _jumpBuffer = 0f;
                 playFx = true;
             } else if (started && !IsGrounded && _coyoteTime > 0f) {
-                Debug.Log("Coyote-time jump!");
                 velocity = new Vector2(velocity.x, _jumpPower);
                 _coyoteTime = 0f;
                 _jumpBuffer = 0f;
                 playFx = true;
             } else if (started && !IsGrounded && _jumpBuffer > 0f) {
-                Debug.Log("Jump-buffer jump!");
                 velocity = new Vector2(velocity.x, _jumpPower);
                 _coyoteTime = 0f;
                 _jumpBuffer = 0f;

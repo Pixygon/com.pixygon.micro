@@ -82,6 +82,7 @@ namespace Pixygon.Micro {
             if (_levelLoaded || _loadingLevel) return;
             CloseFileSelectScreen();
             if (_useMapScreen) {
+                Ui.TriggerMenuScreen(false); // dismiss the press-start menu so it isn't behind the map
                 _mapScreen.SetActive(true);
             } else {
                 Log.DebugMessage(DebugGroup.PixygonMicro, "Selected level", this);
@@ -108,6 +109,9 @@ namespace Pixygon.Micro {
         }
         private void SelectLevel(bool started) {
             if (!started || _showingSplash) return;
+            // Once the map is open it owns the Select button (MapScreen handles it). Without this, the menu's
+            // press-start handler also fired on the map — the double-handling bounced the player to the menu.
+            if (_useMapScreen && _mapScreen != null && _mapScreen.activeSelf) return;
             if(_useFileSelectScreen && !_fileSelected)
                 OpenFileSelectScreen();
             else

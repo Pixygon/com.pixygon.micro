@@ -64,10 +64,6 @@ namespace Pixygon.Micro {
         protected virtual void OnPause() {
             _isPaused = true;
             if(_rigid != null) _rigid.Sleep();
-            if (_anim == null) {
-                Debug.Log("Hey! I've been... removed??");
-                Debug.Log(gameObject.name);
-            }
             if(_isAnimNotNull && _anim != null) _anim.speed = 0f;
         }
         //Added
@@ -98,10 +94,8 @@ namespace Pixygon.Micro {
             _sprite.enabled = false;
             if(ActorData._deathFx != null)
                 EffectsManager.SpawnEffect(ActorData._deathFx.GetFullID, transform.position);
-            Debug.Log("Hello i died???");
             _actorOnKill?.Invoke();
             if(_destroyOnDeath) Destroy(gameObject);
-            Debug.Log("Hello i died!");
         }
 
         public void InstaKill() {
